@@ -1,0 +1,43 @@
+{
+  "name": "taskqueue",
+  "version": "1.0.0",
+  "description": "Production-grade, distributed-style task queue and scheduling engine in TypeScript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "taskqueue": "./dist/cli/index.js",
+    "tq": "./dist/cli/index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "node dist/cli/index.js"
+  },
+  "keywords": [
+    "task-queue",
+    "job-queue",
+    "dag",
+    "scheduler",
+    "cron",
+    "sqlite",
+    "distributed-queue"
+  ],
+  "author": "Google DeepMind team",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "commander": "^15.0.0",
+    "croner": "^10.0.1",
+    "uuid": "^14.0.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.6.5",
+    "@types/uuid": "^10.0.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}
