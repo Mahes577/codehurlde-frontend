@@ -31,17 +31,28 @@ A production-grade, distributed-style task queue and scheduling engine in TypeSc
    - Register recurring jobs with standard cron expressions (e.g. `*/5 * * * *`) or fixed intervals.
    - Non-overlapping execution guarantee (`prevent_overlap = true`) preventing concurrent executions if a previous job is still in-flight.
 
-6. **CLI & Monitoring**:
+6. **Webhook Notification Dispatcher**:
+   - Optional `webhook_url` and `webhook_headers` configured per job.
+   - Automatically dispatches asynchronous HTTP POST notification upon reaching terminal states (`completed`, `failed`, `dead`).
+   - Exponential backoff with up to 3 retries on network failures or non-2xx responses without blocking workers.
+
+7. **Queue Pause & Resume Controls**:
+   - Persisted queue pause state in SQLite (`queues` table).
+   - Pausing a queue prevents workers from leasing new jobs while allowing in-flight jobs to complete cleanly.
+   - Resuming immediately unblocks pending job leasing.
+
+8. **CLI & Monitoring**:
    - `taskqueue worker start [--queue <queues...>] [--concurrency <n>]`
-   - `taskqueue job submit --queue <name> --payload <json> [--priority <0..3>] [--parents <ids>]`
+   - `taskqueue job submit --queue <name> --payload <json> [--priority <0..3>] [--parents <ids>] [--webhook-url <url>]`
    - `taskqueue job status <id>`
+   - `taskqueue queue pause <name>`, `taskqueue queue resume <name>`, `taskqueue queue list`
    - `taskqueue metrics [--queue <name>]`
    - `taskqueue dlq list`, `taskqueue dlq replay <id|all>`, `taskqueue dlq purge <id|all>`
    - `taskqueue cron register`, `taskqueue cron list`, `taskqueue cron unregister`
    - Structured logging supporting `json` and `pretty` formats.
 
-7. **Automated Test Suite**:
-   - Comprehensive unit and integration test suite using Vitest (11 test suites, 31 tests).
+9. **Automated Test Suite**:
+   - Comprehensive unit and integration test suite using Vitest (14 test suites, 42 tests).
 
 ---
 
@@ -65,6 +76,9 @@ npx taskqueue worker start --queue default emails --concurrency 5 --enable-cron
 # Basic job
 npx taskqueue job submit --queue emails --payload '{"to":"alice@example.com"}' --priority 1
 
+# Job with Webhook notification
+npx taskqueue job submit --queue emails --payload '{"to":"alice@example.com"}' --webhook-url "https://api.myapp.com/webhooks" --webhook-headers '{"X-Auth":"secret"}'
+
 # Delayed job (5000ms delay)
 npx taskqueue job submit --queue emails --payload '{"to":"bob@example.com"}' --delay 5000
 
@@ -77,12 +91,24 @@ npx taskqueue job submit --queue analytics --payload '{"action":"aggregate"}' --
 npx taskqueue job status <job-id>
 ```
 
-### 4. Queue Metrics
+### 4. Queue Pause & Resume Controls
+```bash
+# Pause a queue (stops new leases while in-flight jobs finish)
+npx taskqueue queue pause emails
+
+# List queues with status and pending/running metrics
+npx taskqueue queue list
+
+# Resume a paused queue
+npx taskqueue queue resume emails
+```
+
+### 5. Queue Metrics
 ```bash
 npx taskqueue metrics
 ```
 
-### 5. DLQ (Dead Letter Queue) Management
+### 6. DLQ (Dead Letter Queue) Management
 ```bash
 # List dead jobs
 npx taskqueue dlq list
@@ -96,7 +122,7 @@ npx taskqueue dlq purge <job-id>
 npx taskqueue dlq purge all
 ```
 
-### 6. Recurring Cron Scheduler
+### 7. Recurring Cron Scheduler
 ```bash
 # Register a cron job (every hour)
 npx taskqueue cron register --name hourly-sync --cron "0 * * * *" --queue sync --payload '{"type":"full"}'

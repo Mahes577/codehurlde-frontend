@@ -88,6 +88,29 @@ export const migrations: Migration[] = [
       `);
     },
   },
+  {
+    name: '002_webhooks_and_queues',
+    up: (db: Database.Database) => {
+      const tableInfo = db.prepare('PRAGMA table_info(jobs)').all() as { name: string }[];
+      const colNames = new Set(tableInfo.map((c) => c.name));
+
+      if (!colNames.has('webhook_url')) {
+        db.exec('ALTER TABLE jobs ADD COLUMN webhook_url TEXT;');
+      }
+      if (!colNames.has('webhook_headers')) {
+        db.exec('ALTER TABLE jobs ADD COLUMN webhook_headers TEXT;');
+      }
+
+      db.exec(`
+        CREATE TABLE IF NOT EXISTS queues (
+          name TEXT PRIMARY KEY,
+          is_paused INTEGER NOT NULL DEFAULT 0,
+          created_at INTEGER NOT NULL,
+          updated_at INTEGER NOT NULL
+        );
+      `);
+    },
+  },
 ];
 
 export class MigrationEngine {

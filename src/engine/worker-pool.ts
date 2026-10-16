@@ -6,6 +6,7 @@ import { JobHandler, WorkerOptions } from '../types/worker.js';
 import { BackoffCalculator } from './backoff.js';
 import { StaleLeaseReaper } from './reaper.js';
 import { Logger, logger } from '../logger/logger.js';
+import { WebhookDispatcher } from '../webhook/dispatcher.js';
 
 interface ActiveJobExecution {
   job: Job;
@@ -25,6 +26,7 @@ export class WorkerPool extends EventEmitter {
   private leaseDurationMs: number;
   private reaper: StaleLeaseReaper;
   private drainTimeoutMs: number;
+  private webhookDispatcher: WebhookDispatcher;
 
   private defaultHandler: JobHandler | null = null;
   private queueHandlers = new Map<string, JobHandler>();
@@ -50,6 +52,8 @@ export class WorkerPool extends EventEmitter {
     this.drainTimeoutMs = options.drainTimeoutMs ?? 15000;
 
     this.log = customLogger ?? logger.child(`worker:${this.workerId}`);
+    this.webhookDispatcher =
+      options.webhookDispatcher ?? new WebhookDispatcher({ logger: this.log });
     this.reaper = new StaleLeaseReaper(
       jobStore,
       { checkIntervalMs: options.reaperIntervalMs ?? 5000 },
@@ -213,6 +217,11 @@ export class WorkerPool extends EventEmitter {
         const durationMs = Date.now() - startedAt;
         this.log.info(`Job ${job.id} completed successfully in ${durationMs}ms`);
         this.emit('job:completed', { job, durationMs });
+        this.webhookDispatcher.dispatch(
+          { ...job, state: 'completed', completed_at: Date.now() },
+          'completed',
+          null
+        );
       } catch (err: any) {
         if (timeoutTimer) clearTimeout(timeoutTimer);
         clearInterval(heartbeatTimer);
@@ -228,6 +237,17 @@ export class WorkerPool extends EventEmitter {
             `Job ${job.id} failed after ${nextRetryCount} retries and moved to DLQ: ${errorMessage}`
           );
           this.emit('job:dead', { job, error: errorMessage, durationMs });
+          this.webhookDispatcher.dispatch(
+            {
+              ...job,
+              state: 'dead',
+              retry_count: nextRetryCount,
+              completed_at: Date.now(),
+              last_error: errorMessage,
+            },
+            'dead',
+            errorMessage
+          );
         } else {
           const backoff = BackoffCalculator.calculate(nextRetryCount, {
             strategy: job.backoff_strategy,
@@ -245,6 +265,17 @@ export class WorkerPool extends EventEmitter {
             retryCount: nextRetryCount,
             nextRunAt,
           });
+          this.webhookDispatcher.dispatch(
+            {
+              ...job,
+              state: 'failed',
+              retry_count: nextRetryCount,
+              completed_at: Date.now(),
+              last_error: errorMessage,
+            },
+            'failed',
+            errorMessage
+          );
         }
       } finally {
         // Cleanup tracking

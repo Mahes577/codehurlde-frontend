@@ -36,6 +36,8 @@ export interface Job<T = unknown> {
   worker_id: string | null;
   heartbeat_at: number | null;
   lease_expires_at: number | null;
+  webhook_url: string | null;
+  webhook_headers: Record<string, string> | null;
   version: number;
 }
 
@@ -58,6 +60,8 @@ export interface JobRow {
   worker_id: string | null;
   heartbeat_at: number | null;
   lease_expires_at: number | null;
+  webhook_url: string | null;
+  webhook_headers: string | null;
   version: number;
 }
 
@@ -73,6 +77,8 @@ export interface CreateJobInput<T = unknown> {
   delay_ms?: number;
   run_at?: number | Date;
   parents?: string[]; // IDs of parent jobs that must complete before this job runs
+  webhook_url?: string;
+  webhook_headers?: Record<string, string>;
 }
 
 export interface JobFilter {

@@ -42,6 +42,8 @@ export class JobStore {
       worker_id: row.worker_id,
       heartbeat_at: row.heartbeat_at,
       lease_expires_at: row.lease_expires_at,
+      webhook_url: row.webhook_url ?? null,
+      webhook_headers: row.webhook_headers ? JSON.parse(row.webhook_headers) : null,
       version: row.version,
     };
   }
@@ -84,6 +86,9 @@ export class JobStore {
         runAt = now;
       }
 
+      const webhookUrl = input.webhook_url ?? null;
+      const webhookHeaders = input.webhook_headers ? JSON.stringify(input.webhook_headers) : null;
+
       return {
         id,
         queue,
@@ -95,6 +100,8 @@ export class JobStore {
         timeoutMs,
         runAt,
         parents,
+        webhookUrl,
+        webhookHeaders,
       };
     });
 
@@ -133,12 +140,12 @@ export class JobStore {
           id, queue, payload, priority, state, max_retries, retry_count,
           backoff_strategy, backoff_base_ms, timeout_ms, run_at, created_at,
           started_at, completed_at, last_error, worker_id, heartbeat_at,
-          lease_expires_at, version
+          lease_expires_at, webhook_url, webhook_headers, version
         ) VALUES (
           ?, ?, ?, ?, ?, ?, 0,
           ?, ?, ?, ?, ?,
           NULL, NULL, NULL, NULL, NULL,
-          NULL, 0
+          NULL, ?, ?, 0
         )
       `);
 
@@ -204,7 +211,9 @@ export class JobStore {
           item.backoffBaseMs,
           item.timeoutMs,
           item.runAt,
-          now
+          now,
+          item.webhookUrl,
+          item.webhookHeaders
         );
 
         for (const parentId of item.parents) {
@@ -230,6 +239,8 @@ export class JobStore {
           worker_id: null,
           heartbeat_at: null,
           lease_expires_at: null,
+          webhook_url: item.webhookUrl,
+          webhook_headers: item.webhookHeaders ? JSON.parse(item.webhookHeaders) : null,
           version: 0,
         });
       }
@@ -321,6 +332,7 @@ export class JobStore {
       SELECT * FROM jobs
       WHERE state = 'pending'
         AND queue IN (${placeholders})
+        AND queue NOT IN (SELECT name FROM queues WHERE is_paused = 1)
         AND run_at <= ?
       ORDER BY priority ASC, run_at ASC, created_at ASC
       LIMIT 1
@@ -811,5 +823,103 @@ export class JobStore {
       totalFailed,
       totalDead,
     };
+  }
+
+  /**
+   * Queue Pause & Resume Controls
+   */
+  public pauseQueue(queue: string): void {
+    const now = Date.now();
+    this.db
+      .prepare(`
+        INSERT INTO queues (name, is_paused, created_at, updated_at)
+        VALUES (?, 1, ?, ?)
+        ON CONFLICT(name) DO UPDATE SET
+          is_paused = 1,
+          updated_at = excluded.updated_at
+      `)
+      .run(queue, now, now);
+    this.log.info(`Queue "${queue}" is now paused`);
+  }
+
+  public resumeQueue(queue: string): void {
+    const now = Date.now();
+    this.db
+      .prepare(`
+        INSERT INTO queues (name, is_paused, created_at, updated_at)
+        VALUES (?, 0, ?, ?)
+        ON CONFLICT(name) DO UPDATE SET
+          is_paused = 0,
+          updated_at = excluded.updated_at
+      `)
+      .run(queue, now, now);
+    this.log.info(`Queue "${queue}" is now resumed`);
+  }
+
+  public isQueuePaused(queue: string): boolean {
+    const row = this.db
+      .prepare('SELECT is_paused FROM queues WHERE name = ?')
+      .get(queue) as { is_paused: number } | undefined;
+    return Boolean(row && row.is_paused === 1);
+  }
+
+  public getPausedQueues(): string[] {
+    const rows = this.db
+      .prepare('SELECT name FROM queues WHERE is_paused = 1')
+      .all() as { name: string }[];
+    return rows.map((r) => r.name);
+  }
+
+  public listQueuesSummary(): {
+    name: string;
+    is_paused: boolean;
+    pending: number;
+    scheduled: number;
+    running: number;
+    completed: number;
+    failed: number;
+    dead: number;
+    canceled: number;
+    blocked: number;
+    total: number;
+  }[] {
+    const sql = `
+      WITH all_queues AS (
+        SELECT DISTINCT queue as name FROM jobs
+        UNION
+        SELECT name FROM queues
+      )
+      SELECT
+        q.name as name,
+        COALESCE(pq.is_paused, 0) as is_paused,
+        COALESCE(SUM(CASE WHEN j.state = 'pending' THEN 1 ELSE 0 END), 0) as pending,
+        COALESCE(SUM(CASE WHEN j.state = 'scheduled' THEN 1 ELSE 0 END), 0) as scheduled,
+        COALESCE(SUM(CASE WHEN j.state = 'running' THEN 1 ELSE 0 END), 0) as running,
+        COALESCE(SUM(CASE WHEN j.state = 'completed' THEN 1 ELSE 0 END), 0) as completed,
+        COALESCE(SUM(CASE WHEN j.state = 'failed' THEN 1 ELSE 0 END), 0) as failed,
+        COALESCE(SUM(CASE WHEN j.state = 'dead' THEN 1 ELSE 0 END), 0) as dead,
+        COALESCE(SUM(CASE WHEN j.state = 'canceled' THEN 1 ELSE 0 END), 0) as canceled,
+        COALESCE(SUM(CASE WHEN j.state = 'blocked' THEN 1 ELSE 0 END), 0) as blocked,
+        COALESCE(COUNT(j.id), 0) as total
+      FROM all_queues q
+      LEFT JOIN queues pq ON q.name = pq.name
+      LEFT JOIN jobs j ON q.name = j.queue
+      GROUP BY q.name
+      ORDER BY q.name ASC
+    `;
+    const rows = this.db.prepare(sql).all() as any[];
+    return rows.map((r) => ({
+      name: r.name,
+      is_paused: Boolean(r.is_paused),
+      pending: r.pending,
+      scheduled: r.scheduled,
+      running: r.running,
+      completed: r.completed,
+      failed: r.failed,
+      dead: r.dead,
+      canceled: r.canceled,
+      blocked: r.blocked,
+      total: r.total,
+    }));
   }
 }

@@ -15,6 +15,7 @@ export interface WorkerOptions {
   leaseDurationMs?: number;
   reaperIntervalMs?: number;
   drainTimeoutMs?: number;
+  webhookDispatcher?: any;
 }
 
 export interface WorkerQueueStats {

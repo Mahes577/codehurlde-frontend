@@ -16,5 +16,11 @@ export { GracefulShutdownManager, ShutdownOptions } from './engine/shutdown.js';
 
 export { CronScheduler } from './scheduler/cron-scheduler.js';
 export { DLQManager } from './dlq/dlq-manager.js';
+export {
+  WebhookDispatcher,
+  WebhookEventPayload,
+  WebhookDispatcherOptions,
+  defaultWebhookDispatcher,
+} from './webhook/dispatcher.js';
 
 export { Logger, LoggerOptions, LogLevel, LogFormat, logger } from './logger/logger.js';

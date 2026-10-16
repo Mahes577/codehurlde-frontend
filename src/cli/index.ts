@@ -124,6 +124,8 @@ jobCmd
   .option('--max-retries <n>', 'Max retry attempts', '3')
   .option('--backoff <strategy>', 'Backoff strategy: exponential | fixed', 'exponential')
   .option('--timeout <ms>', 'Job timeout in milliseconds', '30000')
+  .option('--webhook-url <url>', 'Webhook URL for completion/failure notifications')
+  .option('--webhook-headers <json>', 'JSON headers to send with webhook request')
   .action((cmdOptions) => {
     const globalOpts = program.opts();
     const { dbManager, jobStore } = initContext(globalOpts);
@@ -133,6 +135,15 @@ jobCmd
       parsedPayload = JSON.parse(cmdOptions.payload);
     } catch {
       parsedPayload = { data: cmdOptions.payload };
+    }
+
+    let webhookHeaders: Record<string, string> | undefined;
+    if (cmdOptions.webhookHeaders) {
+      try {
+        webhookHeaders = JSON.parse(cmdOptions.webhookHeaders);
+      } catch {
+        console.error('Invalid JSON provided for --webhook-headers');
+      }
     }
 
     const parents = cmdOptions.parents
@@ -148,6 +159,8 @@ jobCmd
       max_retries: parseInt(cmdOptions.maxRetries, 10),
       backoff_strategy: cmdOptions.backoff as BackoffStrategy,
       timeout_ms: parseInt(cmdOptions.timeout, 10),
+      webhook_url: cmdOptions.webhookUrl,
+      webhook_headers: webhookHeaders,
     });
 
     console.log(
@@ -437,6 +450,69 @@ cronCmd
     } else {
       console.error(`Recurring job "${name}" not found.`);
       process.exit(1);
+    }
+
+    dbManager.close();
+  });
+
+// 7. Queue Controls
+const queueCmd = program.command('queue').description('Queue management and pause/resume controls');
+
+queueCmd
+  .command('pause <name>')
+  .description('Pause a queue to stop leasing new jobs')
+  .action((name: string) => {
+    const globalOpts = program.opts();
+    const { dbManager, jobStore } = initContext(globalOpts);
+
+    jobStore.pauseQueue(name);
+    console.log(`Queue "${name}" is now paused.`);
+    dbManager.close();
+  });
+
+queueCmd
+  .command('resume <name>')
+  .description('Resume a paused queue')
+  .action((name: string) => {
+    const globalOpts = program.opts();
+    const { dbManager, jobStore } = initContext(globalOpts);
+
+    jobStore.resumeQueue(name);
+    console.log(`Queue "${name}" is now resumed.`);
+    dbManager.close();
+  });
+
+queueCmd
+  .command('list')
+  .description('List queues with paused status and job counts')
+  .option('--json', 'Output as JSON')
+  .action((cmdOptions) => {
+    const globalOpts = program.opts();
+    const { dbManager, jobStore } = initContext(globalOpts);
+
+    const queues = jobStore.listQueuesSummary();
+
+    if (cmdOptions.json) {
+      console.log(JSON.stringify(queues, null, 2));
+    } else {
+      console.log(`\n=== QUEUES STATUS (${queues.length}) ===\n`);
+      if (queues.length === 0) {
+        console.log('No queues found.');
+      } else {
+        console.table(
+          queues.map((q) => ({
+            Queue: q.name,
+            Status: q.is_paused ? 'PAUSED' : 'ACTIVE',
+            Pending: q.pending,
+            Scheduled: q.scheduled,
+            Running: q.running,
+            Completed: q.completed,
+            Failed: q.failed,
+            Dead: q.dead,
+            Total: q.total,
+          }))
+        );
+      }
     }
 
     dbManager.close();

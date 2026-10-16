@@ -10,8 +10,9 @@ describe('Schema Migration Engine', () => {
     engine.run();
 
     const applied = engine.getAppliedMigrations();
-    expect(applied.length).toBe(1);
+    expect(applied.length).toBe(2);
     expect(applied[0].name).toBe('001_initial_schema');
+    expect(applied[1].name).toBe('002_webhooks_and_queues');
 
     // Verify tables exist
     const tables = db
@@ -23,6 +24,7 @@ describe('Schema Migration Engine', () => {
     expect(tableNames).toContain('jobs');
     expect(tableNames).toContain('job_dependencies');
     expect(tableNames).toContain('cron_jobs');
+    expect(tableNames).toContain('queues');
 
     db.close();
   });
