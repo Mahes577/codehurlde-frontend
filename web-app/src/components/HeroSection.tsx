@@ -19,6 +19,11 @@ import {
 
 type Language = 'python' | 'cpp' | 'javascript';
 
+interface HeroSectionProps {
+  onLaunchCompiler?: () => void;
+  onExploreRoadmap?: () => void;
+}
+
 const CODE_SNIPPETS: Record<Language, { filename: string; code: string }> = {
   python: {
     filename: 'solution.py',
@@ -74,7 +79,7 @@ console.log(twoSum([2, 7, 11, 15], 9)); // [0, 1]`
   }
 };
 
-export const HeroSection: React.FC = () => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onExploreRoadmap }) => {
   const [viewMode, setViewMode] = useState<'visualizer' | 'code'>('visualizer');
   const [lang, setLang] = useState<Language>('python');
   const [copied, setCopied] = useState(false);
@@ -154,21 +159,21 @@ export const HeroSection: React.FC = () => {
 
           {/* Action CTAs */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <a
-              href="#problems"
+            <button
+              onClick={() => onLaunchCompiler ? onLaunchCompiler() : undefined}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 px-6 py-3.5 text-sm font-bold text-zinc-950 shadow-lg shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
             >
               <Zap className="h-4 w-4 fill-zinc-950" />
-              <span>Start Solving Free</span>
-            </a>
+              <span>Launch In-Browser IDE</span>
+            </button>
 
-            <a
-              href="#dynamic-mode"
+            <button
+              onClick={() => onExploreRoadmap ? onExploreRoadmap() : undefined}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.15] bg-white/[0.05] hover:bg-white/[0.09] px-6 py-3.5 text-sm font-semibold text-white transition-all backdrop-blur-md"
             >
               <Sparkles className="h-4 w-4 text-emerald-400" />
-              <span>Explore Skill Calibration</span>
-            </a>
+              <span>Explore 29-Topic Roadmap</span>
+            </button>
           </div>
 
           {/* Key Metrics Strip */}

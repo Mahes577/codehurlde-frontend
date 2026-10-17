@@ -23,6 +23,10 @@ interface DetailedProblem extends Problem {
   similarProblems: string[];
 }
 
+interface ProblemExplorerProps {
+  onSolveProblem?: (problemId: number | string) => void;
+}
+
 const EXTENDED_PROBLEMS: DetailedProblem[] = [
   { 
     id: 1, 
@@ -182,7 +186,7 @@ const EXTENDED_PROBLEMS: DetailedProblem[] = [
   },
 ];
 
-export const ProblemExplorer: React.FC = () => {
+export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem }) => {
   const [problems, setProblems] = useState<DetailedProblem[]>(EXTENDED_PROBLEMS);
   const [selectedDifficulty, setSelectedDifficulty] = useState<'All' | 'Easy' | 'Medium' | 'Hard'>('All');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -509,13 +513,13 @@ export const ProblemExplorer: React.FC = () => {
 
                 {/* Solve CTA */}
                 <div className="pt-4 border-t border-white/[0.08]">
-                  <a
-                    href="#editor"
+                  <button
+                    onClick={() => onSolveProblem ? onSolveProblem(previewProblem.id) : undefined}
                     className="w-full flex items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 py-3 text-xs font-bold text-zinc-950 shadow-lg shadow-emerald-500/25 transition-all"
                   >
                     <Play className="h-3.5 w-3.5 fill-zinc-950" />
                     <span>Open in Code Editor</span>
-                  </a>
+                  </button>
                 </div>
 
               </div>

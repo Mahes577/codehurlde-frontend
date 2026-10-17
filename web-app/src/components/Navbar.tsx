@@ -4,40 +4,55 @@ import {
   Menu, 
   X, 
   Flame, 
-  Calendar, 
   Trophy, 
   BookOpen, 
   Building2, 
   Sparkles, 
   Bell, 
   ChevronDown, 
-  CheckCircle2, 
   ShieldCheck,
-  Zap,
-  SlidersHorizontal,
-  Code
+  Code2,
+  Terminal,
+  User,
+  Compass,
+  Layers,
+  ArrowRight
 } from 'lucide-react';
 
+export type ActiveView = 'home' | 'problems' | 'compiler' | 'profile' | 'roadmap';
+
 interface NavbarProps {
+  currentView: ActiveView;
+  onSelectView: (view: ActiveView) => void;
   onOpenSearch?: () => void;
+  onOpenComponentDocs?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
+export const Navbar: React.FC<NavbarProps> = ({ 
+  currentView, 
+  onSelectView, 
+  onOpenSearch,
+  onOpenComponentDocs
+}) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-white/[0.08] bg-[#07090e]/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#07090e]/95 backdrop-blur-md font-sans">
       {/* Top micro-bar: Today's Daily Coding Challenge Announcement */}
       <div className="border-b border-white/[0.05] bg-gradient-to-r from-emerald-950/40 via-[#0a0f1d] to-[#07090e] px-4 py-1 text-[11px] font-mono text-zinc-400">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-zinc-500 uppercase">Oct 18 Challenge:</span>
-            <a href="#problems" className="font-semibold text-zinc-200 hover:text-emerald-400 transition-colors flex items-center gap-1">
-              <span>#200 Number of Islands (Medium)</span>
-              <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-1 rounded border border-emerald-500/20">Reward +15 pts</span>
-            </a>
+            <span className="text-zinc-500 uppercase">Oct 18 Daily Challenge:</span>
+            <button 
+              onClick={() => onSelectView('compiler')}
+              className="font-semibold text-zinc-200 hover:text-emerald-400 transition-colors flex items-center gap-1.5"
+            >
+              <span>Roll Number Lookup (Medium)</span>
+              <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-1 rounded border border-emerald-500/20">Reward +100 XP</span>
+              <span className="text-zinc-500 text-[10px]">Solve in IDE →</span>
+            </button>
           </div>
 
           <div className="hidden md:flex items-center gap-4 text-zinc-400 text-[11px]">
@@ -55,9 +70,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
         
         {/* Brand & Left Navigation */}
         <div className="flex items-center gap-6">
-          <a href="#" className="flex items-center gap-2.5 group">
+          <button 
+            onClick={() => onSelectView('home')} 
+            className="flex items-center gap-2.5 group text-left"
+          >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 border border-emerald-500/30 group-hover:border-emerald-500/60 group-hover:bg-emerald-500/20 transition-all shadow-sm">
-              <Code className="h-4.5 w-4.5 text-emerald-400 group-hover:scale-105 transition-transform" />
+              <Code2 className="h-4.5 w-4.5 text-emerald-400 group-hover:scale-105 transition-transform" />
             </div>
             <div className="flex items-center gap-1.5">
               <span className="font-black text-base tracking-tight text-white font-sans">
@@ -67,55 +85,85 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
                 v2.1
               </span>
             </div>
-          </a>
+          </button>
 
-          {/* Primary Nav Links */}
-          <nav className="hidden md:flex items-center gap-0.5">
-            <a 
-              href="#problems" 
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-200 hover:text-white rounded-md hover:bg-white/[0.04] transition-colors"
+          {/* Primary View Switcher Navigation */}
+          <nav className="hidden lg:flex items-center gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/80">
+            <button 
+              onClick={() => onSelectView('home')} 
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'home'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
+            >
+              <span>Home</span>
+            </button>
+
+            <button 
+              onClick={() => onSelectView('problems')} 
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'problems'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
             >
               <BookOpen className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Problems</span>
-            </a>
+              <span>Problem Catalog</span>
+            </button>
 
-            <a 
-              href="#dynamic-mode" 
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-200 hover:text-white rounded-md hover:bg-white/[0.04] transition-colors"
+            <button 
+              onClick={() => onSelectView('compiler')} 
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'compiler'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
             >
-              <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-              <span>Calibration</span>
-            </a>
+              <Terminal className="h-3.5 w-3.5 text-cyan-400" />
+              <span>Compiler / IDE</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            </button>
 
-            <a 
-              href="#contests" 
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-200 hover:text-white rounded-md hover:bg-white/[0.04] transition-colors"
+            <button 
+              onClick={() => onSelectView('roadmap')} 
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'roadmap'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
             >
-              <Trophy className="h-3.5 w-3.5 text-amber-400" />
-              <span>Contests</span>
-              <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-            </a>
+              <Compass className="h-3.5 w-3.5 text-purple-400" />
+              <span>DSA 29-Tracks</span>
+            </button>
 
-            <a 
-              href="#companies" 
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-zinc-200 hover:text-white rounded-md hover:bg-white/[0.04] transition-colors"
+            <button 
+              onClick={() => onSelectView('profile')} 
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'profile'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
             >
-              <Building2 className="h-3.5 w-3.5 text-blue-400" />
-              <span>Company Sheets</span>
-            </a>
-
-            <a 
-              href="#discuss" 
-              className="px-3 py-1.5 text-xs font-medium text-zinc-300 hover:text-white rounded-md hover:bg-white/[0.04] transition-colors"
-            >
-              Discuss
-            </a>
+              <User className="h-3.5 w-3.5 text-amber-400" />
+              <span>Profile</span>
+            </button>
           </nav>
         </div>
 
         {/* Right Action Bar & Developer User Strip */}
-        <div className="flex items-center gap-3">
-          
+        <div className="flex items-center gap-2.5">
+          {/* Component Specs Drawer trigger */}
+          {onOpenComponentDocs && (
+            <button
+              onClick={onOpenComponentDocs}
+              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-lg border border-emerald-500/25 transition-all shadow-sm"
+            >
+              <Layers className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Reusable Components</span>
+            </button>
+          )}
+
           {/* Quick Search trigger */}
           <button 
             onClick={onOpenSearch}
@@ -123,7 +171,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
             title="Search (Cmd+K)"
           >
             <Search className="h-3.5 w-3.5 text-zinc-500" />
-            <span className="hidden sm:inline font-sans text-xs">Search problem, pattern...</span>
+            <span className="hidden xl:inline font-sans text-xs">Search...</span>
             <kbd className="rounded bg-white/[0.06] px-1.5 py-0.2 text-[10px] font-mono text-zinc-400 border border-white/[0.08]">⌘K</kbd>
           </button>
 
@@ -134,62 +182,29 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
             <span className="text-[10px] text-amber-400/80 uppercase font-sans">Days</span>
           </div>
 
-          {/* Notification bell */}
-          <button 
-            onClick={() => alert("No unread contest notifications.")}
-            className="relative hidden sm:flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.02] text-zinc-400 hover:text-white hover:border-white/[0.16] transition-colors"
-            title="Notifications"
-          >
-            <Bell className="h-3.5 w-3.5" />
-            <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          </button>
-
           {/* User Profile Pill / Menu */}
           <div className="relative">
             <button
-              onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+              onClick={() => {
+                onSelectView('profile');
+              }}
               className="flex items-center gap-2 rounded-lg border border-white/[0.1] bg-[#0c101c] hover:border-white/[0.2] p-1 pr-2.5 transition-colors"
+              title="Open Developer Profile"
             >
-              {/* User Avatar Monogram */}
               <div className="h-6 w-6 rounded bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-[10px] font-mono font-bold text-zinc-950">
-                JD
+                CA
               </div>
               <div className="hidden md:flex flex-col text-left">
-                <span className="text-[11px] font-semibold text-zinc-200 leading-tight">johndoe.dev</span>
+                <span className="text-[11px] font-semibold text-zinc-200 leading-tight">aarav_codes</span>
                 <span className="text-[9px] font-mono text-emerald-400 leading-tight">1,840 Elo · Div 1</span>
               </div>
-              <ChevronDown className="h-3 w-3 text-zinc-400" />
             </button>
-
-            {/* Profile Dropdown Menu */}
-            {profileDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-56 rounded-xl border border-white/[0.1] bg-[#0c101c] p-2 shadow-2xl z-50 font-mono text-xs text-zinc-300 backdrop-blur-xl">
-                <div className="p-2 border-b border-white/[0.06] mb-1">
-                  <div className="font-bold text-white font-sans text-xs">John Doe (@johndoe)</div>
-                  <div className="text-[10px] text-zinc-500 font-mono">Rank: #242 Global · Season 2026</div>
-                </div>
-                <a href="#stats" onClick={() => setProfileDropdownOpen(false)} className="block rounded p-2 hover:bg-white/[0.04] text-zinc-300 hover:text-white">
-                  Submission History & Stats
-                </a>
-                <a href="#contests" onClick={() => setProfileDropdownOpen(false)} className="block rounded p-2 hover:bg-white/[0.04] text-zinc-300 hover:text-white">
-                  My Contests & Rating Curve
-                </a>
-                <a href="#problems" onClick={() => setProfileDropdownOpen(false)} className="block rounded p-2 hover:bg-white/[0.04] text-zinc-300 hover:text-white">
-                  Favorite Starred Problems (18)
-                </a>
-                <div className="border-t border-white/[0.06] mt-1 pt-1">
-                  <button onClick={() => setProfileDropdownOpen(false)} className="w-full text-left rounded p-2 hover:bg-rose-500/10 text-rose-400">
-                    Sign Out
-                  </button>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-300"
+            className="lg:hidden flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-300"
             aria-label="Toggle navigation"
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -199,38 +214,50 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenSearch }) => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-white/[0.08] bg-[#090b14] px-4 py-3 space-y-2 text-xs">
-          <a 
-            href="#problems" 
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-between p-2 rounded-lg text-zinc-200 hover:bg-white/[0.04]"
+        <div className="lg:hidden border-b border-white/[0.08] bg-[#090b14] px-4 py-3 space-y-2 text-xs">
+          <button 
+            onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'home' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
-            <span>Problems Catalog</span>
+            <span>Home Platform</span>
+          </button>
+          <button 
+            onClick={() => { onSelectView('problems'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'problems' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+          >
+            <span>Problems Directory</span>
             <span className="font-mono text-emerald-400">520 Curated</span>
-          </a>
-          <a 
-            href="#dynamic-mode" 
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-between p-2 rounded-lg text-zinc-200 hover:bg-white/[0.04]"
+          </button>
+          <button 
+            onClick={() => { onSelectView('compiler'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'compiler' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
-            <span>Dynamic Calibration Engine</span>
-            <span className="font-mono text-indigo-400">Adaptive</span>
-          </a>
-          <a 
-            href="#contests" 
-            onClick={() => setMobileMenuOpen(false)}
-            className="flex items-center justify-between p-2 rounded-lg text-zinc-200 hover:bg-white/[0.04]"
+            <span>In-Browser IDE / Compiler</span>
+            <span className="font-mono text-cyan-400">Live</span>
+          </button>
+          <button 
+            onClick={() => { onSelectView('roadmap'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'roadmap' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
-            <span>Weekly Rated Contests</span>
-            <span className="font-mono text-amber-400">Div 1/2</span>
-          </a>
-          <a 
-            href="#companies" 
-            onClick={() => setMobileMenuOpen(false)}
-            className="block p-2 rounded-lg text-zinc-200 hover:bg-white/[0.04]"
+            <span>DSA 29-Tracks Curriculum</span>
+            <span className="font-mono text-purple-400">Syllabus</span>
+          </button>
+          <button 
+            onClick={() => { onSelectView('profile'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'profile' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
-            Company Question Sheets
-          </a>
+            <span>Developer Profile</span>
+            <span className="font-mono text-amber-400">1,840 Elo</span>
+          </button>
+          {onOpenComponentDocs && (
+            <button 
+              onClick={() => { onOpenComponentDocs(); setMobileMenuOpen(false); }}
+              className="w-full flex items-center justify-between p-2 rounded-lg text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
+            >
+              <span>Reusable Components Spec</span>
+              <Layers className="w-3.5 h-3.5" />
+            </button>
+          )}
         </div>
       )}
     </header>
