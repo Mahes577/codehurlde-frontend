@@ -40,7 +40,13 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
       }`}
     >
       {/* Solved Status Checkbox */}
-      <td className="py-3 px-3 w-10 text-center" onClick={onToggleSolved}>
+      <td 
+        className="py-3 px-3 w-10 text-center cursor-pointer" 
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggleSolved?.(e);
+        }}
+      >
         {problem.solved ? (
           <CheckCircle2 className="w-4 h-4 text-emerald-400 fill-emerald-500/20 inline" />
         ) : (
@@ -49,7 +55,13 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
       </td>
 
       {/* Star Bookmark */}
-      <td className="py-3 px-2 w-8 text-center" onClick={onToggleStarred}>
+      <td 
+        className="py-3 px-2 w-8 text-center cursor-pointer" 
+        onClick={(e) => {
+          e.stopPropagation();
+          onToggleStarred?.(e);
+        }}
+      >
         <Star className={`w-3.5 h-3.5 inline ${problem.starred ? 'fill-amber-400 text-amber-400' : 'text-zinc-600 hover:text-amber-400/80'}`} />
       </td>
 
