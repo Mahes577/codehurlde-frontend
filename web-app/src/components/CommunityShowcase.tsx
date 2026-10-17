@@ -1,216 +1,165 @@
 import React, { useState } from 'react';
-import { Users, Hash, Volume2, MessageSquare, Sparkles, Send, Mic, Radio } from 'lucide-react';
+import { MessageSquare, ThumbsUp, MessageCircle, Code, Hash, ArrowUpRight } from 'lucide-react';
 
-interface Channel {
-  name: string;
-  unread?: number;
-  isVoice?: boolean;
+interface DiscussionThread {
+  id: string;
+  title: string;
+  author: string;
+  authorInitials: string;
+  tag: string;
+  timeAgo: string;
+  upvotes: number;
+  replies: number;
+  snippet?: string;
+  summary: string;
 }
 
+const DISCUSSIONS: DiscussionThread[] = [
+  {
+    id: '1',
+    title: 'Rolling array space optimization for 0/1 Knapsack: reducing O(N×W) to O(W)',
+    author: 'Mei Lin',
+    authorInitials: 'ML',
+    tag: 'Dynamic Programming',
+    timeAgo: '2h ago',
+    upvotes: 312,
+    replies: 28,
+    snippet: `// Iterate backwards to avoid reusing values from the current item
+for (let w = W; w >= weight[i]; w--) {
+  dp[w] = Math.max(dp[w], dp[w - weight[i]] + value[i]);
+}`,
+    summary: 'When calculating the current row in 0/1 knapsack, only the immediately preceding row is needed. Iterating in reverse allows using a single 1D array in-place without memory allocation overhead.'
+  },
+  {
+    id: '2',
+    title: 'Two-pointer deduplication trick for 3Sum without set-based hashing',
+    author: 'Priya Sharma',
+    authorInitials: 'PS',
+    tag: 'Two Pointers',
+    timeAgo: '4h ago',
+    upvotes: 245,
+    replies: 19,
+    snippet: `while (left < right && nums[left] === nums[left + 1]) left++;
+while (left < right && nums[right] === nums[right - 1]) right--;`,
+    summary: 'Hashing triplets via Set adds substantial overhead and memory allocation in Python and JS. Sorting first and advancing pointers past duplicate elements guarantees uniqueness in O(1) auxiliary space.'
+  },
+  {
+    id: '3',
+    title: 'Why Monotonic Deque guarantees amortized O(N) for Sliding Window Maximum',
+    author: 'Chen Wei',
+    authorInitials: 'CW',
+    tag: 'Queue / Deque',
+    timeAgo: '6h ago',
+    upvotes: 184,
+    replies: 14,
+    snippet: `while (!deque.isEmpty() && nums[deque.peekLast()] <= nums[i]) {
+  deque.pollLast();
+}`,
+    summary: 'Each element enters and exits the deque at most once. Because elements are strictly decreasing in value, the window maximum is always accessible at the head in O(1).'
+  }
+];
+
 export const CommunityShowcase: React.FC = () => {
-  const [activeChannel, setActiveChannel] = useState('dsa-help');
+  const [selectedTag, setSelectedTag] = useState('All');
 
-  const channels: Channel[] = [
-    { name: 'announcements' },
-    { name: 'general', unread: 3 },
-    { name: 'dsa-help', unread: 5 },
-    { name: 'weekly-contest' },
-    { name: 'show-your-work' },
-    { name: 'interview-prep', unread: 2 },
-    { name: 'Study Room Alpha (Voice)', isVoice: true },
-  ];
+  const tags = ['All', 'Dynamic Programming', 'Two Pointers', 'Queue / Deque', 'System Design'];
 
-  const messages = [
-    {
-      user: 'Aarav',
-      avatar: '👨‍💻',
-      color: 'bg-emerald-500/20 text-emerald-300',
-      time: '10:42 AM',
-      text: 'Anyone solved today’s DP problem with O(n) memory?',
-    },
-    {
-      user: 'Mei',
-      avatar: '👩‍💻',
-      color: 'bg-indigo-500/20 text-indigo-300',
-      time: '10:44 AM',
-      text: 'Yes, roll the array! Only the last row matters:',
-      code: 'dp[i % 2][j] = dp[(i - 1) % 2][j] + ...'
-    },
-    {
-      user: 'Sam',
-      avatar: '⚡',
-      color: 'bg-amber-500/20 text-amber-300',
-      time: '10:45 AM',
-      text: 'That cut my memory usage down to 14MB and runtime in half. Thanks Mei!',
-    },
-    {
-      user: 'Riya',
-      avatar: '🎯',
-      color: 'bg-purple-500/20 text-purple-300',
-      time: '10:51 AM',
-      text: 'Just posted a full walkthrough of the two-pointer dedupe trick for 3Sum in #show-your-work.',
-      code: 'while l < r and nums[l] == nums[l + 1]: l += 1'
-    },
-    {
-      user: 'Kenji',
-      avatar: '🚀',
-      color: 'bg-rose-500/20 text-rose-300',
-      time: '10:58 AM',
-      text: 'Weekly contest starts in 20 minutes! Who is in?',
-    },
-    {
-      user: 'Mei',
-      avatar: '👩‍💻',
-      color: 'bg-indigo-500/20 text-indigo-300',
-      time: '11:00 AM',
-      text: 'Count me in! Warming up with a quick 3-problem Dynamic Mode set.',
-    }
-  ];
+  const filtered = selectedTag === 'All' 
+    ? DISCUSSIONS 
+    : DISCUSSIONS.filter(d => d.tag === selectedTag);
 
   return (
-    <section id="community" className="py-20 bg-[#080c14] border-t border-slate-800">
+    <section id="discuss" className="py-16 sm:py-20 bg-[#090a0f] border-b border-white/[0.08]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-950/40 px-3 py-1 text-xs font-mono font-medium text-indigo-400 mb-3">
-            <Users className="h-3.5 w-3.5" />
-            <span>SOLVE ALONGSIDE PEERS</span>
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-white/[0.08]">
+          <div>
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-medium mb-1">
+              Peer Engineering & Solution Breakdowns
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              Algorithm Discussions & Editorials
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            A Living Developer Community
-          </h2>
-          <p className="mt-3 text-base text-slate-300">
-            Never get stuck on an algorithm edge-case alone. Share runtime breakthroughs, join live voice study rooms, and pair-program.
-          </p>
+
+          {/* Tag filters */}
+          <div className="flex flex-wrap gap-1.5">
+            {tags.map((t) => (
+              <button
+                key={t}
+                onClick={() => setSelectedTag(t)}
+                className={`px-2.5 py-1 rounded text-xs font-mono transition-colors border ${
+                  selectedTag === t
+                    ? 'bg-white/[0.1] text-white border-white/[0.15]'
+                    : 'bg-white/[0.02] text-zinc-400 border-white/[0.06] hover:text-zinc-200'
+                }`}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Discord/Slack-style Developer Workspace Card */}
-        <div className="mt-12 max-w-5xl mx-auto rounded-2xl border border-slate-800 bg-[#0c1220]/90 shadow-2xl overflow-hidden backdrop-blur-xl">
-          
-          {/* Top Window Bar */}
-          <div className="flex items-center justify-between border-b border-slate-800 bg-[#080d18] px-4 py-3">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-slate-700" />
-              <div className="h-3 w-3 rounded-full bg-slate-700" />
-              <div className="h-3 w-3 rounded-full bg-slate-700" />
-              <span className="ml-2 text-xs font-mono font-semibold text-slate-300">CodeHurdle Official Discord & Practice Hub</span>
-            </div>
-            
-            {/* Live voice indicator */}
-            <div className="flex items-center gap-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-xs font-mono text-emerald-400">
-              <Radio className="h-3 w-3 animate-pulse" />
-              <span>38 coders in Voice Study Rooms</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-12 min-h-[420px]">
-            
-            {/* Sidebar Channels (4 cols) */}
-            <div className="md:col-span-4 border-b md:border-b-0 md:border-r border-slate-800 bg-[#090d19] p-4">
-              <div className="text-xs font-mono uppercase tracking-wider text-slate-400 font-semibold mb-3">
-                CHANNELS
-              </div>
-              
-              <div className="space-y-1">
-                {channels.map((chan) => (
-                  <button
-                    key={chan.name}
-                    onClick={() => !chan.isVoice && setActiveChannel(chan.name)}
-                    className={`w-full flex items-center justify-between rounded-lg px-2.5 py-1.5 text-xs font-mono transition-colors text-left ${
-                      activeChannel === chan.name 
-                        ? 'bg-indigo-600/20 text-indigo-300 font-semibold border border-indigo-500/30'
-                        : chan.isVoice 
-                        ? 'text-emerald-400 hover:bg-slate-800/40' 
-                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2">
-                      {chan.isVoice ? (
-                        <Volume2 className="h-3.5 w-3.5 text-emerald-400" />
-                      ) : (
-                        <Hash className="h-3.5 w-3.5 text-slate-500" />
-                      )}
-                      <span>{chan.name}</span>
-                    </div>
-
-                    {chan.unread && (
-                      <span className="rounded-full bg-indigo-500 px-1.5 py-0.2 text-[10px] font-bold text-white">
-                        {chan.unread}
-                      </span>
-                    )}
-
-                    {chan.isVoice && (
-                      <span className="flex h-2 w-2 rounded-full bg-emerald-400" />
-                    )}
-                  </button>
-                ))}
-              </div>
-
-              {/* Voice Room Card */}
-              <div className="mt-8 rounded-xl bg-slate-900/80 p-3 border border-slate-800">
-                <div className="flex items-center justify-between text-xs font-mono text-emerald-400 mb-2">
-                  <span className="flex items-center gap-1.5"><Mic className="h-3.5 w-3.5" /> Voice Connected</span>
-                  <span className="text-[10px] text-slate-500">Live</span>
-                </div>
-                <div className="text-xs text-slate-300 font-medium">Study Room Alpha: Graph Theory</div>
-                <div className="mt-2 flex -space-x-1.5 overflow-hidden">
-                  <div className="inline-block h-6 w-6 rounded-full bg-emerald-500 text-[10px] font-bold text-slate-950 flex items-center justify-center ring-2 ring-slate-900">A</div>
-                  <div className="inline-block h-6 w-6 rounded-full bg-indigo-500 text-[10px] font-bold text-white flex items-center justify-center ring-2 ring-slate-900">M</div>
-                  <div className="inline-block h-6 w-6 rounded-full bg-amber-500 text-[10px] font-bold text-slate-950 flex items-center justify-center ring-2 ring-slate-900">S</div>
-                  <div className="inline-block h-6 w-6 rounded-full bg-rose-500 text-[10px] font-bold text-white flex items-center justify-center ring-2 ring-slate-900">R</div>
-                  <div className="inline-block h-6 w-6 rounded-full bg-slate-800 text-[10px] font-medium text-slate-400 flex items-center justify-center ring-2 ring-slate-900">+10</div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Chat Messages Feed (8 cols) */}
-            <div className="md:col-span-8 bg-[#0a0f1d] p-4 flex flex-col justify-between">
-              
-              <div className="space-y-4 overflow-y-auto max-h-[350px] pr-2">
-                {messages.map((msg, idx) => (
-                  <div key={idx} className="flex items-start gap-3 text-sm">
-                    <span className="text-xl select-none">{msg.avatar}</span>
-                    <div className="flex-1 space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs font-bold text-white">{msg.user}</span>
-                        <span className="text-[10px] font-mono text-slate-500">{msg.time}</span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                        {msg.text}
-                      </p>
-                      {msg.code && (
-                        <div className="mt-1.5 rounded-lg bg-slate-950 px-3 py-2 font-mono text-xs text-emerald-400 border border-slate-800 overflow-x-auto">
-                          <code>{msg.code}</code>
-                        </div>
-                      )}
-                    </div>
+        {/* Discussion Cards Feed */}
+        <div className="mt-6 space-y-4">
+          {filtered.map((item) => (
+            <div 
+              key={item.id}
+              className="rounded-lg border border-white/[0.08] bg-[#0c0e16] p-5 hover:border-white/[0.15] transition-colors"
+            >
+              <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+                
+                <div className="space-y-2 flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="rounded bg-white/[0.04] border border-white/[0.08] px-2 py-0.5 text-[10px] font-mono text-zinc-300">
+                      {item.tag}
+                    </span>
+                    <span className="text-[11px] font-mono text-zinc-500">
+                      Posted by {item.author} ({item.authorInitials}) · {item.timeAgo}
+                    </span>
                   </div>
-                ))}
-              </div>
 
-              {/* Chat Input Bar */}
-              <div className="mt-4 pt-3 border-t border-slate-800 flex items-center gap-2">
-                <input 
-                  type="text" 
-                  readOnly 
-                  value="Message #dsa-help... (Join community to chat)" 
-                  className="flex-1 rounded-xl border border-slate-800 bg-slate-900/60 px-3.5 py-2 text-xs text-slate-500 font-mono focus:outline-none cursor-not-allowed"
-                />
-                <a
-                  href="#community-join"
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 px-4 py-2 text-xs font-semibold text-white transition-all shadow-md shadow-indigo-600/30"
-                >
-                  <Send className="h-3 w-3" />
-                  <span>Join Server</span>
-                </a>
-              </div>
+                  <h3 className="text-base font-semibold text-white hover:text-emerald-400 transition-colors cursor-pointer">
+                    {item.title}
+                  </h3>
 
+                  <p className="text-xs text-zinc-300 leading-relaxed max-w-3xl">
+                    {item.summary}
+                  </p>
+
+                  {item.snippet && (
+                    <div className="mt-2 rounded border border-white/[0.06] bg-black/40 p-3 font-mono text-xs text-zinc-200 overflow-x-auto">
+                      <pre><code>{item.snippet}</code></pre>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right stats & action */}
+                <div className="flex lg:flex-col items-center lg:items-end justify-between lg:justify-start gap-3 shrink-0 pt-2 lg:pt-0">
+                  <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
+                    <span className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
+                      <ThumbsUp className="h-3.5 w-3.5 text-zinc-500" />
+                      {item.upvotes}
+                    </span>
+                    <span className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer">
+                      <MessageCircle className="h-3.5 w-3.5 text-zinc-500" />
+                      {item.replies}
+                    </span>
+                  </div>
+
+                  <a 
+                    href="#discuss" 
+                    className="inline-flex items-center gap-1 text-xs font-mono text-zinc-400 hover:text-white transition-colors"
+                  >
+                    <span>Read breakdown</span>
+                    <ArrowUpRight className="h-3 w-3" />
+                  </a>
+                </div>
+
+              </div>
             </div>
-
-          </div>
-
+          ))}
         </div>
 
       </div>

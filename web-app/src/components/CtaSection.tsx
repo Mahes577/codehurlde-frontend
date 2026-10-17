@@ -1,70 +1,59 @@
 import React from 'react';
-import { ArrowRight, Terminal, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 export const CtaSection: React.FC = () => {
   return (
-    <section className="relative py-20 bg-[#080c14] overflow-hidden border-t border-slate-800">
-      
-      {/* Background ambient lighting */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className="h-96 w-96 rounded-full bg-emerald-500/10 blur-[150px]" />
-        <div className="h-96 w-96 rounded-full bg-indigo-500/10 blur-[150px] -translate-x-20" />
-      </div>
-
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-slate-900 via-[#0c1424] to-[#0a101d] p-8 sm:p-14 text-center shadow-2xl shadow-emerald-950/20">
-          
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-950/50 px-3.5 py-1 text-xs font-mono font-medium text-emerald-400 mb-6">
-            <Terminal className="h-3.5 w-3.5" />
-            <span>GET STARTED IN 30 SECONDS</span>
+    <section className="py-20 bg-[#090a0f] border-b border-white/[0.08]">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        
+        <div className="rounded-xl border border-white/[0.1] bg-[#0c0e16] p-8 sm:p-12">
+          <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-medium mb-3">
+            Start Practicing
           </div>
 
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Stop Stalling. Start Clearing Your <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-indigo-400 bg-clip-text text-transparent">Coding Hurdles Today.</span>
+          <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+            Ready to solve your next coding hurdle?
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Join 45,000+ software engineers mastering algorithms with AI adaptive problem matching. Free forever for core DSA practice.
+          <p className="mt-3 text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
+            Join engineers practicing Data Structures, Algorithms, and Competitive Programming with calibrated problem sequencing.
           </p>
 
-          {/* Action Buttons */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
               href="#register"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 px-7 py-4 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md bg-white hover:bg-zinc-200 px-5 py-2.5 text-xs font-medium text-zinc-950 transition-colors shadow-sm"
             >
               <span>Create Free Account</span>
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-3.5 w-3.5 text-zinc-700" />
             </a>
 
             <button
-              onClick={() => alert('GitHub OAuth login simulated!')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 hover:border-slate-600 px-6 py-4 text-sm font-medium text-white transition-all"
+              onClick={() => alert('GitHub OAuth sign-in')}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-md border border-white/[0.12] bg-white/[0.04] hover:bg-white/[0.08] px-5 py-2.5 text-xs font-medium text-zinc-200 transition-colors"
             >
               <GithubIcon className="h-4 w-4" />
               <span>Continue with GitHub</span>
             </button>
           </div>
 
-          {/* Trust Guarantees */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-slate-400">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] font-mono text-zinc-500">
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Free Forever Tier</span>
+              <Check className="h-3.5 w-3.5 text-emerald-400" />
+              <span>100% Free Core Practice</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-              <span>No Credit Card</span>
+              <Check className="h-3.5 w-3.5 text-emerald-400" />
+              <span>In-Browser Compiler</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Full In-Browser IDE</span>
+              <Check className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Zero Configuration</span>
             </div>
           </div>
-
         </div>
+
       </div>
     </section>
   );

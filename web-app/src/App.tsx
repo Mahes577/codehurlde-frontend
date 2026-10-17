@@ -17,7 +17,7 @@ export const App: React.FC = () => {
   const [searchOpen, setSearchOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-200">
+    <div className="min-h-screen bg-[#090a0f] text-zinc-100 flex flex-col font-sans selection:bg-emerald-500/20 selection:text-emerald-300">
       {/* Global Spotlight Search Palette */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
@@ -32,28 +32,28 @@ export const App: React.FC = () => {
         {/* 2. Top Hiring Company Question Vaults */}
         <CompanyTrustBar />
 
-        {/* 3. Platform Key Metrics */}
+        {/* 3. Platform Telemetry & Metrics */}
         <StatsBar />
 
-        {/* 4. Adaptive AI Dynamic Mode (Killer Feature Showcase) */}
+        {/* 4. Skill Calibration & Adaptive Sequencing */}
         <DynamicModeShowcase />
 
-        {/* 5. Interactive DSA Problem Explorer Table */}
+        {/* 5. Curated Problem Catalog */}
         <ProblemExplorer />
 
-        {/* 6. CP Arena & Live Contest Countdown */}
+        {/* 6. Weekly Rated Contests & Leaderboard */}
         <ContestArena />
 
-        {/* 7. Live Developer Community & Voice Study Rooms */}
+        {/* 7. Algorithmic Discussions & Editorials */}
         <CommunityShowcase />
 
-        {/* 8. Tech Interview & ATS Career Prep Track */}
+        {/* 8. Pattern Roadmaps */}
         <JobPrepTrack />
 
-        {/* 9. Interactive FAQ Accordion */}
+        {/* 9. FAQ Accordion */}
         <FaqSection />
 
-        {/* 10. High-Conversion CTA Banner */}
+        {/* 10. Start Practice Banner */}
         <CtaSection />
       </main>
 

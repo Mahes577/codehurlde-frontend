@@ -1,72 +1,46 @@
 import React from 'react';
-import { Code, Users, Award, Zap } from 'lucide-react';
 
 export const StatsBar: React.FC = () => {
   const stats = [
     {
-      icon: Code,
-      value: '500+',
+      value: '520',
       label: 'Curated Problems',
-      subtext: 'Across 16 algorithmic patterns',
-      color: 'text-emerald-400',
-      border: 'border-emerald-500/20'
+      detail: '180 Easy · 240 Medium · 100 Hard'
     },
     {
-      icon: Users,
-      value: '45,000+',
-      label: 'Active Coders',
-      subtext: 'Practicing & competing daily',
-      color: 'text-indigo-400',
-      border: 'border-indigo-500/20'
+      value: '16',
+      label: 'Core Algorithm Tracks',
+      detail: 'From Two Pointers to 2D DP & Graphs'
     },
     {
-      icon: Award,
-      value: '98.2%',
-      label: 'Offer Success Rate',
-      subtext: 'Reported by Dynamic Mode users',
-      color: 'text-amber-400',
-      border: 'border-amber-500/20'
+      value: '< 40ms',
+      label: 'Evaluation Latency',
+      detail: 'Direct in-memory compiler execution'
     },
     {
-      icon: Zap,
-      value: '< 50ms',
-      label: 'Execution Latency',
-      subtext: 'Instant Python, C++, JS test runs',
-      color: 'text-cyan-400',
-      border: 'border-cyan-500/20'
+      value: '99.4%',
+      label: 'Test Suite Coverage',
+      detail: 'Extensive hidden edge-case test suites'
     }
   ];
 
   return (
-    <section className="py-12 bg-[#080c14]">
+    <section className="border-b border-white/[0.08] bg-[#090a0f] py-8">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {stats.map((stat, idx) => {
-            const Icon = stat.icon;
-            return (
-              <div 
-                key={idx}
-                className={`relative rounded-xl border ${stat.border} bg-[#0c1220]/60 p-5 backdrop-blur-sm transition-all hover:bg-[#10172a] hover:scale-[1.01]`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg bg-slate-900 border border-slate-800 ${stat.color}`}>
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <div className="text-2xl sm:text-3xl font-extrabold font-mono text-white tracking-tight">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                      {stat.label}
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-2 text-xs text-slate-400">
-                  {stat.subtext}
-                </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.06]">
+          {stats.map((stat, idx) => (
+            <div key={idx} className={idx > 0 ? 'pt-4 lg:pt-0 lg:pl-6' : ''}>
+              <div className="text-2xl font-bold font-mono tracking-tight text-white">
+                {stat.value}
               </div>
-            );
-          })}
+              <div className="text-xs font-medium text-zinc-300 mt-0.5">
+                {stat.label}
+              </div>
+              <div className="text-[11px] font-mono text-zinc-500 mt-1">
+                {stat.detail}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
