@@ -19,7 +19,7 @@ import { StreakBadge } from './molecules/StreakBadge';
 import { Button } from './atoms/Button';
 import { Badge } from './atoms/Badge';
 
-export type ActiveView = 'home' | 'problems' | 'cp' | 'compiler' | 'roadmap' | 'community' | 'jobprep' | 'profile';
+export type ActiveView = 'design-system' | 'home' | 'problems' | 'cp' | 'compiler' | 'roadmap' | 'community' | 'jobprep' | 'profile';
 
 interface NavbarProps {
   currentView: ActiveView;
@@ -88,6 +88,18 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Primary View Switcher Navigation */}
           <nav className="hidden xl:flex items-center gap-0.5 bg-zinc-950/60 p-1 rounded-xl border border-white/[0.08]">
+            <button 
+              onClick={() => onSelectView('design-system')} 
+              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
+                currentView === 'design-system'
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm font-semibold'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
+            >
+              <Layers className="h-3.5 w-3.5 text-emerald-400" />
+              <span>Design System</span>
+            </button>
+
             <button 
               onClick={() => onSelectView('home')} 
               className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
@@ -188,18 +200,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right Action Bar & Developer User Strip */}
         <div className="flex items-center gap-2.5">
-          {/* Component Specs Drawer trigger */}
-          {onOpenComponentDocs && (
-            <Button
-              onClick={onOpenComponentDocs}
-              variant="outline"
-              size="xs"
-              icon={<Layers className="w-3.5 h-3.5 text-emerald-400" />}
-              className="hidden sm:inline-flex border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20"
-            >
-              Design System
-            </Button>
-          )}
+          {/* Design System Primary Page button */}
+          <Button
+            onClick={() => onSelectView('design-system')}
+            variant={currentView === 'design-system' ? 'primary' : 'outline'}
+            size="xs"
+            icon={<Layers className="w-3.5 h-3.5 text-emerald-400" />}
+            className={`hidden sm:inline-flex ${
+              currentView === 'design-system' 
+                ? 'bg-emerald-500 text-zinc-950 font-bold border-emerald-400 shadow-md shadow-emerald-500/20' 
+                : 'border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20'
+            }`}
+          >
+            Design System
+          </Button>
 
           {/* Quick Search trigger */}
           <button 
@@ -244,6 +258,13 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="xl:hidden border-b border-white/[0.08] bg-[#090b14] px-4 py-3 space-y-1.5 text-xs">
+          <button 
+            onClick={() => { onSelectView('design-system'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'design-system' ? 'bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30' : 'text-zinc-300'}`}
+          >
+            <span>Design System (4-Tier Library)</span>
+            <Layers className="w-3.5 h-3.5 text-emerald-400" />
+          </button>
           <button 
             onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }}
             className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'home' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}

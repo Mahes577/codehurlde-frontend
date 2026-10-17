@@ -20,9 +20,10 @@ import { CpArenaView } from './components/CpArenaView';
 import { CommunityView } from './components/CommunityView';
 import { JobPrepView } from './components/JobPrepView';
 import { ReusableComponentDrawer } from './components/ReusableComponentDrawer';
+import { DesignSystemView } from './components/DesignSystemView';
 
 export const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<ActiveView>('home');
+  const [currentView, setCurrentView] = useState<ActiveView>('design-system');
   const [searchOpen, setSearchOpen] = useState(false);
   const [componentDocsOpen, setComponentDocsOpen] = useState(false);
 
@@ -103,6 +104,10 @@ export const App: React.FC = () => {
         )}
 
         {/* Dedicated Page Views for every route of CodeHurdle */}
+        {currentView === 'design-system' && (
+          <DesignSystemView onNavigateToView={(view) => handleSelectView(view)} />
+        )}
+
         {currentView === 'problems' && (
           <div className="py-6 space-y-6">
             <StatsBar />

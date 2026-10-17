@@ -11,7 +11,7 @@ export * from './atoms/ProgressBar';
 export * from './atoms/TabGroup';
 export * from './atoms/SectionHeader';
 
-// MOLECULES
+// MOLECULES & INTERACTIVE VISUALIZERS
 export * from './molecules/StreakBadge';
 export * from './molecules/EloBadge';
 export * from './molecules/StatMetricCard';
@@ -22,3 +22,5 @@ export * from './molecules/FaqAccordionItem';
 export * from './molecules/DifficultyBreakdownBar';
 export * from './molecules/ContestCard';
 export * from './molecules/AlgorithmStepController';
+export * from './interactive/GraphAlgorithmVisualizer';
+export * from './interactive/DpAlgorithmVisualizer';

@@ -19,6 +19,8 @@ import {
 import { Button } from './atoms/Button';
 import { Badge, DifficultyBadge } from './atoms/Badge';
 import { AlgorithmStepController } from './molecules/AlgorithmStepController';
+import { GraphAlgorithmVisualizer } from './interactive/GraphAlgorithmVisualizer';
+import { DpAlgorithmVisualizer } from './interactive/DpAlgorithmVisualizer';
 
 type Language = 'python' | 'cpp' | 'javascript';
 
@@ -83,6 +85,7 @@ console.log(twoSum([2, 7, 11, 15], 9)); // [0, 1]`
 };
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onExploreRoadmap }) => {
+  const [selectedProblem, setSelectedProblem] = useState<'twosum' | 'graph' | 'dp'>('twosum');
   const [viewMode, setViewMode] = useState<'visualizer' | 'code'>('visualizer');
   const [lang, setLang] = useState<Language>('python');
   const [copied, setCopied] = useState(false);
@@ -207,7 +210,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
             {/* Workbench Top Bar */}
             <div className="flex flex-wrap items-center justify-between border-b border-white/[0.08] bg-[#080b14] px-4 py-3 gap-3">
               
-              {/* Problem info & View switcher */}
+              {/* Problem info & Multi-Paradigm Switcher */}
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
                   <div className="h-3 w-3 rounded-full bg-rose-500/80" />
@@ -216,66 +219,113 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                 </div>
                 <div className="h-4 w-[1px] bg-white/[0.1]" />
                 
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-mono font-bold text-white">#1 Two Sum</span>
-                  <DifficultyBadge difficulty="Easy" size="xs" />
-                  <span className="hidden sm:inline text-[11px] font-mono text-zinc-400">
-                    Target = 9
-                  </span>
+                {/* 3 Interactive Problem Tabs */}
+                <div className="flex flex-wrap items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/[0.08]">
+                  <button
+                    onClick={() => setSelectedProblem('twosum')}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                      selectedProblem === 'twosum'
+                        ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40 shadow-sm'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>#1 Two Sum</span>
+                    <DifficultyBadge difficulty="Easy" size="xs" />
+                  </button>
+
+                  <button
+                    onClick={() => setSelectedProblem('graph')}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                      selectedProblem === 'graph'
+                        ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/40 shadow-sm'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>#743 Graph Path</span>
+                    <Badge variant="cyan" size="xs">Medium</Badge>
+                  </button>
+
+                  <button
+                    onClick={() => setSelectedProblem('dp')}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                      selectedProblem === 'dp'
+                        ? 'bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40 shadow-sm'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>#322 Coin Change (DP)</span>
+                    <Badge variant="amber" size="xs">Medium</Badge>
+                  </button>
                 </div>
               </div>
 
               {/* View Switcher: Interactive Visualizer vs Code Editor */}
-              <div className="flex items-center gap-2">
-                <div className="flex rounded-lg bg-black/40 p-1 border border-white/[0.08]">
-                  <button
-                    onClick={() => setViewMode('visualizer')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-all ${
-                      viewMode === 'visualizer'
-                        ? 'bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/20'
-                        : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    <Eye className="h-3.5 w-3.5" />
-                    <span>Visual Algorithm</span>
-                  </button>
-                  <button
-                    onClick={() => setViewMode('code')}
-                    className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-all ${
-                      viewMode === 'code'
-                        ? 'bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/20'
-                        : 'text-zinc-400 hover:text-white'
-                    }`}
-                  >
-                    <Code2 className="h-3.5 w-3.5" />
-                    <span>Code Editor</span>
-                  </button>
-                </div>
+              {selectedProblem === 'twosum' && (
+                <div className="flex items-center gap-2">
+                  <div className="flex rounded-lg bg-black/40 p-1 border border-white/[0.08]">
+                    <button
+                      onClick={() => setViewMode('visualizer')}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
+                        viewMode === 'visualizer'
+                          ? 'bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/20'
+                          : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                      <span>Visual Algorithm</span>
+                    </button>
+                    <button
+                      onClick={() => setViewMode('code')}
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
+                        viewMode === 'code'
+                          ? 'bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/20'
+                          : 'text-zinc-400 hover:text-white'
+                      }`}
+                    >
+                      <Code2 className="h-3.5 w-3.5" />
+                      <span>Code Editor</span>
+                    </button>
+                  </div>
 
-                {viewMode === 'code' && (
-                  <button
-                    onClick={handleRunCode}
-                    disabled={isRunningCode}
-                    className="flex items-center gap-1.5 rounded-lg bg-emerald-400 hover:bg-emerald-300 px-3.5 py-1.5 text-xs font-bold text-zinc-950 transition-all active:scale-95 disabled:opacity-75"
-                  >
-                    {isRunningCode ? (
-                      <>
-                        <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-zinc-950 border-t-transparent" />
-                        <span>Running...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Play className="h-3.5 w-3.5 fill-zinc-950" />
-                        <span>Run Code</span>
-                      </>
-                    )}
-                  </button>
-                )}
-              </div>
+                  {viewMode === 'code' && (
+                    <button
+                      onClick={handleRunCode}
+                      disabled={isRunningCode}
+                      className="flex items-center gap-1.5 rounded-lg bg-emerald-400 hover:bg-emerald-300 px-3.5 py-1.5 text-xs font-bold text-zinc-950 transition-all active:scale-95 disabled:opacity-75 cursor-pointer"
+                    >
+                      {isRunningCode ? (
+                        <>
+                          <div className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-zinc-950 border-t-transparent" />
+                          <span>Running...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Play className="h-3.5 w-3.5 fill-zinc-950" />
+                          <span>Run Code</span>
+                        </>
+                      )}
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
 
-            {/* TAB A: INTERACTIVE ALGORITHM VISUALIZER */}
-            {viewMode === 'visualizer' && (
+            {/* TAB: GRAPH ALGORITHM VISUALIZER */}
+            {selectedProblem === 'graph' && (
+              <div className="p-2 sm:p-4 bg-[#090d18]">
+                <GraphAlgorithmVisualizer onLaunchSolver={onLaunchCompiler} />
+              </div>
+            )}
+
+            {/* TAB: DYNAMIC PROGRAMMING VISUALIZER */}
+            {selectedProblem === 'dp' && (
+              <div className="p-2 sm:p-4 bg-[#090d18]">
+                <DpAlgorithmVisualizer onLaunchSolver={onLaunchCompiler} />
+              </div>
+            )}
+
+            {/* TAB A: INTERACTIVE ALGORITHM VISUALIZER (TWO SUM) */}
+            {selectedProblem === 'twosum' && viewMode === 'visualizer' && (
               <div className="p-6 bg-[#090d18] min-h-[380px] flex flex-col justify-between">
                 
                 {/* Visualizer Status Bar */}
@@ -440,7 +490,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
             )}
 
             {/* TAB B: INTERACTIVE CODE EDITOR & RUNNER */}
-            {viewMode === 'code' && (
+            {selectedProblem === 'twosum' && viewMode === 'code' && (
               <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
                 
                 {/* Code pane (7 cols) */}
