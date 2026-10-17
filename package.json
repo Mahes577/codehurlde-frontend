@@ -10,6 +10,9 @@
   },
   "type": "module",
   "scripts": {
+    "dev": "npm --prefix web-app run dev -- --host 0.0.0.0 --port ${PORT:-5173}",
+    "build:web": "npm --prefix web-app run build",
+    "preview": "npm --prefix web-app run preview -- --host 0.0.0.0 --port ${PORT:-5173}",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "vitest run",
