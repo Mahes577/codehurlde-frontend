@@ -16,6 +16,9 @@ import { SearchModal } from './components/SearchModal';
 import { CompilerView } from './components/CompilerView';
 import { UserProfileView } from './components/UserProfileView';
 import { RoadmapView } from './components/RoadmapView';
+import { CpArenaView } from './components/CpArenaView';
+import { CommunityView } from './components/CommunityView';
+import { JobPrepView } from './components/JobPrepView';
 import { ReusableComponentDrawer } from './components/ReusableComponentDrawer';
 
 export const App: React.FC = () => {
@@ -99,11 +102,16 @@ export const App: React.FC = () => {
           </>
         )}
 
+        {/* Dedicated Page Views for every route of CodeHurdle */}
         {currentView === 'problems' && (
           <div className="py-6 space-y-6">
             <StatsBar />
             <ProblemExplorer onSolveProblem={(id) => handleLaunchCompiler(id)} />
           </div>
+        )}
+
+        {currentView === 'cp' && (
+          <CpArenaView onSolveProblem={(id) => handleLaunchCompiler(id)} />
         )}
 
         {currentView === 'compiler' && (
@@ -116,6 +124,14 @@ export const App: React.FC = () => {
 
         {currentView === 'roadmap' && (
           <RoadmapView onSelectProblem={(id) => handleLaunchCompiler(id)} />
+        )}
+
+        {currentView === 'community' && (
+          <CommunityView />
+        )}
+
+        {currentView === 'jobprep' && (
+          <JobPrepView />
         )}
       </main>
 

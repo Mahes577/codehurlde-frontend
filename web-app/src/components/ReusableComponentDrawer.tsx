@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
-import { X, Code2, Copy, Check, Layers, Terminal, User, BookOpen, Compass, ExternalLink } from 'lucide-react';
+import { 
+  X, 
+  Code2, 
+  Copy, 
+  Check, 
+  Layers, 
+  Terminal, 
+  User, 
+  BookOpen, 
+  Compass, 
+  ExternalLink,
+  Swords,
+  Users,
+  Briefcase
+} from 'lucide-react';
+import { ActiveView } from './Navbar';
 
 interface ComponentDoc {
-  id: string;
+  id: ActiveView;
   name: string;
   category: string;
   icon: any;
@@ -19,14 +34,80 @@ const COMPONENTS: ComponentDoc[] = [
     category: 'Core Problem Solver',
     icon: Terminal,
     file: 'src/components/CompilerView.tsx',
-    description: 'Split-pane problem solver matching CodeHurdle /dsa/problems/:id/solve with multi-language code runner, custom testcases, AI mentor assistance, scratchpad notes, and submission verdict with runtime/memory percentiles.',
+    description: 'Split-pane problem solver matching CodeHurdle /dsa/problems/:id/solve with multi-language code runner (Python 3, C++ 17, JS), custom testcase runner, AI mentor assistance, scratchpad notes, and submission verdict with runtime/memory percentiles.',
     propsSnippet: `interface CompilerViewProps {
   onBackToDirectory?: () => void;
-  problemId?: string;
+  problemId?: string | number;
 }`,
     usageSnippet: `<CompilerView 
   onBackToDirectory={() => navigate('/dsa')} 
 />`
+  },
+  {
+    id: 'cp',
+    name: 'Competitive Programming Arena',
+    category: 'CP & Contests',
+    icon: Swords,
+    file: 'src/components/CpArenaView.tsx',
+    description: 'Contest problem catalog matching CodeHurdle /cp with strict limits (1.0s-3.0s, 256MB), hidden test suites, Division 1 rating status, DP track progress, and real problems (The Chronomancer’s Queue, Divergence 3, LLM Swarm).',
+    propsSnippet: `interface CpArenaViewProps {
+  onSolveProblem?: (problemId: string | number) => void;
+}`,
+    usageSnippet: `<CpArenaView 
+  onSolveProblem={(id) => openCompiler(id)} 
+/>`
+  },
+  {
+    id: 'problems',
+    name: 'DSA Hub Problem Directory',
+    category: 'Curriculum & Catalog',
+    icon: BookOpen,
+    file: 'src/components/ProblemExplorer.tsx',
+    description: 'Filterable, searchable problem catalog matching CodeHurdle /dsa with difficulty badges, company tags, completion statuses, acceptance percentages, starred bookmarks, and slide-over preview drawer with direct solve CTA.',
+    propsSnippet: `interface ProblemExplorerProps {
+  onSolveProblem?: (problemId: string | number) => void;
+}`,
+    usageSnippet: `<ProblemExplorer 
+  onSolveProblem={(id) => navigate(\`/dsa/problems/\${id}/solve\`)} 
+/>`
+  },
+  {
+    id: 'roadmap',
+    name: '29-Topic DSA Syllabus Roadmap',
+    category: 'Curriculum & Tracks',
+    icon: Compass,
+    file: 'src/components/RoadmapView.tsx',
+    description: 'Complete sequential curriculum matching CodeHurdle 29 topics (Basics, Number Theory, Arrays, Two Pointers, Binary Search, DP...). Features milestone indicators, progress bars, and topic inspection.',
+    propsSnippet: `interface RoadmapViewProps {
+  onSelectProblem?: (problemId: string | number) => void;
+}`,
+    usageSnippet: `<RoadmapView 
+  onSelectProblem={(id) => openCompiler(id)} 
+/>`
+  },
+  {
+    id: 'community',
+    name: 'Community Channels & Study Rooms',
+    category: 'Social & Collaborative',
+    icon: Users,
+    file: 'src/components/CommunityView.tsx',
+    description: 'Developer discussion channels matching CodeHurdle /community/feed (#dsa-help, #weekly-contest, #show-your-work), interactive chat with code snippets, peer mock interview pairing, and voice study rooms.',
+    propsSnippet: `interface CommunityViewProps {
+  channelId?: string;
+}`,
+    usageSnippet: `<CommunityView />`
+  },
+  {
+    id: 'jobprep',
+    name: 'Job Prep & Company Question Vaults',
+    category: 'Career & Interviews',
+    icon: Briefcase,
+    file: 'src/components/JobPrepView.tsx',
+    description: 'Interview guides and company vaults matching CodeHurdle /job-prep and /companies (Google, Meta, Amazon, Microsoft, Uber, Netflix) with hiring rounds, salary benchmarks, and an AI resume ATS keyword scanner.',
+    propsSnippet: `interface JobPrepViewProps {
+  companyId?: string;
+}`,
+    usageSnippet: `<JobPrepView />`
   },
   {
     id: 'profile',
@@ -40,54 +121,13 @@ const COMPONENTS: ComponentDoc[] = [
   username?: string;
 }`,
     usageSnippet: `<UserProfileView />`
-  },
-  {
-    id: 'problems',
-    name: 'Problem Directory & Catalog',
-    category: 'Directory & Navigation',
-    icon: BookOpen,
-    file: 'src/components/ProblemExplorer.tsx',
-    description: 'Filterable, searchable problem catalog with difficulty badges, company tags, completion statuses, acceptance percentages, starred bookmarks, and slide-over preview drawer with direct solve CTA.',
-    propsSnippet: `interface ProblemExplorerProps {
-  onSelectProblem?: (problemId: string) => void;
-}`,
-    usageSnippet: `<ProblemExplorer 
-  onSelectProblem={(id) => navigate(\`/dsa/problems/\${id}/solve\`)} 
-/>`
-  },
-  {
-    id: 'roadmap',
-    name: '29-Topic DSA Syllabus Roadmap',
-    category: 'Curriculum & Tracks',
-    icon: Compass,
-    file: 'src/components/RoadmapView.tsx',
-    description: 'Complete sequential curriculum matching CodeHurdle 29 topics (Basics, Number Theory, Arrays, Two Pointers, Binary Search, DP...). Features milestone indicators, progress bars, and topic inspection.',
-    propsSnippet: `interface RoadmapViewProps {
-  onSelectProblem?: (problemId: string) => void;
-}`,
-    usageSnippet: `<RoadmapView 
-  onSelectProblem={(id) => openCompiler(id)} 
-/>`
-  },
-  {
-    id: 'heatmap',
-    name: '365-Day Continuous Heatmap',
-    category: 'Gamification & Retention',
-    icon: Layers,
-    file: 'src/components/ActivityHeatmap.tsx',
-    description: 'GitHub and LeetCode-style activity grid across 52 weeks with multi-year toggles, streak metrics, and day-by-day submission inspector drawer.',
-    propsSnippet: `interface ActivityHeatmapProps {
-  year?: number;
-  userId?: string;
-}`,
-    usageSnippet: `<ActivityHeatmap />`
   }
 ];
 
 interface ReusableComponentDrawerProps {
   isOpen: boolean;
   onClose: () => void;
-  onNavigateToView: (view: 'home' | 'problems' | 'compiler' | 'profile' | 'roadmap') => void;
+  onNavigateToView: (view: ActiveView) => void;
 }
 
 export const ReusableComponentDrawer: React.FC<ReusableComponentDrawerProps> = ({
@@ -107,8 +147,8 @@ export const ReusableComponentDrawer: React.FC<ReusableComponentDrawerProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm">
-      <div className="w-full max-w-2xl bg-[#0b0e14] border-l border-zinc-800 h-full flex flex-col font-sans shadow-2xl">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm font-sans">
+      <div className="w-full max-w-2xl bg-[#0b0e14] border-l border-zinc-800 h-full flex flex-col shadow-2xl">
         {/* Header */}
         <div className="p-5 border-b border-zinc-800/80 flex items-center justify-between bg-zinc-950/60">
           <div className="flex items-center gap-2.5">
@@ -116,8 +156,8 @@ export const ReusableComponentDrawer: React.FC<ReusableComponentDrawerProps> = (
               <Code2 className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-white">Reusable Component Reference</h2>
-              <p className="text-xs text-zinc-400">Directly exportable modules designed for CodeHurdle</p>
+              <h2 className="text-base font-bold text-white">CodeHurdle Reusable Component Library</h2>
+              <p className="text-xs text-zinc-400">Production-ready modules matching all routes of CodeHurdle</p>
             </div>
           </div>
           <button 
@@ -131,7 +171,7 @@ export const ReusableComponentDrawer: React.FC<ReusableComponentDrawerProps> = (
         {/* Content body */}
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           {/* Component Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {COMPONENTS.map(c => {
               const Icon = c.icon;
               const isSelected = selectedComp.id === c.id;
@@ -166,16 +206,12 @@ export const ReusableComponentDrawer: React.FC<ReusableComponentDrawerProps> = (
 
               <button
                 onClick={() => {
-                  if (selectedComp.id === 'compiler') onNavigateToView('compiler');
-                  else if (selectedComp.id === 'profile') onNavigateToView('profile');
-                  else if (selectedComp.id === 'roadmap') onNavigateToView('roadmap');
-                  else if (selectedComp.id === 'problems') onNavigateToView('problems');
-                  else onNavigateToView('home');
+                  onNavigateToView(selectedComp.id);
                   onClose();
                 }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-400 text-black text-xs font-semibold hover:bg-emerald-300 transition-colors"
               >
-                <span>Live Preview</span>
+                <span>Live View</span>
                 <ExternalLink className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -213,7 +249,7 @@ export const ReusableComponentDrawer: React.FC<ReusableComponentDrawerProps> = (
 
         {/* Footer */}
         <div className="p-4 border-t border-zinc-800/80 bg-zinc-950/60 flex items-center justify-between text-xs text-zinc-400">
-          <span>All components are written in React 19 + TypeScript + Tailwind CSS</span>
+          <span>React 19 + TypeScript + Tailwind CSS</span>
           <button 
             onClick={onClose}
             className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-white transition-colors"

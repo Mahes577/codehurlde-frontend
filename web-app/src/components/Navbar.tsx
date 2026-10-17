@@ -16,10 +16,12 @@ import {
   User,
   Compass,
   Layers,
-  ArrowRight
+  Swords,
+  Users,
+  Briefcase
 } from 'lucide-react';
 
-export type ActiveView = 'home' | 'problems' | 'compiler' | 'profile' | 'roadmap';
+export type ActiveView = 'home' | 'problems' | 'cp' | 'compiler' | 'roadmap' | 'community' | 'jobprep' | 'profile';
 
 interface NavbarProps {
   currentView: ActiveView;
@@ -35,7 +37,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenComponentDocs
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#07090e]/95 backdrop-blur-md font-sans">
@@ -88,10 +89,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Primary View Switcher Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/80">
+          <nav className="hidden xl:flex items-center gap-0.5 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/80">
             <button 
               onClick={() => onSelectView('home')} 
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
                 currentView === 'home'
                   ? 'bg-zinc-800 text-white shadow-sm'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
@@ -102,19 +103,31 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('problems')} 
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
                 currentView === 'problems'
                   ? 'bg-zinc-800 text-white shadow-sm'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
               <BookOpen className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Problem Catalog</span>
+              <span>DSA Hub</span>
+            </button>
+
+            <button 
+              onClick={() => onSelectView('cp')} 
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'cp'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
+            >
+              <Swords className="h-3.5 w-3.5 text-rose-400" />
+              <span>CP Arena</span>
             </button>
 
             <button 
               onClick={() => onSelectView('compiler')} 
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
                 currentView === 'compiler'
                   ? 'bg-zinc-800 text-white shadow-sm'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
@@ -127,19 +140,43 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('roadmap')} 
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
                 currentView === 'roadmap'
                   ? 'bg-zinc-800 text-white shadow-sm'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
               <Compass className="h-3.5 w-3.5 text-purple-400" />
-              <span>DSA 29-Tracks</span>
+              <span>29-Tracks</span>
+            </button>
+
+            <button 
+              onClick={() => onSelectView('community')} 
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'community'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
+            >
+              <Users className="h-3.5 w-3.5 text-indigo-400" />
+              <span>Community</span>
+            </button>
+
+            <button 
+              onClick={() => onSelectView('jobprep')} 
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                currentView === 'jobprep'
+                  ? 'bg-zinc-800 text-white shadow-sm'
+                  : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
+              }`}
+            >
+              <Briefcase className="h-3.5 w-3.5 text-blue-400" />
+              <span>Job Prep</span>
             </button>
 
             <button 
               onClick={() => onSelectView('profile')} 
-              className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
                 currentView === 'profile'
                   ? 'bg-zinc-800 text-white shadow-sm'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
@@ -171,7 +208,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             title="Search (Cmd+K)"
           >
             <Search className="h-3.5 w-3.5 text-zinc-500" />
-            <span className="hidden xl:inline font-sans text-xs">Search...</span>
+            <span className="hidden sm:inline font-sans text-xs">Search...</span>
             <kbd className="rounded bg-white/[0.06] px-1.5 py-0.2 text-[10px] font-mono text-zinc-400 border border-white/[0.08]">⌘K</kbd>
           </button>
 
@@ -182,12 +219,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-[10px] text-amber-400/80 uppercase font-sans">Days</span>
           </div>
 
-          {/* User Profile Pill / Menu */}
+          {/* User Profile Pill */}
           <div className="relative">
             <button
-              onClick={() => {
-                onSelectView('profile');
-              }}
+              onClick={() => onSelectView('profile')}
               className="flex items-center gap-2 rounded-lg border border-white/[0.1] bg-[#0c101c] hover:border-white/[0.2] p-1 pr-2.5 transition-colors"
               title="Open Developer Profile"
             >
@@ -204,7 +239,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-300"
+            className="xl:hidden flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-300"
             aria-label="Toggle navigation"
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -214,7 +249,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-white/[0.08] bg-[#090b14] px-4 py-3 space-y-2 text-xs">
+        <div className="xl:hidden border-b border-white/[0.08] bg-[#090b14] px-4 py-3 space-y-1.5 text-xs">
           <button 
             onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }}
             className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'home' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
@@ -225,22 +260,43 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => { onSelectView('problems'); setMobileMenuOpen(false); }}
             className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'problems' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
-            <span>Problems Directory</span>
-            <span className="font-mono text-emerald-400">520 Curated</span>
+            <span>DSA Hub (520 Problems)</span>
+            <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
+          </button>
+          <button 
+            onClick={() => { onSelectView('cp'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'cp' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+          >
+            <span>CP Arena (Contest Problems)</span>
+            <Swords className="w-3.5 h-3.5 text-rose-400" />
           </button>
           <button 
             onClick={() => { onSelectView('compiler'); setMobileMenuOpen(false); }}
             className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'compiler' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>In-Browser IDE / Compiler</span>
-            <span className="font-mono text-cyan-400">Live</span>
+            <Terminal className="w-3.5 h-3.5 text-cyan-400" />
           </button>
           <button 
             onClick={() => { onSelectView('roadmap'); setMobileMenuOpen(false); }}
             className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'roadmap' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>DSA 29-Tracks Curriculum</span>
-            <span className="font-mono text-purple-400">Syllabus</span>
+            <Compass className="w-3.5 h-3.5 text-purple-400" />
+          </button>
+          <button 
+            onClick={() => { onSelectView('community'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'community' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+          >
+            <span>Community & Study Rooms</span>
+            <Users className="w-3.5 h-3.5 text-indigo-400" />
+          </button>
+          <button 
+            onClick={() => { onSelectView('jobprep'); setMobileMenuOpen(false); }}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'jobprep' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+          >
+            <span>Job Prep & Companies</span>
+            <Briefcase className="w-3.5 h-3.5 text-blue-400" />
           </button>
           <button 
             onClick={() => { onSelectView('profile'); setMobileMenuOpen(false); }}
