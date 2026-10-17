@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Search, CheckCircle2, Circle, ChevronRight, FileText } from 'lucide-react';
+import { Search, CheckCircle2, Circle, ChevronRight, Zap, ExternalLink, ArrowRight } from 'lucide-react';
 import { Problem } from '../types';
 
 const PROBLEMS_DATA: Problem[] = [
@@ -45,57 +45,80 @@ export const ProblemExplorer: React.FC = () => {
   const getDifficultyBadge = (diff: 'Easy' | 'Medium' | 'Hard') => {
     switch (diff) {
       case 'Easy':
-        return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20';
+        return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30';
       case 'Medium':
-        return 'text-amber-400 bg-amber-500/10 border-amber-500/20';
+        return 'text-amber-400 bg-amber-500/10 border-amber-500/30';
       case 'Hard':
-        return 'text-rose-400 bg-rose-500/10 border-rose-500/20';
+        return 'text-rose-400 bg-rose-500/10 border-rose-500/30';
     }
   };
 
-  const solvedCount = problems.filter(p => p.solved).length;
+  const solvedEasy = problems.filter(p => p.difficulty === 'Easy' && p.solved).length;
+  const totalEasy = problems.filter(p => p.difficulty === 'Easy').length;
+
+  const solvedMed = problems.filter(p => p.difficulty === 'Medium' && p.solved).length;
+  const totalMed = problems.filter(p => p.difficulty === 'Medium').length;
+
+  const solvedHard = problems.filter(p => p.difficulty === 'Hard' && p.solved).length;
+  const totalHard = problems.filter(p => p.difficulty === 'Hard').length;
 
   return (
-    <section id="problems" className="py-16 sm:py-20 bg-[#090a0f] border-b border-white/[0.08]">
+    <section id="problems" className="py-20 bg-[#080c16] border-b border-white/[0.08]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-white/[0.08]">
-          <div>
-            <div className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-medium mb-1">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/[0.08]">
+          <div className="max-w-2xl">
+            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-2 mb-2">
+              <Zap className="h-4 w-4" />
               Curated Problem Catalog
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Problems & Learning Paths
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              520 Curated Algorithmic Problems
             </h2>
+            <p className="mt-2 text-sm sm:text-base text-zinc-300">
+              Filter by core algorithmic invariants, difficulty tiers, and company appearance frequency.
+            </p>
           </div>
 
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-mono text-zinc-400">
-              Completed: <strong className="text-white">{solvedCount}</strong> / {problems.length}
-            </span>
-            <div className="w-28 h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-emerald-400 rounded-full transition-all duration-300"
-                style={{ width: `${(solvedCount / problems.length) * 100}%` }}
-              />
+          {/* Difficulty breakdown cards */}
+          <div className="flex items-center gap-3 font-mono text-xs">
+            <div className="rounded-xl border border-emerald-500/25 bg-emerald-950/20 px-3.5 py-2 text-center">
+              <div className="text-base font-black text-emerald-400">{solvedEasy} / {totalEasy}</div>
+              <div className="text-[10px] text-zinc-400 uppercase font-sans">Easy Solved</div>
+            </div>
+
+            <div className="rounded-xl border border-amber-500/25 bg-amber-950/20 px-3.5 py-2 text-center">
+              <div className="text-base font-black text-amber-400">{solvedMed} / {totalMed}</div>
+              <div className="text-[10px] text-zinc-400 uppercase font-sans">Medium Solved</div>
+            </div>
+
+            <div className="rounded-xl border border-rose-500/25 bg-rose-950/20 px-3.5 py-2 text-center">
+              <div className="text-base font-black text-rose-400">{solvedHard} / {totalHard}</div>
+              <div className="text-[10px] text-zinc-400 uppercase font-sans">Hard Solved</div>
             </div>
           </div>
         </div>
 
-        {/* Filter controls */}
-        <div className="mt-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+        {/* Filters and Search Bar */}
+        <div className="mt-8 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
           
           {/* Difficulty Toggles */}
-          <div className="flex items-center gap-1 bg-white/[0.02] p-1 rounded-md border border-white/[0.08] w-fit">
+          <div className="flex items-center gap-1.5 bg-[#0c1220] p-1.5 rounded-xl border border-white/[0.1] w-fit">
             {(['All', 'Easy', 'Medium', 'Hard'] as const).map((diff) => (
               <button
                 key={diff}
                 onClick={() => setSelectedDifficulty(diff)}
-                className={`px-3 py-1 text-xs font-mono rounded transition-colors ${
+                className={`px-3.5 py-1.5 text-xs font-mono rounded-lg transition-all ${
                   selectedDifficulty === diff 
-                    ? 'bg-white/[0.1] text-white font-medium border border-white/[0.12]'
-                    : 'text-zinc-400 hover:text-zinc-200'
+                    ? diff === 'Easy'
+                      ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40 shadow-sm'
+                      : diff === 'Medium'
+                      ? 'bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40 shadow-sm'
+                      : diff === 'Hard'
+                      ? 'bg-rose-500/20 text-rose-300 font-bold border border-rose-500/40 shadow-sm'
+                      : 'bg-white/[0.15] text-white font-bold border border-white/[0.2] shadow-sm'
+                    : 'text-zinc-400 hover:text-white'
                 }`}
               >
                 {diff}
@@ -103,29 +126,29 @@ export const ProblemExplorer: React.FC = () => {
             ))}
           </div>
 
-          {/* Search Box */}
-          <div className="relative flex-1 max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-zinc-500" />
+          {/* Search Input */}
+          <div className="relative flex-1 max-w-md">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Filter by title, #, or company..."
-              className="w-full rounded-md border border-white/[0.08] bg-white/[0.03] py-1.5 pl-8 pr-3 text-xs text-zinc-200 placeholder-zinc-500 focus:border-white/[0.2] focus:outline-none"
+              className="w-full rounded-xl border border-white/[0.1] bg-[#0c1220] py-2.5 pl-9 pr-4 text-xs sm:text-sm text-zinc-100 placeholder-zinc-500 focus:border-emerald-500/60 focus:outline-none"
             />
           </div>
         </div>
 
         {/* Category Pills */}
-        <div className="mt-3 flex flex-wrap gap-1.5">
+        <div className="mt-4 flex flex-wrap gap-2">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`rounded px-2.5 py-1 text-xs font-mono transition-colors border ${
+              className={`rounded-lg px-3 py-1.5 text-xs font-mono transition-all border ${
                 selectedCategory === cat 
-                  ? 'border-white/[0.2] bg-white/[0.08] text-white font-medium'
-                  : 'border-white/[0.06] bg-white/[0.02] text-zinc-400 hover:text-zinc-200'
+                  ? 'border-emerald-500/40 bg-emerald-950/40 text-emerald-300 font-bold shadow-sm'
+                  : 'border-white/[0.08] bg-[#0c1220]/60 text-zinc-400 hover:text-white hover:border-white/[0.16]'
               }`}
             >
               {cat}
@@ -134,48 +157,48 @@ export const ProblemExplorer: React.FC = () => {
         </div>
 
         {/* Problem Table */}
-        <div className="mt-6 rounded-lg border border-white/[0.08] bg-[#0c0e16] overflow-hidden">
+        <div className="mt-6 rounded-2xl border border-white/[0.1] bg-[#0c1220]/90 shadow-2xl overflow-hidden backdrop-blur-xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-white/[0.08] bg-white/[0.02] text-[11px] font-mono uppercase tracking-wider text-zinc-500">
-                  <th className="py-2.5 px-3 w-10 text-center">Status</th>
-                  <th className="py-2.5 px-3">Title</th>
-                  <th className="py-2.5 px-3">Category</th>
-                  <th className="py-2.5 px-3">Difficulty</th>
-                  <th className="py-2.5 px-3">Acceptance</th>
-                  <th className="py-2.5 px-3">Company Tags</th>
-                  <th className="py-2.5 px-3 text-right">Action</th>
+                <tr className="border-b border-white/[0.08] bg-[#080d18] text-[11px] font-mono uppercase tracking-wider text-zinc-400">
+                  <th className="py-3 px-4 w-12 text-center">Status</th>
+                  <th className="py-3 px-4">Title</th>
+                  <th className="py-3 px-4">Category</th>
+                  <th className="py-3 px-4">Difficulty</th>
+                  <th className="py-3 px-4">Acceptance</th>
+                  <th className="py-3 px-4">Company Tags</th>
+                  <th className="py-3 px-4 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.04] text-xs">
+              <tbody className="divide-y divide-white/[0.04] text-sm">
                 {filteredProblems.map((problem) => (
                   <tr 
                     key={problem.id}
-                    className="hover:bg-white/[0.02] transition-colors group"
+                    className="hover:bg-white/[0.03] transition-colors group cursor-pointer"
                   >
-                    {/* Solved checkmark */}
-                    <td className="py-2.5 px-3 text-center">
+                    {/* Checkbox */}
+                    <td className="py-3.5 px-4 text-center">
                       <button 
                         onClick={() => toggleSolved(problem.id)}
                         className="text-zinc-600 hover:text-emerald-400 transition-colors"
-                        title={problem.solved ? 'Mark as uncompleted' : 'Mark as completed'}
+                        title={problem.solved ? 'Mark as unsolved' : 'Mark as solved'}
                       >
                         {problem.solved ? (
-                          <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                          <CheckCircle2 className="h-4 w-4 text-emerald-400 fill-emerald-500/20" />
                         ) : (
-                          <Circle className="h-4 w-4" />
+                          <Circle className="h-4 w-4 text-zinc-600 hover:text-zinc-400" />
                         )}
                       </button>
                     </td>
 
                     {/* Title */}
-                    <td className="py-2.5 px-3">
-                      <div className="flex items-center gap-2">
-                        <span className="text-[11px] font-mono text-zinc-500 w-8">#{problem.id}</span>
+                    <td className="py-3.5 px-4">
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-xs font-mono text-zinc-500 w-8">#{problem.id}</span>
                         <a 
                           href="#problems" 
-                          className="font-medium text-zinc-200 hover:text-white transition-colors"
+                          className="font-semibold text-zinc-100 group-hover:text-emerald-400 transition-colors"
                         >
                           {problem.title}
                         </a>
@@ -183,32 +206,32 @@ export const ProblemExplorer: React.FC = () => {
                     </td>
 
                     {/* Category */}
-                    <td className="py-2.5 px-3 font-mono text-[11px] text-zinc-400">
+                    <td className="py-3.5 px-4 text-xs font-mono text-zinc-400">
                       {problem.category}
                     </td>
 
                     {/* Difficulty */}
-                    <td className="py-2.5 px-3">
-                      <span className={`inline-block rounded px-1.5 py-0.2 text-[11px] font-mono font-medium border ${getDifficultyBadge(problem.difficulty)}`}>
+                    <td className="py-3.5 px-4">
+                      <span className={`inline-block rounded-md px-2 py-0.5 text-xs font-mono font-bold border ${getDifficultyBadge(problem.difficulty)}`}>
                         {problem.difficulty}
                       </span>
                     </td>
 
                     {/* Acceptance */}
-                    <td className="py-2.5 px-3 font-mono text-[11px] text-zinc-400">
+                    <td className="py-3.5 px-4 text-xs font-mono text-zinc-300">
                       {problem.acceptance}
                     </td>
 
                     {/* Company tags */}
-                    <td className="py-2.5 px-3">
-                      <div className="flex flex-wrap gap-1">
+                    <td className="py-3.5 px-4">
+                      <div className="flex flex-wrap gap-1.5">
                         {problem.companies.slice(0, 2).map((comp, idx) => (
-                          <span key={idx} className="rounded border border-white/[0.06] bg-white/[0.02] px-1.5 py-0.2 text-[10px] font-mono text-zinc-400">
+                          <span key={idx} className="rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 text-[10px] font-mono text-zinc-300">
                             {comp}
                           </span>
                         ))}
                         {problem.companies.length > 2 && (
-                          <span className="text-[10px] font-mono text-zinc-600 self-center">
+                          <span className="text-[10px] font-mono text-zinc-500 self-center">
                             +{problem.companies.length - 2}
                           </span>
                         )}
@@ -216,13 +239,13 @@ export const ProblemExplorer: React.FC = () => {
                     </td>
 
                     {/* Action */}
-                    <td className="py-2.5 px-3 text-right">
+                    <td className="py-3.5 px-4 text-right">
                       <a 
                         href="#problems"
-                        className="inline-flex items-center gap-1 rounded border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.08] px-2 py-1 text-[11px] font-mono text-zinc-300 transition-colors"
+                        className="inline-flex items-center gap-1 rounded-lg bg-white/[0.05] hover:bg-emerald-500 hover:text-zinc-950 border border-white/[0.08] hover:border-emerald-400 px-3 py-1 text-xs font-mono font-bold text-zinc-200 transition-all"
                       >
                         <span>Solve</span>
-                        <ChevronRight className="h-3 w-3 text-zinc-500" />
+                        <ChevronRight className="h-3 w-3" />
                       </a>
                     </td>
                   </tr>
@@ -232,7 +255,7 @@ export const ProblemExplorer: React.FC = () => {
           </div>
 
           {filteredProblems.length === 0 && (
-            <div className="py-10 text-center text-zinc-500 text-xs font-mono">
+            <div className="py-12 text-center text-zinc-500 text-xs font-mono">
               No problems match current filters.
             </div>
           )}
