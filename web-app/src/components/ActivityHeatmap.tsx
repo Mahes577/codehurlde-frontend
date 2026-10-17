@@ -80,7 +80,7 @@ export const ActivityHeatmap: React.FC = () => {
 
   return (
     <section className="py-12 bg-[#07090e] border-b border-white/[0.08]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Main Card Container */}
         <div className="rounded-2xl border border-white/[0.1] bg-[#0c1220]/90 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">

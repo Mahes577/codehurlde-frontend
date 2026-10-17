@@ -80,7 +80,7 @@ export const DynamicModeShowcase: React.FC = () => {
       {/* Background ambient lighting */}
       <div className="pointer-events-none absolute top-1/2 right-10 -translate-y-1/2 h-96 w-96 rounded-full bg-emerald-500/10 blur-[130px]" />
       
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
+      <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 relative">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-white/[0.08]">

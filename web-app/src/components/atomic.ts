@@ -24,3 +24,4 @@ export * from './molecules/ContestCard';
 export * from './molecules/AlgorithmStepController';
 export * from './interactive/GraphAlgorithmVisualizer';
 export * from './interactive/DpAlgorithmVisualizer';
+export * from './interactive/TreeAlgorithmVisualizer';

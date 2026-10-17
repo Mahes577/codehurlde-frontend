@@ -42,37 +42,39 @@ export interface StepRecord {
   frontierNodes: string[];
   distances: Record<string, number | string>;
   minHeap: { node: string; dist: number }[];
-  activeEdges: string[]; // edges being evaluated
-  relaxedEdges: string[]; // tree edges
-  shortestPathNodes: string[];
-  shortestPathEdges: string[];
+  activeEdges: string[]; // edges currently being relaxed/evaluated
+  relaxedEdges: string[]; // settled tree edges
+  shortestPathNodes: string[]; // nodes in finalized shortest path
+  shortestPathEdges: string[]; // edges in finalized shortest path
   codeLine: number;
 }
 
+// 6 Nodes with a clean, balanced layout
 const NODES: GraphNode[] = [
   { id: 'A', label: 'A (Src)', x: 90, y: 170, neighbors: [{ target: 'C', weight: 2 }, { target: 'B', weight: 4 }] },
-  { id: 'B', label: 'B', x: 230, y: 80, neighbors: [{ target: 'D', weight: 5 }, { target: 'E', weight: 2 }] },
-  { id: 'C', label: 'C', x: 230, y: 260, neighbors: [{ target: 'B', weight: 1 }, { target: 'E', weight: 8 }] },
-  { id: 'D', label: 'D', x: 410, y: 80, neighbors: [{ target: 'F', weight: 6 }] },
-  { id: 'E', label: 'E', x: 410, y: 260, neighbors: [{ target: 'F', weight: 3 }] },
+  { id: 'B', label: 'B', x: 230, y: 85, neighbors: [{ target: 'D', weight: 5 }, { target: 'E', weight: 4 }] },
+  { id: 'C', label: 'C', x: 230, y: 255, neighbors: [{ target: 'E', weight: 3 }, { target: 'B', weight: 4 }] },
+  { id: 'D', label: 'D', x: 410, y: 85, neighbors: [{ target: 'F', weight: 4 }] },
+  { id: 'E', label: 'E', x: 410, y: 255, neighbors: [{ target: 'F', weight: 2 }] },
   { id: 'F', label: 'F (Tgt)', x: 550, y: 170, neighbors: [] }
 ];
 
+// Clean directed edges: Shortest Path is cleanly A -> C (2) -> E (3) -> F (2) = 7
 const EDGES: GraphEdge[] = [
-  { id: 'A-B', source: 'A', target: 'B', weight: 4 },
   { id: 'A-C', source: 'A', target: 'C', weight: 2 },
-  { id: 'C-B', source: 'C', target: 'B', weight: 1 },
+  { id: 'A-B', source: 'A', target: 'B', weight: 4 },
+  { id: 'C-E', source: 'C', target: 'E', weight: 3 },
+  { id: 'C-B', source: 'C', target: 'B', weight: 4 },
   { id: 'B-D', source: 'B', target: 'D', weight: 5 },
-  { id: 'B-E', source: 'B', target: 'E', weight: 2 },
-  { id: 'C-E', source: 'C', target: 'E', weight: 8 },
-  { id: 'D-F', source: 'D', target: 'F', weight: 6 },
-  { id: 'E-F', source: 'E', target: 'F', weight: 3 }
+  { id: 'B-E', source: 'B', target: 'E', weight: 4 },
+  { id: 'D-F', source: 'D', target: 'F', weight: 4 },
+  { id: 'E-F', source: 'E', target: 'F', weight: 2 }
 ];
 
 const STEPS: StepRecord[] = [
   {
     step: 0,
-    title: 'Initialize Dijkstra Invariant',
+    title: 'Initialize Dijkstra Priority Queue',
     description: 'Set source node A distance to 0, all other nodes to ∞. Push (0, A) into the Min-Heap priority queue.',
     currentNode: 'A',
     visitedNodes: [],
@@ -102,77 +104,77 @@ const STEPS: StepRecord[] = [
   },
   {
     step: 2,
-    title: 'Pop C (dist=2) — Algorithmic Shortcut Found!',
-    description: 'C is closest (dist=2). Relax (C→B, wt=1): 2+1=3 < 4! B is updated to dist=3 (better than direct A→B). Relax (C→E, wt=8): dist[E]=10.',
+    title: 'Pop C (dist=2) — Closest Unvisited Node',
+    description: 'C is smallest in Min-Heap (dist=2). Relax (C→E, wt=3): dist[E] = 2+3 = 5. Checking (C→B, wt=4): 2+4 = 6 > 4 (current dist[B]), so B stays at 4.',
     currentNode: 'C',
     visitedNodes: ['A', 'C'],
     frontierNodes: ['B', 'E'],
-    distances: { A: 0, B: 3, C: 2, D: '∞', E: 10, F: '∞' },
-    minHeap: [{ node: 'B', dist: 3 }, { node: 'E', dist: 10 }],
-    activeEdges: ['C-B', 'C-E'],
-    relaxedEdges: ['A-C', 'C-B', 'C-E'],
+    distances: { A: 0, B: 4, C: 2, D: '∞', E: 5, F: '∞' },
+    minHeap: [{ node: 'B', dist: 4 }, { node: 'E', dist: 5 }],
+    activeEdges: ['C-E', 'C-B'],
+    relaxedEdges: ['A-C', 'A-B', 'C-E'],
     shortestPathNodes: [],
     shortestPathEdges: [],
     codeLine: 5
   },
   {
     step: 3,
-    title: 'Pop B (dist=3) & Relax Sub-Branch',
-    description: 'B is settled. Relax (B→D, wt=5): dist[D] = 3+5 = 8. Relax (B→E, wt=2): 3+2 = 5 < 10! dist[E] reduced from 10 to 5.',
+    title: 'Pop B (dist=4) & Explore Branch',
+    description: 'B is settled. Relax (B→D, wt=5): dist[D] = 4+5 = 9. Evaluating (B→E, wt=4): 4+4 = 8 > 5 (dist[E] already 5 via C, pruned!).',
     currentNode: 'B',
     visitedNodes: ['A', 'C', 'B'],
     frontierNodes: ['E', 'D'],
-    distances: { A: 0, B: 3, C: 2, D: 8, E: 5, F: '∞' },
-    minHeap: [{ node: 'E', dist: 5 }, { node: 'D', dist: 8 }],
+    distances: { A: 0, B: 4, C: 2, D: 9, E: 5, F: '∞' },
+    minHeap: [{ node: 'E', dist: 5 }, { node: 'D', dist: 9 }],
     activeEdges: ['B-D', 'B-E'],
-    relaxedEdges: ['A-C', 'C-B', 'B-E', 'B-D'],
+    relaxedEdges: ['A-C', 'C-E', 'B-D'],
     shortestPathNodes: [],
     shortestPathEdges: [],
     codeLine: 4
   },
   {
     step: 4,
-    title: 'Pop E (dist=5) & Reach Target F',
-    description: 'E is settled at dist=5. Relax (E→F, wt=3): dist[F] = 5+3 = 8. Target F entered the priority queue!',
+    title: 'Pop E (dist=5) & Reach Target Node F',
+    description: 'E is settled at dist=5. Relax edge (E→F, wt=2): dist[F] = 5+2 = 7. Target node F is reached and pushed to Min-Heap!',
     currentNode: 'E',
     visitedNodes: ['A', 'C', 'B', 'E'],
     frontierNodes: ['F', 'D'],
-    distances: { A: 0, B: 3, C: 2, D: 8, E: 5, F: 8 },
-    minHeap: [{ node: 'F', dist: 8 }, { node: 'D', dist: 8 }],
+    distances: { A: 0, B: 4, C: 2, D: 9, E: 5, F: 7 },
+    minHeap: [{ node: 'F', dist: 7 }, { node: 'D', dist: 9 }],
     activeEdges: ['E-F'],
-    relaxedEdges: ['A-C', 'C-B', 'B-E', 'E-F', 'B-D'],
+    relaxedEdges: ['A-C', 'C-E', 'E-F', 'B-D'],
     shortestPathNodes: [],
     shortestPathEdges: [],
     codeLine: 5
   },
   {
     step: 5,
-    title: 'Pop D (dist=8) — Redundant Path Pruning',
-    description: 'D is settled at dist=8. Evaluating (D→F, wt=6): 8+6 = 14 > 8 (current F dist). Pruned! Target already has optimal path.',
-    currentNode: 'D',
-    visitedNodes: ['A', 'C', 'B', 'E', 'D'],
-    frontierNodes: ['F'],
-    distances: { A: 0, B: 3, C: 2, D: 8, E: 5, F: 8 },
-    minHeap: [{ node: 'F', dist: 8 }],
+    title: 'Pop F (dist=7) — Target Settled at Min Distance',
+    description: 'Target F is popped from Min-Heap with settled dist=7. Evaluating remaining node D (dist=9): 9+4 = 13 > 7 (pruned).',
+    currentNode: 'F',
+    visitedNodes: ['A', 'C', 'B', 'E', 'F'],
+    frontierNodes: ['D'],
+    distances: { A: 0, B: 4, C: 2, D: 9, E: 5, F: 7 },
+    minHeap: [{ node: 'D', dist: 9 }],
     activeEdges: ['D-F'],
-    relaxedEdges: ['A-C', 'C-B', 'B-E', 'E-F'],
-    shortestPathNodes: [],
-    shortestPathEdges: [],
-    codeLine: 6
+    relaxedEdges: ['A-C', 'C-E', 'E-F'],
+    shortestPathNodes: ['A', 'C', 'E', 'F'],
+    shortestPathEdges: ['A-C', 'C-E', 'E-F'],
+    codeLine: 7
   },
   {
     step: 6,
-    title: 'Target F Settled — Shortest Path Finalized!',
-    description: 'Optimal path found: A → C → B → E → F with minimum weight cost = 8. Guaranteed optimal in O((V + E) log V).',
+    title: 'Shortest Path Fully Illuminated: A → C → E → F',
+    description: 'Complete unbroken shortest path finalized: A → C → E → F with minimum weight cost = 7 (2 + 3 + 2). Optimal in O((V + E) log V).',
     currentNode: 'F',
     visitedNodes: ['A', 'C', 'B', 'E', 'D', 'F'],
     frontierNodes: [],
-    distances: { A: 0, B: 3, C: 2, D: 8, E: 5, F: 8 },
+    distances: { A: 0, B: 4, C: 2, D: 9, E: 5, F: 7 },
     minHeap: [],
     activeEdges: [],
     relaxedEdges: [],
-    shortestPathNodes: ['A', 'C', 'B', 'E', 'F'],
-    shortestPathEdges: ['A-C', 'C-B', 'B-E', 'E-F'],
+    shortestPathNodes: ['A', 'C', 'E', 'F'],
+    shortestPathEdges: ['A-C', 'C-E', 'E-F'],
     codeLine: 8
   }
 ];
@@ -199,7 +201,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
             return prev;
           }
         });
-      }, 1800);
+      }, 1900);
     }
     return () => clearInterval(timer);
   }, [isPlaying]);
@@ -222,6 +224,34 @@ export const GraphAlgorithmVisualizer: React.FC<{
     setCurrentStepIdx(0);
     setIsPlaying(false);
   };
+
+  // Helper to compute exact geometric edge coordinates clipped to circle radii
+  const getEdgeGeom = (src: GraphNode, tgt: GraphNode, radius = 24) => {
+    const dx = tgt.x - src.x;
+    const dy = tgt.y - src.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist === 0) return { x1: src.x, y1: src.y, x2: tgt.x, y2: tgt.y, midX: src.x, midY: src.y, perpX: 0, perpY: 0 };
+    const uX = dx / dist;
+    const uY = dy / dist;
+    return {
+      x1: src.x + uX * radius,
+      y1: src.y + uY * radius,
+      x2: tgt.x - uX * (radius + 5), // leave gap for arrow marker
+      y2: tgt.y - uY * (radius + 5),
+      midX: (src.x + tgt.x) / 2,
+      midY: (src.y + tgt.y) / 2,
+      perpX: -uY * 13,
+      perpY: uX * 13
+    };
+  };
+
+  // Build the continuous polyline points string for shortest path: A -> C -> E -> F
+  const shortestPointsString = ['A', 'C', 'E', 'F']
+    .map(id => {
+      const n = NODES.find(node => node.id === id)!;
+      return `${n.x},${n.y}`;
+    })
+    .join(' ');
 
   return (
     <div className="rounded-2xl border border-white/[0.1] bg-[#090d18] text-zinc-100 p-5 sm:p-6 shadow-2xl space-y-6 font-sans">
@@ -311,8 +341,8 @@ export const GraphAlgorithmVisualizer: React.FC<{
         {/* Graph Legend */}
         <div className="absolute top-3 left-4 flex flex-wrap items-center gap-3 text-[10px] font-mono text-zinc-400 z-10 pointer-events-none">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-emerald-500/80 border border-emerald-400" />
-            <span>Shortest Path</span>
+            <span className="w-3 h-3 rounded-full bg-emerald-500/90 border border-emerald-400 shadow-sm shadow-emerald-500/50" />
+            <span className="text-emerald-300 font-bold">Shortest Path</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-3 h-3 rounded-full bg-cyan-500/80 border border-cyan-400" />
@@ -329,37 +359,49 @@ export const GraphAlgorithmVisualizer: React.FC<{
         </div>
 
         <svg 
-          viewBox="0 0 640 330" 
-          className="w-full h-auto max-h-[360px] select-none"
+          viewBox="0 0 640 340" 
+          className="w-full h-auto max-h-[380px] select-none"
         >
           <defs>
-            {/* Glow filters for optimal edges and nodes */}
-            <filter id="glow-emerald" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="3.5" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-            <filter id="glow-cyan" x="-30%" y="-30%" width="160%" height="160%">
-              <feGaussianBlur stdDeviation="3" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-
             {/* Arrow markers */}
-            <marker id="arrow-default" markerWidth="6" markerHeight="6" refX="22" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L6,3 z" fill="#3f3f46" />
+            <marker id="arrow-default" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L6,3 z" fill="#52525b" />
             </marker>
-            <marker id="arrow-active" markerWidth="7" markerHeight="7" refX="22" refY="3.5" orient="auto">
+            <marker id="arrow-active" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
               <path d="M0,0 L0,7 L7,3.5 z" fill="#38bdf8" />
             </marker>
-            <marker id="arrow-shortest" markerWidth="8" markerHeight="8" refX="22" refY="4" orient="auto">
-              <path d="M0,0 L0,8 L8,4 z" fill="#34d399" />
+            <marker id="arrow-tree" markerWidth="6.5" markerHeight="6.5" refX="5" refY="3.25" orient="auto">
+              <path d="M0,0 L0,6.5 L6.5,3.25 z" fill="#059669" />
+            </marker>
+            <marker id="arrow-shortest" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+              <path d="M0,0 L0,8 L8,4 z" fill="#10b981" />
             </marker>
           </defs>
+
+          {/* 0. CONTINUOUS UNBROKEN SHORTEST PATH CABLE (When Finalized) */}
+          {step.shortestPathNodes.length > 0 && (
+            <g className="shortest-path-ribbon animate-fade-in">
+              {/* Outer Radiant Glow Beam */}
+              <polyline
+                points={shortestPointsString}
+                fill="none"
+                stroke="#10b981"
+                strokeWidth="10"
+                strokeOpacity="0.35"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              {/* Solid Core Cable */}
+              <polyline
+                points={shortestPointsString}
+                fill="none"
+                stroke="#34d399"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </g>
+          )}
 
           {/* 1. EDGES */}
           {EDGES.map(edge => {
@@ -370,15 +412,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
             const isActive = step.activeEdges.includes(edge.id);
             const isRelaxed = step.relaxedEdges.includes(edge.id);
 
-            const midX = (src.x + tgt.x) / 2;
-            const midY = (src.y + tgt.y) / 2;
-
-            // Offset label slightly perpendicular to edge
-            const dx = tgt.x - src.x;
-            const dy = tgt.y - src.y;
-            const len = Math.sqrt(dx * dx + dy * dy);
-            const offsetX = -dy / len * 12;
-            const offsetY = dx / len * 12;
+            const { x1, y1, x2, y2, midX, midY, perpX, perpY } = getEdgeGeom(src, tgt, 23);
 
             let strokeColor = '#27272a'; // zinc-800
             let strokeWidth = 1.5;
@@ -395,41 +429,68 @@ export const GraphAlgorithmVisualizer: React.FC<{
               marker = 'url(#arrow-active)';
               dashArray = '5,3';
             } else if (isRelaxed) {
-              strokeColor = '#065f46'; // emerald-900 / dark tree edge
+              strokeColor = '#059669'; // emerald-600 tree edge
               strokeWidth = 2;
+              marker = 'url(#arrow-tree)';
             }
 
             return (
               <g key={edge.id} className="transition-all duration-300">
+                {/* Background glow stroke for active or shortest edges */}
+                {isShortest && (
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke="#10b981"
+                    strokeWidth="8"
+                    strokeOpacity="0.4"
+                    strokeLinecap="round"
+                  />
+                )}
+                {isActive && (
+                  <line
+                    x1={x1}
+                    y1={y1}
+                    x2={x2}
+                    y2={y2}
+                    stroke="#38bdf8"
+                    strokeWidth="6"
+                    strokeOpacity="0.3"
+                    strokeLinecap="round"
+                  />
+                )}
+
+                {/* Main Edge Line */}
                 <line
-                  x1={src.x}
-                  y1={src.y}
-                  x2={tgt.x}
-                  y2={tgt.y}
+                  x1={x1}
+                  y1={y1}
+                  x2={x2}
+                  y2={y2}
                   stroke={strokeColor}
                   strokeWidth={strokeWidth}
                   strokeDasharray={dashArray}
                   markerEnd={marker}
-                  filter={isShortest ? 'url(#glow-emerald)' : undefined}
                 />
 
-                {/* Edge Weight Pill */}
-                <g transform={`translate(${midX + offsetX}, ${midY + offsetY})`}>
+                {/* Edge Weight Badge Pill */}
+                <g transform={`translate(${midX + perpX}, ${midY + perpY})`}>
                   <rect
                     x="-12"
                     y="-9"
                     width="24"
                     height="18"
                     rx="6"
-                    fill={isShortest ? '#064e3b' : isActive ? '#082f49' : '#18181b'}
-                    stroke={isShortest ? '#34d399' : isActive ? '#38bdf8' : '#27272a'}
-                    strokeWidth="1"
+                    fill={isShortest ? '#064e3b' : isActive ? '#082f49' : isRelaxed ? '#022c22' : '#18181b'}
+                    stroke={isShortest ? '#34d399' : isActive ? '#38bdf8' : isRelaxed ? '#059669' : '#27272a'}
+                    strokeWidth="1.2"
                   />
                   <text
                     textAnchor="middle"
                     dy="3.5"
                     className="text-[10px] font-mono font-bold"
-                    fill={isShortest ? '#6ee7b7' : isActive ? '#7dd3fc' : '#a1a1aa'}
+                    fill={isShortest ? '#6ee7b7' : isActive ? '#7dd3fc' : isRelaxed ? '#34d399' : '#a1a1aa'}
                   >
                     {edge.weight}
                   </text>
@@ -438,7 +499,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
             );
           })}
 
-          {/* 2. NODES */}
+          {/* 2. NODES (Rendered on top for crisp elevation) */}
           {NODES.map(node => {
             const isCurrent = step.currentNode === node.id;
             const isShortest = step.shortestPathNodes.includes(node.id);
@@ -449,18 +510,15 @@ export const GraphAlgorithmVisualizer: React.FC<{
             let nodeFill = '#111625';
             let strokeColor = '#3f3f46';
             let strokeWidth = 2;
-            let filterId = undefined;
 
             if (isShortest) {
               nodeFill = '#064e3b';
               strokeColor = '#10b981';
               strokeWidth = 3;
-              filterId = 'url(#glow-emerald)';
             } else if (isCurrent) {
               nodeFill = '#082f49';
               strokeColor = '#38bdf8';
               strokeWidth = 3;
-              filterId = 'url(#glow-cyan)';
             } else if (isVisited) {
               nodeFill = '#164e63';
               strokeColor = '#06b6d4';
@@ -477,15 +535,39 @@ export const GraphAlgorithmVisualizer: React.FC<{
                 className="cursor-pointer transition-transform duration-200 hover:scale-110"
                 onClick={() => setSelectedNodeInfo(node)}
               >
-                {/* Node Outer Ring */}
+                {/* Outer Glow Ring for Shortest Path or Current */}
+                {isShortest && (
+                  <circle
+                    cx={node.x}
+                    cy={node.y}
+                    r="28"
+                    fill="none"
+                    stroke="#10b981"
+                    strokeWidth="3"
+                    strokeOpacity="0.45"
+                    className="animate-pulse"
+                  />
+                )}
+                {isCurrent && !isShortest && (
+                  <circle
+                    cx={node.x}
+                    cy={node.y}
+                    r="28"
+                    fill="none"
+                    stroke="#38bdf8"
+                    strokeWidth="3"
+                    strokeOpacity="0.45"
+                  />
+                )}
+
+                {/* Node Solid Circle */}
                 <circle
                   cx={node.x}
                   cy={node.y}
-                  r="22"
+                  r="23"
                   fill={nodeFill}
                   stroke={strokeColor}
                   strokeWidth={strokeWidth}
-                  filter={filterId}
                 />
 
                 {/* Node Letter */}
@@ -505,9 +587,9 @@ export const GraphAlgorithmVisualizer: React.FC<{
                   x={node.x}
                   y={node.y}
                   textAnchor="middle"
-                  dy="10"
+                  dy="11"
                   className="text-[9px] font-mono font-bold"
-                  fill={isShortest ? '#6ee7b7' : isCurrent ? '#7dd3fc' : '#94a3b8'}
+                  fill={isShortest ? '#6ee7b7' : isCurrent ? '#7dd3fc' : isFrontier ? '#fcd34d' : '#94a3b8'}
                 >
                   d={dist}
                 </text>
@@ -515,6 +597,22 @@ export const GraphAlgorithmVisualizer: React.FC<{
             );
           })}
         </svg>
+
+        {/* Shortest Path Success Banner */}
+        {step.shortestPathNodes.length > 0 && (
+          <div className="mt-3 p-3.5 rounded-xl border border-emerald-500/40 bg-emerald-950/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono animate-fade-in">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span className="font-bold text-emerald-300">Continuous Shortest Path Verified:</span>
+              <span className="text-zinc-200">
+                A <span className="text-emerald-400 font-bold">(wt 2)</span> → C <span className="text-emerald-400 font-bold">(wt 3)</span> → E <span className="text-emerald-400 font-bold">(wt 2)</span> → F
+              </span>
+            </div>
+            <div className="px-3 py-1 rounded-lg bg-emerald-500 text-zinc-950 font-bold text-xs shrink-0">
+              Total Distance = 7
+            </div>
+          </div>
+        )}
 
         {/* Selected Node Tooltip or hint */}
         <div className="mt-2 text-center text-xs font-mono text-zinc-500">
@@ -600,11 +698,11 @@ export const GraphAlgorithmVisualizer: React.FC<{
             <div className={step.codeLine === 5 ? 'bg-emerald-500/25 text-emerald-300 font-bold px-1 rounded' : ''}>
               5:     if d + w &lt; dist[v]:
             </div>
-            <div className={step.codeLine === 6 ? 'bg-amber-500/20 text-amber-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 7 ? 'bg-amber-500/20 text-amber-200 px-1 rounded' : ''}>
               6:       dist[v] = d + w; heappush(pq)
             </div>
             <div className={step.codeLine === 8 ? 'bg-emerald-500/30 text-emerald-200 font-bold px-1 rounded' : ''}>
-              7: return dist[target]  # = 8
+              7: return dist[target]  # = 7
             </div>
           </div>
         </div>

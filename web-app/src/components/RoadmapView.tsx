@@ -241,7 +241,7 @@ export const RoadmapView: React.FC<RoadmapViewProps> = ({ onSelectProblem }) => 
 
   return (
     <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-[1720px] mx-auto space-y-8">
         
         {/* Header Hero */}
         <Card variant="surface" className="p-6 md:p-8 relative overflow-hidden">

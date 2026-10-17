@@ -43,7 +43,7 @@ export const JobPrepTrack: React.FC = () => {
 
   return (
     <section id="tracks" className="py-16 sm:py-20 bg-[#090a0f] border-b border-white/[0.08]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-white/[0.08]">

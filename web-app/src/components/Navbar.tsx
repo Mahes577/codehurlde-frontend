@@ -40,7 +40,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#07090e]/95 backdrop-blur-md font-sans">
       {/* Top micro-bar: Today's Daily Coding Challenge Announcement */}
       <div className="border-b border-white/[0.05] bg-gradient-to-r from-emerald-950/40 via-[#0a0f1d] to-[#07090e] px-4 py-1 text-[11px] font-mono text-zinc-400">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
+        <div className="mx-auto flex max-w-[1720px] items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="flex h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-zinc-500 uppercase">Oct 18 Daily Challenge:</span>
@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Main Navbar */}
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-14 max-w-[1720px] items-center justify-between px-4 sm:px-6 lg:px-8">
         
         {/* Brand & Left Navigation */}
         <div className="flex items-center gap-6">

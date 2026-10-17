@@ -5,18 +5,18 @@ import { GithubIcon } from './Icons';
 export const CtaSection: React.FC = () => {
   return (
     <section className="py-20 bg-[#090a0f] border-b border-white/[0.08]">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+      <div className="mx-auto max-w-6xl xl:max-w-[1500px] px-4 sm:px-6 lg:px-8 text-center">
         
-        <div className="rounded-xl border border-white/[0.1] bg-[#0c0e16] p-8 sm:p-12">
+        <div className="rounded-2xl border border-white/[0.1] bg-[#0c0e16] p-8 sm:p-14 shadow-2xl">
           <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-medium mb-3">
             Start Practicing
           </div>
 
-          <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
             Ready to solve your next coding hurdle?
           </h2>
 
-          <p className="mt-3 text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
+          <p className="mt-3 text-xs sm:text-sm text-zinc-400 max-w-2xl mx-auto leading-relaxed">
             Join engineers practicing Data Structures, Algorithms, and Competitive Programming with calibrated problem sequencing.
           </p>
 

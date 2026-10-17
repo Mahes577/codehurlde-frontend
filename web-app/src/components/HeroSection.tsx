@@ -21,6 +21,7 @@ import { Badge, DifficultyBadge } from './atoms/Badge';
 import { AlgorithmStepController } from './molecules/AlgorithmStepController';
 import { GraphAlgorithmVisualizer } from './interactive/GraphAlgorithmVisualizer';
 import { DpAlgorithmVisualizer } from './interactive/DpAlgorithmVisualizer';
+import { TreeAlgorithmVisualizer } from './interactive/TreeAlgorithmVisualizer';
 
 type Language = 'python' | 'cpp' | 'javascript';
 
@@ -85,7 +86,7 @@ console.log(twoSum([2, 7, 11, 15], 9)); // [0, 1]`
 };
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onExploreRoadmap }) => {
-  const [selectedProblem, setSelectedProblem] = useState<'twosum' | 'graph' | 'dp'>('twosum');
+  const [selectedProblem, setSelectedProblem] = useState<'twosum' | 'tree' | 'graph' | 'dp'>('twosum');
   const [viewMode, setViewMode] = useState<'visualizer' | 'code'>('visualizer');
   const [lang, setLang] = useState<Language>('python');
   const [copied, setCopied] = useState(false);
@@ -129,13 +130,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
   return (
     <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-28 overflow-hidden bg-mesh-grid">
       {/* Ambient glowing radial flares */}
-      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-full max-w-7xl">
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-full max-w-[1720px]">
         <div className="absolute top-10 left-1/4 h-96 w-96 rounded-full bg-emerald-500/15 blur-[120px]" />
         <div className="absolute top-20 right-1/4 h-96 w-96 rounded-full bg-indigo-500/15 blur-[140px]" />
         <div className="absolute top-40 left-1/2 -translate-x-1/2 h-64 w-[500px] rounded-full bg-cyan-500/10 blur-[100px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Top Feature Pill */}
         <div className="flex justify-center">
@@ -204,7 +205,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
         </div>
 
         {/* Hero Interactive Showcase Workbench */}
-        <div className="mt-12 lg:mt-16 max-w-5xl mx-auto">
+        <div className="mt-12 lg:mt-16 max-w-7xl xl:max-w-[1500px] mx-auto">
           <div className="rounded-2xl border border-white/[0.12] bg-[#0c101c]/90 shadow-2xl shadow-emerald-950/30 backdrop-blur-xl overflow-hidden">
             
             {/* Workbench Top Bar */}
@@ -219,7 +220,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                 </div>
                 <div className="h-4 w-[1px] bg-white/[0.1]" />
                 
-                {/* 3 Interactive Problem Tabs */}
+                {/* 4 Interactive Problem Tabs */}
                 <div className="flex flex-wrap items-center gap-1 bg-black/40 p-1 rounded-xl border border-white/[0.08]">
                   <button
                     onClick={() => setSelectedProblem('twosum')}
@@ -231,6 +232,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                   >
                     <span>#1 Two Sum</span>
                     <DifficultyBadge difficulty="Easy" size="xs" />
+                  </button>
+
+                  <button
+                    onClick={() => setSelectedProblem('tree')}
+                    className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
+                      selectedProblem === 'tree'
+                        ? 'bg-purple-500/20 text-purple-300 font-bold border border-purple-500/40 shadow-sm'
+                        : 'text-zinc-400 hover:text-white'
+                    }`}
+                  >
+                    <span>#236 Tree LCA</span>
+                    <Badge variant="purple" size="xs">Medium</Badge>
                   </button>
 
                   <button
@@ -309,6 +322,13 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                 </div>
               )}
             </div>
+
+            {/* TAB: TREE ALGORITHM VISUALIZER */}
+            {selectedProblem === 'tree' && (
+              <div className="p-2 sm:p-4 bg-[#090d18]">
+                <TreeAlgorithmVisualizer onLaunchSolver={onLaunchCompiler} />
+              </div>
+            )}
 
             {/* TAB: GRAPH ALGORITHM VISUALIZER */}
             {selectedProblem === 'graph' && (

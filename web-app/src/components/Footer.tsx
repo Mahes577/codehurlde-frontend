@@ -5,7 +5,7 @@ import { GithubIcon, TwitterIcon, DiscordIcon } from './Icons';
 export const Footer: React.FC = () => {
   return (
     <footer className="bg-[#07080c] text-zinc-400 text-xs">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           
           {/* Brand Info */}

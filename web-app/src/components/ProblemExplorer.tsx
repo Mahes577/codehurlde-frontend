@@ -224,7 +224,7 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
 
   return (
     <section id="problems" className="py-16 bg-[#07090e]">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-6">
+      <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 space-y-6">
         
         {/* Unified Section Header Atom */}
         <SectionHeader

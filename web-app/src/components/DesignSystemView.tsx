@@ -43,7 +43,8 @@ import {
   CheckCircle,
   AlertCircle,
   Network,
-  Coins
+  Coins,
+  GitFork
 } from 'lucide-react';
 import { ActiveView } from './Navbar';
 import { tokens } from '../tokens';
@@ -74,7 +75,8 @@ import {
   ContestCard,
   AlgorithmStepController,
   GraphAlgorithmVisualizer,
-  DpAlgorithmVisualizer
+  DpAlgorithmVisualizer,
+  TreeAlgorithmVisualizer
 } from './atomic';
 
 export type AtomicTier = 'all' | 'token' | 'atom' | 'molecule' | 'organism';
@@ -538,6 +540,18 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       navTarget: 'problems',
       propsSnippet: `interface DpAlgorithmVisualizerProps {\n  onLaunchSolver?: () => void;\n}`,
       usageSnippet: `<DpAlgorithmVisualizer onLaunchSolver={() => navigate('/dsa')} />`
+    },
+    {
+      id: 'org-tree-visualizer',
+      name: 'TreeAlgorithmVisualizer',
+      tier: 'organism',
+      category: 'Organisms / Visualizers',
+      icon: GitFork,
+      file: 'src/components/interactive/TreeAlgorithmVisualizer.tsx',
+      description: 'Interactive Binary Tree DFS visualizer for Lowest Common Ancestor (LC #236) with recursive call stack telemetry, target node discovery, backtrack highlighting, and crown indicator.',
+      navTarget: 'problems',
+      propsSnippet: `interface TreeAlgorithmVisualizerProps {\n  onLaunchSolver?: () => void;\n}`,
+      usageSnippet: `<TreeAlgorithmVisualizer onLaunchSolver={() => navigate('/tree')} />`
     }
   ];
 
@@ -1518,6 +1532,13 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
           </div>
         );
 
+      case 'org-tree-visualizer':
+        return (
+          <div className="space-y-4">
+            <TreeAlgorithmVisualizer onLaunchSolver={() => onNavigateToView('problems')} />
+          </div>
+        );
+
       case 'org-compiler':
       case 'org-cp':
       case 'org-explorer':
@@ -1566,7 +1587,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       <section className="relative overflow-hidden border-b border-white/[0.08] bg-gradient-to-b from-[#0c101c] via-[#07090e] to-[#07090e] px-4 py-12 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
         
-        <div className="relative mx-auto max-w-7xl">
+        <div className="relative mx-auto max-w-[1720px]">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-mono font-medium text-emerald-300">
@@ -1600,7 +1621,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <div className="text-[10px] text-zinc-500 uppercase mt-0.5">Molecules</div>
               </div>
               <div className="p-3.5 rounded-xl border border-white/[0.08] bg-zinc-950/80 text-center">
-                <div className="text-2xl font-bold text-purple-400 font-mono">9</div>
+                <div className="text-2xl font-bold text-purple-400 font-mono">10</div>
                 <div className="text-[10px] text-zinc-500 uppercase mt-0.5">Organisms</div>
               </div>
             </div>
@@ -1668,16 +1689,16 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       </section>
 
       {/* Main Container */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 mt-8">
         {/* Tier Filter Tabs */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
           <TabGroup
             tabs={[
-              { id: 'all', label: 'All Library (30)' },
+              { id: 'all', label: 'All Library (31)' },
               { id: 'token', label: 'Tokens (3)' },
               { id: 'atom', label: 'Atoms (8)' },
               { id: 'molecule', label: 'Molecules (10)' },
-              { id: 'organism', label: 'Organisms (9)' }
+              { id: 'organism', label: 'Organisms (10)' }
             ]}
             activeTab={selectedTier}
             onChange={id => {
@@ -1938,7 +1959,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <div className="flex items-center gap-2">
                     <div className="w-2.5 h-2.5 rounded-full bg-purple-400" />
-                    <h3 className="text-lg font-bold text-white font-sans">Tier 4: Organisms (9 Templates & Interactive Visualizers)</h3>
+                    <h3 className="text-lg font-bold text-white font-sans">Tier 4: Organisms (10 Templates & Interactive Visualizers)</h3>
                   </div>
                   <span className="text-xs font-mono text-zinc-500">Full-scale views, graph traversals, and DP table workspaces</span>
                 </div>

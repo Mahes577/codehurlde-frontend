@@ -101,7 +101,7 @@ export const JobPrepView: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="max-w-[1720px] mx-auto space-y-6">
         
         {/* Header Card */}
         <Card variant="default" padding="lg">

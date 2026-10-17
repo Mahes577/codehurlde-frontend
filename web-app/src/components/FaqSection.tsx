@@ -46,7 +46,7 @@ export const FaqSection: React.FC = () => {
 
   return (
     <section className="py-16 sm:py-20 bg-[#07090e] border-b border-white/[0.08]">
-      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="mx-auto max-w-6xl xl:max-w-[1500px] px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}
         <SectionHeader
@@ -59,8 +59,8 @@ export const FaqSection: React.FC = () => {
           center
         />
 
-        {/* Accordion Molecule List */}
-        <div className="space-y-3">
+        {/* Accordion Molecule List in 2-Column Responsive Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
           {FAQS.map((faq, idx) => (
             <FaqAccordionItem
               key={idx}
