@@ -16,6 +16,8 @@ import {
   Layers,
   Clock
 } from 'lucide-react';
+import { Button } from './atoms/Button';
+import { Badge, DifficultyBadge } from './atoms/Badge';
 
 type Language = 'python' | 'cpp' | 'javascript';
 
@@ -159,21 +161,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
 
           {/* Action CTAs */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <button
+            <Button
+              variant="primary"
+              size="lg"
+              icon={<Zap className="h-4 w-4 fill-zinc-950" />}
               onClick={() => onLaunchCompiler ? onLaunchCompiler() : undefined}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 px-6 py-3.5 text-sm font-bold text-zinc-950 shadow-lg shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full sm:w-auto"
             >
-              <Zap className="h-4 w-4 fill-zinc-950" />
-              <span>Launch In-Browser IDE</span>
-            </button>
+              Launch In-Browser IDE
+            </Button>
 
-            <button
+            <Button
+              variant="outline"
+              size="lg"
+              icon={<Sparkles className="h-4 w-4 text-emerald-400" />}
               onClick={() => onExploreRoadmap ? onExploreRoadmap() : undefined}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/[0.15] bg-white/[0.05] hover:bg-white/[0.09] px-6 py-3.5 text-sm font-semibold text-white transition-all backdrop-blur-md"
+              className="w-full sm:w-auto backdrop-blur-md"
             >
-              <Sparkles className="h-4 w-4 text-emerald-400" />
-              <span>Explore 29-Topic Roadmap</span>
-            </button>
+              Explore 29-Topic Roadmap
+            </Button>
           </div>
 
           {/* Key Metrics Strip */}
@@ -211,9 +217,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                 
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-mono font-bold text-white">#1 Two Sum</span>
-                  <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-mono font-bold text-emerald-400 border border-emerald-500/30">
-                    Easy
-                  </span>
+                  <DifficultyBadge difficulty="Easy" size="xs" />
                   <span className="hidden sm:inline text-[11px] font-mono text-zinc-400">
                     Target = 9
                   </span>

@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import { 
   Users, 
-  MessageSquare, 
-  Mic, 
   Hash, 
   Send, 
   Flame, 
   Sparkles, 
-  Share2, 
-  CheckCircle2, 
   ThumbsUp, 
-  ChevronRight, 
   Code2, 
   Headphones, 
   Radio,
   BookOpen
 } from 'lucide-react';
+import { Card } from './atoms/Card';
+import { Avatar } from './atoms/Avatar';
+import { Button } from './atoms/Button';
+import { Badge } from './atoms/Badge';
+import { Input } from './atoms/Input';
 
 interface ChatMessage {
   id: string;
@@ -109,13 +109,13 @@ export const CommunityView: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto space-y-6">
         
-        {/* Header */}
-        <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 md:p-8 relative overflow-hidden backdrop-blur-xl">
+        {/* Header Card */}
+        <Card variant="default" padding="lg">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
 
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-xs font-mono mb-3">
                 <Users className="w-3.5 h-3.5" />
@@ -130,7 +130,7 @@ export const CommunityView: React.FC = () => {
             </div>
 
             {/* Voice Study Room Widget */}
-            <div className="p-4 rounded-xl bg-zinc-950/80 border border-zinc-800/80 min-w-[260px] space-y-3">
+            <div className="p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08] min-w-[260px] space-y-3">
               <div className="flex items-center justify-between text-xs">
                 <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
                   <Radio className="w-3.5 h-3.5 animate-pulse" />
@@ -141,33 +141,29 @@ export const CommunityView: React.FC = () => {
 
               <div className="flex items-center gap-1.5">
                 {['M', 'S', 'R', 'K'].map((init, i) => (
-                  <div key={i} className="w-7 h-7 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-xs font-bold text-zinc-300">
-                    {init}
-                  </div>
+                  <Avatar key={i} initials={init} size="xs" gradient="from-zinc-700 to-zinc-600" />
                 ))}
               </div>
 
-              <button
+              <Button
+                variant={voiceRoomJoined ? 'danger' : 'primary'}
+                size="sm"
+                icon={<Headphones className="w-3.5 h-3.5" />}
                 onClick={() => setVoiceRoomJoined(!voiceRoomJoined)}
-                className={`w-full py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors ${
-                  voiceRoomJoined
-                    ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
-                    : 'bg-emerald-400 text-black hover:bg-emerald-300'
-                }`}
+                className="w-full"
               >
-                <Headphones className="w-3.5 h-3.5" />
-                <span>{voiceRoomJoined ? 'Leave Voice Room' : 'Join Voice Room'}</span>
-              </button>
+                {voiceRoomJoined ? 'Leave Voice Room' : 'Join Voice Room'}
+              </Button>
             </div>
           </div>
-        </div>
+        </Card>
 
-        {/* Discord / Slack-style Channel Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[620px] rounded-2xl bg-zinc-900/60 border border-zinc-800/80 overflow-hidden">
+        {/* Discord / Slack-style Channel Layout Card */}
+        <Card variant="surface" padding="none" className="grid grid-cols-1 lg:grid-cols-12 h-[620px] overflow-hidden">
           
           {/* Sidebar Channels (Col 1-4) */}
-          <div className="lg:col-span-4 border-r border-zinc-800/80 flex flex-col bg-zinc-950/50">
-            <div className="p-4 border-b border-zinc-800/80 text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+          <div className="lg:col-span-4 border-r border-white/[0.08] flex flex-col bg-zinc-950/50">
+            <div className="p-4 border-b border-white/[0.08] text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
               Community Channels
             </div>
 
@@ -179,7 +175,7 @@ export const CommunityView: React.FC = () => {
                   <button
                     key={ch.id}
                     onClick={() => setActiveChannel(ch.id)}
-                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs transition-colors ${
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs transition-colors cursor-pointer ${
                       isActive
                         ? 'bg-zinc-800 text-white font-semibold'
                         : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/60'
@@ -190,9 +186,9 @@ export const CommunityView: React.FC = () => {
                       <span>{ch.name}</span>
                     </div>
                     {ch.unread > 0 && (
-                      <span className="px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-mono font-bold">
+                      <Badge variant="emerald" size="xs">
                         {ch.unread}
-                      </span>
+                      </Badge>
                     )}
                   </button>
                 );
@@ -200,7 +196,7 @@ export const CommunityView: React.FC = () => {
             </div>
 
             {/* Peer matching card */}
-            <div className="p-4 border-t border-zinc-800/80 bg-zinc-950/80 text-xs space-y-2">
+            <div className="p-4 border-t border-white/[0.08] bg-zinc-950/80 text-xs space-y-2">
               <div className="font-semibold text-white flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                 <span>Find Mock Interview Partner</span>
@@ -208,19 +204,21 @@ export const CommunityView: React.FC = () => {
               <p className="text-[11px] text-zinc-400 leading-relaxed">
                 Pair up for 45-minute Google/Meta style technical mock interviews.
               </p>
-              <button 
+              <Button
+                variant="secondary"
+                size="xs"
                 onClick={() => alert("Matching with available peers on CodeHurdle...")}
-                className="w-full py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-medium transition-colors"
+                className="w-full"
               >
                 Queue for Mock Pair (Avg 2m)
-              </button>
+              </Button>
             </div>
           </div>
 
           {/* Chat Feed (Col 5-12) */}
           <div className="lg:col-span-8 flex flex-col justify-between bg-[#080b12]">
             {/* Channel Top Header */}
-            <div className="p-4 border-b border-zinc-800/80 flex items-center justify-between text-xs">
+            <div className="p-4 border-b border-white/[0.08] flex items-center justify-between text-xs">
               <div className="flex items-center gap-2 font-semibold text-white">
                 <Hash className="w-4 h-4 text-zinc-500" />
                 <span>{activeChannel}</span>
@@ -233,24 +231,22 @@ export const CommunityView: React.FC = () => {
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {messages.map(msg => (
                 <div key={msg.id} className="flex items-start gap-3">
-                  <div className={`w-8 h-8 rounded-full bg-gradient-to-tr ${msg.avatarColor} flex items-center justify-center text-xs font-bold text-white shrink-0 shadow`}>
-                    {msg.initials}
-                  </div>
+                  <Avatar initials={msg.initials} size="sm" gradient={msg.avatarColor} />
                   <div className="flex-1 space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-white">{msg.author}</span>
-                      <span className="text-[10px] text-zinc-500">{msg.time}</span>
+                      <span className="text-xs font-bold text-white font-sans">{msg.author}</span>
+                      <span className="text-[10px] text-zinc-500 font-mono">{msg.time}</span>
                     </div>
-                    <div className="text-xs text-zinc-300 leading-relaxed">
+                    <div className="text-xs text-zinc-300 leading-relaxed font-sans">
                       {msg.text}
                     </div>
                     {msg.codeSnippet && (
-                      <div className="p-2.5 rounded-lg bg-zinc-950 border border-zinc-800 font-mono text-xs text-emerald-300 my-1.5">
+                      <div className="p-2.5 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-emerald-300 my-1.5">
                         <code>{msg.codeSnippet}</code>
                       </div>
                     )}
                     {msg.reactions && (
-                      <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-900 border border-zinc-800 text-[10px] text-zinc-400 cursor-pointer hover:border-zinc-700">
+                      <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-900 border border-white/[0.08] text-[10px] text-zinc-400 cursor-pointer hover:border-zinc-700">
                         <ThumbsUp className="w-3 h-3 text-emerald-400" />
                         <span>{msg.reactions}</span>
                       </div>
@@ -261,27 +257,27 @@ export const CommunityView: React.FC = () => {
             </div>
 
             {/* Message Input Box */}
-            <div className="p-4 border-t border-zinc-800/80 bg-zinc-950/60">
-              <div className="flex items-center gap-2 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2">
-                <input
-                  type="text"
-                  value={inputVal}
-                  onChange={e => setInputVal(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && handleSendMessage()}
-                  placeholder={`Message #${activeChannel}...`}
-                  className="flex-1 bg-transparent text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none"
-                />
-                <button
-                  onClick={handleSendMessage}
-                  className="p-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black transition-colors"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                </button>
-              </div>
+            <div className="p-4 border-t border-white/[0.08] bg-zinc-950/60 flex items-center gap-2">
+              <input
+                type="text"
+                value={inputVal}
+                onChange={e => setInputVal(e.target.value)}
+                onKeyDown={e => e.key === 'Enter' && handleSendMessage()}
+                placeholder={`Message #${activeChannel}...`}
+                className="flex-1 rounded-xl border border-white/[0.08] bg-[#0c101c] px-3.5 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50"
+              />
+              <Button
+                variant="primary"
+                size="sm"
+                icon={<Send className="w-3.5 h-3.5" />}
+                onClick={handleSendMessage}
+              >
+                Send
+              </Button>
             </div>
 
           </div>
-        </div>
+        </Card>
 
       </div>
     </div>

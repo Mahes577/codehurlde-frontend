@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import { 
   Briefcase, 
-  Building2, 
   FileCheck, 
-  Users, 
   CheckCircle2, 
-  Clock, 
-  DollarSign, 
-  Layers, 
-  ExternalLink, 
-  Sparkles, 
-  Search, 
   ChevronRight,
-  TrendingUp,
-  Target,
-  ShieldCheck
+  Sparkles
 } from 'lucide-react';
+import { Card } from './atoms/Card';
+import { Button } from './atoms/Button';
+import { Badge } from './atoms/Badge';
+import { TabGroup } from './atoms/TabGroup';
+import { Textarea } from './atoms/Input';
 
 interface CompanyVault {
   id: string;
@@ -93,7 +88,7 @@ const COMPANIES_DATA: CompanyVault[] = [
 
 export const JobPrepView: React.FC = () => {
   const [selectedCompany, setSelectedCompany] = useState<CompanyVault>(COMPANIES_DATA[0]);
-  const [activeTab, setActiveTab] = useState<'companies' | 'ats' | 'stages'>('companies');
+  const [activeTab, setActiveTab] = useState<'companies' | 'ats'>('companies');
   const [resumeText, setResumeText] = useState('');
   const [atsScore, setAtsScore] = useState<number | null>(null);
 
@@ -106,13 +101,13 @@ export const JobPrepView: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto space-y-6">
         
-        {/* Header */}
-        <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 md:p-8 relative overflow-hidden backdrop-blur-xl">
+        {/* Header Card */}
+        <Card variant="default" padding="lg">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-400 text-xs font-mono mb-3">
                 <Briefcase className="w-3.5 h-3.5" />
@@ -126,27 +121,17 @@ export const JobPrepView: React.FC = () => {
               </p>
             </div>
 
-            {/* Quick Metrics */}
-            <div className="flex items-center gap-2 bg-zinc-950/80 p-1.5 rounded-xl border border-zinc-800 text-xs">
-              <button
-                onClick={() => setActiveTab('companies')}
-                className={`px-3 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === 'companies' ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Company Guides
-              </button>
-              <button
-                onClick={() => setActiveTab('ats')}
-                className={`px-3 py-2 rounded-lg font-medium transition-colors ${
-                  activeTab === 'ats' ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Resume ATS Scanner
-              </button>
-            </div>
+            {/* TabGroup Atom */}
+            <TabGroup
+              tabs={[
+                { id: 'companies', label: 'Company Guides' },
+                { id: 'ats', label: 'Resume ATS Scanner' }
+              ]}
+              activeTab={activeTab}
+              onChange={(val) => setActiveTab(val as any)}
+            />
           </div>
-        </div>
+        </Card>
 
         {activeTab === 'companies' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -160,18 +145,16 @@ export const JobPrepView: React.FC = () => {
                 {COMPANIES_DATA.map(comp => {
                   const isSelected = selectedCompany.id === comp.id;
                   return (
-                    <div
+                    <Card
                       key={comp.id}
+                      variant="interactive"
+                      padding="sm"
                       onClick={() => setSelectedCompany(comp)}
-                      className={`p-4 rounded-xl border transition-all cursor-pointer ${
-                        isSelected
-                          ? 'bg-zinc-800/80 border-blue-500/50 shadow-lg shadow-blue-950/20'
-                          : 'bg-zinc-900/40 border-zinc-800/70 hover:border-zinc-700'
-                      }`}
+                      className={isSelected ? 'border-blue-500/50 bg-zinc-800/80 shadow-lg shadow-blue-950/20' : ''}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-lg bg-zinc-950 border border-zinc-800 flex items-center justify-center font-bold text-sm text-white">
+                          <div className="w-10 h-10 rounded-xl bg-zinc-950 border border-white/[0.08] flex items-center justify-center font-bold text-sm text-white font-mono">
                             {comp.name[0]}
                           </div>
                           <div>
@@ -182,11 +165,11 @@ export const JobPrepView: React.FC = () => {
                         <ChevronRight className={`w-4 h-4 ${isSelected ? 'text-blue-400' : 'text-zinc-600'}`} />
                       </div>
 
-                      <div className="flex items-center gap-4 mt-3 pt-2.5 border-t border-zinc-800/60 text-[11px] font-mono text-zinc-400">
+                      <div className="flex items-center gap-4 mt-3 pt-2.5 border-t border-white/[0.06] text-[11px] font-mono text-zinc-400">
                         <span>{comp.totalProblems} Vault Problems</span>
                         <span>{comp.roundsCount} Interview Rounds</span>
                       </div>
-                    </div>
+                    </Card>
                   );
                 })}
               </div>
@@ -194,18 +177,18 @@ export const JobPrepView: React.FC = () => {
 
             {/* Selected Company Deep-Dive (Col 6-12) */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 space-y-6 backdrop-blur-xl">
+              <Card variant="surface" padding="md" className="space-y-6">
                 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
                   <div>
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">
+                    <Badge variant="cyan" size="xs">
                       Company Hiring Deep-Dive
-                    </span>
-                    <h2 className="text-2xl font-bold text-white mt-1">{selectedCompany.name}</h2>
+                    </Badge>
+                    <h2 className="text-2xl font-bold text-white mt-2">{selectedCompany.name}</h2>
                     <p className="text-xs text-zinc-400">{selectedCompany.tagline}</p>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-zinc-950/80 border border-zinc-800 font-mono text-xs">
+                  <div className="p-3 rounded-xl bg-zinc-950/80 border border-white/[0.08] font-mono text-xs">
                     <div className="text-[10px] text-zinc-500 uppercase">Avg Compensation</div>
                     <div className="text-sm font-bold text-emerald-400 mt-0.5">{selectedCompany.averagePay}</div>
                   </div>
@@ -218,7 +201,7 @@ export const JobPrepView: React.FC = () => {
                   </h3>
                   <div className="space-y-2">
                     {selectedCompany.interviewStages.map((stage, idx) => (
-                      <div key={idx} className="p-3 rounded-lg bg-zinc-950/60 border border-zinc-800/80 flex items-center gap-3 text-xs">
+                      <div key={idx} className="p-3 rounded-xl bg-zinc-950/60 border border-white/[0.06] flex items-center gap-3 text-xs">
                         <span className="w-5 h-5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center font-mono font-bold text-[10px]">
                           {idx + 1}
                         </span>
@@ -239,7 +222,7 @@ export const JobPrepView: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {selectedCompany.topProblems.map((prob, i) => (
-                      <div key={i} className="p-3 rounded-lg bg-zinc-950/40 border border-zinc-800/60 flex items-center justify-between text-xs hover:border-zinc-700 transition-colors">
+                      <div key={i} className="p-3 rounded-xl bg-zinc-950/40 border border-white/[0.06] flex items-center justify-between text-xs hover:border-white/[0.16] transition-colors cursor-pointer">
                         <span className="text-zinc-300 font-medium truncate">• {prob}</span>
                         <ChevronRight className="w-3.5 h-3.5 text-zinc-600 shrink-0" />
                       </div>
@@ -247,23 +230,24 @@ export const JobPrepView: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-zinc-800 flex items-center justify-between">
-                  <span className="text-xs text-zinc-500">Includes algorithmic test cases & behavioral rubric</span>
-                  <button 
+                <div className="pt-2 border-t border-white/[0.08] flex items-center justify-between">
+                  <span className="text-xs text-zinc-500 font-mono">Includes algorithmic test cases & behavioral rubric</span>
+                  <Button
+                    variant="primary"
+                    size="sm"
                     onClick={() => alert(`Starting 45m timed mock simulation for ${selectedCompany.name}...`)}
-                    className="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-400 text-white text-xs font-semibold shadow-md transition-colors"
                   >
                     Start {selectedCompany.name} Mock Loop
-                  </button>
+                  </Button>
                 </div>
 
-              </div>
+              </Card>
             </div>
           </div>
         )}
 
         {activeTab === 'ats' && (
-          <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 md:p-8 space-y-6">
+          <Card variant="surface" padding="lg" className="space-y-6">
             <div>
               <h2 className="text-lg font-bold text-white flex items-center gap-2">
                 <FileCheck className="w-5 h-5 text-emerald-400" />
@@ -276,29 +260,30 @@ export const JobPrepView: React.FC = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
               <div className="lg:col-span-8 space-y-3">
-                <textarea
+                <Textarea
                   value={resumeText}
                   onChange={e => setResumeText(e.target.value)}
                   placeholder="Paste your plain-text resume here or experience bullet points... (e.g. Optimized distributed task queue with Redis and C++ worker pools, cutting tail latency by 42%)..."
-                  className="w-full h-56 bg-zinc-950 border border-zinc-800 rounded-xl p-4 text-xs font-mono text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 resize-none leading-relaxed"
+                  rows={8}
                 />
-                <button
+                <Button
+                  variant="primary"
+                  size="md"
                   onClick={handleScanResume}
-                  className="px-5 py-2.5 rounded-lg bg-emerald-400 hover:bg-emerald-300 text-black text-xs font-semibold shadow transition-colors"
                 >
                   Run ATS Keywords Analysis
-                </button>
+                </Button>
               </div>
 
-              <div className="lg:col-span-4 p-5 rounded-xl bg-zinc-950/70 border border-zinc-800 space-y-4">
+              <div className="lg:col-span-4 p-5 rounded-2xl bg-zinc-950/70 border border-white/[0.08] space-y-4">
                 <div className="text-xs font-mono uppercase tracking-wider text-zinc-400">Analysis Summary</div>
                 {atsScore !== null ? (
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <div className="text-3xl font-bold font-mono text-emerald-400">{atsScore}%</div>
-                      <div className="text-xs text-zinc-300">Strong ATS Keyword Density</div>
+                      <div className="text-xs text-zinc-300 font-medium">Strong ATS Keyword Density</div>
                     </div>
-                    <ul className="space-y-1.5 text-xs text-zinc-400">
+                    <ul className="space-y-2 text-xs text-zinc-400 font-mono">
                       <li className="flex items-center gap-2 text-emerald-400">
                         <CheckCircle2 className="w-3.5 h-3.5" /> High algorithmic verbs present
                       </li>
@@ -311,13 +296,13 @@ export const JobPrepView: React.FC = () => {
                     </ul>
                   </div>
                 ) : (
-                  <div className="text-xs text-zinc-500 py-8 text-center italic">
+                  <div className="text-xs text-zinc-500 py-8 text-center italic font-mono">
                     Paste resume and click scan to see your keyword matches.
                   </div>
                 )}
               </div>
             </div>
-          </div>
+          </Card>
         )}
 
       </div>

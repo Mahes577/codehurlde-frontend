@@ -6,23 +6,24 @@ import {
   CheckCircle2, 
   Clock, 
   Calendar, 
-  TrendingUp, 
   Target, 
   Zap, 
   BarChart3, 
   ChevronRight, 
-  ExternalLink, 
-  Code2, 
-  ShieldCheck, 
-  Globe, 
-  ArrowUpRight,
-  Filter
+  Code2
 } from 'lucide-react';
+import { Card } from './atoms/Card';
+import { Avatar } from './atoms/Avatar';
+import { ProgressBar } from './atoms/ProgressBar';
+import { DifficultyBadge, DifficultyLevel, Badge } from './atoms/Badge';
+import { TabGroup } from './atoms/TabGroup';
+import { EloBadge } from './molecules/EloBadge';
+import { StreakBadge } from './molecules/StreakBadge';
 
 interface SubmissionRecord {
   id: string;
   problemTitle: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
+  difficulty: DifficultyLevel;
   status: 'Accepted' | 'Wrong Answer' | 'Time Limit Exceeded';
   language: string;
   runtime: string;
@@ -156,45 +157,32 @@ export const UserProfileView: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
-      <div className="max-w-7xl mx-auto space-y-8">
+      <div className="max-w-7xl mx-auto space-y-6">
         
         {/* Profile Card Header */}
-        <div className="relative overflow-hidden rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 md:p-8 backdrop-blur-xl">
-          {/* Subtle Ambient Glow */}
+        <Card variant="default" padding="lg">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-1/3 -mb-20 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            {/* Avatar & User Identifiers */}
             <div className="flex items-center gap-5">
-              <div className="relative">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 p-0.5 shadow-xl shadow-emerald-950/40">
-                  <div className="w-full h-full bg-[#0b0e14] rounded-[14px] flex items-center justify-center text-2xl font-bold text-white tracking-wider">
-                    CA
-                  </div>
-                </div>
-                <div className="absolute -bottom-1 -right-1 px-2 py-0.5 rounded-full bg-emerald-500 text-black text-[10px] font-bold font-mono shadow">
-                  PRO
-                </div>
-              </div>
+              <Avatar initials="CA" size="lg" status="pro" />
 
               <div>
                 <div className="flex items-center gap-3">
                   <h1 className="text-2xl font-bold text-white tracking-tight">CodeHurdle Architect</h1>
-                  <span className="px-2.5 py-0.5 text-xs font-mono font-medium rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700">
-                    @aarav_codes
-                  </span>
+                  <Badge variant="neutral" size="sm">@aarav_codes</Badge>
                 </div>
                 <p className="text-sm text-zinc-400 mt-1 max-w-lg">
                   Competitive Programmer & Systems Engineer. Aiming for CodeHurdle 2000+ rating and Guardian status.
                 </p>
 
-                <div className="flex items-center gap-4 mt-3 text-xs text-zinc-400">
+                <div className="flex items-center gap-4 mt-3 text-xs text-zinc-400 font-mono">
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-zinc-500" /> Joined Jan 2025
+                    <Calendar className="w-3.5 h-3.5 text-zinc-500" /> Jan 2025
                   </span>
                   <span className="flex items-center gap-1">
-                    <Target className="w-3.5 h-3.5 text-emerald-400" /> Goal: 500 Problems
+                    <Target className="w-3.5 h-3.5 text-emerald-400" /> 500 Goal
                   </span>
                   <div className="flex items-center gap-2 text-zinc-500 ml-2">
                     <a href="https://github.com" target="_blank" rel="noreferrer" title="GitHub" className="hover:text-zinc-300 transition-colors">
@@ -210,34 +198,34 @@ export const UserProfileView: React.FC = () => {
 
             {/* Quick Metrics Badges */}
             <div className="grid grid-cols-3 gap-3 w-full md:w-auto">
-              <div className="p-3.5 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-center min-w-[100px]">
+              <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/[0.08] text-center min-w-[100px]">
                 <div className="text-[11px] uppercase tracking-wider text-zinc-500 font-mono">Global Rank</div>
                 <div className="text-xl font-bold text-white font-mono mt-0.5">#242</div>
-                <div className="text-[10px] text-emerald-400">Top 0.8%</div>
+                <div className="text-[10px] text-emerald-400 font-mono">Top 0.8%</div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-center min-w-[100px]">
+              <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/[0.08] text-center min-w-[100px]">
                 <div className="text-[11px] uppercase tracking-wider text-zinc-500 font-mono">Rating</div>
                 <div className="text-xl font-bold text-purple-400 font-mono mt-0.5">1,840</div>
-                <div className="text-[10px] text-purple-300/80">Division 1</div>
+                <div className="text-[10px] text-purple-300/80 font-mono">Division 1</div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-center min-w-[100px]">
+              <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/[0.08] text-center min-w-[100px]">
                 <div className="text-[11px] uppercase tracking-wider text-zinc-500 font-mono">Streak</div>
                 <div className="text-xl font-bold text-amber-400 font-mono mt-0.5 flex items-center justify-center gap-1">
                   <Flame className="w-4 h-4 fill-amber-400" />
                   <span>14</span>
                 </div>
-                <div className="text-[10px] text-zinc-500">Days Active</div>
+                <div className="text-[10px] text-zinc-500 font-mono">Days Active</div>
               </div>
             </div>
           </div>
-        </div>
+        </Card>
 
         {/* Second Row: Solved Breakdown Circular Chart & Topic Breakdown */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Solved Problems Ring & Stats (Col 1-5) */}
-          <div className="lg:col-span-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 flex flex-col justify-between">
+          {/* Solved Problems Ring Card (Col 1-5) */}
+          <Card variant="surface" padding="md" className="lg:col-span-5 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-white flex items-center gap-2">
@@ -253,9 +241,7 @@ export const UserProfileView: React.FC = () => {
               <div className="flex items-center gap-6 my-6">
                 <div className="relative w-36 h-36 shrink-0 flex items-center justify-center">
                   <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                    {/* Background Ring */}
                     <circle cx="50" cy="50" r="40" stroke="#1f2937" strokeWidth="8" fill="transparent" />
-                    {/* Easy Ring segment */}
                     <circle 
                       cx="50" cy="50" r="40" 
                       stroke="#10b981" strokeWidth="8" fill="transparent" 
@@ -263,7 +249,6 @@ export const UserProfileView: React.FC = () => {
                       strokeDashoffset={251.2 - (251.2 * (easySolved / grandTotal))} 
                       strokeLinecap="round" 
                     />
-                    {/* Medium Ring segment */}
                     <circle 
                       cx="50" cy="50" r="32" 
                       stroke="#f59e0b" strokeWidth="6" fill="transparent" 
@@ -271,7 +256,6 @@ export const UserProfileView: React.FC = () => {
                       strokeDashoffset={201 - (201 * (medSolved / grandTotal))} 
                       strokeLinecap="round" 
                     />
-                    {/* Hard Ring segment */}
                     <circle 
                       cx="50" cy="50" r="24" 
                       stroke="#ef4444" strokeWidth="5" fill="transparent" 
@@ -288,74 +272,58 @@ export const UserProfileView: React.FC = () => {
 
                 {/* Difficulty Bars */}
                 <div className="flex-1 space-y-3 font-sans">
-                  {/* Easy */}
-                  <div className="p-2.5 rounded-lg bg-zinc-950/40 border border-zinc-800/60">
+                  <div className="p-2.5 rounded-xl bg-zinc-950/40 border border-white/[0.06]">
                     <div className="flex items-center justify-between text-xs mb-1">
                       <span className="text-emerald-400 font-medium">Easy</span>
                       <span className="font-mono text-zinc-300 font-semibold">{easySolved} <span className="text-zinc-600">/ {easyTotal}</span></span>
                     </div>
-                    <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                      <div className="bg-emerald-400 h-full rounded-full" style={{ width: `${(easySolved / easyTotal) * 100}%` }}></div>
-                    </div>
+                    <ProgressBar value={(easySolved / easyTotal) * 100} color="emerald" size="xs" />
                   </div>
 
-                  {/* Medium */}
-                  <div className="p-2.5 rounded-lg bg-zinc-950/40 border border-zinc-800/60">
+                  <div className="p-2.5 rounded-xl bg-zinc-950/40 border border-white/[0.06]">
                     <div className="flex items-center justify-between text-xs mb-1">
                       <span className="text-amber-400 font-medium">Medium</span>
                       <span className="font-mono text-zinc-300 font-semibold">{medSolved} <span className="text-zinc-600">/ {medTotal}</span></span>
                     </div>
-                    <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                      <div className="bg-amber-400 h-full rounded-full" style={{ width: `${(medSolved / medTotal) * 100}%` }}></div>
-                    </div>
+                    <ProgressBar value={(medSolved / medTotal) * 100} color="amber" size="xs" />
                   </div>
 
-                  {/* Hard */}
-                  <div className="p-2.5 rounded-lg bg-zinc-950/40 border border-zinc-800/60">
+                  <div className="p-2.5 rounded-xl bg-zinc-950/40 border border-white/[0.06]">
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="text-red-400 font-medium">Hard</span>
+                      <span className="text-rose-400 font-medium">Hard</span>
                       <span className="font-mono text-zinc-300 font-semibold">{hardSolved} <span className="text-zinc-600">/ {hardTotal}</span></span>
                     </div>
-                    <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                      <div className="bg-red-400 h-full rounded-full" style={{ width: `${(hardSolved / hardTotal) * 100}%` }}></div>
-                    </div>
+                    <ProgressBar value={(hardSolved / hardTotal) * 100} color="rose" size="xs" />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400">
+            <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs text-zinc-400">
               <span>Overall Acceptance Rate:</span>
               <span className="text-emerald-400 font-mono font-semibold">68.4%</span>
             </div>
-          </div>
+          </Card>
 
-          {/* Skill Radar / Topic Competency (Col 6-12) */}
-          <div className="lg:col-span-7 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 flex flex-col justify-between">
+          {/* Skill Radar / Topic Competency Card (Col 6-12) */}
+          <Card variant="surface" padding="md" className="lg:col-span-7 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-white flex items-center gap-2">
                   <Zap className="w-4 h-4 text-purple-400" />
                   <span>Topic Mastery & Skill Index</span>
                 </h2>
-                <span className="text-xs text-zinc-500">Calculated over 360 submissions</span>
+                <span className="text-xs text-zinc-500 font-mono">Calculated over 360 submissions</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mt-4">
                 {SKILL_TOPICS.map(topic => (
-                  <div key={topic.name} className="p-3 rounded-xl bg-zinc-950/40 border border-zinc-800/70 space-y-1.5">
+                  <div key={topic.name} className="p-3 rounded-xl bg-zinc-950/40 border border-white/[0.06] space-y-1.5">
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-medium text-zinc-200">{topic.name}</span>
                       <span className="font-mono text-emerald-400 font-semibold">{topic.percentage}%</span>
                     </div>
-                    <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                      <div 
-                        className={`h-full rounded-full ${
-                          topic.percentage >= 85 ? 'bg-emerald-400' : topic.percentage >= 70 ? 'bg-cyan-400' : 'bg-amber-400'
-                        }`} 
-                        style={{ width: `${topic.percentage}%` }}
-                      ></div>
-                    </div>
+                    <ProgressBar value={topic.percentage} color={topic.percentage >= 85 ? 'emerald' : topic.percentage >= 70 ? 'cyan' : 'amber'} size="xs" />
                     <div className="text-[10px] text-zinc-500 font-mono flex justify-between">
                       <span>{topic.solved} solved</span>
                       <span>Target: {topic.total}</span>
@@ -365,21 +333,21 @@ export const UserProfileView: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-4 mt-4 border-t border-zinc-800/60 flex items-center justify-between text-xs text-zinc-400">
+            <div className="pt-4 mt-4 border-t border-white/[0.06] flex items-center justify-between text-xs text-zinc-400">
               <span>Strongest Domain: <strong className="text-emerald-400">Binary Search & Invariants</strong></span>
-              <span className="text-zinc-500">Updated today</span>
+              <span className="text-zinc-500 font-mono">Updated today</span>
             </div>
-          </div>
+          </Card>
         </div>
 
-        {/* Badges Showcase */}
-        <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6">
+        {/* Badges Showcase Card */}
+        <Card variant="surface" padding="md">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-base font-semibold text-white flex items-center gap-2">
               <Award className="w-4 h-4 text-amber-400" />
               <span>Earned Badges & Distinctions (4)</span>
             </h2>
-            <button className="text-xs text-zinc-400 hover:text-white transition-colors flex items-center gap-1">
+            <button className="text-xs text-zinc-400 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
               <span>View all badges</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
@@ -400,43 +368,36 @@ export const UserProfileView: React.FC = () => {
                 </div>
                 <div className="mt-4 pt-2 border-t border-white/10 flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-zinc-400">
                   <span>{badge.rarity}</span>
-                  <span className="text-white">Unlocked</span>
+                  <span className="text-white font-semibold">Unlocked</span>
                 </div>
               </div>
             ))}
           </div>
-        </div>
+        </Card>
 
-        {/* Recent Submissions Table */}
-        <div className="rounded-2xl bg-zinc-900/60 border border-zinc-800/80 p-6 space-y-4">
+        {/* Recent Submissions Table Card */}
+        <Card variant="surface" padding="md" className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <h2 className="text-base font-semibold text-white flex items-center gap-2">
               <Code2 className="w-4 h-4 text-emerald-400" />
               <span>Recent Submissions Log</span>
             </h2>
 
-            {/* Filter buttons */}
-            <div className="flex items-center gap-1.5 bg-zinc-950 p-1 rounded-lg border border-zinc-800 text-xs">
-              {(['All', 'Easy', 'Medium', 'Hard'] as const).map(diff => (
-                <button
-                  key={diff}
-                  onClick={() => setFilterDifficulty(diff)}
-                  className={`px-2.5 py-1 rounded transition-colors ${
-                    filterDifficulty === diff
-                      ? 'bg-zinc-800 text-white font-medium'
-                      : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  {diff}
-                </button>
-              ))}
-            </div>
+            <TabGroup
+              tabs={[
+                { id: 'All', label: 'All' },
+                { id: 'Easy', label: 'Easy' },
+                { id: 'Medium', label: 'Medium' },
+                { id: 'Hard', label: 'Hard' }
+              ]}
+              activeTab={filterDifficulty}
+              onChange={(val) => setFilterDifficulty(val as any)}
+            />
           </div>
 
-          {/* Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-sans">
-              <thead className="bg-zinc-950/60 text-zinc-400 uppercase tracking-wider font-mono text-[11px] border-b border-zinc-800">
+              <thead className="bg-[#0c101c]/90 text-zinc-400 uppercase tracking-wider font-mono text-[11px] border-b border-white/[0.08]">
                 <tr>
                   <th className="py-3 px-4">Status</th>
                   <th className="py-3 px-4">Problem</th>
@@ -447,9 +408,9 @@ export const UserProfileView: React.FC = () => {
                   <th className="py-3 px-4 text-right">Time</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800/60">
+              <tbody className="divide-y divide-white/[0.03]">
                 {filteredSubmissions.map(sub => (
-                  <tr key={sub.id} className="hover:bg-zinc-800/30 transition-colors">
+                  <tr key={sub.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-3.5 px-4">
                       {sub.status === 'Accepted' ? (
                         <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-400">
@@ -462,7 +423,7 @@ export const UserProfileView: React.FC = () => {
                           <span>Time Limit</span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 font-semibold text-red-400">
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-rose-400">
                           <Target className="w-3.5 h-3.5" />
                           <span>Wrong Answer</span>
                         </span>
@@ -472,13 +433,7 @@ export const UserProfileView: React.FC = () => {
                       {sub.problemTitle}
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium ${
-                        sub.difficulty === 'Easy' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                        sub.difficulty === 'Medium' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
-                        'bg-red-500/10 text-red-400 border border-red-500/20'
-                      }`}>
-                        {sub.difficulty}
-                      </span>
+                      <DifficultyBadge difficulty={sub.difficulty} size="sm" />
                     </td>
                     <td className="py-3.5 px-4 font-mono text-zinc-400">
                       {sub.language}
@@ -497,7 +452,7 @@ export const UserProfileView: React.FC = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </Card>
 
       </div>
     </div>

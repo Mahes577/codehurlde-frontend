@@ -3,13 +3,7 @@ import {
   Search, 
   Menu, 
   X, 
-  Flame, 
-  Trophy, 
   BookOpen, 
-  Building2, 
-  Sparkles, 
-  Bell, 
-  ChevronDown, 
   ShieldCheck,
   Code2,
   Terminal,
@@ -20,6 +14,10 @@ import {
   Users,
   Briefcase
 } from 'lucide-react';
+import { Avatar } from './atoms/Avatar';
+import { StreakBadge } from './molecules/StreakBadge';
+import { Button } from './atoms/Button';
+import { Badge } from './atoms/Badge';
 
 export type ActiveView = 'home' | 'problems' | 'cp' | 'compiler' | 'roadmap' | 'community' | 'jobprep' | 'profile';
 
@@ -48,10 +46,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-zinc-500 uppercase">Oct 18 Daily Challenge:</span>
             <button 
               onClick={() => onSelectView('compiler')}
-              className="font-semibold text-zinc-200 hover:text-emerald-400 transition-colors flex items-center gap-1.5"
+              className="font-semibold text-zinc-200 hover:text-emerald-400 transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <span>Roll Number Lookup (Medium)</span>
-              <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-1 rounded border border-emerald-500/20">Reward +100 XP</span>
+              <Badge variant="emerald" size="xs">Reward +100 XP</Badge>
               <span className="text-zinc-500 text-[10px]">Solve in IDE →</span>
             </button>
           </div>
@@ -73,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-6">
           <button 
             onClick={() => onSelectView('home')} 
-            className="flex items-center gap-2.5 group text-left"
+            className="flex items-center gap-2.5 group text-left cursor-pointer"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/10 border border-emerald-500/30 group-hover:border-emerald-500/60 group-hover:bg-emerald-500/20 transition-all shadow-sm">
               <Code2 className="h-4.5 w-4.5 text-emerald-400 group-hover:scale-105 transition-transform" />
@@ -89,12 +87,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           {/* Primary View Switcher Navigation */}
-          <nav className="hidden xl:flex items-center gap-0.5 bg-zinc-950/60 p-1 rounded-xl border border-zinc-800/80">
+          <nav className="hidden xl:flex items-center gap-0.5 bg-zinc-950/60 p-1 rounded-xl border border-white/[0.08]">
             <button 
               onClick={() => onSelectView('home')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'home'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -103,9 +101,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('problems')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'problems'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -115,9 +113,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('cp')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'cp'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -127,9 +125,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('compiler')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'compiler'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -140,9 +138,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('roadmap')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'roadmap'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -152,9 +150,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('community')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'community'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -164,9 +162,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('jobprep')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'jobprep'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -176,9 +174,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button 
               onClick={() => onSelectView('profile')} 
-              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg transition-all cursor-pointer ${
                 currentView === 'profile'
-                  ? 'bg-zinc-800 text-white shadow-sm'
+                  ? 'bg-zinc-800 text-white shadow-sm font-semibold'
                   : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50'
               }`}
             >
@@ -192,19 +190,21 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center gap-2.5">
           {/* Component Specs Drawer trigger */}
           {onOpenComponentDocs && (
-            <button
+            <Button
               onClick={onOpenComponentDocs}
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-emerald-300 bg-emerald-500/10 hover:bg-emerald-500/20 rounded-lg border border-emerald-500/25 transition-all shadow-sm"
+              variant="outline"
+              size="xs"
+              icon={<Layers className="w-3.5 h-3.5 text-emerald-400" />}
+              className="hidden sm:inline-flex border-emerald-500/30 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20"
             >
-              <Layers className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Reusable Components</span>
-            </button>
+              Design System
+            </Button>
           )}
 
           {/* Quick Search trigger */}
           <button 
             onClick={onOpenSearch}
-            className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-[#0c101c] px-2.5 py-1 text-xs text-zinc-400 hover:border-white/[0.18] hover:text-zinc-200 transition-colors"
+            className="flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#0c101c] px-2.5 py-1.5 text-xs text-zinc-400 hover:border-white/[0.18] hover:text-zinc-200 transition-colors cursor-pointer"
             title="Search (Cmd+K)"
           >
             <Search className="h-3.5 w-3.5 text-zinc-500" />
@@ -212,34 +212,28 @@ export const Navbar: React.FC<NavbarProps> = ({
             <kbd className="rounded bg-white/[0.06] px-1.5 py-0.2 text-[10px] font-mono text-zinc-400 border border-white/[0.08]">⌘K</kbd>
           </button>
 
-          {/* Daily Streak Indicator */}
-          <div className="hidden sm:flex items-center gap-1.5 rounded-lg border border-amber-500/25 bg-amber-950/20 px-2.5 py-1 text-xs font-mono text-amber-300">
-            <Flame className="h-3.5 w-3.5 fill-amber-400 text-amber-500" />
-            <span className="font-bold">14</span>
-            <span className="text-[10px] text-amber-400/80 uppercase font-sans">Days</span>
+          {/* Daily Streak Indicator Molecule */}
+          <div className="hidden sm:block">
+            <StreakBadge days={14} />
           </div>
 
-          {/* User Profile Pill */}
-          <div className="relative">
-            <button
-              onClick={() => onSelectView('profile')}
-              className="flex items-center gap-2 rounded-lg border border-white/[0.1] bg-[#0c101c] hover:border-white/[0.2] p-1 pr-2.5 transition-colors"
-              title="Open Developer Profile"
-            >
-              <div className="h-6 w-6 rounded bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-[10px] font-mono font-bold text-zinc-950">
-                CA
-              </div>
-              <div className="hidden md:flex flex-col text-left">
-                <span className="text-[11px] font-semibold text-zinc-200 leading-tight">aarav_codes</span>
-                <span className="text-[9px] font-mono text-emerald-400 leading-tight">1,840 Elo · Div 1</span>
-              </div>
-            </button>
-          </div>
+          {/* User Profile Monogram Atom */}
+          <button
+            onClick={() => onSelectView('profile')}
+            className="flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#0c101c] hover:border-white/[0.2] p-1 pr-2.5 transition-colors cursor-pointer"
+            title="Open Developer Profile"
+          >
+            <Avatar initials="CA" size="xs" />
+            <div className="hidden md:flex flex-col text-left">
+              <span className="text-[11px] font-semibold text-zinc-200 leading-tight">aarav_codes</span>
+              <span className="text-[9px] font-mono text-emerald-400 leading-tight">1,840 Elo · Div 1</span>
+            </div>
+          </button>
 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-300"
+            className="xl:hidden flex h-8 w-8 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.03] text-zinc-300 cursor-pointer"
             aria-label="Toggle navigation"
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
@@ -252,55 +246,55 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="xl:hidden border-b border-white/[0.08] bg-[#090b14] px-4 py-3 space-y-1.5 text-xs">
           <button 
             onClick={() => { onSelectView('home'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'home' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'home' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>Home Platform</span>
           </button>
           <button 
             onClick={() => { onSelectView('problems'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'problems' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'problems' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>DSA Hub (520 Problems)</span>
             <BookOpen className="w-3.5 h-3.5 text-emerald-400" />
           </button>
           <button 
             onClick={() => { onSelectView('cp'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'cp' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'cp' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>CP Arena (Contest Problems)</span>
             <Swords className="w-3.5 h-3.5 text-rose-400" />
           </button>
           <button 
             onClick={() => { onSelectView('compiler'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'compiler' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'compiler' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>In-Browser IDE / Compiler</span>
             <Terminal className="w-3.5 h-3.5 text-cyan-400" />
           </button>
           <button 
             onClick={() => { onSelectView('roadmap'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'roadmap' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'roadmap' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>DSA 29-Tracks Curriculum</span>
             <Compass className="w-3.5 h-3.5 text-purple-400" />
           </button>
           <button 
             onClick={() => { onSelectView('community'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'community' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'community' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>Community & Study Rooms</span>
             <Users className="w-3.5 h-3.5 text-indigo-400" />
           </button>
           <button 
             onClick={() => { onSelectView('jobprep'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'jobprep' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'jobprep' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>Job Prep & Companies</span>
             <Briefcase className="w-3.5 h-3.5 text-blue-400" />
           </button>
           <button 
             onClick={() => { onSelectView('profile'); setMobileMenuOpen(false); }}
-            className={`w-full flex items-center justify-between p-2 rounded-lg text-left ${currentView === 'profile' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
+            className={`w-full flex items-center justify-between p-2 rounded-lg text-left cursor-pointer ${currentView === 'profile' ? 'bg-zinc-800 text-white font-medium' : 'text-zinc-300'}`}
           >
             <span>Developer Profile</span>
             <span className="font-mono text-amber-400">1,840 Elo</span>
@@ -308,9 +302,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           {onOpenComponentDocs && (
             <button 
               onClick={() => { onOpenComponentDocs(); setMobileMenuOpen(false); }}
-              className="w-full flex items-center justify-between p-2 rounded-lg text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
+              className="w-full flex items-center justify-between p-2 rounded-lg text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 cursor-pointer"
             >
-              <span>Reusable Components Spec</span>
+              <span>Atomic Design Library</span>
               <Layers className="w-3.5 h-3.5" />
             </button>
           )}

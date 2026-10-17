@@ -4,27 +4,30 @@ import {
   Send, 
   RotateCcw, 
   Settings, 
-  Maximize2, 
   Sparkles, 
   FileText, 
-  HelpCircle, 
   CheckCircle2, 
-  XCircle, 
   Clock, 
   Cpu, 
   Flame, 
-  ChevronRight, 
-  ChevronDown, 
-  Copy, 
   Check, 
   Terminal, 
   BookOpen, 
-  Share2, 
   Bookmark, 
+  Share2, 
   ArrowLeft,
-  Volume2,
   Code2
 } from 'lucide-react';
+import { 
+  Button, 
+  Badge, 
+  DifficultyBadge, 
+  Card, 
+  Input, 
+  Textarea, 
+  TabGroup, 
+  ProgressBar 
+} from './atomic';
 
 interface TestCase {
   id: number;
@@ -198,7 +201,7 @@ Complexity: Time O(log n), Space O(1).`);
 
   // Handle timer tick
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: any;
     if (timerRunning) {
       interval = setInterval(() => setTimerSeconds(prev => prev + 1), 1000);
     }
@@ -272,49 +275,48 @@ Complexity: Time O(log n), Space O(1).`);
   };
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-zinc-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#07090e] text-zinc-100 flex flex-col font-sans">
       {/* Top Navigation & Session Bar */}
-      <header className="h-14 border-b border-zinc-800/80 bg-[#0b0e14] px-4 flex items-center justify-between shrink-0">
+      <header className="h-14 border-b border-white/[0.08] bg-[#0c101c]/90 backdrop-blur px-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           {onBackToDirectory && (
-            <button 
+            <Button 
+              variant="secondary"
+              size="xs"
               onClick={onBackToDirectory}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-zinc-400 hover:text-white bg-zinc-900 hover:bg-zinc-800 rounded-lg border border-zinc-800 transition-colors"
+              icon={<ArrowLeft className="w-3.5 h-3.5" />}
             >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back</span>
-            </button>
+              Back
+            </Button>
           )}
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+            <Badge variant="emerald" size="sm">
               {SAMPLE_PROBLEM.track}
-            </span>
+            </Badge>
             <span className="text-zinc-600">/</span>
-            <h1 className="text-sm font-semibold text-zinc-100 flex items-center gap-2">
-              <span>{SAMPLE_PROBLEM.title}</span>
-              <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
-                {SAMPLE_PROBLEM.difficulty}
-              </span>
-            </h1>
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-semibold text-zinc-100">{SAMPLE_PROBLEM.title}</span>
+              <DifficultyBadge difficulty={SAMPLE_PROBLEM.difficulty} size="sm" />
+            </div>
           </div>
         </div>
 
         {/* Center: Live Session Timer */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300">
+          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-white/[0.08] text-xs font-mono text-zinc-300">
             <Clock className="w-3.5 h-3.5 text-emerald-400" />
             <span>Session:</span>
             <span className="font-semibold text-emerald-400">{formatTimer(timerSeconds)}</span>
             <button 
               onClick={() => setTimerRunning(!timerRunning)}
-              className="text-[10px] text-zinc-500 hover:text-zinc-300 underline ml-1"
+              className="text-[10px] text-zinc-500 hover:text-zinc-300 underline ml-1 cursor-pointer"
             >
               {timerRunning ? 'Pause' : 'Resume'}
             </button>
           </div>
 
-          <div className="hidden md:flex items-center gap-1 text-xs text-zinc-400">
+          <div className="hidden md:flex items-center gap-1.5 text-xs text-zinc-400">
             <Flame className="w-3.5 h-3.5 text-amber-400" />
             <span>+100 XP upon completion</span>
           </div>
@@ -322,76 +324,55 @@ Complexity: Time O(log n), Space O(1).`);
 
         {/* Right: Actions */}
         <div className="flex items-center gap-2.5">
-          <button 
+          <Button 
+            variant="secondary"
+            size="sm"
             onClick={handleRunCode}
             disabled={isRunning}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-zinc-200 bg-zinc-800 hover:bg-zinc-700 active:scale-95 rounded-lg border border-zinc-700/80 transition-all disabled:opacity-50"
+            icon={<Play className={`w-3.5 h-3.5 text-emerald-400 fill-emerald-400 ${isRunning ? 'animate-spin' : ''}`} />}
           >
-            <Play className={`w-3.5 h-3.5 text-emerald-400 fill-emerald-400 ${isRunning ? 'animate-spin' : ''}`} />
-            <span>{isRunning ? 'Running...' : 'Run Code'}</span>
-          </button>
+            {isRunning ? 'Running...' : 'Run Code'}
+          </Button>
 
-          <button 
+          <Button 
+            variant="primary"
+            size="sm"
             onClick={handleSubmitCode}
             disabled={isSubmitting}
-            className="flex items-center gap-1.5 px-4 py-1.5 text-xs font-semibold text-black bg-emerald-400 hover:bg-emerald-300 active:scale-95 rounded-lg shadow-sm shadow-emerald-500/20 transition-all disabled:opacity-50"
+            icon={<Send className="w-3.5 h-3.5" />}
           >
-            <Send className="w-3.5 h-3.5" />
-            <span>{isSubmitting ? 'Evaluating...' : 'Submit'}</span>
-          </button>
+            {isSubmitting ? 'Evaluating...' : 'Submit Solution'}
+          </Button>
         </div>
       </header>
 
       {/* Main Split Body: Left Statement & Right Code/Terminal */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-0 overflow-hidden">
         {/* Left Panel: Description / AI Mentor / Notes (Col 1-5) */}
-        <div className="lg:col-span-5 border-r border-zinc-800/80 flex flex-col bg-[#0b0e14] min-h-0 overflow-hidden">
+        <div className="lg:col-span-5 border-r border-white/[0.08] flex flex-col bg-[#0c101c]/60 min-h-0 overflow-hidden">
           {/* Tabs */}
-          <div className="flex items-center justify-between border-b border-zinc-800/80 px-3 bg-zinc-950/40">
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => setActiveLeftTab('description')}
-                className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium border-b-2 transition-colors ${
-                  activeLeftTab === 'description'
-                    ? 'border-emerald-400 text-emerald-400'
-                    : 'border-transparent text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                <FileText className="w-3.5 h-3.5" />
-                <span>Description</span>
-              </button>
+          <div className="flex items-center justify-between border-b border-white/[0.08] px-3 bg-zinc-950/40">
+            <TabGroup
+              tabs={[
+                { id: 'description', label: 'Description', icon: <FileText className="w-3.5 h-3.5" /> },
+                { 
+                  id: 'mentor', 
+                  label: 'AI Mentor', 
+                  icon: <Sparkles className="w-3.5 h-3.5 text-purple-400" />,
+                  badge: <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+                },
+                { id: 'notes', label: 'Notes', icon: <BookOpen className="w-3.5 h-3.5" /> }
+              ]}
+              activeTab={activeLeftTab}
+              onChange={id => setActiveLeftTab(id as any)}
+              variant="underline"
+            />
 
-              <button
-                onClick={() => setActiveLeftTab('mentor')}
-                className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium border-b-2 transition-colors ${
-                  activeLeftTab === 'mentor'
-                    ? 'border-purple-400 text-purple-300'
-                    : 'border-transparent text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-                <span>AI Mentor</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-              </button>
-
-              <button
-                onClick={() => setActiveLeftTab('notes')}
-                className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-medium border-b-2 transition-colors ${
-                  activeLeftTab === 'notes'
-                    ? 'border-amber-400 text-amber-300'
-                    : 'border-transparent text-zinc-400 hover:text-zinc-200'
-                }`}
-              >
-                <BookOpen className="w-3.5 h-3.5" />
-                <span>Notes</span>
-              </button>
-            </div>
-
-            <div className="flex items-center gap-2 text-zinc-500">
-              <button title="Bookmark Problem" className="p-1 hover:text-zinc-300 transition-colors">
+            <div className="flex items-center gap-1 text-zinc-500">
+              <button title="Bookmark Problem" className="p-1 hover:text-zinc-300 transition-colors cursor-pointer">
                 <Bookmark className="w-3.5 h-3.5" />
               </button>
-              <button title="Share Problem" className="p-1 hover:text-zinc-300 transition-colors">
+              <button title="Share Problem" className="p-1 hover:text-zinc-300 transition-colors cursor-pointer">
                 <Share2 className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -404,46 +385,47 @@ Complexity: Time O(log n), Space O(1).`);
                 <div>
                   <h2 className="text-xl font-bold text-white tracking-tight">{SAMPLE_PROBLEM.title}</h2>
                   <div className="flex flex-wrap items-center gap-2 mt-3 text-xs">
-                    <span className="px-2 py-0.5 rounded font-mono font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                      {SAMPLE_PROBLEM.difficulty}
-                    </span>
-                    <span className="text-zinc-500">|</span>
+                    <DifficultyBadge difficulty={SAMPLE_PROBLEM.difficulty} size="sm" />
+                    <span className="text-zinc-600">|</span>
                     <span className="text-zinc-400">Acceptance: <span className="text-zinc-200 font-mono">{SAMPLE_PROBLEM.acceptance}</span></span>
-                    <span className="text-zinc-500">|</span>
+                    <span className="text-zinc-600">|</span>
                     <span className="text-zinc-400">Est. Time: <span className="text-zinc-200 font-mono">{SAMPLE_PROBLEM.timeEstimate}</span></span>
                   </div>
 
                   {/* Tags */}
                   <div className="flex flex-wrap gap-1.5 mt-3">
                     {SAMPLE_PROBLEM.tags.map(tag => (
-                      <span key={tag} className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-900 text-zinc-400 border border-zinc-800">
+                      <Badge key={tag} variant="neutral" size="xs">
                         #{tag.toLowerCase().replace(/\s+/g, '-')}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
                 </div>
 
                 {/* Problem Statement Prose */}
-                <div className="prose prose-invert prose-sm text-zinc-300 space-y-3 leading-relaxed">
+                <div className="text-zinc-300 space-y-3 leading-relaxed text-xs sm:text-sm">
                   <p>
                     Aarav is checking the official school notice board where roll numbers are listed in strictly increasing order. He needs to quickly verify if his friend Rohan's roll number is present on the board.
                   </p>
                   <p>
-                    You are given a 0-indexed integer array <code className="text-emerald-300 bg-zinc-900 px-1 py-0.5 rounded">nums</code> of length <code className="text-emerald-300 bg-zinc-900 px-1 py-0.5 rounded">n</code> consisting of unique elements sorted in ascending order, and an integer <code className="text-emerald-300 bg-zinc-900 px-1 py-0.5 rounded">target</code>.
+                    You are given a 0-indexed integer array <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">nums</code> of length <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">n</code> consisting of unique elements sorted in ascending order, and an integer <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code>.
                   </p>
                   <p>
-                    Find and return the index of <code className="text-emerald-300 bg-zinc-900 px-1 py-0.5 rounded">target</code> if it exists in the array. If <code className="text-emerald-300 bg-zinc-900 px-1 py-0.5 rounded">target</code> does not exist, return <code className="text-red-300 bg-zinc-900 px-1 py-0.5 rounded">-1</code>.
+                    Find and return the index of <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code> if it exists in the array. If <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code> does not exist, return <code className="text-rose-400 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">-1</code>.
                   </p>
-                  <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs">
-                    <strong>Algorithmic Requirement:</strong> Your solution must run in <strong>O(log n)</strong> time complexity and O(1) auxiliary space.
-                  </div>
+                  
+                  <Card variant="surface" className="p-3 border-emerald-500/30 bg-emerald-500/[0.04]">
+                    <div className="text-emerald-300 text-xs leading-relaxed">
+                      <strong className="text-emerald-400">Algorithmic Requirement:</strong> Your solution must run in <strong>O(log n)</strong> time complexity and O(1) auxiliary space.
+                    </div>
+                  </Card>
                 </div>
 
                 {/* Examples */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Examples</h3>
+                <div className="space-y-3">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 font-mono">Sample Test Cases</h3>
                   {SAMPLE_PROBLEM.examples.map((ex, idx) => (
-                    <div key={ex.id} className="p-3.5 rounded-lg bg-zinc-900/60 border border-zinc-800/80 space-y-2">
+                    <Card key={ex.id} variant="surface" className="p-3.5 space-y-2">
                       <div className="text-xs font-medium text-zinc-300">Example {idx + 1}:</div>
                       <div className="font-mono text-xs space-y-1">
                         <div>
@@ -455,19 +437,19 @@ Complexity: Time O(log n), Space O(1).`);
                           <span className="text-emerald-400">{ex.expectedOutput}</span>
                         </div>
                         {ex.explanation && (
-                          <div className="text-zinc-400 text-[11px] pt-1 border-t border-zinc-800/60">
+                          <div className="text-zinc-400 text-[11px] pt-1 border-t border-white/[0.06]">
                             <span className="text-zinc-500">Explanation: </span>{ex.explanation}
                           </div>
                         )}
                       </div>
-                    </div>
+                    </Card>
                   ))}
                 </div>
 
                 {/* Constraints */}
                 <div className="space-y-2 pb-6">
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-400">Constraints</h3>
-                  <ul className="list-disc list-inside space-y-1 text-xs font-mono text-zinc-400">
+                  <h3 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 font-mono">Constraints</h3>
+                  <ul className="list-disc list-inside space-y-1 text-xs font-mono text-zinc-400 bg-zinc-950/60 p-3 rounded-xl border border-white/[0.06]">
                     {SAMPLE_PROBLEM.constraints.map((c, i) => (
                       <li key={i}>{c}</li>
                     ))}
@@ -479,17 +461,17 @@ Complexity: Time O(log n), Space O(1).`);
             {activeLeftTab === 'mentor' && (
               <div className="h-full flex flex-col justify-between space-y-4">
                 {/* Chat History */}
-                <div className="space-y-3 flex-1 overflow-y-auto">
+                <div className="space-y-3 flex-1 overflow-y-auto pr-1">
                   {mentorMessages.map((msg, i) => (
                     <div 
                       key={i} 
                       className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                     >
                       <div 
-                        className={`max-w-[85%] rounded-lg p-3 text-xs leading-relaxed ${
+                        className={`max-w-[85%] rounded-xl p-3 text-xs leading-relaxed ${
                           msg.sender === 'user'
-                            ? 'bg-emerald-600 text-white rounded-br-none'
-                            : 'bg-zinc-900 border border-zinc-800 text-zinc-300 rounded-bl-none'
+                            ? 'bg-emerald-600 text-white rounded-br-sm'
+                            : 'bg-zinc-900/90 border border-white/[0.08] text-zinc-300 rounded-bl-sm'
                         }`}
                       >
                         {msg.sender === 'ai' && (
@@ -500,50 +482,52 @@ Complexity: Time O(log n), Space O(1).`);
                         )}
                         <p>{msg.text}</p>
                       </div>
-                      <span className="text-[10px] text-zinc-600 mt-1">{msg.time}</span>
+                      <span className="text-[10px] text-zinc-600 mt-1 font-mono">{msg.time}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Quick Prompts */}
-                <div className="space-y-2 pt-2 border-t border-zinc-800/80">
+                <div className="space-y-2 pt-2 border-t border-white/[0.08]">
                   <div className="text-[11px] font-medium text-zinc-400">Suggested Inquiries:</div>
                   <div className="flex flex-wrap gap-1.5">
-                    <button 
+                    <Button 
+                      variant="outline" 
+                      size="xs"
                       onClick={() => handleSendMentor("Explain approach without writing the full code")}
-                      className="text-xs px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition-colors"
                     >
                       💡 Explain approach
-                    </button>
-                    <button 
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="xs"
                       onClick={() => handleSendMentor("Give me a subtle hint on boundary conditions")}
-                      className="text-xs px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition-colors"
                     >
                       🔍 Debug hint
-                    </button>
-                    <button 
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="xs"
                       onClick={() => handleSendMentor("Can I optimize the space complexity further?")}
-                      className="text-xs px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 transition-colors"
                     >
                       ⚡ Check complexity
-                    </button>
+                    </Button>
                   </div>
 
                   <div className="flex items-center gap-2 mt-2">
-                    <input 
-                      type="text" 
+                    <Input 
                       value={mentorInput}
                       onChange={e => setMentorInput(e.target.value)}
                       onKeyDown={e => e.key === 'Enter' && handleSendMentor()}
-                      placeholder="Ask the AI mentor for guidance..."
-                      className="flex-1 bg-zinc-900 border border-zinc-800 rounded-lg px-3 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-purple-500/50"
+                      placeholder="Ask the AI mentor for hints or invariant help..."
+                      className="text-xs"
                     />
-                    <button 
+                    <Button 
+                      variant="primary"
+                      size="sm"
                       onClick={() => handleSendMentor()}
-                      className="p-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors"
-                    >
-                      <Send className="w-3.5 h-3.5" />
-                    </button>
+                      icon={<Send className="w-3.5 h-3.5" />}
+                    />
                   </div>
                 </div>
               </div>
@@ -554,10 +538,10 @@ Complexity: Time O(log n), Space O(1).`);
                 <div className="text-xs text-zinc-400">
                   Auto-saved scratchpad for your thoughts, edge cases, and algorithmic complexity:
                 </div>
-                <textarea 
+                <Textarea 
                   value={notes}
                   onChange={e => setNotes(e.target.value)}
-                  className="flex-1 w-full bg-zinc-900/60 border border-zinc-800/80 rounded-lg p-3 text-xs font-mono text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-amber-500/40 resize-none leading-relaxed"
+                  className="flex-1 w-full font-mono text-xs leading-relaxed"
                   placeholder="Note down invariants, edge case values, and time/space notes..."
                 />
                 <div className="flex items-center justify-between text-[11px] text-zinc-500">
@@ -572,7 +556,7 @@ Complexity: Time O(log n), Space O(1).`);
         {/* Right Panel: Code Editor (Top) & Testbed/Terminal (Bottom) (Col 6-12) */}
         <div className="lg:col-span-7 flex flex-col min-h-0 overflow-hidden bg-[#07090e]">
           {/* Editor Header */}
-          <div className="h-10 border-b border-zinc-800/80 px-4 bg-zinc-950/60 flex items-center justify-between shrink-0">
+          <div className="h-10 border-b border-white/[0.08] px-4 bg-zinc-950/60 flex items-center justify-between shrink-0">
             {/* Language Selector */}
             <div className="flex items-center gap-2">
               <Code2 className="w-3.5 h-3.5 text-emerald-400" />
@@ -581,9 +565,9 @@ Complexity: Time O(log n), Space O(1).`);
                   <button
                     key={lang}
                     onClick={() => handleLanguageChange(lang)}
-                    className={`px-2.5 py-1 text-xs font-mono rounded transition-colors ${
+                    className={`px-2.5 py-1 text-xs font-mono rounded-lg transition-colors cursor-pointer ${
                       selectedLang === lang
-                        ? 'bg-zinc-800 text-white font-medium border border-zinc-700'
+                        ? 'bg-zinc-800 text-white font-medium border border-zinc-700 shadow-sm'
                         : 'text-zinc-400 hover:text-zinc-200'
                     }`}
                   >
@@ -595,17 +579,17 @@ Complexity: Time O(log n), Space O(1).`);
 
             {/* Utility Actions */}
             <div className="flex items-center gap-2">
-              <button 
+              <Button 
+                variant="ghost"
+                size="xs"
                 onClick={() => setCode(SAMPLE_PROBLEM.starterCode[selectedLang])}
-                title="Reset to starter code"
-                className="flex items-center gap-1 px-2 py-1 text-[11px] text-zinc-400 hover:text-zinc-200 bg-zinc-900 rounded border border-zinc-800 transition-colors"
+                icon={<RotateCcw className="w-3 h-3" />}
               >
-                <RotateCcw className="w-3 h-3" />
-                <span>Reset</span>
-              </button>
+                Reset
+              </Button>
               <button 
                 title="Format Code"
-                className="p-1 text-zinc-400 hover:text-zinc-200 transition-colors"
+                className="p-1 text-zinc-400 hover:text-zinc-200 transition-colors cursor-pointer"
               >
                 <Settings className="w-3.5 h-3.5" />
               </button>
@@ -616,7 +600,7 @@ Complexity: Time O(log n), Space O(1).`);
           <div className="flex-1 relative min-h-[300px] bg-[#07090e] p-4 font-mono text-xs overflow-auto">
             {/* Line numbers + Textarea */}
             <div className="flex gap-3 h-full">
-              <div className="select-none text-zinc-600 text-right pr-2 border-r border-zinc-800/50 font-mono space-y-1">
+              <div className="select-none text-zinc-600 text-right pr-2 border-r border-white/[0.08] font-mono space-y-1">
                 {code.split('\n').map((_, i) => (
                   <div key={i} className="leading-5 text-[11px]">{i + 1}</div>
                 ))}
@@ -625,59 +609,34 @@ Complexity: Time O(log n), Space O(1).`);
                 value={code}
                 onChange={e => setCode(e.target.value)}
                 spellCheck={false}
-                className="flex-1 w-full bg-transparent text-emerald-300/90 font-mono text-xs leading-5 focus:outline-none resize-none selection:bg-emerald-500/30 selection:text-white"
+                className="flex-1 w-full bg-transparent text-emerald-300 font-mono text-xs leading-5 focus:outline-none resize-none selection:bg-emerald-500/30 selection:text-white"
               />
             </div>
           </div>
 
           {/* Bottom Execution & Test Cases Drawer */}
-          <div className="h-64 border-t border-zinc-800/80 bg-[#0a0d14] flex flex-col shrink-0">
+          <div className="h-64 border-t border-white/[0.08] bg-[#0a0d14] flex flex-col shrink-0">
             {/* Drawer Tabs */}
-            <div className="h-9 border-b border-zinc-800/80 px-3 bg-zinc-950/40 flex items-center justify-between">
-              <div className="flex items-center gap-1">
-                <button
-                  onClick={() => setActiveBottomTab('testcases')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${
-                    activeBottomTab === 'testcases'
-                      ? 'border-emerald-400 text-emerald-400'
-                      : 'border-transparent text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  <Terminal className="w-3 h-3" />
-                  <span>Test Cases ({SAMPLE_PROBLEM.examples.length})</span>
-                </button>
-
-                <button
-                  onClick={() => setActiveBottomTab('output')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${
-                    activeBottomTab === 'output'
-                      ? 'border-emerald-400 text-emerald-400'
-                      : 'border-transparent text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  <Cpu className="w-3 h-3" />
-                  <span>Output / Console</span>
-                  {runResult && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                  )}
-                </button>
-
-                <button
-                  onClick={() => setActiveBottomTab('verdict')}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border-b-2 transition-colors ${
-                    activeBottomTab === 'verdict'
-                      ? 'border-emerald-400 text-emerald-400'
-                      : 'border-transparent text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                  <span>Submission Verdict</span>
-                </button>
-              </div>
+            <div className="h-10 border-b border-white/[0.08] px-3 bg-zinc-950/40 flex items-center justify-between">
+              <TabGroup
+                tabs={[
+                  { id: 'testcases', label: `Test Cases (${SAMPLE_PROBLEM.examples.length})`, icon: <Terminal className="w-3 h-3" /> },
+                  { 
+                    id: 'output', 
+                    label: 'Output / Console', 
+                    icon: <Cpu className="w-3 h-3" />,
+                    badge: runResult ? <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> : undefined
+                  },
+                  { id: 'verdict', label: 'Submission Verdict', icon: <CheckCircle2 className="w-3 h-3 text-emerald-400" /> }
+                ]}
+                activeTab={activeBottomTab}
+                onChange={id => setActiveBottomTab(id as any)}
+                variant="underline"
+              />
 
               {/* Status info */}
-              <div className="text-[11px] text-zinc-500 font-mono">
-                Environment: GCC 11 / Python 3.11 / Node 20
+              <div className="text-[11px] text-zinc-500 font-mono hidden sm:block">
+                GCC 11 / Python 3.11 / Node 20
               </div>
             </div>
 
@@ -687,56 +646,50 @@ Complexity: Time O(log n), Space O(1).`);
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
                     {SAMPLE_PROBLEM.examples.map((ex, i) => (
-                      <button
+                      <Button
                         key={ex.id}
+                        variant={!isCustomMode && selectedTestCase === i ? 'primary' : 'outline'}
+                        size="xs"
                         onClick={() => {
                           setSelectedTestCase(i);
                           setIsCustomMode(false);
                         }}
-                        className={`px-3 py-1 rounded text-xs transition-colors ${
-                          !isCustomMode && selectedTestCase === i
-                            ? 'bg-zinc-800 text-white font-medium border border-zinc-700'
-                            : 'bg-zinc-900/80 text-zinc-400 hover:text-zinc-200 border border-zinc-800'
-                        }`}
                       >
                         Case {i + 1}
-                      </button>
+                      </Button>
                     ))}
-                    <button
+                    <Button
+                      variant={isCustomMode ? 'primary' : 'outline'}
+                      size="xs"
                       onClick={() => setIsCustomMode(true)}
-                      className={`px-3 py-1 rounded text-xs transition-colors ${
-                        isCustomMode
-                          ? 'bg-zinc-800 text-white font-medium border border-zinc-700'
-                          : 'bg-zinc-900/80 text-zinc-400 hover:text-zinc-200 border border-zinc-800'
-                      }`}
                     >
                       + Custom Test Case
-                    </button>
+                    </Button>
                   </div>
 
                   {!isCustomMode ? (
-                    <div className="p-3 bg-zinc-900/60 rounded-lg border border-zinc-800 space-y-2">
+                    <Card variant="surface" className="p-3 space-y-2">
                       <div>
                         <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1">Input:</div>
-                        <div className="text-zinc-200 bg-zinc-950 p-2 rounded border border-zinc-800/80">
+                        <div className="text-zinc-200 bg-zinc-950/80 p-2 rounded-lg border border-white/[0.06]">
                           {SAMPLE_PROBLEM.examples[selectedTestCase].input}
                         </div>
                       </div>
                       <div>
                         <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1">Expected Output:</div>
-                        <div className="text-emerald-400 bg-zinc-950 p-2 rounded border border-zinc-800/80">
+                        <div className="text-emerald-400 bg-zinc-950/80 p-2 rounded-lg border border-white/[0.06]">
                           {SAMPLE_PROBLEM.examples[selectedTestCase].expectedOutput}
                         </div>
                       </div>
-                    </div>
+                    </Card>
                   ) : (
                     <div className="space-y-2">
                       <div className="text-[11px] text-zinc-400">Enter custom array and target value:</div>
-                      <textarea
+                      <Textarea
                         value={customInput}
                         onChange={e => setCustomInput(e.target.value)}
-                        placeholder="nums = [1, 3, 5, 7, 9, 11]&#10;target = 7"
-                        className="w-full h-24 bg-zinc-950 border border-zinc-800 rounded-lg p-2.5 text-xs font-mono text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-emerald-500/50"
+                        placeholder={"nums = [1, 3, 5, 7, 9, 11]\ntarget = 7"}
+                        className="h-24 bg-zinc-950 font-mono text-xs"
                       />
                     </div>
                   )}
@@ -752,19 +705,19 @@ Complexity: Time O(log n), Space O(1).`);
                           <CheckCircle2 className="w-4 h-4" />
                           <span>{runResult.status}</span>
                         </span>
-                        <span className="text-zinc-500">|</span>
+                        <span className="text-zinc-600">|</span>
                         <span className="text-zinc-400">Runtime: <span className="text-zinc-200">{runResult.runtime}</span></span>
-                        <span className="text-zinc-500">|</span>
+                        <span className="text-zinc-600">|</span>
                         <span className="text-zinc-400">Memory: <span className="text-zinc-200">{runResult.memory}</span></span>
                       </div>
 
-                      <div className="p-3 bg-zinc-950 rounded-lg border border-zinc-800 text-zinc-300 font-mono text-xs whitespace-pre-wrap leading-relaxed">
+                      <div className="p-3 bg-zinc-950 rounded-xl border border-white/[0.08] text-zinc-300 font-mono text-xs whitespace-pre-wrap leading-relaxed">
                         {runResult.stdout}
                       </div>
 
                       <div className="grid grid-cols-3 gap-2 pt-1">
                         {runResult.outputs.map((out, idx) => (
-                          <div key={idx} className="p-2 rounded bg-zinc-900/60 border border-zinc-800 flex items-center justify-between">
+                          <div key={idx} className="p-2 rounded-lg bg-zinc-900/60 border border-white/[0.08] flex items-center justify-between">
                             <span className="text-zinc-400">Case {out.caseId}</span>
                             <span className="text-emerald-400 font-semibold flex items-center gap-1">
                               <Check className="w-3 h-3" /> Passed
@@ -785,9 +738,9 @@ Complexity: Time O(log n), Space O(1).`);
               {activeBottomTab === 'verdict' && (
                 <div>
                   {verdictResult ? (
-                    <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 space-y-4">
+                    <Card variant="surface" className="p-4 border-emerald-500/30 bg-emerald-500/[0.05] space-y-4">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2.5">
                           <CheckCircle2 className="w-6 h-6 text-emerald-400" />
                           <div>
                             <div className="text-base font-bold text-emerald-400">Accepted!</div>
@@ -795,45 +748,41 @@ Complexity: Time O(log n), Space O(1).`);
                           </div>
                         </div>
 
-                        <div className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-semibold flex items-center gap-1 font-sans">
-                          <Flame className="w-3.5 h-3.5 text-amber-400" />
-                          <span>+{verdictResult.xpEarned} XP</span>
-                        </div>
+                        <Badge variant="emerald" size="md">
+                          <Flame className="w-3.5 h-3.5 text-amber-400 inline mr-1" />
+                          +{verdictResult.xpEarned} XP
+                        </Badge>
                       </div>
 
                       {/* Runtime & Memory Telemetry */}
                       <div className="grid grid-cols-2 gap-3 pt-2 font-sans">
-                        <div className="p-3 rounded-lg bg-zinc-900/80 border border-zinc-800">
-                          <div className="text-xs text-zinc-400 mb-1 flex items-center justify-between">
+                        <Card variant="default" className="p-3">
+                          <div className="text-xs text-zinc-400 mb-1.5 flex items-center justify-between">
                             <span>Runtime Speed</span>
                             <span className="text-emerald-400 font-mono font-bold">{verdictResult.runtime}</span>
                           </div>
-                          <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                            <div className="bg-emerald-400 h-full rounded-full" style={{ width: verdictResult.runtimePercentile }}></div>
-                          </div>
-                          <div className="text-[11px] text-zinc-500 mt-1">
+                          <ProgressBar value={parseFloat(verdictResult.runtimePercentile)} variant="emerald" size="sm" />
+                          <div className="text-[11px] text-zinc-500 mt-1.5">
                             Beats <strong className="text-zinc-200">{verdictResult.runtimePercentile}</strong> of all submissions
                           </div>
-                        </div>
+                        </Card>
 
-                        <div className="p-3 rounded-lg bg-zinc-900/80 border border-zinc-800">
-                          <div className="text-xs text-zinc-400 mb-1 flex items-center justify-between">
+                        <Card variant="default" className="p-3">
+                          <div className="text-xs text-zinc-400 mb-1.5 flex items-center justify-between">
                             <span>Memory Footprint</span>
                             <span className="text-cyan-400 font-mono font-bold">{verdictResult.memory}</span>
                           </div>
-                          <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
-                            <div className="bg-cyan-400 h-full rounded-full" style={{ width: verdictResult.memoryPercentile }}></div>
-                          </div>
-                          <div className="text-[11px] text-zinc-500 mt-1">
+                          <ProgressBar value={parseFloat(verdictResult.memoryPercentile)} variant="cyan" size="sm" />
+                          <div className="text-[11px] text-zinc-500 mt-1.5">
                             Beats <strong className="text-zinc-200">{verdictResult.memoryPercentile}</strong> of all submissions
                           </div>
-                        </div>
+                        </Card>
                       </div>
-                    </div>
+                    </Card>
                   ) : (
                     <div className="h-full flex flex-col items-center justify-center text-zinc-500 space-y-2 py-8">
                       <Send className="w-6 h-6 text-zinc-600" />
-                      <p>Hit "Submit" to run the full official test suite against your solution.</p>
+                      <p>Hit "Submit Solution" to run the full official test suite against your solution.</p>
                     </div>
                   )}
                 </div>
