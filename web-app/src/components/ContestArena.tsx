@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Trophy, Timer, Users, Medal, ChevronRight, TrendingUp, Sparkles, Flame } from 'lucide-react';
+import { Button } from './atoms/Button';
+import { Badge } from './atoms/Badge';
 
 interface LeaderboardUser {
   rank: number;
@@ -134,16 +136,14 @@ export const ContestArena: React.FC = () => {
                   <span><strong className="text-white">4,812</strong> registered competitors</span>
                 </div>
 
-                <button
+                <Button
+                  variant={registered ? 'outline' : 'amber'}
+                  size="md"
                   onClick={() => setRegistered(!registered)}
-                  className={`w-full sm:w-auto px-6 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all ${
-                    registered
-                      ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm'
-                      : 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-zinc-950 shadow-lg shadow-amber-500/20 active:scale-95'
-                  }`}
+                  className="w-full sm:w-auto font-bold"
                 >
                   {registered ? '✓ You Are Registered' : 'Register for Round (Free)'}
-                </button>
+                </Button>
               </div>
             </div>
 

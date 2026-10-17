@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { Button } from './atoms/Button';
 import { Badge, DifficultyBadge } from './atoms/Badge';
+import { AlgorithmStepController } from './molecules/AlgorithmStepController';
 
 type Language = 'python' | 'cpp' | 'javascript';
 
@@ -290,20 +291,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <button
+                    <Button
+                      variant="outline"
+                      size="xs"
                       onClick={handleResetStep}
-                      className="flex items-center gap-1 rounded-lg border border-white/[0.1] bg-white/[0.03] px-3 py-1.5 text-xs font-mono text-zinc-300 hover:text-white hover:bg-white/[0.06] transition-colors"
+                      icon={<RotateCcw className="h-3.5 w-3.5" />}
                     >
-                      <RotateCcw className="h-3.5 w-3.5" />
-                      <span>Reset</span>
-                    </button>
+                      Reset
+                    </Button>
 
-                    <button
+                    <Button
+                      variant="primary"
+                      size="xs"
                       onClick={handleNextStep}
-                      className="flex items-center gap-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 px-4 py-1.5 text-xs font-bold text-zinc-950 shadow-md shadow-emerald-500/20 transition-all active:scale-95"
+                      icon={step === 2 ? <RotateCcw className="h-3.5 w-3.5" /> : <ChevronRight className="h-3.5 w-3.5" />}
                     >
-                      <span>{step === 2 ? 'Restart Walkthrough' : 'Next Step →'}</span>
-                    </button>
+                      {step === 2 ? 'Restart Walkthrough' : 'Next Step →'}
+                    </Button>
                   </div>
                 </div>
 

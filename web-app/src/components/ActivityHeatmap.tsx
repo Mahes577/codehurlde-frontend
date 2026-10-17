@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Flame, Calendar, Award, CheckCircle2, TrendingUp, Sparkles, ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { StreakBadge } from './molecules/StreakBadge';
 
 interface DayActivity {
   date: string;
@@ -121,10 +122,7 @@ export const ActivityHeatmap: React.FC = () => {
               </div>
 
               {/* Verified Streak Pill */}
-              <div className="flex items-center gap-2 rounded-xl bg-amber-500/10 border border-amber-500/25 px-3 py-1.5 text-amber-300 font-mono text-xs">
-                <Flame className="h-4 w-4 fill-amber-400 text-amber-500" />
-                <span className="font-bold text-white">14 Days Active Streak</span>
-              </div>
+              <StreakBadge days={14} label="Active Streak" />
             </div>
           </div>
 

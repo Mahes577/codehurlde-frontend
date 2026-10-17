@@ -15,6 +15,7 @@ import {
 import { Card } from './atoms/Card';
 import { ProgressBar } from './atoms/ProgressBar';
 import { StatMetricCard } from './molecules/StatMetricCard';
+import { DifficultyBreakdownBar } from './molecules/DifficultyBreakdownBar';
 
 export const StatsBar: React.FC = () => {
   // Problem counts
@@ -102,46 +103,12 @@ export const StatsBar: React.FC = () => {
             </div>
 
             {/* Right 8 cols: Difficulty breakdown progress bars */}
-            <div className="lg:col-span-8 space-y-4">
-              <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                <span className="uppercase tracking-wider font-bold text-zinc-300">Curated Difficulty Breakdown</span>
-                <span className="text-emerald-400 font-bold">69.2% Completed</span>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {/* Easy Card */}
-                <div className="rounded-xl border border-white/[0.08] bg-zinc-950/60 p-3.5 space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-emerald-400 font-bold font-mono">Easy</span>
-                    <span className="font-mono text-zinc-300 font-bold">
-                      {easySolved} <span className="text-zinc-600">/ {easyTotal}</span>
-                    </span>
-                  </div>
-                  <ProgressBar value={(easySolved / easyTotal) * 100} color="emerald" size="sm" />
-                </div>
-
-                {/* Medium Card */}
-                <div className="rounded-xl border border-white/[0.08] bg-zinc-950/60 p-3.5 space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-amber-400 font-bold font-mono">Medium</span>
-                    <span className="font-mono text-zinc-300 font-bold">
-                      {medSolved} <span className="text-zinc-600">/ {medTotal}</span>
-                    </span>
-                  </div>
-                  <ProgressBar value={(medSolved / medTotal) * 100} color="amber" size="sm" />
-                </div>
-
-                {/* Hard Card */}
-                <div className="rounded-xl border border-white/[0.08] bg-zinc-950/60 p-3.5 space-y-2">
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-rose-400 font-bold font-mono">Hard</span>
-                    <span className="font-mono text-zinc-300 font-bold">
-                      {hardSolved} <span className="text-zinc-600">/ {hardTotal}</span>
-                    </span>
-                  </div>
-                  <ProgressBar value={(hardSolved / hardTotal) * 100} color="rose" size="sm" />
-                </div>
-              </div>
+            <div className="lg:col-span-8">
+              <DifficultyBreakdownBar
+                easy={{ solved: easySolved, total: easyTotal }}
+                medium={{ solved: medSolved, total: medTotal }}
+                hard={{ solved: hardSolved, total: hardTotal }}
+              />
             </div>
 
           </div>

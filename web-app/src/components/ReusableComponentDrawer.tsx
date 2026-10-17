@@ -24,17 +24,19 @@ import {
   CheckCircle2,
   Send,
   Star,
-  Eye,
-  Zap,
-  Tag,
-  Shield,
   Activity,
-  Calendar,
   Building2,
-  FileCheck2,
-  ArrowRight
+  HelpCircle,
+  Clock,
+  Palette,
+  Type,
+  Maximize2,
+  ChevronRight,
+  TrendingUp,
+  LayoutGrid
 } from 'lucide-react';
 import { ActiveView } from './Navbar';
+import { tokens } from '../tokens';
 import { 
   Button, 
   Badge, 
@@ -55,15 +57,20 @@ import {
   EloBadge, 
   StatMetricCard, 
   SearchInput,
-  ProblemRow 
+  ProblemRow,
+  CompanyPill,
+  FaqAccordionItem,
+  DifficultyBreakdownBar,
+  ContestCard,
+  AlgorithmStepController
 } from './atomic';
 
-export type AtomicTier = 'all' | 'atom' | 'molecule' | 'organism';
+export type AtomicTier = 'all' | 'token' | 'atom' | 'molecule' | 'organism';
 
 interface ComponentDoc {
   id: string;
   name: string;
-  tier: 'atom' | 'molecule' | 'organism';
+  tier: 'token' | 'atom' | 'molecule' | 'organism';
   category: string;
   icon: any;
   file: string;
@@ -84,103 +91,125 @@ export const ReusableComponentDrawer: React.FC<{
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 2500);
+    setTimeout(() => setToastMessage(null), 2400);
   };
 
   // -------------------------------------------------------------
-  // INTERACTIVE WORKBENCH STATES FOR ATOMS
+  // INTERACTIVE WORKBENCH STATES
   // -------------------------------------------------------------
-  // Button Atom Workbench
+  // Button Atom
   const [btnVariant, setBtnVariant] = useState<'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'amber'>('primary');
   const [btnSize, setBtnSize] = useState<'xs' | 'sm' | 'md' | 'lg'>('sm');
   const [btnLoading, setBtnLoading] = useState(false);
-  const [btnDisabled, setBtnDisabled] = useState(false);
   const [btnClicks, setBtnClicks] = useState(0);
 
-  // Badge Atom Workbench
+  // Badge Atom
   const [badgeDifficulty, setBadgeDifficulty] = useState<DifficultyLevel>('Medium');
   const [badgeVariant, setBadgeVariant] = useState<'emerald' | 'amber' | 'rose' | 'cyan' | 'purple' | 'neutral'>('cyan');
   const [badgeCustomText, setBadgeCustomText] = useState('O(log N)');
-  const [badgeClicks, setBadgeClicks] = useState(0);
 
-  // Card Atom Workbench
+  // Card Atom
   const [cardVariant, setCardVariant] = useState<'default' | 'surface' | 'interactive' | 'sunken'>('interactive');
-  const [cardGlow, setCardGlow] = useState(true);
-  const [cardClickCount, setCardClickCount] = useState(0);
+  const [cardClicks, setCardClicks] = useState(0);
 
-  // Input Atom Workbench
-  const [inputVal, setInputVal] = useState('Binary Search on Answer Space');
+  // Input Atom
+  const [inputVal, setInputVal] = useState('Binary Search on Range');
   const [inputHasError, setInputHasError] = useState(false);
-  const [inputPrefix, setInputPrefix] = useState(true);
 
-  // Avatar Atom Workbench
+  // Avatar Atom
   const [avatarName, setAvatarName] = useState('Aarav Sharma');
-  const [avatarSize, setAvatarSize] = useState<'xs' | 'sm' | 'md' | 'lg' | 'xl'>('md');
   const [avatarPro, setAvatarPro] = useState(true);
   const [avatarOnline, setAvatarOnline] = useState(true);
 
-  // ProgressBar Atom Workbench
+  // ProgressBar Atom
   const [progressVal, setProgressVal] = useState(72);
   const [progressVariant, setProgressVariant] = useState<'emerald' | 'amber' | 'rose' | 'cyan' | 'purple'>('emerald');
-  const [progressSize, setProgressSize] = useState<'xs' | 'sm' | 'md' | 'lg'>('md');
 
-  // TabGroup Atom Workbench
+  // TabGroup Atom
   const [tabVariant, setTabVariant] = useState<'pill' | 'underline'>('pill');
-  const [activeTestTab, setActiveTestTab] = useState('two_pointers');
+  const [activeTabDemo, setActiveTabDemo] = useState('dp');
 
   // -------------------------------------------------------------
-  // INTERACTIVE WORKBENCH STATES FOR MOLECULES
+  // MOLECULES WORKBENCH STATES
   // -------------------------------------------------------------
-  // ProblemRow Molecule Workbench
+  // ProblemRow Molecule
   const [rowSolved, setRowSolved] = useState(false);
   const [rowStarred, setRowStarred] = useState(true);
   const [rowDiff, setRowDiff] = useState<DifficultyLevel>('Medium');
   const [rowFreq, setRowFreq] = useState(88);
 
-  // StreakBadge Molecule Workbench
+  // Streak Molecule
   const [streakDays, setStreakDays] = useState(14);
-  const [streakActive, setStreakActive] = useState(true);
 
-  // EloBadge Molecule Workbench
+  // Elo Molecule
   const [eloRating, setEloRating] = useState(1840);
   const [eloTrend, setEloTrend] = useState<'up' | 'down' | 'flat'>('up');
 
-  // StatMetricCard Molecule Workbench
+  // StatMetricCard Molecule
   const [statVal, setStatVal] = useState('382 / 520');
   const [statVariant, setStatVariant] = useState<'emerald' | 'cyan' | 'amber' | 'purple' | 'neutral'>('emerald');
 
-  // SearchInput Molecule Workbench
-  const [liveSearchQuery, setLiveSearchQuery] = useState('Dynamic Programming');
+  // SearchInput Molecule
+  const [searchVal, setSearchVal] = useState('Dynamic Programming');
+
+  // CompanyPill Molecule
+  const [activeCompanyDemo, setActiveCompanyDemo] = useState('Google');
+
+  // FaqAccordionItem Molecule
+  const [faqOpenDemo, setFaqOpenDemo] = useState(true);
+
+  // DifficultyBreakdownBar Molecule
+  const [breakdownEasy, setBreakdownEasy] = useState(184);
+  const [breakdownMed, setBreakdownMed] = useState(142);
+  const [breakdownHard, setBreakdownHard] = useState(34);
+
+  // ContestCard Molecule
+  const [contestRegistered, setContestRegistered] = useState(false);
+
+  // AlgorithmStepController Molecule
+  const [algoStep, setAlgoStep] = useState(2);
+  const [algoTotal] = useState(4);
 
   // -------------------------------------------------------------
-  // INTERACTIVE WORKBENCH STATES FOR ORGANISMS
-  // -------------------------------------------------------------
-  // Compiler Sandbox
-  const [compilerLang, setCompilerLang] = useState<'python' | 'cpp' | 'js'>('python');
-  const [compilerCode, setCompilerCode] = useState(`def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if nums[mid] == target: return mid\n        elif nums[mid] < target: left = mid + 1\n        else: right = mid - 1\n    return -1`);
-  const [compilerOutput, setCompilerOutput] = useState<string | null>(null);
-  const [compilerRunning, setCompilerRunning] = useState(false);
-
-  // CP Arena Sandbox
-  const [cpRegistered, setCpRegistered] = useState(false);
-  const [cpSelectedFilter, setCpSelectedFilter] = useState<'All' | '1600-1900' | '1900-2400'>('All');
-
-  // Community Sandbox
-  const [commMessages, setCommMessages] = useState<Array<{ user: string; text: string; time: string }>>([
-    { user: 'Vikram R.', text: 'Notice how state compression reduces Space from O(N*W) to O(W) in 0/1 Knapsack.', time: '10:14 AM' },
-    { user: 'Priya P.', text: 'Rolling hashes with polynomial base 31 avoids collisions in Rabin-Karp!', time: '10:28 AM' }
-  ]);
-  const [commDraft, setCommDraft] = useState('');
-
-  // Job Prep Sandbox
-  const [resumeText, setResumeText] = useState('Experienced in C++, Python, LeetCode 400+, Graphs, Tree Traversals, System Design.');
-  const [atsScore, setAtsScore] = useState<number | null>(null);
-
-  // -------------------------------------------------------------
-  // COMPONENT DIRECTORY DEFINITIONS
+  // COMPONENT DIRECTORY
   // -------------------------------------------------------------
   const COMPONENTS: ComponentDoc[] = [
-    // ATOMS
+    // 1. DESIGN TOKENS
+    {
+      id: 'token-colors',
+      name: 'Color & Difficulty Tokens',
+      tier: 'token',
+      category: 'Tokens / Palette',
+      icon: Palette,
+      file: 'src/tokens/index.ts',
+      description: 'Master color tokens: Obsidian base canvas (#07090e, #0c101c), Difficulty emerald/amber/rose hues, Division cyan/purple tiers, and flame accents.',
+      propsSnippet: `export const tokens = {\n  colors: {\n    base: { canvas: '#07090e', surface: '#0c101c', elevated: '#111625' },\n    difficulty: {\n      easy: '#10b981',\n      medium: '#f59e0b',\n      hard: '#f43f5e'\n    },\n    divisions: { div1: '#22d3ee', div2: '#c084fc', div3: '#94a3b8' }\n  }\n};`,
+      usageSnippet: `import { tokens } from '../tokens';\nconst easyColor = tokens.colors.difficulty.easy;`
+    },
+    {
+      id: 'token-typography',
+      name: 'Typography Tokens',
+      tier: 'token',
+      category: 'Tokens / Typography',
+      icon: Type,
+      file: 'src/tokens/index.ts',
+      description: 'Standardized typography rules: Inter for UI prose, JetBrains/Consolas monospace for code, metrics, Big-O invariants, and tabular data.',
+      propsSnippet: `export const tokens = {\n  typography: {\n    fontSans: 'ui-sans-serif, system-ui, -apple-system, sans-serif',\n    fontMono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',\n    sizes: { xs: '0.75rem', sm: '0.875rem', base: '1rem', lg: '1.125rem' }\n  }\n};`,
+      usageSnippet: `<span className="font-mono text-emerald-400 font-bold">O(N log N)</span>`
+    },
+    {
+      id: 'token-radii',
+      name: 'Radii & Border Tokens',
+      tier: 'token',
+      category: 'Tokens / Geometry',
+      icon: LayoutGrid,
+      file: 'src/tokens/index.ts',
+      description: 'Unified geometry: rounded-xl for interactive inputs and pills, rounded-2xl for surface cards, and subtle border-white/[0.08] for clean separation.',
+      propsSnippet: `export const tokens = {\n  radii: { sm: '6px', md: '8px', lg: '12px', xl: '16px', '2xl': '20px', full: '9999px' },\n  borders: { standard: 'border-white/[0.08]', active: 'border-emerald-500/50' }\n};`,
+      usageSnippet: `<div className="rounded-2xl border border-white/[0.08] bg-[#0c101c]" />`
+    },
+
+    // 2. ATOMS
     {
       id: 'atom-button',
       name: 'Button',
@@ -258,40 +287,62 @@ export const ReusableComponentDrawer: React.FC<{
       propsSnippet: `interface TabItem {\n  id: string;\n  label: string;\n  icon?: React.ReactNode;\n  badge?: string | number | React.ReactNode;\n}\n\ninterface TabGroupProps {\n  tabs: TabItem[];\n  activeTab: string;\n  onChange: (id: string) => void;\n  variant?: 'underline' | 'pill';\n}`,
       usageSnippet: `<TabGroup tabs={tabs} activeTab={active} onChange={setActive} variant="pill" />`
     },
+    {
+      id: 'atom-section',
+      name: 'SectionHeader',
+      tier: 'atom',
+      category: 'Atoms / Typography',
+      icon: Type,
+      file: 'src/components/atoms/SectionHeader.tsx',
+      description: 'Standardized section title banner with eyebrow tag, highlight gradient phrase, subtitle, and action button slot.',
+      propsSnippet: `interface SectionHeaderProps {\n  eyebrow: string;\n  title: string;\n  highlightText?: string;\n  subtitle?: string;\n  action?: React.ReactNode;\n}`,
+      usageSnippet: `<SectionHeader eyebrow="Curated DSA Hub" title="Master 520 Problems" />`
+    },
 
-    // MOLECULES
+    // 3. MOLECULES (10 REUSABLE MOLECULES)
     {
       id: 'mol-prow',
       name: 'ProblemRow',
       tier: 'molecule',
-      category: 'Molecules / Data Presentation',
+      category: 'Molecules / Problem Catalog',
       icon: BookOpen,
       file: 'src/components/molecules/ProblemRow.tsx',
-      description: 'Tabular problem item combining solved checkbox, star bookmark, title, difficulty pill, acceptance %, and solve CTA.',
+      description: 'Interactive problem table row combining solved checkbox, star bookmark, title, difficulty badge, acceptance %, frequency bar, and solve CTA.',
       propsSnippet: `interface ProblemRowProps {\n  problem: ProblemRowData;\n  isSelected?: boolean;\n  onSelect?: () => void;\n  onSolve?: () => void;\n  onToggleSolved?: (e: React.MouseEvent) => void;\n  onToggleStarred?: (e: React.MouseEvent) => void;\n}`,
-      usageSnippet: `<ProblemRow \n  problem={problem} \n  onSolve={() => openCompiler(problem.id)}\n/>`
+      usageSnippet: `<ProblemRow \n  problem={problem} \n  onToggleSolved={() => toggle(problem.id)} \n  onSolve={() => openCompiler(problem.id)}\n/>`
     },
     {
       id: 'mol-streak',
-      name: 'StreakBadge & EloBadge',
+      name: 'StreakBadge',
       tier: 'molecule',
       category: 'Molecules / Gamification',
       icon: Flame,
       file: 'src/components/molecules/StreakBadge.tsx',
-      description: 'Interactive gamification badges for daily practice streak with flame icon and competitive programming Elo rating.',
-      propsSnippet: `interface StreakBadgeProps {\n  days: number;\n  active?: boolean;\n}\n\ninterface EloBadgeProps {\n  rating: number;\n  division?: string;\n  trend?: 'up' | 'down' | 'flat';\n}`,
-      usageSnippet: `<StreakBadge days={24} active={true} />\n<EloBadge rating={1840} division="Div 1" />`
+      description: 'Interactive coding habit streak pill with pulsating flame icon and day counter used in Navbar and profile stats.',
+      propsSnippet: `interface StreakBadgeProps {\n  days: number;\n  label?: string;\n  className?: string;\n}`,
+      usageSnippet: `<StreakBadge days={14} label="Days" />`
+    },
+    {
+      id: 'mol-elo',
+      name: 'EloBadge',
+      tier: 'molecule',
+      category: 'Molecules / Contests',
+      icon: Award,
+      file: 'src/components/molecules/EloBadge.tsx',
+      description: 'Competitive programming Elo pill that dynamically maps rating to Division 1, Division 2, or Division 3 with trend arrow.',
+      propsSnippet: `interface EloBadgeProps {\n  rating: number;\n  division?: string;\n  trend?: 'up' | 'down' | 'flat';\n}`,
+      usageSnippet: `<EloBadge rating={1840} division="Div 1" trend="up" />`
     },
     {
       id: 'mol-stat',
       name: 'StatMetricCard',
       tier: 'molecule',
-      category: 'Molecules / Metrics',
-      icon: Award,
+      category: 'Molecules / Telemetry',
+      icon: Activity,
       file: 'src/components/molecules/StatMetricCard.tsx',
-      description: 'Standardized scorecard displaying icon container, primary metric number, sublabel, and trend percentage.',
+      description: 'Standardized scorecard displaying icon container, primary metric number, sublabel, and trend percentage badge.',
       propsSnippet: `interface StatMetricCardProps {\n  label: string;\n  value: string | number;\n  subtext?: string;\n  icon: React.ReactNode;\n  trend?: { direction: 'up' | 'down' | 'neutral'; text: string };\n  variant?: 'emerald' | 'cyan' | 'amber' | 'purple' | 'neutral';\n}`,
-      usageSnippet: `<StatMetricCard label="Solved" value="382" icon={<Check />} variant="emerald" />`
+      usageSnippet: `<StatMetricCard label="Solved" value="382 / 520" icon={<BookOpen />} variant="emerald" />`
     },
     {
       id: 'mol-search',
@@ -304,8 +355,63 @@ export const ReusableComponentDrawer: React.FC<{
       propsSnippet: `interface SearchInputProps {\n  value: string;\n  onChange: (val: string) => void;\n  placeholder?: string;\n  onClear?: () => void;\n}`,
       usageSnippet: `<SearchInput value={query} onChange={setQuery} placeholder="Search topics..." />`
     },
+    {
+      id: 'mol-company',
+      name: 'CompanyPill',
+      tier: 'molecule',
+      category: 'Molecules / Company Vaults',
+      icon: Building2,
+      file: 'src/components/molecules/CompanyPill.tsx',
+      description: 'Interactive company question filter pill with logo, company name, question count, and active selection state.',
+      propsSnippet: `interface CompanyPillProps {\n  name: string;\n  count: number;\n  isSelected?: boolean;\n  onClick?: () => void;\n}`,
+      usageSnippet: `<CompanyPill name="Google" count={142} isSelected={active === 'Google'} onClick={select} />`
+    },
+    {
+      id: 'mol-faq',
+      name: 'FaqAccordionItem',
+      tier: 'molecule',
+      category: 'Molecules / FAQ',
+      icon: HelpCircle,
+      file: 'src/components/molecules/FaqAccordionItem.tsx',
+      description: 'Expandable question accordion item with smooth chevron rotation, category tag, and readable body container.',
+      propsSnippet: `interface FaqAccordionItemProps {\n  question: string;\n  answer: string;\n  isOpen: boolean;\n  onToggle: () => void;\n  category?: string;\n}`,
+      usageSnippet: `<FaqAccordionItem question="Are contests rated?" answer="..." isOpen={open} onToggle={toggle} />`
+    },
+    {
+      id: 'mol-diffbar',
+      name: 'DifficultyBreakdownBar',
+      tier: 'molecule',
+      category: 'Molecules / Metrics',
+      icon: Sliders,
+      file: 'src/components/molecules/DifficultyBreakdownBar.tsx',
+      description: 'Segmented multi-color progress track showing proportional Easy, Medium, and Hard solved counts with percentage chips.',
+      propsSnippet: `interface DifficultyBreakdownProps {\n  easy: { solved: number; total: number };\n  medium: { solved: number; total: number };\n  hard: { solved: number; total: number };\n}`,
+      usageSnippet: `<DifficultyBreakdownBar easy={{ solved: 184, total: 210 }} medium={{ solved: 142, total: 230 }} hard={{ solved: 34, total: 80 }} />`
+    },
+    {
+      id: 'mol-contest',
+      name: 'ContestCard',
+      tier: 'molecule',
+      category: 'Molecules / Contests',
+      icon: Swords,
+      file: 'src/components/molecules/ContestCard.tsx',
+      description: 'Interactive weekly contest scorecard with live start time countdown, division badge, participant counter, and register toggle.',
+      propsSnippet: `interface ContestCardProps {\n  title: string;\n  division: string;\n  startTime: string;\n  duration: string;\n  participants: number;\n  isRegistered?: boolean;\n  onRegisterToggle?: () => void;\n}`,
+      usageSnippet: `<ContestCard title="Round #92" division="Div 1" startTime="Starts in 18h" duration="120 min" participants={1420} />`
+    },
+    {
+      id: 'mol-stepctrl',
+      name: 'AlgorithmStepController',
+      tier: 'molecule',
+      category: 'Molecules / Visualizer',
+      icon: Play,
+      file: 'src/components/molecules/AlgorithmStepController.tsx',
+      description: 'Stepping controls for algorithm visualizer with Step indicator pills, Reset, and Next Step action buttons.',
+      propsSnippet: `interface AlgorithmStepControllerProps {\n  currentStep: number;\n  totalSteps: number;\n  stepTitle: string;\n  isComplete: boolean;\n  onNextStep: () => void;\n  onReset: () => void;\n}`,
+      usageSnippet: `<AlgorithmStepController currentStep={step} totalSteps={4} stepTitle="Check Hash Map" isComplete={step === 4} onNextStep={next} onReset={reset} />`
+    },
 
-    // ORGANISMS
+    // 4. ORGANISMS
     {
       id: 'org-compiler',
       name: 'CompilerView',
@@ -408,24 +514,79 @@ export const ReusableComponentDrawer: React.FC<{
   };
 
   // -------------------------------------------------------------
-  // RENDER DYNAMIC INTERACTIVE PLAYGROUND
+  // DYNAMIC LIVE WORKBENCH PLAYGROUND RENDERER
   // -------------------------------------------------------------
   const renderInteractivePlayground = () => {
     switch (selectedComp.id) {
-      // 1. BUTTON ATOM PLAYGROUND
+      // 1. TOKEN: COLOR PALETTE
+      case 'token-colors':
+        return (
+          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
+            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+              <Palette className="w-3.5 h-3.5" />
+              Interactive Design Tokens Palette
+            </div>
+            
+            <div className="space-y-3">
+              <div className="text-[11px] font-mono text-zinc-400">Difficulty Hues (LeetCode & CodeHurdle Standard):</div>
+              <div className="grid grid-cols-3 gap-2">
+                <div 
+                  onClick={() => showToast("Easy Token: #10b981 (Emerald)")} 
+                  className="p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                >
+                  <div className="w-4 h-4 rounded-full bg-emerald-400 mx-auto mb-1 shadow-sm shadow-emerald-500/50" />
+                  <div className="text-xs font-bold text-emerald-400 font-mono">Easy</div>
+                  <div className="text-[10px] text-zinc-400 font-mono">#10b981</div>
+                </div>
+
+                <div 
+                  onClick={() => showToast("Medium Token: #f59e0b (Amber)")} 
+                  className="p-3 rounded-xl border border-amber-500/30 bg-amber-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                >
+                  <div className="w-4 h-4 rounded-full bg-amber-400 mx-auto mb-1 shadow-sm shadow-amber-500/50" />
+                  <div className="text-xs font-bold text-amber-400 font-mono">Medium</div>
+                  <div className="text-[10px] text-zinc-400 font-mono">#f59e0b</div>
+                </div>
+
+                <div 
+                  onClick={() => showToast("Hard Token: #f43f5e (Rose)")} 
+                  className="p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                >
+                  <div className="w-4 h-4 rounded-full bg-rose-400 mx-auto mb-1 shadow-sm shadow-rose-500/50" />
+                  <div className="text-xs font-bold text-rose-400 font-mono">Hard</div>
+                  <div className="text-[10px] text-zinc-400 font-mono">#f43f5e</div>
+                </div>
+              </div>
+
+              <div className="text-[11px] font-mono text-zinc-400 pt-2">Contest Division Tiers:</div>
+              <div className="grid grid-cols-3 gap-2 font-mono text-xs">
+                <div className="p-2.5 rounded-lg border border-cyan-500/25 bg-cyan-950/20 text-cyan-300 text-center">
+                  Div 1 (1900+)
+                </div>
+                <div className="p-2.5 rounded-lg border border-purple-500/25 bg-purple-950/20 text-purple-300 text-center">
+                  Div 2 (1400-1899)
+                </div>
+                <div className="p-2.5 rounded-lg border border-slate-500/25 bg-slate-900/40 text-slate-400 text-center">
+                  Div 3 (&lt;1400)
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      // 2. ATOM: BUTTON
       case 'atom-button':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
               <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
                 <MousePointerClick className="w-3.5 h-3.5" />
-                Live Interactive Button Playground
+                Button Atom Workbench
               </span>
               <span className="text-xs font-mono text-zinc-400">Clicks: <strong className="text-emerald-400">{btnClicks}</strong></span>
             </div>
 
-            {/* Interactive Controls */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
               <div>
                 <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Variant</label>
                 <select 
@@ -467,456 +628,35 @@ export const ReusableComponentDrawer: React.FC<{
                   <span>Loading</span>
                 </label>
               </div>
-
-              <div className="flex flex-col justify-end">
-                <label className="flex items-center gap-2 cursor-pointer py-1 text-zinc-300">
-                  <input 
-                    type="checkbox" 
-                    checked={btnDisabled} 
-                    onChange={e => setBtnDisabled(e.target.checked)}
-                    className="rounded border-zinc-700 accent-emerald-500" 
-                  />
-                  <span>Disabled</span>
-                </label>
-              </div>
             </div>
 
-            {/* Live Interactive Target */}
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-white/[0.04] flex flex-col items-center justify-center gap-3">
+            <div className="p-6 rounded-xl bg-zinc-900/50 border border-white/[0.04] flex items-center justify-center">
               <Button
                 variant={btnVariant}
                 size={btnSize}
                 isLoading={btnLoading}
-                disabled={btnDisabled}
                 icon={<Play className="w-3.5 h-3.5" />}
                 onClick={() => {
                   setBtnClicks(prev => prev + 1);
                   showToast(`Button clicked! (Total: ${btnClicks + 1})`);
                 }}
               >
-                Click Me To Test Feedback
+                Click Me To Test
               </Button>
-              <span className="text-[11px] text-zinc-500 font-mono">
-                Supports tactile active:scale, focus ring, and ARIA disabled states.
-              </span>
             </div>
           </div>
         );
 
-      // 2. BADGE ATOM PLAYGROUND
-      case 'atom-badge':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
-                Live Interactive Badge & Difficulty Playground
-              </span>
-              <span className="text-xs font-mono text-zinc-400">Clicks: <strong className="text-emerald-400">{badgeClicks}</strong></span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div>
-                <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Difficulty Pill</label>
-                <div className="flex gap-1.5">
-                  {(['Easy', 'Medium', 'Hard'] as const).map(d => (
-                    <button
-                      key={d}
-                      onClick={() => setBadgeDifficulty(d)}
-                      className={`px-2.5 py-1 rounded text-xs font-mono cursor-pointer transition-colors ${
-                        badgeDifficulty === d ? 'bg-zinc-800 text-white border border-zinc-600' : 'text-zinc-500 hover:text-zinc-300'
-                      }`}
-                    >
-                      {d}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Badge Hue</label>
-                <select 
-                  value={badgeVariant} 
-                  onChange={e => setBadgeVariant(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
-                >
-                  <option value="emerald">emerald</option>
-                  <option value="amber">amber</option>
-                  <option value="rose">rose</option>
-                  <option value="cyan">cyan</option>
-                  <option value="purple">purple</option>
-                  <option value="neutral">neutral</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Custom Label</label>
-                <input 
-                  type="text" 
-                  value={badgeCustomText}
-                  onChange={e => setBadgeCustomText(e.target.value)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2 py-1 text-xs text-zinc-200 font-mono"
-                />
-              </div>
-            </div>
-
-            {/* Live Interactive Badges */}
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-white/[0.04] flex flex-wrap items-center justify-center gap-3">
-              <div 
-                onClick={() => {
-                  setBadgeClicks(c => c + 1);
-                  showToast(`Selected Difficulty: ${badgeDifficulty}`);
-                }}
-                className="cursor-pointer transition-transform hover:scale-105 active:scale-95"
-              >
-                <DifficultyBadge difficulty={badgeDifficulty} size="md" />
-              </div>
-
-              <div 
-                onClick={() => {
-                  setBadgeClicks(c => c + 1);
-                  showToast(`Clicked Badge: ${badgeCustomText}`);
-                }}
-                className="cursor-pointer transition-transform hover:scale-105 active:scale-95"
-              >
-                <Badge variant={badgeVariant} size="md">
-                  {badgeCustomText}
-                </Badge>
-              </div>
-
-              <Badge variant="emerald" size="sm">Active Contest</Badge>
-              <Badge variant="purple" size="sm">AI Mentor Active</Badge>
-              <Badge variant="amber" size="sm">Top 5%</Badge>
-            </div>
-          </div>
-        );
-
-      // 3. CARD ATOM PLAYGROUND
-      case 'atom-card':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5" />
-                Live Interactive Card Surface Playground
-              </span>
-              <span className="text-xs font-mono text-zinc-400">Card Clicks: <strong className="text-emerald-400">{cardClickCount}</strong></span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4 text-xs">
-              <div className="flex items-center gap-2">
-                <span className="text-zinc-500 font-mono">Surface Variant:</span>
-                {(['default', 'surface', 'interactive', 'sunken'] as const).map(v => (
-                  <button
-                    key={v}
-                    onClick={() => setCardVariant(v)}
-                    className={`px-2.5 py-1 rounded text-xs font-mono cursor-pointer ${
-                      cardVariant === v ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-zinc-900 text-zinc-400 border border-white/[0.06]'
-                    }`}
-                  >
-                    {v}
-                  </button>
-                ))}
-              </div>
-
-              <label className="flex items-center gap-2 cursor-pointer text-zinc-300">
-                <input 
-                  type="checkbox" 
-                  checked={cardGlow} 
-                  onChange={e => setCardGlow(e.target.checked)}
-                  className="rounded border-zinc-700 accent-emerald-500" 
-                />
-                <span>Backdrop Radial Glow</span>
-              </label>
-            </div>
-
-            {/* Clickable Card Instance */}
-            <Card 
-              variant={cardVariant} 
-              glow={cardGlow}
-              className="p-5 cursor-pointer transition-all hover:scale-[1.01]"
-              onClick={() => {
-                setCardClickCount(c => c + 1);
-                showToast(`Interactive Card clicked! (Count: ${cardClickCount + 1})`);
-              }}
-            >
-              <div className="flex items-start justify-between">
-                <div>
-                  <Badge variant="emerald" size="xs">Live Interactive Card</Badge>
-                  <h4 className="text-base font-bold text-white mt-2">Dynamic Programming Track</h4>
-                  <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                    Click this card surface to test active states, borders, and rounded-2xl obsidian tokens.
-                  </p>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 font-mono text-xs font-bold">
-                  #{cardClickCount}
-                </div>
-              </div>
-            </Card>
-          </div>
-        );
-
-      // 4. INPUT & TEXTAREA PLAYGROUND
-      case 'atom-input':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Sliders className="w-3.5 h-3.5" />
-                Live Interactive Input & Form Workbench
-              </span>
-              <span className="text-xs font-mono text-zinc-400">Chars: <strong className="text-emerald-400">{inputVal.length}</strong></span>
-            </div>
-
-            <div className="flex gap-4 text-xs">
-              <label className="flex items-center gap-2 cursor-pointer text-zinc-300">
-                <input 
-                  type="checkbox" 
-                  checked={inputHasError} 
-                  onChange={e => setInputHasError(e.target.checked)}
-                  className="rounded border-zinc-700 accent-rose-500" 
-                />
-                <span className={inputHasError ? 'text-rose-400 font-bold' : ''}>Simulate Validation Error</span>
-              </label>
-
-              <label className="flex items-center gap-2 cursor-pointer text-zinc-300">
-                <input 
-                  type="checkbox" 
-                  checked={inputPrefix} 
-                  onChange={e => setInputPrefix(e.target.checked)}
-                  className="rounded border-zinc-700 accent-emerald-500" 
-                />
-                <span>Search Prefix Icon</span>
-              </label>
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Standard Text Input</label>
-                <Input
-                  value={inputVal}
-                  onChange={e => setInputVal(e.target.value)}
-                  placeholder="Type anything to test real-time validation..."
-                  error={inputHasError}
-                  prefix={inputPrefix ? <Search className="w-3.5 h-3.5 text-zinc-500" /> : undefined}
-                />
-              </div>
-
-              <div>
-                <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Monospace Scratchpad Textarea</label>
-                <Textarea
-                  value={inputVal}
-                  onChange={e => setInputVal(e.target.value)}
-                  placeholder="Write algorithm invariant notes..."
-                  className="h-20 font-mono text-xs"
-                />
-              </div>
-            </div>
-          </div>
-        );
-
-      // 5. AVATAR PLAYGROUND
-      case 'atom-avatar':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5" />
-                Live Interactive Developer Avatar Workbench
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-              <div>
-                <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Name / Monogram</label>
-                <input 
-                  type="text" 
-                  value={avatarName}
-                  onChange={e => setAvatarName(e.target.value)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2 py-1 text-xs text-zinc-200 font-mono"
-                />
-              </div>
-
-              <div>
-                <label className="text-[10px] uppercase font-mono text-zinc-500 block mb-1">Size</label>
-                <select 
-                  value={avatarSize} 
-                  onChange={e => setAvatarSize(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
-                >
-                  <option value="xs">xs</option>
-                  <option value="sm">sm</option>
-                  <option value="md">md</option>
-                  <option value="lg">lg</option>
-                  <option value="xl">xl</option>
-                </select>
-              </div>
-
-              <div className="flex flex-col justify-end gap-1">
-                <label className="flex items-center gap-2 cursor-pointer text-zinc-300">
-                  <input 
-                    type="checkbox" 
-                    checked={avatarPro} 
-                    onChange={e => setAvatarPro(e.target.checked)}
-                    className="rounded border-zinc-700 accent-amber-500" 
-                  />
-                  <span>PRO Badge</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer text-zinc-300">
-                  <input 
-                    type="checkbox" 
-                    checked={avatarOnline} 
-                    onChange={e => setAvatarOnline(e.target.checked)}
-                    className="rounded border-zinc-700 accent-emerald-500" 
-                  />
-                  <span>Online Status Dot</span>
-                </label>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-xl bg-zinc-900/50 border border-white/[0.04] flex items-center justify-center gap-6">
-              <Avatar 
-                name={avatarName} 
-                size={avatarSize} 
-                isPro={avatarPro} 
-                isOnline={avatarOnline} 
-              />
-              <div className="text-left font-mono text-xs">
-                <div className="text-white font-semibold">{avatarName}</div>
-                <div className="text-zinc-500 text-[11px]">{avatarPro ? 'CodeHurdle Pro Member' : 'Standard Member'}</div>
-                <div className="text-emerald-400 text-[10px]">{avatarOnline ? '● Active in #dsa-help' : '○ Offline'}</div>
-              </div>
-            </div>
-          </div>
-        );
-
-      // 6. PROGRESS BAR PLAYGROUND
-      case 'atom-progress':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Activity className="w-3.5 h-3.5" />
-                Live Interactive Telemetry Progress Bar
-              </span>
-              <span className="text-xs font-mono text-emerald-400 font-bold">{progressVal}%</span>
-            </div>
-
-            <div className="space-y-3">
-              <div>
-                <div className="flex items-center justify-between text-xs text-zinc-400 font-mono mb-1">
-                  <span>Drag value slider:</span>
-                  <span>{progressVal} / 100</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="0" 
-                  max="100" 
-                  value={progressVal}
-                  onChange={e => setProgressVal(Number(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer"
-                />
-              </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-zinc-500 font-mono">Hues:</span>
-                  {(['emerald', 'amber', 'rose', 'cyan', 'purple'] as const).map(h => (
-                    <button
-                      key={h}
-                      onClick={() => setProgressVariant(h)}
-                      className={`px-2 py-0.5 rounded text-[11px] font-mono capitalize cursor-pointer ${
-                        progressVariant === h ? 'bg-zinc-800 text-white font-bold border border-zinc-600' : 'text-zinc-500 hover:text-zinc-300'
-                      }`}
-                    >
-                      {h}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-1.5">
-                  <Button size="xs" variant="outline" onClick={() => setProgressVal(Math.max(0, progressVal - 15))}>-15%</Button>
-                  <Button size="xs" variant="outline" onClick={() => setProgressVal(Math.min(100, progressVal + 15))}>+15%</Button>
-                  <Button size="xs" variant="primary" onClick={() => setProgressVal(100)}>Complete (100%)</Button>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-zinc-900/60 border border-white/[0.04] space-y-2">
-                <div className="flex justify-between text-xs font-mono text-zinc-300">
-                  <span>Binary Search Track Mastery</span>
-                  <span className="font-bold">{progressVal}% Completed</span>
-                </div>
-                <ProgressBar value={progressVal} variant={progressVariant} size={progressSize} />
-              </div>
-            </div>
-          </div>
-        );
-
-      // 7. TABGROUP PLAYGROUND
-      case 'atom-tabs':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Sliders className="w-3.5 h-3.5" />
-                Live Interactive TabGroup Navigation
-              </span>
-              <span className="text-xs font-mono text-zinc-400">Active Tab: <strong className="text-emerald-400">{activeTestTab}</strong></span>
-            </div>
-
-            <div className="flex items-center gap-3 text-xs">
-              <span className="text-zinc-500 font-mono">Variant:</span>
-              <button
-                onClick={() => setTabVariant('pill')}
-                className={`px-3 py-1 rounded-lg text-xs font-mono cursor-pointer ${
-                  tabVariant === 'pill' ? 'bg-zinc-800 text-white border border-zinc-700' : 'text-zinc-400'
-                }`}
-              >
-                Pill Style
-              </button>
-              <button
-                onClick={() => setTabVariant('underline')}
-                className={`px-3 py-1 rounded-lg text-xs font-mono cursor-pointer ${
-                  tabVariant === 'underline' ? 'bg-zinc-800 text-white border border-zinc-700' : 'text-zinc-400'
-                }`}
-              >
-                Underline Style
-              </button>
-            </div>
-
-            <div className="p-4 rounded-xl bg-zinc-900/60 border border-white/[0.04] space-y-4">
-              <TabGroup
-                tabs={[
-                  { id: 'arrays', label: 'Arrays & Hashing (120)' },
-                  { id: 'two_pointers', label: 'Two Pointers (45)', badge: '45' },
-                  { id: 'trees', label: 'Binary Trees (80)' },
-                  { id: 'dp', label: 'Dynamic Programming (110)' }
-                ]}
-                activeTab={activeTestTab}
-                onChange={id => {
-                  setActiveTestTab(id);
-                  showToast(`Switched active tab to: ${id}`);
-                }}
-                variant={tabVariant}
-              />
-
-              <div className="p-3 rounded-lg bg-zinc-950 text-xs font-mono text-zinc-400">
-                Displaying content pane for: <span className="text-emerald-400 font-bold">{activeTestTab}</span>
-              </div>
-            </div>
-          </div>
-        );
-
-      // 8. MOLECULE: PROBLEM ROW
+      // 3. MOLECULE: PROBLEM ROW (100% Interactive)
       case 'mol-prow':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
               <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
                 <BookOpen className="w-3.5 h-3.5" />
-                Live Interactive ProblemRow Molecule
+                ProblemRow Molecule (Live Interactive Item)
               </span>
-              <span className="text-xs font-mono text-zinc-400">
+              <span className="text-xs font-mono">
                 Status: <strong className={rowSolved ? 'text-emerald-400' : 'text-zinc-500'}>{rowSolved ? 'SOLVED' : 'UNSOLVED'}</strong>
               </span>
             </div>
@@ -945,13 +685,12 @@ export const ReusableComponentDrawer: React.FC<{
                   max="100" 
                   value={rowFreq} 
                   onChange={e => setRowFreq(Number(e.target.value))}
-                  className="w-20 accent-amber-500" 
+                  className="w-20 accent-amber-500 cursor-pointer" 
                 />
                 <span className="font-mono text-zinc-300">{rowFreq}%</span>
               </div>
             </div>
 
-            {/* Clickable ProblemRow Table wrapper */}
             <div className="overflow-x-auto rounded-xl border border-white/[0.08] bg-[#0c101c]">
               <table className="w-full text-left border-collapse text-xs">
                 <tbody>
@@ -967,7 +706,7 @@ export const ReusableComponentDrawer: React.FC<{
                       starred: rowStarred,
                       frequency: rowFreq
                     }}
-                    onSelect={() => showToast("Problem row selected! Drawer preview updated.")}
+                    onSelect={() => showToast("Problem row selected! Drawer preview opened.")}
                     onSolve={() => showToast("Launch in-browser compiler IDE for Problem #33")}
                     onToggleSolved={(e) => {
                       e.stopPropagation();
@@ -985,95 +724,191 @@ export const ReusableComponentDrawer: React.FC<{
             </div>
 
             <div className="text-[11px] text-zinc-500 font-mono flex items-center justify-between">
-              <span>💡 Click the circle/check to toggle solved. Click the star to bookmark.</span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('compiler')}>
-                Open in Full IDE
-              </Button>
+              <span>💡 Click the checkmark to toggle solved. Click star to favorite. Click play to solve.</span>
             </div>
           </div>
         );
 
-      // 9. MOLECULE: STREAK & ELO BADGE
-      case 'mol-streak':
+      // 4. MOLECULE: COMPANY PILL
+      case 'mol-company':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
               <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Flame className="w-3.5 h-3.5" />
-                Live Interactive Streak & Elo Gamification Badges
+                <Building2 className="w-3.5 h-3.5" />
+                CompanyPill Molecule (Live Selection Filter)
+              </span>
+              <span className="text-xs font-mono text-zinc-400">Selected: <strong className="text-emerald-400">{activeCompanyDemo}</strong></span>
+            </div>
+
+            <div className="flex flex-wrap gap-2.5">
+              {[
+                { name: 'Google', count: 142 },
+                { name: 'Meta', count: 185 },
+                { name: 'Amazon', count: 210 },
+                { name: 'Microsoft', count: 130 },
+                { name: 'Apple', count: 95 }
+              ].map(c => (
+                <CompanyPill
+                  key={c.name}
+                  name={c.name}
+                  count={c.count}
+                  isSelected={activeCompanyDemo === c.name}
+                  onClick={() => {
+                    setActiveCompanyDemo(c.name);
+                    showToast(`Filtered by ${c.name} Question Bank (${c.count} problems)`);
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        );
+
+      // 5. MOLECULE: FAQ ACCORDION ITEM
+      case 'mol-faq':
+        return (
+          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
+            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+                <HelpCircle className="w-3.5 h-3.5" />
+                FaqAccordionItem Molecule
+              </span>
+              <span className="text-xs font-mono text-zinc-400">{faqOpenDemo ? 'Expanded' : 'Collapsed'}</span>
+            </div>
+
+            <FaqAccordionItem
+              category="Architecture"
+              question="How does CodeHurdle differ from standard problem lists like LeetCode or NeetCode?"
+              answer="Standard problem sheets treat every learner identically. CodeHurdle incorporates an adaptive skill calibration engine that tracks your speed, memory efficiency, and bug patterns across 16 core patterns, serving problems at your exact learning boundary."
+              isOpen={faqOpenDemo}
+              onToggle={() => {
+                setFaqOpenDemo(!faqOpenDemo);
+                showToast(faqOpenDemo ? "Collapsed FAQ item" : "Expanded FAQ item");
+              }}
+            />
+          </div>
+        );
+
+      // 6. MOLECULE: CONTEST CARD
+      case 'mol-contest':
+        return (
+          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
+            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+                <Swords className="w-3.5 h-3.5" />
+                ContestCard Molecule (Live Countdown & Registration)
               </span>
             </div>
 
-            {/* Streak Controls */}
-            <div className="p-4 rounded-xl bg-zinc-900/60 border border-white/[0.04] space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-xs font-bold text-white">Daily Coding Streak Molecule</div>
-                  <div className="text-[11px] text-zinc-400">Current habit persistence: {streakDays} days</div>
-                </div>
-                <StreakBadge days={streakDays} />
-              </div>
+            <ContestCard
+              id="w92"
+              title="CodeHurdle Weekly Round #92"
+              division="Div 1 + Div 2"
+              startTime="Starts in 18h 42m"
+              duration="120 min"
+              participants={1429}
+              isRegistered={contestRegistered}
+              onRegisterToggle={() => {
+                setContestRegistered(!contestRegistered);
+                showToast(contestRegistered ? "Cancelled contest registration" : "Registered for Weekly Round #92!");
+              }}
+              onOpenDetails={() => showToast("Opening contest problem rules & rating brackets")}
+            />
+          </div>
+        );
 
-              <div className="flex items-center gap-2">
-                <Button 
-                  size="xs" 
-                  variant="amber" 
-                  icon={<Flame className="w-3.5 h-3.5" />}
-                  onClick={() => {
-                    setStreakDays(s => s + 1);
-                    showToast(`Streak Increased! 🔥 ${streakDays + 1} Days`);
-                  }}
-                >
-                  Solve Today (+1 Day)
-                </Button>
-                <Button size="xs" variant="outline" onClick={() => setStreakDays(0)}>Reset Streak</Button>
-              </div>
+      // 7. MOLECULE: DIFFICULTY BREAKDOWN BAR
+      case 'mol-diffbar':
+        return (
+          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
+            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+                <Sliders className="w-3.5 h-3.5" />
+                DifficultyBreakdownBar Molecule
+              </span>
+              <Button size="xs" variant="outline" onClick={() => {
+                setBreakdownEasy(190);
+                setBreakdownMed(170);
+                setBreakdownHard(50);
+                showToast("Simulated Mastery Boost!");
+              }}>
+                Simulate Solve (+34)
+              </Button>
             </div>
 
-            {/* Elo Controls */}
-            <div className="p-4 rounded-xl bg-zinc-900/60 border border-white/[0.04] space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-xs font-bold text-white">Competitive Programming Elo Molecule</div>
-                  <div className="text-[11px] text-zinc-400">Dynamically maps Elo to Codeforces/CodeHurdle Division</div>
-                </div>
-                <EloBadge 
-                  rating={eloRating} 
-                  division={eloRating >= 1900 ? 'Div 1' : eloRating >= 1400 ? 'Div 2' : 'Div 3'} 
-                  trend={eloTrend}
-                />
-              </div>
+            <DifficultyBreakdownBar
+              easy={{ solved: breakdownEasy, total: 210 }}
+              medium={{ solved: breakdownMed, total: 230 }}
+              hard={{ solved: breakdownHard, total: 80 }}
+            />
+          </div>
+        );
 
+      // 8. MOLECULE: ALGORITHM STEP CONTROLLER
+      case 'mol-stepctrl':
+        return (
+          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
+            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
+              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+                <Play className="w-3.5 h-3.5" />
+                AlgorithmStepController Molecule
+              </span>
+            </div>
+
+            <AlgorithmStepController
+              currentStep={algoStep}
+              totalSteps={algoTotal}
+              stepTitle={algoStep === 1 ? 'Compute Complement (9 - 2 = 7)' : algoStep === 2 ? 'Lookup in Hash Map' : algoStep === 3 ? 'Match Found at index 1' : 'Return Indices [0, 1]'}
+              isComplete={algoStep === algoTotal}
+              onNextStep={() => {
+                const next = algoStep < algoTotal ? algoStep + 1 : 1;
+                setAlgoStep(next);
+                showToast(`Stepped to Step ${next} of ${algoTotal}`);
+              }}
+              onReset={() => {
+                setAlgoStep(1);
+                showToast("Reset visualizer step to 1");
+              }}
+            />
+          </div>
+        );
+
+      // 9. MOLECULE: STREAK & ELO
+      case 'mol-streak':
+      case 'mol-elo':
+        return (
+          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
+            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold pb-2 border-b border-white/[0.06]">
+              Gamification Badges (Streak & Elo)
+            </div>
+
+            <div className="flex items-center justify-between p-4 bg-zinc-900/50 rounded-xl">
               <div>
-                <div className="flex justify-between text-xs font-mono text-zinc-400 mb-1">
-                  <span>Simulate Rating Change:</span>
-                  <span className="font-bold text-cyan-400">{eloRating} Elo</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="1100" 
-                  max="2400" 
-                  step="25"
-                  value={eloRating} 
-                  onChange={e => setEloRating(Number(e.target.value))}
-                  className="w-full accent-cyan-500 cursor-pointer" 
-                />
+                <div className="text-xs font-bold text-white mb-1">Daily Habit Streak</div>
+                <StreakBadge days={streakDays} />
               </div>
+              <Button size="xs" variant="amber" onClick={() => {
+                setStreakDays(s => s + 1);
+                showToast(`Streak Increased to ${streakDays + 1} Days! 🔥`);
+              }}>
+                +1 Day
+              </Button>
+            </div>
 
-              <div className="flex items-center gap-2 text-xs">
-                <span className="text-zinc-500 font-mono">Trend:</span>
-                {(['up', 'down', 'flat'] as const).map(t => (
-                  <button
-                    key={t}
-                    onClick={() => setEloTrend(t)}
-                    className={`px-2 py-0.5 rounded text-[11px] font-mono capitalize cursor-pointer ${
-                      eloTrend === t ? 'bg-zinc-800 text-white font-bold border border-zinc-600' : 'text-zinc-500'
-                    }`}
-                  >
-                    {t}
-                  </button>
-                ))}
+            <div className="space-y-2 p-4 bg-zinc-900/50 rounded-xl">
+              <div className="flex justify-between items-center text-xs">
+                <span className="font-bold text-white">Contest Elo Rating</span>
+                <EloBadge rating={eloRating} division={eloRating >= 1900 ? 'Div 1' : eloRating >= 1400 ? 'Div 2' : 'Div 3'} trend={eloTrend} />
               </div>
+              <input 
+                type="range" 
+                min="1100" 
+                max="2400" 
+                step="25"
+                value={eloRating} 
+                onChange={e => setEloRating(Number(e.target.value))}
+                className="w-full accent-cyan-500 cursor-pointer" 
+              />
             </div>
           </div>
         );
@@ -1082,45 +917,14 @@ export const ReusableComponentDrawer: React.FC<{
       case 'mol-stat':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5" />
-                Live Interactive StatMetricCard Molecule
-              </span>
+            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold pb-2 border-b border-white/[0.06]">
+              StatMetricCard Telemetry Molecule
             </div>
-
-            <div className="flex flex-wrap items-center gap-3 text-xs">
-              <div className="flex items-center gap-2">
-                <span className="text-zinc-500 font-mono">Accent Hue:</span>
-                {(['emerald', 'cyan', 'amber', 'purple'] as const).map(v => (
-                  <button
-                    key={v}
-                    onClick={() => setStatVariant(v)}
-                    className={`px-2.5 py-1 rounded text-xs font-mono capitalize cursor-pointer ${
-                      statVariant === v ? 'bg-zinc-800 text-white font-bold border border-zinc-600' : 'text-zinc-500'
-                    }`}
-                  >
-                    {v}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="text-zinc-500 font-mono">Value:</span>
-                <input 
-                  type="text" 
-                  value={statVal} 
-                  onChange={e => setStatVal(e.target.value)}
-                  className="w-28 bg-[#0c101c] border border-white/[0.08] rounded px-2 py-0.5 text-xs font-mono text-zinc-200"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
               <StatMetricCard
                 label="Mastery Index"
                 value={statVal}
-                subtext="Global percentile: Top 4.8%"
+                subtext="Top 4.8% worldwide"
                 icon={<BookOpen className="w-4 h-4 text-emerald-400" />}
                 trend={{ direction: 'up', text: '+12 this week' }}
                 variant={statVariant}
@@ -1141,367 +945,48 @@ export const ReusableComponentDrawer: React.FC<{
       case 'mol-search':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <Search className="w-3.5 h-3.5" />
-                Live Interactive SearchInput Molecule
-              </span>
+            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold pb-2 border-b border-white/[0.06]">
+              SearchInput Molecule with ⌘K Badge
             </div>
-
             <SearchInput
-              value={liveSearchQuery}
-              onChange={setLiveSearchQuery}
+              value={searchVal}
+              onChange={setSearchVal}
               onClear={() => {
-                setLiveSearchQuery('');
+                setSearchVal('');
                 showToast("Search cleared!");
               }}
               placeholder="Search problems by keyword, company tag, or pattern..."
             />
-
-            <div className="p-3 rounded-lg bg-zinc-900/60 border border-white/[0.04] text-xs font-mono text-zinc-400 space-y-1">
-              <div>Simulated Query Result for: <strong className="text-emerald-400">"{liveSearchQuery}"</strong></div>
-              <div className="text-[11px] text-zinc-500">
-                {liveSearchQuery.trim() ? `Found 14 matching algorithmic problems matching '${liveSearchQuery}'` : 'Showing all 520 curated problems.'}
-              </div>
+            <div className="text-xs font-mono text-zinc-500">
+              Query: <strong className="text-emerald-400">"{searchVal}"</strong>
             </div>
           </div>
         );
 
-      // 12. ORGANISM: COMPILER VIEW SANDBOX
+      // ORGANISMS
       case 'org-compiler':
+      case 'org-cp':
+      case 'org-explorer':
+      case 'org-roadmap':
+      case 'org-community':
+      case 'org-jobprep':
+      case 'org-profile':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
               <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
                 <Terminal className="w-3.5 h-3.5" />
-                Live Interactive In-Drawer Compiler IDE Sandbox
+                {selectedComp.name} (Organism)
               </span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('compiler')}>
-                Full Split-Pane View <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-
-            <div className="flex items-center justify-between text-xs">
-              <div className="flex gap-1 font-mono">
-                {(['python', 'cpp', 'js'] as const).map(l => (
-                  <button
-                    key={l}
-                    onClick={() => {
-                      setCompilerLang(l);
-                      if (l === 'cpp') setCompilerCode(`#include <vector>\nusing namespace std;\n\nint search(vector<int>& nums, int target) {\n    int l = 0, r = nums.size() - 1;\n    while(l <= r) {\n        int m = l + (r-l)/2;\n        if(nums[m] == target) return m;\n        if(nums[m] < target) l = m + 1;\n        else r = m - 1;\n    }\n    return -1;\n}`);
-                      else if (l === 'js') setCompilerCode(`function search(nums, target) {\n  let left = 0, right = nums.length - 1;\n  while (left <= right) {\n    const mid = Math.floor((left + right) / 2);\n    if (nums[mid] === target) return mid;\n    if (nums[mid] < target) left = mid + 1;\n    else right = mid - 1;\n  }\n  return -1;\n}`);
-                      else setCompilerCode(`def solve(nums, target):\n    left, right = 0, len(nums) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if nums[mid] == target: return mid\n        elif nums[mid] < target: left = mid + 1\n        else: right = mid - 1\n    return -1`);
-                    }}
-                    className={`px-2.5 py-1 rounded text-xs cursor-pointer ${
-                      compilerLang === l ? 'bg-zinc-800 text-white border border-zinc-700' : 'text-zinc-500 hover:text-zinc-300'
-                    }`}
-                  >
-                    {l === 'python' ? 'Python 3' : l === 'cpp' ? 'C++ 17' : 'JavaScript'}
-                  </button>
-                ))}
-              </div>
-
-              <Button
-                variant="primary"
-                size="xs"
-                isLoading={compilerRunning}
-                icon={<Play className="w-3 h-3 fill-black" />}
-                onClick={() => {
-                  setCompilerRunning(true);
-                  setTimeout(() => {
-                    setCompilerRunning(false);
-                    setCompilerOutput(`Compilation: OK\nExecuting 48 official testcases...\n[TestCase 1]: target=9 -> 4 (PASS 18ms)\n[TestCase 2]: target=2 -> -1 (PASS 16ms)\n[TestCase 3]: target=5 -> 0 (PASS 19ms)\n----------------------------------------\nVERDICT: ACCEPTED (Runtime: 24ms | Beats 98.2%)\nMemory Footprint: 16.8 MB (Beats 91.4%)\n+100 XP awarded.`);
-                    showToast("Code Executed! Status: ACCEPTED");
-                  }, 600);
-                }}
-              >
-                Run In-Sandbox
-              </Button>
-            </div>
-
-            {/* Code Textarea */}
-            <Textarea
-              value={compilerCode}
-              onChange={e => setCompilerCode(e.target.value)}
-              className="h-36 font-mono text-xs text-emerald-300 bg-zinc-950"
-              spellCheck={false}
-            />
-
-            {/* Simulated Console Output */}
-            {compilerOutput && (
-              <div className="p-3 rounded-lg bg-zinc-950 border border-emerald-500/30 font-mono text-xs text-zinc-300 whitespace-pre-wrap leading-relaxed animate-fade-in">
-                <div className="flex items-center gap-1.5 text-emerald-400 font-bold mb-1 text-[11px]">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Execution Output
-                </div>
-                {compilerOutput}
-              </div>
-            )}
-          </div>
-        );
-
-      // 13. ORGANISM: CP ARENA SANDBOX
-      case 'org-cp':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-rose-400 font-bold flex items-center gap-1.5">
-                <Swords className="w-3.5 h-3.5" />
-                Live Interactive CP Arena Sandbox
-              </span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('cp')}>
-                Full CP Arena View <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-
-            <Card variant="surface" className="p-4 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <Badge variant="rose" size="xs">Div 1 & Div 2 Contest</Badge>
-                  <h4 className="text-sm font-bold text-white mt-1">CodeHurdle Weekly Round #92</h4>
-                  <p className="text-xs text-zinc-400">4 problems · 120 minutes · Dynamic rating recalculation</p>
-                </div>
-                <div className="text-right">
-                  <div className="text-xs font-mono font-bold text-amber-400">Starts in 18h 42m</div>
-                  <div className="text-[11px] text-zinc-500 font-mono">1,429 Registrations</div>
-                </div>
-              </div>
-
-              <div className="pt-2 flex items-center justify-between border-t border-white/[0.06]">
-                <span className="text-xs font-mono text-zinc-400">Status: {cpRegistered ? <strong className="text-emerald-400 font-bold">Registered ✓</strong> : 'Not Registered'}</span>
-                <Button 
-                  size="xs" 
-                  variant={cpRegistered ? 'outline' : 'primary'}
-                  onClick={() => {
-                    setCpRegistered(!cpRegistered);
-                    showToast(cpRegistered ? "Registration cancelled" : "Registered for Weekly Round #92!");
-                  }}
-                >
-                  {cpRegistered ? 'Cancel Registration' : 'Register for Contest'}
+              {selectedComp.navTarget && (
+                <Button size="xs" variant="primary" onClick={() => onNavigateToView(selectedComp.navTarget!)}>
+                  Launch Page View <ExternalLink className="w-3 h-3 ml-1" />
                 </Button>
-              </div>
-            </Card>
-          </div>
-        );
-
-      // 14. ORGANISM: PROBLEM EXPLORER SANDBOX
-      case 'org-explorer':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
-                <BookOpen className="w-3.5 h-3.5" />
-                Live Interactive Problem Explorer Sandbox
-              </span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('problems')}>
-                Open Full Catalog <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-
-            <div className="space-y-2">
-              <div className="text-xs font-mono text-zinc-400">Select problem to test live preview drawer:</div>
-              <div className="grid grid-cols-1 gap-2">
-                {[
-                  { id: 1, title: 'Two Sum', diff: 'Easy' as DifficultyLevel, acc: '49.2%', tags: ['Arrays', 'Hash Map'] },
-                  { id: 146, title: 'LRU Cache', diff: 'Medium' as DifficultyLevel, acc: '43.1%', tags: ['Doubly Linked List', 'Hash Map'] },
-                  { id: 23, title: 'Merge k Sorted Lists', diff: 'Hard' as DifficultyLevel, acc: '52.0%', tags: ['Heap', 'Divide & Conquer'] }
-                ].map(p => (
-                  <div 
-                    key={p.id}
-                    onClick={() => showToast(`Selected Problem #${p.id}: ${p.title}`)}
-                    className="p-3 rounded-lg bg-zinc-900/60 border border-white/[0.06] hover:border-emerald-500/40 flex items-center justify-between cursor-pointer transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold text-zinc-500">#{p.id}</span>
-                      <span className="text-xs font-semibold text-zinc-200">{p.title}</span>
-                      <DifficultyBadge difficulty={p.diff} size="xs" />
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] font-mono text-zinc-500">{p.acc}</span>
-                      <ArrowRight className="w-3.5 h-3.5 text-zinc-600" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        );
-
-      // 15. ORGANISM: ROADMAP SANDBOX
-      case 'org-roadmap':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold flex items-center gap-1.5">
-                <Compass className="w-3.5 h-3.5" />
-                Live Interactive 29-Tracks Roadmap Sandbox
-              </span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('roadmap')}>
-                Full Roadmap View <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2">
-              {[
-                { track: '01. Complexity Analysis', count: '12/12', status: 'Completed' },
-                { track: '04. Arrays & Prefix Sums', count: '28/28', status: 'Completed' },
-                { track: '10. Binary Search', count: '18/26', status: 'In Progress' },
-                { track: '16. Dynamic Programming', count: '0/32', status: 'Locked' }
-              ].map(t => (
-                <div 
-                  key={t.track}
-                  onClick={() => showToast(`Inspecting Track: ${t.track}`)}
-                  className="p-3 rounded-lg bg-zinc-900/60 border border-white/[0.06] hover:border-purple-500/40 cursor-pointer transition-colors"
-                >
-                  <div className="text-xs font-bold text-zinc-200">{t.track}</div>
-                  <div className="flex items-center justify-between mt-1 text-[11px] font-mono">
-                    <span className="text-zinc-500">{t.count}</span>
-                    <span className={t.status === 'Completed' ? 'text-emerald-400' : t.status === 'In Progress' ? 'text-amber-400' : 'text-zinc-600'}>
-                      {t.status}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-
-      // 16. ORGANISM: COMMUNITY SANDBOX
-      case 'org-community':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-indigo-400 font-bold flex items-center gap-1.5">
-                <Users className="w-3.5 h-3.5" />
-                Live Interactive Community Chat Sandbox (#dsa-help)
-              </span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('community')}>
-                Full Community View <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-
-            {/* Message Thread */}
-            <div className="space-y-2 max-h-36 overflow-y-auto p-2 bg-zinc-950 rounded-lg border border-white/[0.06]">
-              {commMessages.map((m, idx) => (
-                <div key={idx} className="text-xs font-sans">
-                  <span className="font-bold text-emerald-400">{m.user}: </span>
-                  <span className="text-zinc-300">{m.text}</span>
-                  <span className="text-[10px] text-zinc-600 ml-2 font-mono">{m.time}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Input to send chat message */}
-            <div className="flex items-center gap-2">
-              <Input
-                value={commDraft}
-                onChange={e => setCommDraft(e.target.value)}
-                onKeyDown={e => {
-                  if (e.key === 'Enter' && commDraft.trim()) {
-                    setCommMessages(prev => [...prev, { user: 'You', text: commDraft, time: 'Just now' }]);
-                    setCommDraft('');
-                    showToast("Message posted to #dsa-help!");
-                  }
-                }}
-                placeholder="Type question in #dsa-help and press Enter..."
-                className="text-xs"
-              />
-              <Button
-                size="sm"
-                variant="primary"
-                icon={<Send className="w-3.5 h-3.5" />}
-                onClick={() => {
-                  if (commDraft.trim()) {
-                    setCommMessages(prev => [...prev, { user: 'You', text: commDraft, time: 'Just now' }]);
-                    setCommDraft('');
-                    showToast("Message posted to #dsa-help!");
-                  }
-                }}
-              />
-            </div>
-          </div>
-        );
-
-      // 17. ORGANISM: JOB PREP SANDBOX
-      case 'org-jobprep':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-blue-400 font-bold flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5" />
-                Live Interactive Job Prep ATS Scanner Sandbox
-              </span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('jobprep')}>
-                Full Job Prep View <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-
-            <Textarea
-              value={resumeText}
-              onChange={e => setResumeText(e.target.value)}
-              placeholder="Paste tech stack or resume highlights..."
-              className="h-20 text-xs font-mono"
-            />
-
-            <div className="flex items-center justify-between">
-              <Button 
-                size="xs" 
-                variant="primary"
-                onClick={() => {
-                  const score = Math.floor(Math.random() * 15) + 84;
-                  setAtsScore(score);
-                  showToast(`Resume Analyzed! Target FAANG Match: ${score}%`);
-                }}
-              >
-                Scan Against Google / Meta Bar
-              </Button>
-
-              {atsScore !== null && (
-                <div className="text-xs font-mono text-emerald-400 font-bold animate-fade-in">
-                  Match Score: {atsScore}% Match ✓
-                </div>
               )}
             </div>
-          </div>
-        );
-
-      // 18. ORGANISM: USER PROFILE SANDBOX
-      case 'org-profile':
-        return (
-          <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5">
-                <User className="w-3.5 h-3.5" />
-                Live Interactive User Profile Analytics Sandbox
-              </span>
-              <Button size="xs" variant="primary" onClick={() => onNavigateToView('profile')}>
-                Full Profile View <ExternalLink className="w-3 h-3 ml-1" />
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-3 gap-2 text-center">
-              <div 
-                onClick={() => showToast("Easy Solved: 142 / 160")} 
-                className="p-3 rounded-lg bg-zinc-900/60 border border-emerald-500/20 cursor-pointer hover:bg-emerald-500/10 transition-colors"
-              >
-                <div className="text-[10px] font-mono uppercase text-emerald-400">Easy</div>
-                <div className="text-lg font-bold text-white font-mono">142</div>
-              </div>
-              <div 
-                onClick={() => showToast("Medium Solved: 188 / 260")} 
-                className="p-3 rounded-lg bg-zinc-900/60 border border-amber-500/20 cursor-pointer hover:bg-amber-500/10 transition-colors"
-              >
-                <div className="text-[10px] font-mono uppercase text-amber-400">Medium</div>
-                <div className="text-lg font-bold text-white font-mono">188</div>
-              </div>
-              <div 
-                onClick={() => showToast("Hard Solved: 52 / 100")} 
-                className="p-3 rounded-lg bg-zinc-900/60 border border-rose-500/20 cursor-pointer hover:bg-rose-500/10 transition-colors"
-              >
-                <div className="text-[10px] font-mono uppercase text-rose-400">Hard</div>
-                <div className="text-lg font-bold text-white font-mono">52</div>
-              </div>
-            </div>
+            <p className="text-xs text-zinc-300 leading-relaxed">
+              {selectedComp.description}
+            </p>
           </div>
         );
 
@@ -1529,10 +1014,10 @@ export const ReusableComponentDrawer: React.FC<{
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white">CodeHurdle Atomic Design System</h2>
-                <Badge variant="emerald" size="xs">100% Interactive Workbench</Badge>
+                <h2 className="text-base font-bold text-white">CodeHurdle Atomic Architecture</h2>
+                <Badge variant="emerald" size="xs">4 Tiers Active</Badge>
               </div>
-              <p className="text-xs text-zinc-400 mt-0.5">Live sandbox controls for every Atom, Molecule, and Organism</p>
+              <p className="text-xs text-zinc-400 mt-0.5">Tokens · Atoms · Molecules · Organisms</p>
             </div>
           </div>
           <button 
@@ -1543,13 +1028,14 @@ export const ReusableComponentDrawer: React.FC<{
           </button>
         </div>
 
-        {/* Tier Switcher Bar */}
+        {/* 4-Tier Switcher Bar */}
         <div className="px-6 py-3 border-b border-white/[0.08] bg-zinc-950/40 flex items-center justify-between">
           <TabGroup
             tabs={[
-              { id: 'all', label: 'All Components' },
-              { id: 'atom', label: 'Atoms (7)' },
-              { id: 'molecule', label: 'Molecules (4)' },
+              { id: 'all', label: 'All' },
+              { id: 'token', label: 'Tokens (3)' },
+              { id: 'atom', label: 'Atoms (8)' },
+              { id: 'molecule', label: 'Molecules (10)' },
               { id: 'organism', label: 'Organisms (7)' }
             ]}
             activeTab={selectedTier}
@@ -1561,7 +1047,7 @@ export const ReusableComponentDrawer: React.FC<{
             variant="pill"
           />
           <span className="text-xs font-mono text-zinc-500 hidden sm:inline">
-            {filteredComponents.length} components
+            {filteredComponents.length} items
           </span>
         </div>
 
@@ -1585,6 +1071,7 @@ export const ReusableComponentDrawer: React.FC<{
                   <div className="flex items-center justify-between w-full">
                     <Icon className={`w-4 h-4 ${isSelected ? 'text-emerald-400' : 'text-zinc-500'}`} />
                     <span className={`text-[9px] font-mono uppercase px-1.5 py-0.5 rounded ${
+                      c.tier === 'token' ? 'bg-emerald-500/10 text-emerald-400' :
                       c.tier === 'atom' ? 'bg-cyan-500/10 text-cyan-400' :
                       c.tier === 'molecule' ? 'bg-amber-500/10 text-amber-400' :
                       'bg-purple-500/10 text-purple-400'
@@ -1606,6 +1093,7 @@ export const ReusableComponentDrawer: React.FC<{
                 <div className="flex items-center gap-2">
                   <Badge 
                     variant={
+                      selectedComp.tier === 'token' ? 'emerald' :
                       selectedComp.tier === 'atom' ? 'cyan' :
                       selectedComp.tier === 'molecule' ? 'amber' : 'purple'
                     }
@@ -1643,7 +1131,7 @@ export const ReusableComponentDrawer: React.FC<{
 
             {/* Props snippet */}
             <div>
-              <div className="text-xs font-mono uppercase text-zinc-400 mb-1.5">Component Props Interface:</div>
+              <div className="text-xs font-mono uppercase text-zinc-400 mb-1.5">Component Definition / Props:</div>
               <div className="p-3.5 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-zinc-300 overflow-x-auto">
                 <pre>{selectedComp.propsSnippet}</pre>
               </div>
@@ -1672,7 +1160,7 @@ export const ReusableComponentDrawer: React.FC<{
         <div className="p-4 border-t border-white/[0.08] bg-zinc-950/70 flex items-center justify-between text-xs text-zinc-400">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>All atoms, molecules, and organisms now feature live stateful sandboxes</span>
+            <span>4-Tier Atomic Structure: Tokens → Atoms → Molecules → Organisms</span>
           </div>
           <Button 
             variant="secondary"
