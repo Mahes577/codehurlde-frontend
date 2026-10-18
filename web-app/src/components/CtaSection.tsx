@@ -4,11 +4,11 @@ import { GithubIcon } from './Icons';
 
 export const CtaSection: React.FC = () => {
   return (
-    <section className="py-20 bg-[#090a0f] border-b border-white/[0.08]">
+    <section className="py-20 bg-[#000000] border-b border-white/[0.08]">
       <div className="mx-auto max-w-6xl xl:max-w-[1500px] px-4 sm:px-6 lg:px-8 text-center">
         
-        <div className="rounded-2xl border border-white/[0.1] bg-[#0c0e16] p-8 sm:p-14 shadow-2xl">
-          <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-medium mb-3">
+        <div className="rounded-2xl border border-white/[0.1] bg-[#111111] p-8 sm:p-14 shadow-2xl">
+          <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-medium mb-3">
             Start Practicing
           </div>
 
@@ -40,15 +40,15 @@ export const CtaSection: React.FC = () => {
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[11px] font-mono text-zinc-500">
             <div className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-emerald-400" />
+              <Check className="h-3.5 w-3.5 text-zinc-400" />
               <span>100% Free Core Practice</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-emerald-400" />
+              <Check className="h-3.5 w-3.5 text-zinc-400" />
               <span>In-Browser Compiler</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <Check className="h-3.5 w-3.5 text-emerald-400" />
+              <Check className="h-3.5 w-3.5 text-zinc-400" />
               <span>Zero Configuration</span>
             </div>
           </div>

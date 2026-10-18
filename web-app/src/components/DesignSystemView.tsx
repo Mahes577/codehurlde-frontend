@@ -113,14 +113,14 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
   // INTERACTIVE WORKBENCH STATES
   // -------------------------------------------------------------
   // Button Atom
-  const [btnVariant, setBtnVariant] = useState<'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'amber'>('primary');
+  const [btnVariant, setBtnVariant] = useState<'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'blue'>('primary');
   const [btnSize, setBtnSize] = useState<'xs' | 'sm' | 'md' | 'lg'>('sm');
   const [btnLoading, setBtnLoading] = useState(false);
   const [btnClicks, setBtnClicks] = useState(0);
 
   // Badge Atom
   const [badgeDifficulty, setBadgeDifficulty] = useState<DifficultyLevel>('Medium');
-  const [badgeVariant, setBadgeVariant] = useState<'emerald' | 'amber' | 'rose' | 'cyan' | 'purple' | 'neutral'>('cyan');
+  const [badgeVariant, setBadgeVariant] = useState<'blue' | 'blue' | 'blue' | 'blue' | 'blue' | 'neutral'>('blue');
   const [badgeCustomText, setBadgeCustomText] = useState('O(log N)');
 
   // Card Atom
@@ -139,7 +139,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
 
   // ProgressBar Atom
   const [progressVal, setProgressVal] = useState(72);
-  const [progressVariant, setProgressVariant] = useState<'emerald' | 'amber' | 'rose' | 'cyan' | 'purple'>('emerald');
+  const [progressVariant, setProgressVariant] = useState<'blue' | 'blue' | 'blue' | 'blue' | 'blue'>('blue');
 
   // TabGroup Atom
   const [tabVariant, setTabVariant] = useState<'pill' | 'underline'>('pill');
@@ -168,7 +168,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
 
   // StatMetricCard Molecule
   const [statVal, setStatVal] = useState('382 / 520');
-  const [statVariant, setStatVariant] = useState<'emerald' | 'cyan' | 'amber' | 'purple' | 'neutral'>('emerald');
+  const [statVariant, setStatVariant] = useState<'blue' | 'blue' | 'blue' | 'blue' | 'neutral'>('blue');
 
   // SearchInput Molecule
   const [searchVal, setSearchVal] = useState('Dynamic Programming');
@@ -203,8 +203,8 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       category: 'Tokens / Palette',
       icon: Palette,
       file: 'src/tokens/index.ts',
-      description: 'Master color tokens: Obsidian base canvas (#07090e, #0c101c), Difficulty emerald/amber/rose hues, Division cyan/purple tiers, and flame accents.',
-      propsSnippet: `export const tokens = {\n  colors: {\n    base: { canvas: '#07090e', surface: '#0c101c', elevated: '#111625' },\n    difficulty: {\n      easy: '#10b981',\n      medium: '#f59e0b',\n      hard: '#f43f5e'\n    },\n    divisions: { div1: '#22d3ee', div2: '#c084fc', div3: '#94a3b8' }\n  }\n};`,
+      description: 'Master color tokens: black and white base surfaces with blue difficulty, division, and activity accents.',
+      propsSnippet: `export const tokens = {\n  colors: {\n    base: { canvas: '#000000', surface: '#111111', elevated: '#171717' },\n    difficulty: {\n      easy: '#a1a1aa',\n      medium: '#d4d4d8',\n      hard: '#71717a'\n    },\n    divisions: { div1: '#d4d4d8', div2: '#a1a1aa', div3: '#a1a1aa' }\n  }\n};`,
       usageSnippet: `import { tokens } from '../tokens';\nconst easyColor = tokens.colors.difficulty.easy;`
     },
     {
@@ -216,7 +216,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       file: 'src/tokens/index.ts',
       description: 'Standardized typography rules: Inter for UI prose, JetBrains/Consolas monospace for code, metrics, Big-O invariants, and tabular data.',
       propsSnippet: `export const tokens = {\n  typography: {\n    fontSans: 'ui-sans-serif, system-ui, -apple-system, sans-serif',\n    fontMono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',\n    sizes: { xs: '0.75rem', sm: '0.875rem', base: '1rem', lg: '1.125rem' }\n  }\n};`,
-      usageSnippet: `<span className="font-mono text-emerald-400 font-bold">O(N log N)</span>`
+      usageSnippet: `<span className="font-mono text-zinc-400 font-bold">O(N log N)</span>`
     },
     {
       id: 'token-radii',
@@ -226,8 +226,8 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       icon: LayoutGrid,
       file: 'src/tokens/index.ts',
       description: 'Unified geometry: rounded-xl for interactive inputs and pills, rounded-2xl for surface cards, and subtle border-white/[0.08] for clean separation.',
-      propsSnippet: `export const tokens = {\n  radii: { sm: '6px', md: '8px', lg: '12px', xl: '16px', '2xl': '20px', full: '9999px' },\n  borders: { standard: 'border-white/[0.08]', active: 'border-emerald-500/50' }\n};`,
-      usageSnippet: `<div className="rounded-2xl border border-white/[0.08] bg-[#0c101c]" />`
+      propsSnippet: `export const tokens = {\n  radii: { sm: '6px', md: '8px', lg: '12px', xl: '16px', '2xl': '20px', full: '9999px' },\n  borders: { standard: 'border-white/[0.08]', active: 'border-zinc-500/50' }\n};`,
+      usageSnippet: `<div className="rounded-2xl border border-white/[0.08] bg-[#111111]" />`
     },
 
     // 2. ATOMS (8 ATOMS)
@@ -239,7 +239,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       icon: MousePointerClick,
       file: 'src/components/atoms/Button.tsx',
       description: 'Tactile action button supporting 6 color variants, 4 sizes, loading spinner state, and tactile scale feedback.',
-      propsSnippet: `interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'amber';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n  isLoading?: boolean;\n  icon?: React.ReactNode;\n}`,
+      propsSnippet: `interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'blue';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n  isLoading?: boolean;\n  icon?: React.ReactNode;\n}`,
       usageSnippet: `<Button variant="primary" size="sm" icon={<Play className="w-3.5 h-3.5" />}>\n  Run Code\n</Button>`
     },
     {
@@ -250,8 +250,8 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       icon: Sparkles,
       file: 'src/components/atoms/Badge.tsx',
       description: 'Semantic pills for system states and problem difficulty (Easy/Medium/Hard). Enforces standardized LeetCode hues.',
-      propsSnippet: `interface BadgeProps {\n  variant?: 'emerald' | 'amber' | 'rose' | 'cyan' | 'purple' | 'neutral';\n  size?: 'xs' | 'sm' | 'md';\n  children: React.ReactNode;\n}\n\ninterface DifficultyBadgeProps {\n  difficulty: 'Easy' | 'Medium' | 'Hard';\n  size?: 'xs' | 'sm' | 'md';\n}`,
-      usageSnippet: `<DifficultyBadge difficulty="Medium" size="sm" />\n<Badge variant="cyan" size="xs">Div 1</Badge>`
+      propsSnippet: `interface BadgeProps {\n  variant?: 'blue' | 'blue' | 'blue' | 'blue' | 'blue' | 'neutral';\n  size?: 'xs' | 'sm' | 'md';\n  children: React.ReactNode;\n}\n\ninterface DifficultyBadgeProps {\n  difficulty: 'Easy' | 'Medium' | 'Hard';\n  size?: 'xs' | 'sm' | 'md';\n}`,
+      usageSnippet: `<DifficultyBadge difficulty="Medium" size="sm" />\n<Badge variant="blue" size="xs">Div 1</Badge>`
     },
     {
       id: 'atom-card',
@@ -260,7 +260,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       category: 'Atoms / Containers',
       icon: Layers,
       file: 'src/components/atoms/Card.tsx',
-      description: 'Standardized card surfaces matching obsidian design tokens (#0c101c base, border-white/[0.08], subtle elevation).',
+      description: 'Standardized card surfaces matching obsidian design tokens (#111111 base, border-white/[0.08], subtle elevation).',
       propsSnippet: `interface CardProps extends React.HTMLAttributes<HTMLDivElement> {\n  variant?: 'default' | 'surface' | 'interactive' | 'sunken';\n  glow?: boolean;\n}`,
       usageSnippet: `<Card variant="surface" className="p-4">\n  <CardTitle>Two Pointers Track</CardTitle>\n  <CardDescription>Master inward and outward search intervals.</CardDescription>\n</Card>`
     },
@@ -271,7 +271,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       category: 'Atoms / Form Elements',
       icon: Sliders,
       file: 'src/components/atoms/Input.tsx',
-      description: 'Standard form inputs with prefix and suffix slots, focused emerald outline, monospace typography, and subtle error states.',
+      description: 'Standard form inputs with prefix and suffix slots, focused blue outline, monospace typography, and subtle error states.',
       propsSnippet: `interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  prefix?: React.ReactNode;\n  suffix?: React.ReactNode;\n  error?: boolean;\n}`,
       usageSnippet: `<Input \n  prefix={<Search className="w-4 h-4 text-zinc-500" />} \n  placeholder="Filter by keyword..." \n/>`
     },
@@ -294,8 +294,8 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       icon: Sliders,
       file: 'src/components/atoms/ProgressBar.tsx',
       description: 'Multi-variant progress track with smooth CSS transitions, glowing accent heads, and size tiers.',
-      propsSnippet: `interface ProgressBarProps {\n  value: number;\n  max?: number;\n  variant?: 'emerald' | 'amber' | 'rose' | 'cyan' | 'purple';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n}`,
-      usageSnippet: `<ProgressBar value={82} variant="emerald" size="md" />`
+      propsSnippet: `interface ProgressBarProps {\n  value: number;\n  max?: number;\n  variant?: 'blue' | 'blue' | 'blue' | 'blue' | 'blue';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n}`,
+      usageSnippet: `<ProgressBar value={82} variant="blue" size="md" />`
     },
     {
       id: 'atom-tabs',
@@ -362,8 +362,8 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       icon: Activity,
       file: 'src/components/molecules/StatMetricCard.tsx',
       description: 'Standardized scorecard displaying icon container, primary metric number, sublabel, and trend percentage badge.',
-      propsSnippet: `interface StatMetricCardProps {\n  label: string;\n  value: string | number;\n  subtext?: string;\n  icon: React.ReactNode;\n  trend?: { direction: 'up' | 'down' | 'neutral'; text: string };\n  variant?: 'emerald' | 'cyan' | 'amber' | 'purple' | 'neutral';\n}`,
-      usageSnippet: `<StatMetricCard label="Solved" value="382 / 520" icon={<BookOpen />} variant="emerald" />`
+      propsSnippet: `interface StatMetricCardProps {\n  label: string;\n  value: string | number;\n  subtext?: string;\n  icon: React.ReactNode;\n  trend?: { direction: 'up' | 'down' | 'neutral'; text: string };\n  variant?: 'blue' | 'blue' | 'blue' | 'blue' | 'neutral';\n}`,
+      usageSnippet: `<StatMetricCard label="Solved" value="382 / 520" icon={<BookOpen />} variant="blue" />`
     },
     {
       id: 'mol-search',
@@ -577,7 +577,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'token-colors':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Palette className="w-3.5 h-3.5" />
               Interactive Design Tokens Palette
             </div>
@@ -587,25 +587,25 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <div className="text-[11px] font-mono text-zinc-400 mb-2">Base Canvas & Surface Architecture:</div>
                 <div className="grid grid-cols-3 gap-2.5">
                   <div 
-                    onClick={() => showToast("Base Canvas: #07090e")} 
-                    className="p-3 rounded-xl border border-white/[0.1] bg-[#07090e] cursor-pointer hover:border-emerald-500/50 transition-all text-center"
+                    onClick={() => showToast("Base Canvas: #000000")} 
+                    className="p-3 rounded-xl border border-white/[0.1] bg-[#000000] cursor-pointer hover:border-zinc-500/50 transition-all text-center"
                   >
                     <div className="text-xs font-bold text-white font-mono">Canvas</div>
-                    <div className="text-[10px] text-zinc-400 font-mono">#07090e</div>
+                    <div className="text-[10px] text-zinc-400 font-mono">#000000</div>
                   </div>
                   <div 
-                    onClick={() => showToast("Surface Container: #0c101c")} 
-                    className="p-3 rounded-xl border border-white/[0.1] bg-[#0c101c] cursor-pointer hover:border-emerald-500/50 transition-all text-center"
+                    onClick={() => showToast("Surface Container: #111111")} 
+                    className="p-3 rounded-xl border border-white/[0.1] bg-[#111111] cursor-pointer hover:border-zinc-500/50 transition-all text-center"
                   >
                     <div className="text-xs font-bold text-white font-mono">Surface</div>
-                    <div className="text-[10px] text-zinc-400 font-mono">#0c101c</div>
+                    <div className="text-[10px] text-zinc-400 font-mono">#111111</div>
                   </div>
                   <div 
-                    onClick={() => showToast("Elevated Card: #111625")} 
-                    className="p-3 rounded-xl border border-white/[0.1] bg-[#111625] cursor-pointer hover:border-emerald-500/50 transition-all text-center"
+                    onClick={() => showToast("Elevated Card: #171717")} 
+                    className="p-3 rounded-xl border border-white/[0.1] bg-[#171717] cursor-pointer hover:border-zinc-500/50 transition-all text-center"
                   >
                     <div className="text-xs font-bold text-white font-mono">Elevated</div>
-                    <div className="text-[10px] text-zinc-400 font-mono">#111625</div>
+                    <div className="text-[10px] text-zinc-400 font-mono">#171717</div>
                   </div>
                 </div>
               </div>
@@ -614,30 +614,30 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <div className="text-[11px] font-mono text-zinc-400 mb-2">Difficulty Hues (LeetCode & CodeHurdle Standard):</div>
                 <div className="grid grid-cols-3 gap-2.5">
                   <div 
-                    onClick={() => showToast("Easy Token: #10b981 (Emerald)")} 
-                    className="p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                    onClick={() => showToast("Easy Token: #a1a1aa (Blue)")}
+                    className="p-3 rounded-xl border border-zinc-500/30 bg-zinc-500/10 cursor-pointer hover:scale-105 transition-all text-center"
                   >
-                    <div className="w-4 h-4 rounded-full bg-emerald-400 mx-auto mb-1 shadow-sm shadow-emerald-500/50" />
-                    <div className="text-xs font-bold text-emerald-400 font-mono">Easy</div>
-                    <div className="text-[10px] text-zinc-400 font-mono">#10b981</div>
+                    <div className="w-4 h-4 rounded-full bg-zinc-400 mx-auto mb-1 shadow-sm shadow-zinc-500/50" />
+                    <div className="text-xs font-bold text-zinc-400 font-mono">Easy</div>
+                    <div className="text-[10px] text-zinc-400 font-mono">#a1a1aa</div>
                   </div>
 
                   <div 
-                    onClick={() => showToast("Medium Token: #f59e0b (Amber)")} 
-                    className="p-3 rounded-xl border border-amber-500/30 bg-amber-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                    onClick={() => showToast("Medium Token: #d4d4d8 (Blue)")}
+                    className="p-3 rounded-xl border border-zinc-500/30 bg-zinc-500/10 cursor-pointer hover:scale-105 transition-all text-center"
                   >
-                    <div className="w-4 h-4 rounded-full bg-amber-400 mx-auto mb-1 shadow-sm shadow-amber-500/50" />
-                    <div className="text-xs font-bold text-amber-400 font-mono">Medium</div>
-                    <div className="text-[10px] text-zinc-400 font-mono">#f59e0b</div>
+                    <div className="w-4 h-4 rounded-full bg-zinc-400 mx-auto mb-1 shadow-sm shadow-zinc-500/50" />
+                    <div className="text-xs font-bold text-zinc-400 font-mono">Medium</div>
+                    <div className="text-[10px] text-zinc-400 font-mono">#d4d4d8</div>
                   </div>
 
                   <div 
-                    onClick={() => showToast("Hard Token: #f43f5e (Rose)")} 
-                    className="p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                    onClick={() => showToast("Hard Token: #71717a (Blue)")}
+                    className="p-3 rounded-xl border border-zinc-500/30 bg-zinc-500/10 cursor-pointer hover:scale-105 transition-all text-center"
                   >
-                    <div className="w-4 h-4 rounded-full bg-rose-400 mx-auto mb-1 shadow-sm shadow-rose-500/50" />
-                    <div className="text-xs font-bold text-rose-400 font-mono">Hard</div>
-                    <div className="text-[10px] text-zinc-400 font-mono">#f43f5e</div>
+                    <div className="w-4 h-4 rounded-full bg-zinc-400 mx-auto mb-1 shadow-sm shadow-zinc-500/50" />
+                    <div className="text-xs font-bold text-zinc-400 font-mono">Hard</div>
+                    <div className="text-[10px] text-zinc-400 font-mono">#71717a</div>
                   </div>
                 </div>
               </div>
@@ -645,13 +645,13 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               <div>
                 <div className="text-[11px] font-mono text-zinc-400 mb-2">Contest Division Tiers:</div>
                 <div className="grid grid-cols-3 gap-2.5 font-mono text-xs">
-                  <div className="p-2.5 rounded-xl border border-cyan-500/25 bg-cyan-950/20 text-cyan-300 text-center font-semibold">
+                  <div className="p-2.5 rounded-xl border border-zinc-500/25 bg-zinc-950/20 text-zinc-300 text-center font-semibold">
                     Div 1 (1900+)
                   </div>
-                  <div className="p-2.5 rounded-xl border border-purple-500/25 bg-purple-950/20 text-purple-300 text-center font-semibold">
+                  <div className="p-2.5 rounded-xl border border-zinc-500/25 bg-zinc-950/20 text-zinc-300 text-center font-semibold">
                     Div 2 (1400-1899)
                   </div>
-                  <div className="p-2.5 rounded-xl border border-slate-500/25 bg-slate-900/40 text-slate-400 text-center font-semibold">
+                  <div className="p-2.5 rounded-xl border border-zinc-500/25 bg-zinc-900/40 text-zinc-400 text-center font-semibold">
                     Div 3 (&lt;1400)
                   </div>
                 </div>
@@ -664,7 +664,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'token-typography':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Type className="w-3.5 h-3.5" />
               Typography Scale & Monospace Code Hierarchy
             </div>
@@ -673,14 +673,14 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               <div className="p-3 rounded-lg bg-zinc-900/40 border border-white/[0.04] space-y-1">
                 <span className="text-[10px] font-mono text-zinc-500 uppercase">Heading 1 / Display</span>
                 <div className="text-2xl font-black tracking-tight text-white font-sans">
-                  Crack LeetCode with <span className="text-emerald-400">Algorithmic Precision</span>
+                  Crack LeetCode with <span className="text-zinc-400">Algorithmic Precision</span>
                 </div>
               </div>
 
               <div className="p-3 rounded-lg bg-zinc-900/40 border border-white/[0.04] space-y-1">
                 <span className="text-[10px] font-mono text-zinc-500 uppercase">Monospace Code & Big-O Invariants</span>
                 <div className="font-mono text-xs space-y-1 text-zinc-300">
-                  <div className="text-emerald-400 font-bold">Time: O(N log K) | Space: O(K)</div>
+                  <div className="text-zinc-400 font-bold">Time: O(N log K) | Space: O(K)</div>
                   <div className="text-zinc-400">priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;&gt;&gt; minHeap;</div>
                 </div>
               </div>
@@ -699,25 +699,25 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'token-radii':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <LayoutGrid className="w-3.5 h-3.5" />
               Surface Radii & Border Tokens
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center font-mono text-xs">
-              <div className="p-3 rounded-md border border-white/[0.1] bg-[#0c101c]">
+              <div className="p-3 rounded-md border border-white/[0.1] bg-[#111111]">
                 <div className="text-zinc-200">rounded-md</div>
                 <div className="text-[10px] text-zinc-500">6px</div>
               </div>
-              <div className="p-3 rounded-lg border border-white/[0.1] bg-[#0c101c]">
+              <div className="p-3 rounded-lg border border-white/[0.1] bg-[#111111]">
                 <div className="text-zinc-200">rounded-lg</div>
                 <div className="text-[10px] text-zinc-500">8px</div>
               </div>
-              <div className="p-3 rounded-xl border border-white/[0.1] bg-[#0c101c]">
+              <div className="p-3 rounded-xl border border-white/[0.1] bg-[#111111]">
                 <div className="text-zinc-200">rounded-xl</div>
                 <div className="text-[10px] text-zinc-500">12px</div>
               </div>
-              <div className="p-3 rounded-2xl border border-white/[0.1] bg-[#0c101c]">
+              <div className="p-3 rounded-2xl border border-white/[0.1] bg-[#111111]">
                 <div className="text-zinc-200">rounded-2xl</div>
                 <div className="text-[10px] text-zinc-500">16px</div>
               </div>
@@ -730,11 +730,11 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <MousePointerClick className="w-3.5 h-3.5" />
                 Button Atom Workbench
               </span>
-              <span className="text-xs font-mono text-zinc-400">Clicks: <strong className="text-emerald-400">{btnClicks}</strong></span>
+              <span className="text-xs font-mono text-zinc-400">Clicks: <strong className="text-zinc-400">{btnClicks}</strong></span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
@@ -743,14 +743,14 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <select 
                   value={btnVariant} 
                   onChange={e => setBtnVariant(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 >
                   <option value="primary">primary</option>
                   <option value="secondary">secondary</option>
                   <option value="outline">outline</option>
                   <option value="ghost">ghost</option>
                   <option value="danger">danger</option>
-                  <option value="amber">amber</option>
+                  <option value="blue">blue</option>
                 </select>
               </div>
 
@@ -759,7 +759,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <select 
                   value={btnSize} 
                   onChange={e => setBtnSize(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 >
                   <option value="xs">xs</option>
                   <option value="sm">sm</option>
@@ -774,7 +774,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     type="checkbox" 
                     checked={btnLoading} 
                     onChange={e => setBtnLoading(e.target.checked)}
-                    className="rounded border-zinc-700 accent-emerald-500" 
+                    className="rounded border-zinc-700 accent-zinc-500" 
                   />
                   <span>Loading</span>
                 </label>
@@ -802,7 +802,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'atom-badge':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Sparkles className="w-3.5 h-3.5" />
               Badge & DifficultyBadge Atom Workbench
             </div>
@@ -816,7 +816,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                       key={d}
                       onClick={() => setBadgeDifficulty(d)}
                       className={`px-3 py-1.5 rounded-lg border text-xs font-mono cursor-pointer transition-all ${
-                        badgeDifficulty === d ? 'border-emerald-500 bg-emerald-500/20 text-white' : 'border-white/[0.08] text-zinc-400'
+                        badgeDifficulty === d ? 'border-zinc-500 bg-zinc-500/20 text-white' : 'border-white/[0.08] text-zinc-400'
                       }`}
                     >
                       {d}
@@ -831,7 +831,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   type="text"
                   value={badgeCustomText}
                   onChange={e => setBadgeCustomText(e.target.value)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 />
               </div>
             </div>
@@ -839,9 +839,9 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
             <div className="p-6 rounded-xl bg-zinc-900/50 border border-white/[0.04] flex flex-wrap items-center justify-center gap-4">
               <DifficultyBadge difficulty={badgeDifficulty} size="sm" />
               <Badge variant={badgeVariant} size="sm">{badgeCustomText}</Badge>
-              <Badge variant="emerald" size="xs">XP +100</Badge>
-              <Badge variant="rose" size="xs">Live Round</Badge>
-              <Badge variant="purple" size="xs">Div 2</Badge>
+              <Badge variant="blue" size="xs">XP +100</Badge>
+              <Badge variant="blue" size="xs">Live Round</Badge>
+              <Badge variant="blue" size="xs">Div 2</Badge>
             </div>
           </div>
         );
@@ -851,11 +851,11 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5" />
                 Card Surface Atom Workbench
               </span>
-              <span className="text-xs font-mono text-zinc-400">Card Clicks: <strong className="text-purple-400">{cardClicks}</strong></span>
+              <span className="text-xs font-mono text-zinc-400">Card Clicks: <strong className="text-zinc-400">{cardClicks}</strong></span>
             </div>
 
             <div className="flex gap-2">
@@ -864,7 +864,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   key={v}
                   onClick={() => setCardVariant(v)}
                   className={`px-3 py-1.5 rounded-lg border text-xs font-mono cursor-pointer transition-all ${
-                    cardVariant === v ? 'border-purple-500 bg-purple-500/20 text-white font-semibold' : 'border-white/[0.08] text-zinc-400'
+                    cardVariant === v ? 'border-zinc-500 bg-zinc-500/20 text-white font-semibold' : 'border-white/[0.08] text-zinc-400'
                   }`}
                 >
                   {v}
@@ -882,7 +882,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 }}
               >
                 <div className="flex items-center justify-between mb-2">
-                  <Badge variant="purple" size="xs">Interactive Card</Badge>
+                  <Badge variant="blue" size="xs">Interactive Card</Badge>
                   <span className="text-[10px] font-mono text-zinc-500">Variant: {cardVariant}</span>
                 </div>
                 <CardTitle className="text-base font-bold text-white">Dynamic Programming Mastery</CardTitle>
@@ -898,7 +898,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'atom-input':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Sliders className="w-3.5 h-3.5" />
               Input & Form Atom Workbench
             </div>
@@ -911,7 +911,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     type="checkbox"
                     checked={inputHasError}
                     onChange={e => setInputHasError(e.target.checked)}
-                    className="rounded accent-rose-500"
+                    className="rounded accent-zinc-500"
                   />
                   <span>Toggle Error State</span>
                 </label>
@@ -937,7 +937,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'atom-avatar':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <User className="w-3.5 h-3.5" />
               Avatar Atom Workbench
             </div>
@@ -949,7 +949,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   type="text"
                   value={avatarName}
                   onChange={e => setAvatarName(e.target.value)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 />
               </div>
 
@@ -958,7 +958,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <select
                   value={avatarSize}
                   onChange={e => setAvatarSize(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 >
                   <option value="xs">xs (24px)</option>
                   <option value="sm">sm (32px)</option>
@@ -974,7 +974,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     type="checkbox"
                     checked={avatarPro}
                     onChange={e => setAvatarPro(e.target.checked)}
-                    className="rounded accent-emerald-500"
+                    className="rounded accent-zinc-500"
                   />
                   <span>PRO Badge</span>
                 </label>
@@ -984,7 +984,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     type="checkbox"
                     checked={avatarOnline}
                     onChange={e => setAvatarOnline(e.target.checked)}
-                    className="rounded accent-emerald-500"
+                    className="rounded accent-zinc-500"
                   />
                   <span>Online Dot</span>
                 </label>
@@ -995,7 +995,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               <Avatar name={avatarName} size={avatarSize} isPro={avatarPro} isOnline={avatarOnline} />
               <div className="text-left font-sans">
                 <div className="text-sm font-bold text-white">{avatarName}</div>
-                <div className="text-xs font-mono text-emerald-400">1,940 Elo · Candidate Master</div>
+                <div className="text-xs font-mono text-zinc-400">1,940 Elo · Candidate Master</div>
               </div>
             </div>
           </div>
@@ -1006,11 +1006,11 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Sliders className="w-3.5 h-3.5" />
                 ProgressBar Atom Workbench
               </span>
-              <span className="text-xs font-mono text-emerald-400 font-bold">{progressVal}% Complete</span>
+              <span className="text-xs font-mono text-zinc-400 font-bold">{progressVal}% Complete</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -1022,7 +1022,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   max="100"
                   value={progressVal}
                   onChange={e => setProgressVal(Number(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer"
+                  className="w-full accent-zinc-500 cursor-pointer"
                 />
               </div>
 
@@ -1031,13 +1031,13 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <select
                   value={progressVariant}
                   onChange={e => setProgressVariant(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 >
-                  <option value="emerald">emerald (DSA Progress)</option>
-                  <option value="amber">amber (Medium)</option>
-                  <option value="rose">rose (Hard)</option>
-                  <option value="cyan">cyan (Div 1)</option>
-                  <option value="purple">purple (Roadmap)</option>
+                  <option value="blue">blue (DSA Progress)</option>
+                  <option value="blue">blue (Medium)</option>
+                  <option value="blue">blue (Hard)</option>
+                  <option value="blue">blue (Div 1)</option>
+                  <option value="blue">blue (Roadmap)</option>
                 </select>
               </div>
             </div>
@@ -1058,20 +1058,20 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Sliders className="w-3.5 h-3.5" />
                 TabGroup Atom Workbench
               </span>
               <div className="flex gap-2">
                 <button
                   onClick={() => setTabVariant('pill')}
-                  className={`px-2.5 py-1 text-xs rounded font-mono ${tabVariant === 'pill' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'text-zinc-500'}`}
+                  className={`px-2.5 py-1 text-xs rounded font-mono ${tabVariant === 'pill' ? 'bg-zinc-500/20 text-zinc-300 border border-zinc-500/30' : 'text-zinc-500'}`}
                 >
                   Pill
                 </button>
                 <button
                   onClick={() => setTabVariant('underline')}
-                  className={`px-2.5 py-1 text-xs rounded font-mono ${tabVariant === 'underline' ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30' : 'text-zinc-500'}`}
+                  className={`px-2.5 py-1 text-xs rounded font-mono ${tabVariant === 'underline' ? 'bg-zinc-500/20 text-zinc-300 border border-zinc-500/30' : 'text-zinc-500'}`}
                 >
                   Underline
                 </button>
@@ -1101,7 +1101,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'atom-section':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Type className="w-3.5 h-3.5" />
               SectionHeader Atom Workbench
             </div>
@@ -1113,7 +1113,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   type="text"
                   value={sectionEyebrow}
                   onChange={e => setSectionEyebrow(e.target.value)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 />
               </div>
 
@@ -1123,7 +1123,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   type="text"
                   value={sectionTitle}
                   onChange={e => setSectionTitle(e.target.value)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 />
               </div>
 
@@ -1133,7 +1133,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   type="text"
                   value={sectionHighlight}
                   onChange={e => setSectionHighlight(e.target.value)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2.5 py-1.5 text-xs text-zinc-200"
                 />
               </div>
             </div>
@@ -1155,11 +1155,11 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <BookOpen className="w-3.5 h-3.5" />
                 ProblemRow Molecule Interactive Playground
               </span>
-              <span className="text-xs font-mono text-zinc-400">Status: <strong className={rowSolved ? 'text-emerald-400' : 'text-zinc-400'}>{rowSolved ? 'Solved ✓' : 'Unsolved'}</strong></span>
+              <span className="text-xs font-mono text-zinc-400">Status: <strong className={rowSolved ? 'text-zinc-400' : 'text-zinc-400'}>{rowSolved ? 'Solved ✓' : 'Unsolved'}</strong></span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
@@ -1168,7 +1168,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <select 
                   value={rowDiff} 
                   onChange={e => setRowDiff(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
                 >
                   <option value="Easy">Easy</option>
                   <option value="Medium">Medium</option>
@@ -1184,7 +1184,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   max="100" 
                   value={rowFreq} 
                   onChange={e => setRowFreq(Number(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer"
+                  className="w-full accent-zinc-500 cursor-pointer"
                 />
               </div>
 
@@ -1194,7 +1194,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     type="checkbox" 
                     checked={rowSolved} 
                     onChange={e => setRowSolved(e.target.checked)}
-                    className="rounded border-zinc-700 accent-emerald-500" 
+                    className="rounded border-zinc-700 accent-zinc-500" 
                   />
                   <span>Solved</span>
                 </label>
@@ -1206,7 +1206,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     type="checkbox" 
                     checked={rowStarred} 
                     onChange={e => setRowStarred(e.target.checked)}
-                    className="rounded border-zinc-700 accent-amber-500" 
+                    className="rounded border-zinc-700 accent-zinc-500" 
                   />
                   <span>Starred</span>
                 </label>
@@ -1252,7 +1252,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Building2 className="w-3.5 h-3.5" />
                 CompanyPill Molecule Workbench
               </span>
@@ -1288,11 +1288,11 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <HelpCircle className="w-3.5 h-3.5" />
                 FaqAccordionItem Molecule Workbench
               </span>
-              <span className="text-xs font-mono text-zinc-400">State: <strong className={faqOpenDemo ? 'text-emerald-400' : 'text-zinc-500'}>{faqOpenDemo ? 'Expanded' : 'Collapsed'}</strong></span>
+              <span className="text-xs font-mono text-zinc-400">State: <strong className={faqOpenDemo ? 'text-zinc-400' : 'text-zinc-500'}>{faqOpenDemo ? 'Expanded' : 'Collapsed'}</strong></span>
             </div>
 
             <div className="space-y-2">
@@ -1312,11 +1312,11 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-rose-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Swords className="w-3.5 h-3.5" />
                 ContestCard Molecule Workbench
               </span>
-              <span className="text-xs font-mono text-zinc-400">Registration: <strong className={contestRegistered ? 'text-emerald-400' : 'text-zinc-400'}>{contestRegistered ? 'Registered ✓' : 'Not Registered'}</strong></span>
+              <span className="text-xs font-mono text-zinc-400">Registration: <strong className={contestRegistered ? 'text-zinc-400' : 'text-zinc-400'}>{contestRegistered ? 'Registered ✓' : 'Not Registered'}</strong></span>
             </div>
 
             <ContestCard
@@ -1338,34 +1338,34 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'mol-diffbar':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Sliders className="w-3.5 h-3.5" />
               DifficultyBreakdownBar Molecule Workbench
             </div>
 
             <div className="grid grid-cols-3 gap-3 text-xs">
               <div>
-                <label className="text-[10px] uppercase font-mono text-emerald-400 block mb-1">Easy Solved: {breakdownEasy}</label>
+                <label className="text-[10px] uppercase font-mono text-zinc-400 block mb-1">Easy Solved: {breakdownEasy}</label>
                 <input 
                   type="range" min="0" max="210" value={breakdownEasy} 
                   onChange={e => setBreakdownEasy(Number(e.target.value))}
-                  className="w-full accent-emerald-500 cursor-pointer"
+                  className="w-full accent-zinc-500 cursor-pointer"
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-mono text-amber-400 block mb-1">Medium Solved: {breakdownMed}</label>
+                <label className="text-[10px] uppercase font-mono text-zinc-400 block mb-1">Medium Solved: {breakdownMed}</label>
                 <input 
                   type="range" min="0" max="230" value={breakdownMed} 
                   onChange={e => setBreakdownMed(Number(e.target.value))}
-                  className="w-full accent-amber-500 cursor-pointer"
+                  className="w-full accent-zinc-500 cursor-pointer"
                 />
               </div>
               <div>
-                <label className="text-[10px] uppercase font-mono text-rose-400 block mb-1">Hard Solved: {breakdownHard}</label>
+                <label className="text-[10px] uppercase font-mono text-zinc-400 block mb-1">Hard Solved: {breakdownHard}</label>
                 <input 
                   type="range" min="0" max="80" value={breakdownHard} 
                   onChange={e => setBreakdownHard(Number(e.target.value))}
-                  className="w-full accent-rose-500 cursor-pointer"
+                  className="w-full accent-zinc-500 cursor-pointer"
                 />
               </div>
             </div>
@@ -1384,7 +1384,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'mol-stepctrl':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Play className="w-3.5 h-3.5" />
               AlgorithmStepController Molecule Workbench
             </div>
@@ -1419,7 +1419,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'mol-elo':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Award className="w-3.5 h-3.5" />
               StreakBadge & EloBadge Gamification Molecules
             </div>
@@ -1430,7 +1430,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <input 
                   type="range" min="1" max="100" value={streakDays} 
                   onChange={e => setStreakDays(Number(e.target.value))}
-                  className="w-full accent-amber-500 cursor-pointer"
+                  className="w-full accent-zinc-500 cursor-pointer"
                 />
                 <div className="flex justify-center pt-2">
                   <StreakBadge days={streakDays} />
@@ -1442,7 +1442,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <input 
                   type="range" min="800" max="2600" value={eloRating} 
                   onChange={e => setEloRating(Number(e.target.value))}
-                  className="w-full accent-cyan-500 cursor-pointer"
+                  className="w-full accent-zinc-500 cursor-pointer"
                 />
                 <div className="flex justify-center gap-2 pt-2">
                   <EloBadge 
@@ -1460,7 +1460,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'mol-stat':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Activity className="w-3.5 h-3.5" />
               StatMetricCard Molecule Workbench
             </div>
@@ -1470,24 +1470,24 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 label="Problems Solved"
                 value="382 / 520"
                 subtext="Top 4.2% on CodeHurdle"
-                icon={<BookOpen className="w-4 h-4 text-emerald-400" />}
-                variant="emerald"
+                icon={<BookOpen className="w-4 h-4 text-zinc-400" />}
+                variant="blue"
                 trend={{ direction: 'up', text: '+18 this week' }}
               />
               <StatMetricCard
                 label="Contest Rating"
                 value="1,840 Elo"
                 subtext="Division 1 Candidate"
-                icon={<Swords className="w-4 h-4 text-cyan-400" />}
-                variant="cyan"
+                icon={<Swords className="w-4 h-4 text-zinc-400" />}
+                variant="blue"
                 trend={{ direction: 'up', text: '+64 pts' }}
               />
               <StatMetricCard
                 label="Current Streak"
                 value="14 Days"
                 subtext="Active streak multiplier"
-                icon={<Flame className="w-4 h-4 text-amber-400" />}
-                variant="amber"
+                icon={<Flame className="w-4 h-4 text-zinc-400" />}
+                variant="blue"
                 trend={{ direction: 'up', text: 'Personal best' }}
               />
             </div>
@@ -1498,7 +1498,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
       case 'mol-search':
         return (
           <div className="space-y-4 p-5 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Search className="w-3.5 h-3.5" />
               SearchInput Molecule Workbench
             </div>
@@ -1511,7 +1511,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 onClear={() => setSearchVal('')}
               />
               <div className="mt-2 text-xs font-mono text-zinc-500">
-                Searching for: <span className="text-emerald-400">"{searchVal}"</span>
+                Searching for: <span className="text-zinc-400">"{searchVal}"</span>
               </div>
             </div>
           </div>
@@ -1549,7 +1549,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
         return (
           <div className="p-6 rounded-xl bg-gradient-to-r from-zinc-950 to-zinc-900 border border-white/[0.08] space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold flex items-center gap-2">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-2">
                 <Layers className="w-4 h-4" />
                 Live Page Organism Available
               </span>
@@ -1563,7 +1563,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               {selectedComp.description}
             </p>
             <div className="p-4 rounded-lg bg-black/40 border border-white/[0.05] font-mono text-xs text-zinc-400">
-              Target Route: <span className="text-emerald-400 font-semibold">{selectedComp.navTarget}</span> | File: <span className="text-zinc-200">{selectedComp.file}</span>
+              Target Route: <span className="text-zinc-400 font-semibold">{selectedComp.navTarget}</span> | File: <span className="text-zinc-200">{selectedComp.file}</span>
             </div>
           </div>
         );
@@ -1574,30 +1574,30 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-zinc-100 font-sans pb-20">
+    <div className="min-h-screen bg-[#000000] text-zinc-100 font-sans pb-20">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-20 right-6 z-50 bg-emerald-500 text-zinc-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 animate-bounce">
+        <div className="fixed top-20 right-6 z-50 bg-zinc-500 text-zinc-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 animate-bounce">
           <CheckCircle2 className="w-4 h-4" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Top Hero Section of the Design System */}
-      <section className="relative overflow-hidden border-b border-white/[0.08] bg-gradient-to-b from-[#0c101c] via-[#07090e] to-[#07090e] px-4 py-12 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+      <section className="relative overflow-hidden border-b border-white/[0.08] bg-gradient-to-b from-[#111111] via-[#000000] to-[#000000] px-4 py-12 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#a1a1aa08_1px,transparent_1px),linear-gradient(to_bottom,#a1a1aa08_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
         
         <div className="relative mx-auto max-w-[1720px]">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs font-mono font-medium text-emerald-300">
-                <Layers className="h-3.5 w-3.5 text-emerald-400" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-zinc-500/30 bg-zinc-500/10 px-3 py-1 text-xs font-mono font-medium text-zinc-300">
+                <Layers className="h-3.5 w-3.5 text-zinc-400" />
                 <span>Atomic Design Architecture v2.4</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-pulse" />
               </div>
 
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white font-sans">
-                CodeHurdle <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Design System</span>
+                CodeHurdle <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 via-zinc-300 to-zinc-400">Design System</span>
               </h1>
 
               <p className="max-w-2xl text-sm sm:text-base text-zinc-400 leading-relaxed font-sans">
@@ -1613,15 +1613,15 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <div className="text-[10px] text-zinc-500 uppercase mt-0.5">Token Sets</div>
               </div>
               <div className="p-3.5 rounded-xl border border-white/[0.08] bg-zinc-950/80 text-center">
-                <div className="text-2xl font-bold text-emerald-400 font-mono">8</div>
+                <div className="text-2xl font-bold text-zinc-400 font-mono">8</div>
                 <div className="text-[10px] text-zinc-500 uppercase mt-0.5">Atoms</div>
               </div>
               <div className="p-3.5 rounded-xl border border-white/[0.08] bg-zinc-950/80 text-center">
-                <div className="text-2xl font-bold text-cyan-400 font-mono">10</div>
+                <div className="text-2xl font-bold text-zinc-400 font-mono">10</div>
                 <div className="text-[10px] text-zinc-500 uppercase mt-0.5">Molecules</div>
               </div>
               <div className="p-3.5 rounded-xl border border-white/[0.08] bg-zinc-950/80 text-center">
-                <div className="text-2xl font-bold text-purple-400 font-mono">10</div>
+                <div className="text-2xl font-bold text-zinc-400 font-mono">10</div>
                 <div className="text-[10px] text-zinc-500 uppercase mt-0.5">Organisms</div>
               </div>
             </div>
@@ -1639,25 +1639,25 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               </button>
               <button
                 onClick={() => onNavigateToView('problems')}
-                className="px-3 py-1 rounded-lg border border-emerald-500/20 bg-emerald-500/10 hover:bg-emerald-500/20 text-xs font-medium text-emerald-300 transition-colors cursor-pointer"
+                className="px-3 py-1 rounded-lg border border-zinc-500/20 bg-zinc-500/10 hover:bg-zinc-500/20 text-xs font-medium text-zinc-300 transition-colors cursor-pointer"
               >
                 DSA Hub (520 Problems)
               </button>
               <button
                 onClick={() => onNavigateToView('cp')}
-                className="px-3 py-1 rounded-lg border border-rose-500/20 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-medium text-rose-300 transition-colors cursor-pointer"
+                className="px-3 py-1 rounded-lg border border-zinc-500/20 bg-zinc-500/10 hover:bg-zinc-500/20 text-xs font-medium text-zinc-300 transition-colors cursor-pointer"
               >
                 CP Arena
               </button>
               <button
                 onClick={() => onNavigateToView('compiler')}
-                className="px-3 py-1 rounded-lg border border-cyan-500/20 bg-cyan-500/10 hover:bg-cyan-500/20 text-xs font-medium text-cyan-300 transition-colors cursor-pointer"
+                className="px-3 py-1 rounded-lg border border-zinc-500/20 bg-zinc-500/10 hover:bg-zinc-500/20 text-xs font-medium text-zinc-300 transition-colors cursor-pointer"
               >
                 Compiler / IDE
               </button>
               <button
                 onClick={() => onNavigateToView('roadmap')}
-                className="px-3 py-1 rounded-lg border border-purple-500/20 bg-purple-500/10 hover:bg-purple-500/20 text-xs font-medium text-purple-300 transition-colors cursor-pointer"
+                className="px-3 py-1 rounded-lg border border-zinc-500/20 bg-zinc-500/10 hover:bg-zinc-500/20 text-xs font-medium text-zinc-300 transition-colors cursor-pointer"
               >
                 29-Tracks Roadmap
               </button>
@@ -1671,7 +1671,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   viewMode === 'workbench' ? 'bg-zinc-800 text-white font-semibold shadow-sm' : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-emerald-400" />
+                <SlidersHorizontal className="w-3.5 h-3.5 text-zinc-400" />
                 <span>Workbench Mode</span>
               </button>
               <button
@@ -1680,7 +1680,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   viewMode === 'gallery' ? 'bg-zinc-800 text-white font-semibold shadow-sm' : 'text-zinc-400 hover:text-zinc-200'
                 }`}
               >
-                <Grid className="w-3.5 h-3.5 text-cyan-400" />
+                <Grid className="w-3.5 h-3.5 text-zinc-400" />
                 <span>Gallery Mode</span>
               </button>
             </div>
@@ -1736,13 +1736,13 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                       }}
                       className={`w-full p-3 rounded-xl border text-left transition-all flex items-center justify-between cursor-pointer ${
                         isSelected
-                          ? 'bg-zinc-800/90 border-emerald-500/60 text-white shadow-lg shadow-emerald-950/20 ring-1 ring-emerald-500/30'
+                          ? 'bg-zinc-800/90 border-zinc-500/60 text-white shadow-lg shadow-zinc-950/20 ring-1 ring-zinc-500/30'
                           : 'bg-zinc-950/60 border-white/[0.06] text-zinc-400 hover:text-zinc-200 hover:border-zinc-700 hover:bg-zinc-900/40'
                       }`}
                     >
                       <div className="flex items-center gap-3 min-w-0">
                         <div className={`p-2 rounded-lg ${
-                          isSelected ? 'bg-emerald-500/20 text-emerald-400' : 'bg-white/[0.03] text-zinc-500'
+                          isSelected ? 'bg-zinc-500/20 text-zinc-400' : 'bg-white/[0.03] text-zinc-500'
                         }`}>
                           <Icon className="w-4 h-4" />
                         </div>
@@ -1753,10 +1753,10 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                       </div>
 
                       <span className={`text-[9px] font-mono uppercase px-2 py-0.5 rounded font-medium ${
-                        c.tier === 'token' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                        c.tier === 'atom' ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/20' :
-                        c.tier === 'molecule' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
-                        'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                        c.tier === 'token' ? 'bg-zinc-500/10 text-zinc-400 border border-zinc-500/20' :
+                        c.tier === 'atom' ? 'bg-zinc-500/10 text-zinc-400 border border-zinc-500/20' :
+                        c.tier === 'molecule' ? 'bg-zinc-500/10 text-zinc-400 border border-zinc-500/20' :
+                        'bg-zinc-500/10 text-zinc-400 border border-zinc-500/20'
                       }`}>
                         {c.tier}
                       </span>
@@ -1768,16 +1768,16 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
 
             {/* Right Column: Deep-Dive Component Workbench Canvas */}
             <div className="lg:col-span-8">
-              <Card variant="surface" className="p-6 sm:p-8 space-y-6 border-white/[0.1] bg-[#0c101c]/90 shadow-2xl">
+              <Card variant="surface" className="p-6 sm:p-8 space-y-6 border-white/[0.1] bg-[#111111]/90 shadow-2xl">
                 {/* Component Title & Metadata */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
                   <div>
                     <div className="flex items-center gap-2">
                       <Badge 
                         variant={
-                          selectedComp.tier === 'token' ? 'emerald' :
-                          selectedComp.tier === 'atom' ? 'cyan' :
-                          selectedComp.tier === 'molecule' ? 'amber' : 'purple'
+                          selectedComp.tier === 'token' ? 'blue' :
+                          selectedComp.tier === 'atom' ? 'blue' :
+                          selectedComp.tier === 'molecule' ? 'blue' : 'blue'
                         }
                         size="xs"
                       >
@@ -1786,7 +1786,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                       <span className="text-xs font-mono text-zinc-500">{selectedComp.category}</span>
                     </div>
                     <h2 className="text-2xl font-black text-white mt-1.5 font-sans">{selectedComp.name}</h2>
-                    <span className="text-xs font-mono text-emerald-400/90">{selectedComp.file}</span>
+                    <span className="text-xs font-mono text-zinc-400/90">{selectedComp.file}</span>
                   </div>
 
                   {selectedComp.navTarget && (
@@ -1809,7 +1809,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 {/* LIVE INTERACTIVE PLAYGROUND CANVAS */}
                 <div>
                   <div className="text-xs font-mono uppercase text-zinc-400 font-bold mb-3 flex items-center gap-2">
-                    <SlidersHorizontal className="w-4 h-4 text-emerald-400" />
+                    <SlidersHorizontal className="w-4 h-4 text-zinc-400" />
                     <span>Interactive Test Playground & Live State:</span>
                   </div>
                   {renderInteractivePlayground()}
@@ -1819,7 +1819,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <div>
                   <div className="flex items-center justify-between text-xs font-mono uppercase text-zinc-400 font-bold mb-2">
                     <span className="flex items-center gap-1.5">
-                      <FileCode2 className="w-4 h-4 text-cyan-400" />
+                      <FileCode2 className="w-4 h-4 text-zinc-400" />
                       <span>TypeScript Props Specification:</span>
                     </span>
                   </div>
@@ -1832,18 +1832,18 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                 <div>
                   <div className="flex items-center justify-between text-xs font-mono uppercase text-zinc-400 font-bold mb-2">
                     <span className="flex items-center gap-1.5">
-                      <Code2 className="w-4 h-4 text-emerald-400" />
+                      <Code2 className="w-4 h-4 text-zinc-400" />
                       <span>Ready-to-Use Code Example:</span>
                     </span>
                     <button
                       onClick={() => handleCopy(selectedComp.usageSnippet)}
                       className="flex items-center gap-1 text-xs text-zinc-400 hover:text-white transition-colors cursor-pointer px-2.5 py-1 rounded-lg bg-zinc-900 border border-white/[0.08]"
                     >
-                      {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copied ? <Check className="w-3.5 h-3.5 text-zinc-400" /> : <Copy className="w-3.5 h-3.5" />}
                       <span>{copied ? 'Copied to Clipboard' : 'Copy Snippet'}</span>
                     </button>
                   </div>
-                  <div className="p-4 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-emerald-300 overflow-x-auto">
+                  <div className="p-4 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-zinc-300 overflow-x-auto">
                     <pre>{selectedComp.usageSnippet}</pre>
                   </div>
                 </div>
@@ -1860,7 +1860,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               <section className="space-y-4">
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-400" />
                     <h3 className="text-lg font-bold text-white font-sans">Tier 1: Design Tokens</h3>
                   </div>
                   <span className="text-xs font-mono text-zinc-500">Master colors, fonts, and geometry</span>
@@ -1870,7 +1870,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                   {COMPONENTS.filter(c => c.tier === 'token').map(c => (
                     <Card key={c.id} variant="surface" className="p-5 space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono text-emerald-400 font-bold">{c.name}</span>
+                        <span className="text-xs font-mono text-zinc-400 font-bold">{c.name}</span>
                         <c.icon className="w-4 h-4 text-zinc-400" />
                       </div>
                       <p className="text-xs text-zinc-400">{c.description}</p>
@@ -1879,7 +1879,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                           setSelectedComp(c);
                           setViewMode('workbench');
                         }}
-                        className="text-xs font-mono text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer"
+                        className="text-xs font-mono text-zinc-400 hover:underline flex items-center gap-1 cursor-pointer"
                       >
                         Inspect in Workbench →
                       </button>
@@ -1894,7 +1894,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               <section className="space-y-4">
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-400" />
                     <h3 className="text-lg font-bold text-white font-sans">Tier 2: Atoms (8 Building Blocks)</h3>
                   </div>
                   <span className="text-xs font-mono text-zinc-500">Indivisible UI primitives</span>
@@ -1908,12 +1908,12 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     }}>
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-white font-sans">{c.name}</span>
-                        <c.icon className="w-4 h-4 text-cyan-400" />
+                        <c.icon className="w-4 h-4 text-zinc-400" />
                       </div>
                       <p className="text-xs text-zinc-400 line-clamp-2">{c.description}</p>
                       <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-zinc-500">
                         <span>{c.file.split('/').pop()}</span>
-                        <span className="text-cyan-400">Test →</span>
+                        <span className="text-zinc-400">Test →</span>
                       </div>
                     </Card>
                   ))}
@@ -1926,7 +1926,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               <section className="space-y-4">
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-400" />
                     <h3 className="text-lg font-bold text-white font-sans">Tier 3: Molecules (10 Algorithmic Components)</h3>
                   </div>
                   <span className="text-xs font-mono text-zinc-500">Problem rows, Elo badges, contest cards, telemetry</span>
@@ -1940,12 +1940,12 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     }}>
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-white font-sans">{c.name}</span>
-                        <c.icon className="w-4 h-4 text-amber-400" />
+                        <c.icon className="w-4 h-4 text-zinc-400" />
                       </div>
                       <p className="text-xs text-zinc-400 line-clamp-2">{c.description}</p>
                       <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] font-mono text-zinc-500">
                         <span>{c.category}</span>
-                        <span className="text-amber-400">Test →</span>
+                        <span className="text-zinc-400">Test →</span>
                       </div>
                     </Card>
                   ))}
@@ -1958,7 +1958,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
               <section className="space-y-4">
                 <div className="flex items-center justify-between border-b border-white/[0.08] pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-purple-400" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-zinc-400" />
                     <h3 className="text-lg font-bold text-white font-sans">Tier 4: Organisms (10 Templates & Interactive Visualizers)</h3>
                   </div>
                   <span className="text-xs font-mono text-zinc-500">Full-scale views, graph traversals, and DP table workspaces</span>
@@ -1969,7 +1969,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                     <Card key={c.id} variant="surface" className="p-5 space-y-3">
                       <div className="flex items-center justify-between">
                         <span className="text-xs font-bold text-white font-sans">{c.name}</span>
-                        <c.icon className="w-4 h-4 text-purple-400" />
+                        <c.icon className="w-4 h-4 text-zinc-400" />
                       </div>
                       <p className="text-xs text-zinc-400">{c.description}</p>
                       <div className="pt-2 border-t border-white/[0.06] flex items-center justify-between">
@@ -1978,7 +1978,7 @@ export const DesignSystemView: React.FC<DesignSystemViewProps> = ({ onNavigateTo
                             setSelectedComp(c);
                             setViewMode('workbench');
                           }}
-                          className="text-xs font-mono text-purple-400 hover:underline cursor-pointer"
+                          className="text-xs font-mono text-zinc-400 hover:underline cursor-pointer"
                         >
                           Specs & Snippets →
                         </button>

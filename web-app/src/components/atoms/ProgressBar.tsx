@@ -2,7 +2,7 @@ import React from 'react';
 
 export interface ProgressBarProps {
   value: number; // 0 to 100
-  color?: 'emerald' | 'amber' | 'rose' | 'cyan' | 'purple';
+  color?: 'blue' | 'easy' | 'medium' | 'hard';
   size?: 'xs' | 'sm' | 'md';
   showLabel?: boolean;
   label?: string;
@@ -11,7 +11,7 @@ export interface ProgressBarProps {
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({
   value,
-  color = 'emerald',
+  color = 'blue',
   size = 'sm',
   showLabel = false,
   label,
@@ -20,11 +20,10 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   const clampedValue = Math.min(Math.max(value, 0), 100);
 
   const colorStyles = {
-    emerald: 'bg-emerald-400',
-    amber: 'bg-amber-400',
-    rose: 'bg-rose-400',
-    cyan: 'bg-cyan-400',
-    purple: 'bg-purple-400'
+    blue: 'bg-lime-400',
+    easy: 'bg-green-500',
+    medium: 'bg-lime-400',
+    hard: 'bg-red-500'
   };
 
   const heightStyles = {

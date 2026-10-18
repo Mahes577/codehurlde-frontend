@@ -13,7 +13,7 @@ export interface StatMetricCardProps {
 
 export const StatMetricCard: React.FC<StatMetricCardProps> = ({
   icon,
-  iconBgColor = 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+  iconBgColor = 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
   label,
   value,
   subtext,

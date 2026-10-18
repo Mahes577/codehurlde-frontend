@@ -21,22 +21,22 @@ export const FaqAccordionItem: React.FC<FaqAccordionItemProps> = ({
     <Card 
       variant={isOpen ? 'interactive' : 'default'} 
       className={`transition-all duration-200 overflow-hidden cursor-pointer ${
-        isOpen ? 'border-emerald-500/40 shadow-lg shadow-emerald-950/20' : ''
+        isOpen ? 'border-zinc-500/40 shadow-lg shadow-zinc-950/20' : ''
       }`}
       onClick={onToggle}
     >
       <div className="p-4 sm:p-5 flex items-center justify-between gap-4 select-none">
         <div className="flex items-center gap-3">
           {category && (
-            <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 hidden sm:inline">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 bg-zinc-500/10 px-2 py-0.5 rounded border border-zinc-500/20 hidden sm:inline">
               {category}
             </span>
           )}
-          <h3 className={`text-sm sm:text-base font-semibold transition-colors ${isOpen ? 'text-emerald-300' : 'text-zinc-200'}`}>
+          <h3 className={`text-sm sm:text-base font-semibold transition-colors ${isOpen ? 'text-zinc-300' : 'text-zinc-200'}`}>
             {question}
           </h3>
         </div>
-        <div className={`p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 transition-transform duration-200 ${isOpen ? 'rotate-180 text-emerald-400' : ''}`}>
+        <div className={`p-1.5 rounded-lg bg-white/[0.04] text-zinc-400 transition-transform duration-200 ${isOpen ? 'rotate-180 text-zinc-400' : ''}`}>
           <ChevronDown className="w-4 h-4" />
         </div>
       </div>

@@ -19,7 +19,7 @@ export const Input: React.FC<InputProps> = ({
         </span>
       )}
       <input
-        className={`w-full rounded-xl border border-white/[0.08] bg-[#0c101c] px-3.5 py-2 text-xs text-zinc-100 placeholder-zinc-500 transition-all focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 font-sans ${
+        className={`w-full rounded-xl border border-white/[0.08] bg-[#111111] px-3.5 py-2 text-xs text-zinc-100 placeholder-zinc-500 transition-all focus:border-zinc-500/50 focus:outline-none focus:ring-1 focus:ring-zinc-500/20 disabled:opacity-50 font-sans ${
           icon ? 'pl-9' : ''
         } ${rightElement ? 'pr-9' : ''} ${className}`}
         {...props}
@@ -41,7 +41,7 @@ export const Textarea: React.FC<TextareaProps> = ({
 }) => {
   return (
     <textarea
-      className={`w-full rounded-xl border border-white/[0.08] bg-[#0c101c] p-3 text-xs text-zinc-100 placeholder-zinc-500 transition-all focus:border-emerald-500/50 focus:outline-none focus:ring-1 focus:ring-emerald-500/20 disabled:opacity-50 font-mono resize-none leading-relaxed ${className}`}
+      className={`w-full rounded-xl border border-white/[0.08] bg-[#111111] p-3 text-xs text-zinc-100 placeholder-zinc-500 transition-all focus:border-zinc-500/50 focus:outline-none focus:ring-1 focus:ring-zinc-500/20 disabled:opacity-50 font-mono resize-none leading-relaxed ${className}`}
       {...props}
     />
   );

@@ -223,22 +223,22 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
   };
 
   return (
-    <section id="problems" className="py-16 bg-[#07090e]">
+    <section id="problems" className="py-16 bg-[#000000]">
       <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 space-y-6">
         
         {/* Unified Section Header Atom */}
         <SectionHeader
           eyebrow="Curated Problem Directory"
           eyebrowIcon={<Zap className="w-3.5 h-3.5" />}
-          eyebrowColor="emerald"
+          eyebrowColor="blue"
           title="Master Algorithmic Patterns"
           highlightText="Without Burnout"
           subtitle="Filter 520 curated problems with instant test previews, real company frequency weightings, and acceptance rates."
           action={
             <Button
-              variant={showOnlyStarred ? 'amber' : 'secondary'}
+              variant={showOnlyStarred ? 'blue' : 'secondary'}
               size="sm"
-              icon={<Star className={`w-3.5 h-3.5 ${showOnlyStarred ? 'fill-amber-400' : ''}`} />}
+              icon={<Star className={`w-3.5 h-3.5 ${showOnlyStarred ? 'fill-zinc-400' : ''}`} />}
               onClick={() => setShowOnlyStarred(!showOnlyStarred)}
             >
               Starred Favorites
@@ -271,7 +271,7 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
             <select
               value={selectedCategory}
               onChange={e => setSelectedCategory(e.target.value)}
-              className="bg-[#0c101c] border border-white/[0.08] rounded-xl px-3 py-1.5 text-xs text-zinc-300 focus:outline-none focus:border-emerald-500/50 font-mono"
+              className="bg-[#111111] border border-white/[0.08] rounded-xl px-3 py-1.5 text-xs text-zinc-300 focus:outline-none focus:border-zinc-500/50 font-mono"
             >
               {categories.map(cat => (
                 <option key={cat} value={cat}>{cat}</option>
@@ -288,7 +288,7 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs">
                 <thead>
-                  <tr className="border-b border-white/[0.08] bg-[#0c101c]/90 text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-400">
+                  <tr className="border-b border-white/[0.08] bg-[#111111]/90 text-[11px] font-mono font-semibold uppercase tracking-wider text-zinc-400">
                     <th className="py-3 px-3 w-10 text-center">Status</th>
                     <th className="py-3 px-2 w-8 text-center">Star</th>
                     <th className="py-3 px-3">Title & Pattern</th>
@@ -335,9 +335,9 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
                   </div>
                   <button 
                     onClick={(e) => toggleStarred(previewProblem.id, e)}
-                    className="p-1 rounded hover:bg-white/[0.05] text-zinc-400 hover:text-amber-400 cursor-pointer"
+                    className="p-1 rounded hover:bg-white/[0.05] text-zinc-400 hover:text-zinc-400 cursor-pointer"
                   >
-                    <Star className={`h-4 w-4 ${previewProblem.starred ? 'fill-amber-400 text-amber-400' : ''}`} />
+                    <Star className={`h-4 w-4 ${previewProblem.starred ? 'fill-zinc-400 text-zinc-400' : ''}`} />
                   </button>
                 </div>
 
@@ -346,7 +346,7 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
                     {previewProblem.title}
                   </h3>
                   <div className="text-[11px] text-zinc-400 mt-0.5">
-                    Topic: <strong className="text-emerald-400 font-sans">{previewProblem.category}</strong>
+                    Topic: <strong className="text-zinc-400 font-sans">{previewProblem.category}</strong>
                   </div>
                 </div>
 
@@ -362,7 +362,7 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-[11px]">
                     <span className="text-zinc-500">Interview Frequency</span>
-                    <span className="text-amber-400 font-bold">{previewProblem.frequency}% Weight</span>
+                    <span className="text-zinc-400 font-bold">{previewProblem.frequency}% Weight</span>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {previewProblem.companies.map((c, i) => (
@@ -378,7 +378,7 @@ export const ProblemExplorer: React.FC<ProblemExplorerProps> = ({ onSolveProblem
                   <div className="text-[10px] uppercase text-zinc-500 font-bold mb-1.5">Similar Invariants</div>
                   <div className="space-y-1">
                     {previewProblem.similarProblems.map((sim, i) => (
-                      <div key={i} className="text-zinc-400 hover:text-emerald-400 cursor-pointer flex items-center justify-between text-[11px] font-sans">
+                      <div key={i} className="text-zinc-400 hover:text-zinc-400 cursor-pointer flex items-center justify-between text-[11px] font-sans">
                         <span>• {sim}</span>
                         <ChevronRight className="h-3 w-3 text-zinc-600" />
                       </div>

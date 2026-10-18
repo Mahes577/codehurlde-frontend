@@ -147,17 +147,17 @@ export const CpArenaView: React.FC<CpArenaViewProps> = ({ onSolveProblem }) => {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-[#000000] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-[1720px] mx-auto space-y-6">
         
         {/* CP Header Card */}
         <Card variant="default" padding="lg">
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-rose-500/10 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/4 -mb-20 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-zinc-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-1/4 -mb-20 w-80 h-80 rounded-full bg-zinc-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs font-mono mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-500/10 border border-zinc-500/25 text-zinc-400 text-xs font-mono mb-3">
                 <Swords className="w-3.5 h-3.5" />
                 <span>CodeHurdle CP Arena</span>
               </div>
@@ -173,9 +173,9 @@ export const CpArenaView: React.FC<CpArenaViewProps> = ({ onSolveProblem }) => {
             <div className="p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08] min-w-[240px] space-y-2">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-zinc-400 font-mono">Current Division</span>
-                <span className="text-amber-400 font-bold font-mono">Division 1 (1,840)</span>
+                <span className="text-zinc-400 font-bold font-mono">Division 1 (1,840)</span>
               </div>
-              <ProgressBar value={74} color="amber" size="sm" />
+              <ProgressBar value={74} color="blue" size="sm" />
               <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 pt-1">
                 <span>Next rank: Candidate Master</span>
                 <span>+160 pts needed</span>
@@ -185,13 +185,13 @@ export const CpArenaView: React.FC<CpArenaViewProps> = ({ onSolveProblem }) => {
         </Card>
 
         {/* Featured CP Track Banner Card */}
-        <Card variant="surface" padding="md" className="border-purple-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <Card variant="surface" padding="md" className="border-zinc-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-bold font-mono text-lg shrink-0">
+            <div className="w-12 h-12 rounded-xl bg-zinc-500/10 border border-zinc-500/30 flex items-center justify-center text-zinc-400 font-bold font-mono text-lg shrink-0">
               DP
             </div>
             <div>
-              <div className="text-xs font-mono uppercase tracking-wider text-purple-400 font-semibold">Continue Learning Track</div>
+              <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">Continue Learning Track</div>
               <div className="text-base font-bold text-white">Master Dynamic Programming Algorithms & Invariants</div>
               <div className="text-xs text-zinc-400 mt-0.5">0 of 5 solved · Beginner to Advanced state compression</div>
             </div>
@@ -229,7 +229,7 @@ export const CpArenaView: React.FC<CpArenaViewProps> = ({ onSolveProblem }) => {
             <select
               value={selectedTopic}
               onChange={e => setSelectedTopic(e.target.value)}
-              className="bg-[#0c101c] border border-white/[0.08] rounded-xl px-3 py-1.5 text-xs text-zinc-200 focus:outline-none focus:border-rose-500/50 font-mono"
+              className="bg-[#111111] border border-white/[0.08] rounded-xl px-3 py-1.5 text-xs text-zinc-200 focus:outline-none focus:border-zinc-500/50 font-mono"
             >
               {topics.map(t => (
                 <option key={t} value={t}>{t}</option>
@@ -242,7 +242,7 @@ export const CpArenaView: React.FC<CpArenaViewProps> = ({ onSolveProblem }) => {
         <Card variant="surface" padding="none" className="overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-sans">
-              <thead className="bg-[#0c101c]/90 text-zinc-400 uppercase tracking-wider font-mono text-[11px] border-b border-white/[0.08]">
+              <thead className="bg-[#111111]/90 text-zinc-400 uppercase tracking-wider font-mono text-[11px] border-b border-white/[0.08]">
                 <tr>
                   <th className="py-3 px-4 w-12 text-center">#</th>
                   <th className="py-3 px-4">Problem Name</th>
@@ -262,8 +262,8 @@ export const CpArenaView: React.FC<CpArenaViewProps> = ({ onSolveProblem }) => {
                     <td className="py-3.5 px-4 font-semibold text-white">
                       <div className="flex items-center gap-2">
                         <span>{p.title}</span>
-                        <button onClick={() => toggleStar(p.id)} className="text-zinc-600 hover:text-amber-400 cursor-pointer">
-                          <Star className={`w-3.5 h-3.5 ${p.starred ? 'fill-amber-400 text-amber-400' : ''}`} />
+                        <button onClick={() => toggleStar(p.id)} className="text-zinc-600 hover:text-zinc-400 cursor-pointer">
+                          <Star className={`w-3.5 h-3.5 ${p.starred ? 'fill-zinc-400 text-zinc-400' : ''}`} />
                         </button>
                       </div>
                     </td>

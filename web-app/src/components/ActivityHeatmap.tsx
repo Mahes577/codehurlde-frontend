@@ -67,29 +67,29 @@ export const ActivityHeatmap: React.FC = () => {
       case 0:
         return 'bg-white/[0.04] border-white/[0.02] hover:border-zinc-500';
       case 1:
-        return 'bg-emerald-950/80 border-emerald-900/60 hover:border-emerald-400';
+        return 'bg-green-950/80 border-green-900/60 hover:border-green-400';
       case 2:
-        return 'bg-emerald-800/80 border-emerald-700/60 hover:border-emerald-300';
+        return 'bg-green-800/80 border-green-700/60 hover:border-green-300';
       case 3:
-        return 'bg-emerald-600 border-emerald-500 hover:border-emerald-200 shadow-sm shadow-emerald-600/30';
+        return 'bg-green-600 border-green-500 hover:border-green-200 shadow-sm shadow-green-600/30';
       case 4:
       default:
-        return 'bg-emerald-400 border-emerald-300 hover:border-white shadow-md shadow-emerald-400/40';
+        return 'bg-green-400 border-green-300 hover:border-white shadow-md shadow-green-400/40';
     }
   };
 
   return (
-    <section className="py-12 bg-[#07090e] border-b border-white/[0.08]">
+    <section className="py-12 bg-[#000000] border-b border-white/[0.08]">
       <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Main Card Container */}
-        <div className="rounded-2xl border border-white/[0.1] bg-[#0c1220]/90 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
+        <div className="rounded-2xl border border-white/[0.1] bg-[#111111]/90 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
           
           {/* Top Section Header with Human Badges */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/[0.08]">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+                <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                   <Calendar className="h-4 w-4" />
                   Submission Activity Heatmap
                 </span>
@@ -112,7 +112,7 @@ export const ActivityHeatmap: React.FC = () => {
                     onClick={() => setSelectedYear(yr)}
                     className={`px-3 py-1 rounded transition-colors ${
                       selectedYear === yr
-                        ? 'bg-emerald-500 text-zinc-950 font-bold'
+                        ? 'bg-zinc-500 text-zinc-950 font-bold'
                         : 'text-zinc-400 hover:text-white'
                     }`}
                   >
@@ -179,7 +179,7 @@ export const ActivityHeatmap: React.FC = () => {
                 <div className="flex items-center gap-4">
                   <div>Total Submissions in {selectedYear}: <strong className="text-white">684</strong></div>
                   <span>•</span>
-                  <div>Active Days: <strong className="text-emerald-400">224 / 365</strong></div>
+                  <div>Active Days: <strong className="text-zinc-400">224 / 365</strong></div>
                   <span>•</span>
                   <div>Max Daily Solved: <strong className="text-white">7 problems</strong></div>
                 </div>
@@ -188,10 +188,10 @@ export const ActivityHeatmap: React.FC = () => {
                 <div className="flex items-center gap-1.5 text-[11px] text-zinc-500">
                   <span>Less</span>
                   <div className="h-2.5 w-2.5 rounded-sm bg-white/[0.04]" />
-                  <div className="h-2.5 w-2.5 rounded-sm bg-emerald-950" />
-                  <div className="h-2.5 w-2.5 rounded-sm bg-emerald-800" />
-                  <div className="h-2.5 w-2.5 rounded-sm bg-emerald-600" />
-                  <div className="h-2.5 w-2.5 rounded-sm bg-emerald-400" />
+                  <div className="h-2.5 w-2.5 rounded-sm bg-zinc-950" />
+                  <div className="h-2.5 w-2.5 rounded-sm bg-zinc-800" />
+                  <div className="h-2.5 w-2.5 rounded-sm bg-zinc-600" />
+                  <div className="h-2.5 w-2.5 rounded-sm bg-zinc-400" />
                   <span>More</span>
                 </div>
               </div>
@@ -204,7 +204,7 @@ export const ActivityHeatmap: React.FC = () => {
                 <span className="font-bold text-white text-[11px] uppercase tracking-wider">
                   Day Inspector
                 </span>
-                <span className="text-[10px] text-emerald-400 font-semibold bg-emerald-500/10 px-1.5 py-0.2 rounded border border-emerald-500/20">
+                <span className="text-[10px] text-zinc-400 font-semibold bg-zinc-500/10 px-1.5 py-0.2 rounded border border-zinc-500/20">
                   {activeDay.count} Submissions
                 </span>
               </div>
@@ -223,8 +223,8 @@ export const ActivityHeatmap: React.FC = () => {
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-white text-[11px]">#{prob.id} {prob.title}</span>
                         <span className={`text-[9px] px-1 rounded font-bold ${
-                          prob.difficulty === 'Easy' ? 'text-emerald-400 bg-emerald-500/10' :
-                          prob.difficulty === 'Medium' ? 'text-amber-400 bg-amber-500/10' : 'text-rose-400 bg-rose-500/10'
+                          prob.difficulty === 'Easy' ? 'text-zinc-400 bg-zinc-500/10' :
+                          prob.difficulty === 'Medium' ? 'text-zinc-400 bg-zinc-500/10' : 'text-zinc-400 bg-zinc-500/10'
                         }`}>
                           {prob.difficulty}
                         </span>
@@ -241,8 +241,8 @@ export const ActivityHeatmap: React.FC = () => {
 
               {/* Milestone Badge in this period */}
               <div className="mt-4 pt-3 border-t border-white/[0.06]">
-                <div className="flex items-center gap-2 text-amber-300 text-[11px]">
-                  <Award className="h-4 w-4 shrink-0 text-amber-400" />
+                <div className="flex items-center gap-2 text-zinc-300 text-[11px]">
+                  <Award className="h-4 w-4 shrink-0 text-zinc-400" />
                   <span>Earned: <strong>October 50 Days Badge</strong></span>
                 </div>
               </div>

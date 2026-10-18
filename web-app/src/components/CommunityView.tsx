@@ -42,7 +42,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: 'm1',
     author: 'Aarav',
     initials: 'A',
-    avatarColor: 'from-blue-600 to-indigo-600',
+    avatarColor: 'from-zinc-600 to-zinc-600',
     time: '10:42 AM',
     text: "Anyone solved today's DP problem with O(n) memory instead of O(n^2)?",
     reactions: 3
@@ -51,7 +51,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: 'm2',
     author: 'Mei',
     initials: 'M',
-    avatarColor: 'from-emerald-600 to-teal-600',
+    avatarColor: 'from-zinc-600 to-zinc-600',
     time: '10:44 AM',
     text: "Yes! Roll the array: only the last row matters. You can compress the dp table to 2 rows:",
     codeSnippet: 'dp[i % 2][j] = dp[(i - 1) % 2][j] + dp[i % 2][j - 1]',
@@ -61,7 +61,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: 'm3',
     author: 'Sam',
     initials: 'S',
-    avatarColor: 'from-amber-600 to-orange-600',
+    avatarColor: 'from-zinc-600 to-zinc-600',
     time: '10:45 AM',
     text: "That cut my runtime in half on CodeHurdle's runner, thanks Mei!",
     reactions: 4
@@ -70,7 +70,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: 'm4',
     author: 'Riya',
     initials: 'R',
-    avatarColor: 'from-purple-600 to-pink-600',
+    avatarColor: 'from-zinc-600 to-zinc-600',
     time: '10:51 AM',
     text: "Posted a complete walkthrough of the two-pointer invariant for 3Sum in #show-your-work.",
     reactions: 6
@@ -79,7 +79,7 @@ const INITIAL_MESSAGES: ChatMessage[] = [
     id: 'm5',
     author: 'Kenji',
     initials: 'K',
-    avatarColor: 'from-rose-600 to-red-600',
+    avatarColor: 'from-zinc-600 to-zinc-600',
     time: '10:58 AM',
     text: "Weekly Contest #42 starts in 20 minutes! Who is in?",
     reactions: 12
@@ -98,7 +98,7 @@ export const CommunityView: React.FC = () => {
       id: `m-${Date.now()}`,
       author: 'You (@aarav_codes)',
       initials: 'CA',
-      avatarColor: 'from-emerald-500 to-cyan-500',
+      avatarColor: 'from-zinc-500 to-zinc-500',
       time: 'Just now',
       text: inputVal,
       reactions: 1
@@ -108,16 +108,16 @@ export const CommunityView: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-[#000000] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-[1720px] mx-auto space-y-6">
         
         {/* Header Card */}
         <Card variant="default" padding="lg">
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-zinc-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/25 text-indigo-400 text-xs font-mono mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-500/10 border border-zinc-500/25 text-zinc-400 text-xs font-mono mb-3">
                 <Users className="w-3.5 h-3.5" />
                 <span>CodeHurdle Developer Community</span>
               </div>
@@ -132,7 +132,7 @@ export const CommunityView: React.FC = () => {
             {/* Voice Study Room Widget */}
             <div className="p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08] min-w-[260px] space-y-3">
               <div className="flex items-center justify-between text-xs">
-                <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                <span className="flex items-center gap-1.5 text-zinc-400 font-semibold">
                   <Radio className="w-3.5 h-3.5 animate-pulse" />
                   <span>Live Study Room #1</span>
                 </span>
@@ -186,7 +186,7 @@ export const CommunityView: React.FC = () => {
                       <span>{ch.name}</span>
                     </div>
                     {ch.unread > 0 && (
-                      <Badge variant="emerald" size="xs">
+                      <Badge variant="blue" size="xs">
                         {ch.unread}
                       </Badge>
                     )}
@@ -198,7 +198,7 @@ export const CommunityView: React.FC = () => {
             {/* Peer matching card */}
             <div className="p-4 border-t border-white/[0.08] bg-zinc-950/80 text-xs space-y-2">
               <div className="font-semibold text-white flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <Sparkles className="w-3.5 h-3.5 text-zinc-400" />
                 <span>Find Mock Interview Partner</span>
               </div>
               <p className="text-[11px] text-zinc-400 leading-relaxed">
@@ -216,7 +216,7 @@ export const CommunityView: React.FC = () => {
           </div>
 
           {/* Chat Feed (Col 5-12) */}
-          <div className="lg:col-span-8 flex flex-col justify-between bg-[#080b12]">
+          <div className="lg:col-span-8 flex flex-col justify-between bg-[#0a0a0a]">
             {/* Channel Top Header */}
             <div className="p-4 border-b border-white/[0.08] flex items-center justify-between text-xs">
               <div className="flex items-center gap-2 font-semibold text-white">
@@ -241,13 +241,13 @@ export const CommunityView: React.FC = () => {
                       {msg.text}
                     </div>
                     {msg.codeSnippet && (
-                      <div className="p-2.5 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-emerald-300 my-1.5">
+                      <div className="p-2.5 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-zinc-300 my-1.5">
                         <code>{msg.codeSnippet}</code>
                       </div>
                     )}
                     {msg.reactions && (
                       <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-900 border border-white/[0.08] text-[10px] text-zinc-400 cursor-pointer hover:border-zinc-700">
-                        <ThumbsUp className="w-3 h-3 text-emerald-400" />
+                        <ThumbsUp className="w-3 h-3 text-zinc-400" />
                         <span>{msg.reactions}</span>
                       </div>
                     )}
@@ -264,7 +264,7 @@ export const CommunityView: React.FC = () => {
                 onChange={e => setInputVal(e.target.value)}
                 onKeyDown={e => e.key === 'Enter' && handleSendMessage()}
                 placeholder={`Message #${activeChannel}...`}
-                className="flex-1 rounded-xl border border-white/[0.08] bg-[#0c101c] px-3.5 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-emerald-500/50"
+                className="flex-1 rounded-xl border border-white/[0.08] bg-[#111111] px-3.5 py-2 text-xs text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-zinc-500/50"
               />
               <Button
                 variant="primary"

@@ -35,7 +35,7 @@ export function TabGroup<T extends string = string>({
               onClick={() => onChange(tab.id)}
               className={`flex items-center gap-1.5 px-3 py-2 text-xs font-medium border-b-2 transition-all cursor-pointer select-none ${
                 isActive
-                  ? 'border-emerald-400 text-emerald-400 font-semibold'
+                  ? 'border-zinc-400 text-zinc-400 font-semibold'
                   : 'border-transparent text-zinc-400 hover:text-zinc-200'
               }`}
             >
@@ -43,7 +43,7 @@ export function TabGroup<T extends string = string>({
               <span>{tab.label}</span>
               {tab.count !== undefined && (
                 <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                  isActive ? 'bg-emerald-500/20 text-emerald-300' : 'bg-zinc-800 text-zinc-400'
+                  isActive ? 'bg-zinc-500/20 text-zinc-300' : 'bg-zinc-800 text-zinc-400'
                 }`}>
                   {tab.count}
                 </span>

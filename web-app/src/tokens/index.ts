@@ -6,59 +6,59 @@
 export const tokens = {
   colors: {
     base: {
-      canvas: '#07090e',
-      surface: '#0c101c',
-      elevated: '#111625',
-      sunken: '#05070a',
+      canvas: '#000000',
+      surface: '#111111',
+      elevated: '#171717',
+      sunken: '#050505',
       border: 'rgba(255, 255, 255, 0.08)',
       borderHover: 'rgba(255, 255, 255, 0.16)',
-      borderActive: 'rgba(16, 185, 129, 0.5)'
+      borderActive: 'rgba(132, 204, 22, 0.5)'
     },
     difficulty: {
       easy: {
-        text: '#34d399',
-        bg: 'rgba(16, 185, 129, 0.12)',
-        border: 'rgba(16, 185, 129, 0.28)',
-        hex: '#10b981'
+        text: '#4ade80',
+        bg: 'rgba(34, 197, 94, 0.12)',
+        border: 'rgba(34, 197, 94, 0.28)',
+        hex: '#22c55e'
       },
       medium: {
-        text: '#fbbf24',
-        bg: 'rgba(245, 158, 11, 0.12)',
-        border: 'rgba(245, 158, 11, 0.28)',
-        hex: '#f59e0b'
+        text: '#bef264',
+        bg: 'rgba(132, 204, 22, 0.12)',
+        border: 'rgba(132, 204, 22, 0.28)',
+        hex: '#84cc16'
       },
       hard: {
-        text: '#fb7185',
-        bg: 'rgba(244, 63, 94, 0.12)',
-        border: 'rgba(244, 63, 94, 0.28)',
-        hex: '#f43f5e'
+        text: '#f87171',
+        bg: 'rgba(239, 68, 68, 0.12)',
+        border: 'rgba(239, 68, 68, 0.28)',
+        hex: '#ef4444'
       }
     },
     divisions: {
       div1: {
         name: 'Division 1 (1900+)',
-        color: '#22d3ee',
-        bg: 'rgba(6, 182, 212, 0.12)',
-        border: 'rgba(6, 182, 212, 0.28)'
+        color: '#60a5fa',
+        bg: 'rgba(96, 165, 250, 0.12)',
+        border: 'rgba(96, 165, 250, 0.28)'
       },
       div2: {
         name: 'Division 2 (1400-1899)',
-        color: '#c084fc',
-        bg: 'rgba(168, 85, 247, 0.12)',
-        border: 'rgba(168, 85, 247, 0.28)'
+        color: '#fbbf24',
+        bg: 'rgba(251, 191, 36, 0.12)',
+        border: 'rgba(251, 191, 36, 0.28)'
       },
       div3: {
         name: 'Division 3 (<1400)',
-        color: '#94a3b8',
-        bg: 'rgba(148, 163, 184, 0.12)',
-        border: 'rgba(148, 163, 184, 0.28)'
+        color: '#a1a1aa',
+        bg: 'rgba(161, 161, 170, 0.12)',
+        border: 'rgba(161, 161, 170, 0.28)'
       }
     },
     gamification: {
-      flame: '#f59e0b',
-      flameGlow: 'rgba(245, 158, 11, 0.3)',
-      xpBadge: '#10b981',
-      proGradient: 'from-amber-400 via-emerald-400 to-cyan-400'
+      flame: '#fbbf24',
+      flameGlow: 'rgba(251, 191, 36, 0.3)',
+      xpBadge: '#84cc16',
+      proGradient: 'from-lime-400 via-green-400 to-lime-400'
     }
   },
   typography: {
@@ -85,9 +85,9 @@ export const tokens = {
   shadows: {
     subtle: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
     card: '0 4px 20px -2px rgba(0, 0, 0, 0.5)',
-    glowEmerald: '0 0 25px -5px rgba(16, 185, 129, 0.2)',
-    glowAmber: '0 0 25px -5px rgba(245, 158, 11, 0.2)',
-    glowCyan: '0 0 25px -5px rgba(6, 182, 212, 0.2)'
+    glowEmerald: '0 0 25px -5px rgba(132, 204, 22, 0.2)',
+    glowAmber: '0 0 25px -5px rgba(251, 191, 36, 0.2)',
+    glowCyan: '0 0 25px -5px rgba(96, 165, 250, 0.2)'
   }
 } as const;
 

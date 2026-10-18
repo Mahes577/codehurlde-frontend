@@ -131,21 +131,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
     <section className="relative pt-12 pb-20 lg:pt-16 lg:pb-28 overflow-hidden bg-mesh-grid">
       {/* Ambient glowing radial flares */}
       <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[600px] w-full max-w-[1720px]">
-        <div className="absolute top-10 left-1/4 h-96 w-96 rounded-full bg-emerald-500/15 blur-[120px]" />
-        <div className="absolute top-20 right-1/4 h-96 w-96 rounded-full bg-indigo-500/15 blur-[140px]" />
-        <div className="absolute top-40 left-1/2 -translate-x-1/2 h-64 w-[500px] rounded-full bg-cyan-500/10 blur-[100px]" />
+        <div className="absolute top-10 left-1/4 h-96 w-96 rounded-full bg-zinc-500/15 blur-[120px]" />
+        <div className="absolute top-20 right-1/4 h-96 w-96 rounded-full bg-zinc-500/15 blur-[140px]" />
+        <div className="absolute top-40 left-1/2 -translate-x-1/2 h-64 w-[500px] rounded-full bg-zinc-500/10 blur-[100px]" />
       </div>
 
       <div className="relative mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Top Feature Pill */}
         <div className="flex justify-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-950/50 px-3.5 py-1.5 text-xs font-mono font-medium text-emerald-300 shadow-inner backdrop-blur-md">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-semibold text-emerald-400">DYNAMIC CALIBRATION v2</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-zinc-500/30 bg-zinc-950/50 px-3.5 py-1.5 text-xs font-mono font-medium text-zinc-300 shadow-inner backdrop-blur-md">
+            <span className="flex h-2 w-2 rounded-full bg-zinc-400 animate-pulse" />
+            <span className="font-semibold text-zinc-400">DYNAMIC CALIBRATION v2</span>
             <span className="text-zinc-500">|</span>
             <span className="text-zinc-300">Adaptive Problem Sequences For Real Retention</span>
-            <ArrowRight className="h-3 w-3 text-emerald-400" />
+            <ArrowRight className="h-3 w-3 text-zinc-400" />
           </div>
         </div>
 
@@ -153,14 +153,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
         <div className="mt-6 text-center max-w-3xl mx-auto">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.12]">
             Master Every Algorithm Hurdle. <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-zinc-400 via-zinc-300 to-zinc-400 bg-clip-text text-transparent">
               Without The LeetCode Burnout.
             </span>
           </h1>
 
           <p className="mt-5 text-base sm:text-lg text-zinc-300 max-w-2xl mx-auto leading-relaxed">
             Stop grinding 3,000 disconnected questions. Practice 500+ curated problems with 
-            <span className="text-emerald-400 font-semibold"> step-by-step visual execution</span>, 
+            <span className="text-zinc-400 font-semibold"> step-by-step visual execution</span>, 
             adaptive difficulty matching, and competitive timed rounds.
           </p>
 
@@ -179,7 +179,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
             <Button
               variant="outline"
               size="lg"
-              icon={<Sparkles className="h-4 w-4 text-emerald-400" />}
+              icon={<Sparkles className="h-4 w-4 text-zinc-400" />}
               onClick={() => onExploreRoadmap ? onExploreRoadmap() : undefined}
               className="w-full sm:w-auto backdrop-blur-md"
             >
@@ -190,15 +190,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
           {/* Key Metrics Strip */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-mono text-zinc-400">
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+              <CheckCircle2 className="h-3.5 w-3.5 text-zinc-400" />
               <span>520 Curated Problems</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+              <CheckCircle2 className="h-3.5 w-3.5 text-zinc-400" />
               <span>Interactive Step Visualizer</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
+              <CheckCircle2 className="h-3.5 w-3.5 text-zinc-400" />
               <span>Python · C++20 · Node.js</span>
             </div>
           </div>
@@ -206,17 +206,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
 
         {/* Hero Interactive Showcase Workbench */}
         <div className="mt-12 lg:mt-16 max-w-7xl xl:max-w-[1500px] mx-auto">
-          <div className="rounded-2xl border border-white/[0.12] bg-[#0c101c]/90 shadow-2xl shadow-emerald-950/30 backdrop-blur-xl overflow-hidden">
+          <div className="rounded-2xl border border-white/[0.12] bg-[#111111]/90 shadow-2xl shadow-zinc-950/30 backdrop-blur-xl overflow-hidden">
             
             {/* Workbench Top Bar */}
-            <div className="flex flex-wrap items-center justify-between border-b border-white/[0.08] bg-[#080b14] px-4 py-3 gap-3">
+            <div className="flex flex-wrap items-center justify-between border-b border-white/[0.08] bg-[#0a0a0a] px-4 py-3 gap-3">
               
               {/* Problem info & Multi-Paradigm Switcher */}
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
-                  <div className="h-3 w-3 rounded-full bg-rose-500/80" />
-                  <div className="h-3 w-3 rounded-full bg-amber-500/80" />
-                  <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
+                  <div className="h-3 w-3 rounded-full bg-zinc-500/80" />
+                  <div className="h-3 w-3 rounded-full bg-zinc-500/80" />
+                  <div className="h-3 w-3 rounded-full bg-zinc-500/80" />
                 </div>
                 <div className="h-4 w-[1px] bg-white/[0.1]" />
                 
@@ -226,7 +226,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                     onClick={() => setSelectedProblem('twosum')}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
                       selectedProblem === 'twosum'
-                        ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/40 shadow-sm'
+                        ? 'bg-zinc-500/20 text-zinc-300 font-bold border border-zinc-500/40 shadow-sm'
                         : 'text-zinc-400 hover:text-white'
                     }`}
                   >
@@ -238,36 +238,36 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                     onClick={() => setSelectedProblem('tree')}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
                       selectedProblem === 'tree'
-                        ? 'bg-purple-500/20 text-purple-300 font-bold border border-purple-500/40 shadow-sm'
+                        ? 'bg-zinc-500/20 text-zinc-300 font-bold border border-zinc-500/40 shadow-sm'
                         : 'text-zinc-400 hover:text-white'
                     }`}
                   >
                     <span>#236 Tree LCA</span>
-                    <Badge variant="purple" size="xs">Medium</Badge>
+                    <Badge variant="blue" size="xs">Medium</Badge>
                   </button>
 
                   <button
                     onClick={() => setSelectedProblem('graph')}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
                       selectedProblem === 'graph'
-                        ? 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/40 shadow-sm'
+                        ? 'bg-zinc-500/20 text-zinc-300 font-bold border border-zinc-500/40 shadow-sm'
                         : 'text-zinc-400 hover:text-white'
                     }`}
                   >
                     <span>#743 Graph Path</span>
-                    <Badge variant="cyan" size="xs">Medium</Badge>
+                    <Badge variant="blue" size="xs">Medium</Badge>
                   </button>
 
                   <button
                     onClick={() => setSelectedProblem('dp')}
                     className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono transition-all cursor-pointer ${
                       selectedProblem === 'dp'
-                        ? 'bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40 shadow-sm'
+                        ? 'bg-zinc-500/20 text-zinc-300 font-bold border border-zinc-500/40 shadow-sm'
                         : 'text-zinc-400 hover:text-white'
                     }`}
                   >
                     <span>#322 Coin Change (DP)</span>
-                    <Badge variant="amber" size="xs">Medium</Badge>
+                    <Badge variant="blue" size="xs">Medium</Badge>
                   </button>
                 </div>
               </div>
@@ -280,7 +280,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                       onClick={() => setViewMode('visualizer')}
                       className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
                         viewMode === 'visualizer'
-                          ? 'bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/20'
+                          ? 'bg-zinc-500 text-zinc-950 font-bold shadow-md shadow-zinc-500/20'
                           : 'text-zinc-400 hover:text-white'
                       }`}
                     >
@@ -291,7 +291,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                       onClick={() => setViewMode('code')}
                       className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-mono transition-all cursor-pointer ${
                         viewMode === 'code'
-                          ? 'bg-emerald-500 text-zinc-950 font-bold shadow-md shadow-emerald-500/20'
+                          ? 'bg-zinc-500 text-zinc-950 font-bold shadow-md shadow-zinc-500/20'
                           : 'text-zinc-400 hover:text-white'
                       }`}
                     >
@@ -304,7 +304,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                     <button
                       onClick={handleRunCode}
                       disabled={isRunningCode}
-                      className="flex items-center gap-1.5 rounded-lg bg-emerald-400 hover:bg-emerald-300 px-3.5 py-1.5 text-xs font-bold text-zinc-950 transition-all active:scale-95 disabled:opacity-75 cursor-pointer"
+                      className="flex items-center gap-1.5 rounded-lg bg-zinc-400 hover:bg-zinc-300 px-3.5 py-1.5 text-xs font-bold text-zinc-950 transition-all active:scale-95 disabled:opacity-75 cursor-pointer"
                     >
                       {isRunningCode ? (
                         <>
@@ -325,33 +325,33 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
 
             {/* TAB: TREE ALGORITHM VISUALIZER */}
             {selectedProblem === 'tree' && (
-              <div className="p-2 sm:p-4 bg-[#090d18]">
+              <div className="p-2 sm:p-4 bg-[#111111]">
                 <TreeAlgorithmVisualizer onLaunchSolver={onLaunchCompiler} />
               </div>
             )}
 
             {/* TAB: GRAPH ALGORITHM VISUALIZER */}
             {selectedProblem === 'graph' && (
-              <div className="p-2 sm:p-4 bg-[#090d18]">
+              <div className="p-2 sm:p-4 bg-[#111111]">
                 <GraphAlgorithmVisualizer onLaunchSolver={onLaunchCompiler} />
               </div>
             )}
 
             {/* TAB: DYNAMIC PROGRAMMING VISUALIZER */}
             {selectedProblem === 'dp' && (
-              <div className="p-2 sm:p-4 bg-[#090d18]">
+              <div className="p-2 sm:p-4 bg-[#111111]">
                 <DpAlgorithmVisualizer onLaunchSolver={onLaunchCompiler} />
               </div>
             )}
 
             {/* TAB A: INTERACTIVE ALGORITHM VISUALIZER (TWO SUM) */}
             {selectedProblem === 'twosum' && viewMode === 'visualizer' && (
-              <div className="p-6 bg-[#090d18] min-h-[380px] flex flex-col justify-between">
+              <div className="p-6 bg-[#111111] min-h-[380px] flex flex-col justify-between">
                 
                 {/* Visualizer Status Bar */}
                 <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
                   <div className="space-y-0.5">
-                    <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold flex items-center gap-1.5">
+                    <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold flex items-center gap-1.5">
                       <Sparkles className="h-3.5 w-3.5" />
                       Step-by-Step Hash Map Lookup Visualization
                     </div>
@@ -387,7 +387,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                   {/* Array Row */}
                   <div>
                     <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-2 font-medium">
-                      Input Array: <span className="text-white font-mono">nums = [2, 7, 11, 15]</span> | <span className="text-emerald-400">target = 9</span>
+                      Input Array: <span className="text-white font-mono">nums = [2, 7, 11, 15]</span> | <span className="text-zinc-400">target = 9</span>
                     </div>
 
                     <div className="grid grid-cols-4 gap-3 sm:gap-4 max-w-xl">
@@ -400,15 +400,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                             key={item.index}
                             className={`relative rounded-xl p-3 sm:p-4 text-center border transition-all duration-300 ${
                               isMatched && step === 2
-                                ? 'border-emerald-400 bg-emerald-500/20 shadow-lg shadow-emerald-500/20 scale-105'
+                                ? 'border-zinc-400 bg-zinc-500/20 shadow-lg shadow-zinc-500/20 scale-105'
                                 : isCurrent
-                                ? 'border-amber-400 bg-amber-500/15 shadow-md shadow-amber-500/20'
+                                ? 'border-zinc-400 bg-zinc-500/15 shadow-md shadow-zinc-500/20'
                                 : 'border-white/[0.08] bg-black/40 text-zinc-400'
                             }`}
                           >
                             {/* Pointer Indicator */}
                             {isCurrent && (
-                              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-amber-400 px-2 py-0.2 text-[9px] font-mono font-bold text-zinc-950 animate-bounce">
+                              <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-zinc-400 px-2 py-0.2 text-[9px] font-mono font-bold text-zinc-950 animate-bounce">
                                 i = {item.index}
                               </div>
                             )}
@@ -436,25 +436,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
 
                       {step === 0 && (
                         <div className="space-y-1 text-zinc-300">
-                          <div>Pointer at <strong className="text-amber-300">i = 0</strong>, value = <strong className="text-white">2</strong></div>
-                          <div>Needed complement = target - num = <strong className="text-emerald-400">9 - 2 = 7</strong></div>
-                          <div className="text-rose-400">Lookup: Is 7 in seen hash map? <span className="font-bold">No</span></div>
-                          <div className="pt-1 text-emerald-300">→ Store seen[2] = 0 in map. Advance pointer to i = 1.</div>
+                          <div>Pointer at <strong className="text-zinc-300">i = 0</strong>, value = <strong className="text-white">2</strong></div>
+                          <div>Needed complement = target - num = <strong className="text-zinc-400">9 - 2 = 7</strong></div>
+                          <div className="text-zinc-400">Lookup: Is 7 in seen hash map? <span className="font-bold">No</span></div>
+                          <div className="pt-1 text-zinc-300">→ Store seen[2] = 0 in map. Advance pointer to i = 1.</div>
                         </div>
                       )}
 
                       {step === 1 && (
                         <div className="space-y-1 text-zinc-300">
-                          <div>Pointer at <strong className="text-amber-300">i = 1</strong>, value = <strong className="text-white">7</strong></div>
-                          <div>Needed complement = target - num = <strong className="text-emerald-400">9 - 7 = 2</strong></div>
-                          <div className="text-emerald-400 font-bold">Lookup: Is 2 in seen hash map? YES! Found at index 0!</div>
-                          <div className="pt-1 text-amber-300">→ Solution pair found: [seen[2], 1] = [0, 1].</div>
+                          <div>Pointer at <strong className="text-zinc-300">i = 1</strong>, value = <strong className="text-white">7</strong></div>
+                          <div>Needed complement = target - num = <strong className="text-zinc-400">9 - 7 = 2</strong></div>
+                          <div className="text-zinc-400 font-bold">Lookup: Is 2 in seen hash map? YES! Found at index 0!</div>
+                          <div className="pt-1 text-zinc-300">→ Solution pair found: [seen[2], 1] = [0, 1].</div>
                         </div>
                       )}
 
                       {step === 2 && (
-                        <div className="space-y-1 text-emerald-300">
-                          <div className="font-bold text-sm text-emerald-400 flex items-center gap-1.5">
+                        <div className="space-y-1 text-zinc-300">
+                          <div className="font-bold text-sm text-zinc-400 flex items-center gap-1.5">
                             <CheckCircle2 className="h-4 w-4" />
                             Target Satisfied: nums[0] + nums[1] = 2 + 7 = 9!
                           </div>
@@ -478,11 +478,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                       ) : (
                         <div className="space-y-1.5">
                           <div className={`p-2 rounded border flex items-center justify-between ${
-                            step >= 1 ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300' : 'border-white/[0.06]'
+                            step >= 1 ? 'border-zinc-500/40 bg-zinc-500/10 text-zinc-300' : 'border-white/[0.06]'
                           }`}>
                             <span>Key: <strong className="text-white">2</strong></span>
-                            <span>Value: <strong className="text-emerald-400">Index 0</strong></span>
-                            <span className="text-[10px] text-emerald-400 font-bold">MATCHED ✓</span>
+                            <span>Value: <strong className="text-zinc-400">Index 0</strong></span>
+                            <span className="text-[10px] text-zinc-400 font-bold">MATCHED ✓</span>
                           </div>
                         </div>
                       )}
@@ -495,12 +495,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                 {/* Footer Insight */}
                 <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between text-xs font-mono text-zinc-400">
                   <div className="flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-emerald-400" />
-                    <span>Complexity: Time <strong className="text-emerald-400">O(N)</strong> · Space <strong className="text-emerald-400">O(N)</strong></span>
+                    <span className="h-2 w-2 rounded-full bg-zinc-400" />
+                    <span>Complexity: Time <strong className="text-zinc-400">O(N)</strong> · Space <strong className="text-zinc-400">O(N)</strong></span>
                   </div>
                   <button 
                     onClick={() => setViewMode('code')}
-                    className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 font-semibold"
+                    className="text-zinc-400 hover:text-zinc-300 flex items-center gap-1 font-semibold"
                   >
                     View Code Implementation →
                   </button>
@@ -514,7 +514,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
               <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
                 
                 {/* Code pane (7 cols) */}
-                <div className="lg:col-span-7 bg-[#090d18] p-4 font-mono text-xs overflow-x-auto border-b lg:border-b-0 lg:border-r border-white/[0.08]">
+                <div className="lg:col-span-7 bg-[#111111] p-4 font-mono text-xs overflow-x-auto border-b lg:border-b-0 lg:border-r border-white/[0.08]">
                   
                   {/* Language switch bar */}
                   <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/[0.08]">
@@ -525,7 +525,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                           onClick={() => setLang(l)}
                           className={`px-2.5 py-1 text-xs font-mono rounded transition-colors ${
                             lang === l
-                              ? 'bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30'
+                              ? 'bg-zinc-500/20 text-zinc-300 font-bold border border-zinc-500/30'
                               : 'text-zinc-400 hover:text-white'
                           }`}
                         >
@@ -538,7 +538,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                       onClick={handleCopy}
                       className="flex items-center gap-1 text-[11px] font-mono text-zinc-400 hover:text-white px-2 py-0.5 rounded border border-white/[0.08]"
                     >
-                      {copied ? <Check className="h-3 w-3 text-emerald-400" /> : <Copy className="h-3 w-3" />}
+                      {copied ? <Check className="h-3 w-3 text-zinc-400" /> : <Copy className="h-3 w-3" />}
                       <span>{copied ? 'Copied' : 'Copy'}</span>
                     </button>
                   </div>
@@ -557,14 +557,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                 </div>
 
                 {/* Test Results Output (5 cols) */}
-                <div className="lg:col-span-5 bg-[#080b14] p-5 flex flex-col justify-between text-xs font-mono">
+                <div className="lg:col-span-5 bg-[#0a0a0a] p-5 flex flex-col justify-between text-xs font-mono">
                   <div>
                     <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
-                      <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                      <div className="flex items-center gap-1.5 text-zinc-400 font-bold">
                         <CheckCircle2 className="h-4 w-4" />
                         <span>Accepted</span>
                       </div>
-                      <span className="text-[11px] text-zinc-400">Runtime: <strong className="text-emerald-400">32 ms</strong></span>
+                      <span className="text-[11px] text-zinc-400">Runtime: <strong className="text-zinc-400">32 ms</strong></span>
                     </div>
 
                     {/* Testcase tabs */}
@@ -593,7 +593,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                           <>
                             <div>nums = [2, 7, 11, 15]</div>
                             <div>target = 9</div>
-                            <div className="pt-1 border-t border-white/[0.06] text-emerald-400 font-bold">
+                            <div className="pt-1 border-t border-white/[0.06] text-zinc-400 font-bold">
                               Output: [0, 1] ✓
                             </div>
                           </>
@@ -602,7 +602,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                           <>
                             <div>nums = [3, 2, 4]</div>
                             <div>target = 6</div>
-                            <div className="pt-1 border-t border-white/[0.06] text-emerald-400 font-bold">
+                            <div className="pt-1 border-t border-white/[0.06] text-zinc-400 font-bold">
                               Output: [1, 2] ✓
                             </div>
                           </>
@@ -611,7 +611,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                           <>
                             <div>nums = [3, 3]</div>
                             <div>target = 6</div>
-                            <div className="pt-1 border-t border-white/[0.06] text-emerald-400 font-bold">
+                            <div className="pt-1 border-t border-white/[0.06] text-zinc-400 font-bold">
                               Output: [0, 1] ✓
                             </div>
                           </>
@@ -623,17 +623,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onLaunchCompiler, onEx
                     <div className="mt-4 rounded-lg border border-white/[0.08] bg-white/[0.02] p-3 space-y-2">
                       <div className="flex items-center justify-between text-[11px]">
                         <span className="text-zinc-400">Speed Percentile</span>
-                        <span className="text-emerald-400 font-bold font-mono">Beats 96.4%</span>
+                        <span className="text-zinc-400 font-bold font-mono">Beats 96.4%</span>
                       </div>
                       <div className="h-1.5 w-full bg-white/[0.08] rounded-full overflow-hidden">
-                        <div className="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full" style={{ width: '96.4%' }} />
+                        <div className="bg-gradient-to-r from-zinc-500 to-zinc-400 h-full rounded-full" style={{ width: '96.4%' }} />
                       </div>
                     </div>
                   </div>
 
                   <div className="pt-3 border-t border-white/[0.08] flex items-center justify-between text-[11px] text-zinc-500">
                     <span>3 / 3 test cases passed</span>
-                    <a href="#problems" className="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-0.5">
+                    <a href="#problems" className="text-zinc-400 hover:text-zinc-300 font-semibold flex items-center gap-0.5">
                       Next Problem →
                     </a>
                   </div>

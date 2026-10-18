@@ -53,13 +53,13 @@ export const CompanyTrustBar: React.FC = () => {
   const [activeCompany, setActiveCompany] = useState<Company>(COMPANIES[0]);
 
   return (
-    <section id="companies" className="py-12 bg-[#07090e] border-b border-white/[0.08]">
+    <section id="companies" className="py-12 bg-[#000000] border-b border-white/[0.08]">
       <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6">
           <div className="space-y-1">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
               <Building2 className="h-4 w-4" />
               Targeted Interview Vaults
             </div>
@@ -87,14 +87,14 @@ export const CompanyTrustBar: React.FC = () => {
         </div>
 
         {/* Active Company Detail Spotlight Card */}
-        <Card variant="surface" className="mt-4 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-emerald-500/20">
+        <Card variant="surface" className="mt-4 p-4 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-zinc-500/20">
           <div className="space-y-1">
             <div className="text-xs font-mono text-zinc-400 flex items-center gap-2">
-              <Badge variant="emerald" size="xs">
+              <Badge variant="blue" size="xs">
                 {activeCompany.name} Technical Track
               </Badge>
               <span className="text-zinc-600">|</span>
-              <span className="text-emerald-400 font-semibold">{activeCompany.count} Verified Questions</span>
+              <span className="text-zinc-400 font-semibold">{activeCompany.count} Verified Questions</span>
             </div>
             <div className="text-xs text-zinc-300">
               High frequency patterns: <strong className="text-white">{activeCompany.topTopics}</strong>
@@ -108,7 +108,7 @@ export const CompanyTrustBar: React.FC = () => {
               const el = document.getElementById('problems');
               el?.scrollIntoView({ behavior: 'smooth' });
             }}
-            icon={<ChevronRight className="w-3.5 h-3.5 text-emerald-400" />}
+            icon={<ChevronRight className="w-3.5 h-3.5 text-zinc-400" />}
             iconPosition="right"
           >
             Filter {activeCompany.name} Questions

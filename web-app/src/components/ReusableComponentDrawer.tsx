@@ -98,14 +98,14 @@ export const ReusableComponentDrawer: React.FC<{
   // INTERACTIVE WORKBENCH STATES
   // -------------------------------------------------------------
   // Button Atom
-  const [btnVariant, setBtnVariant] = useState<'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'amber'>('primary');
+  const [btnVariant, setBtnVariant] = useState<'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'blue'>('primary');
   const [btnSize, setBtnSize] = useState<'xs' | 'sm' | 'md' | 'lg'>('sm');
   const [btnLoading, setBtnLoading] = useState(false);
   const [btnClicks, setBtnClicks] = useState(0);
 
   // Badge Atom
   const [badgeDifficulty, setBadgeDifficulty] = useState<DifficultyLevel>('Medium');
-  const [badgeVariant, setBadgeVariant] = useState<'emerald' | 'amber' | 'rose' | 'cyan' | 'purple' | 'neutral'>('cyan');
+  const [badgeVariant, setBadgeVariant] = useState<'blue' | 'blue' | 'blue' | 'blue' | 'blue' | 'neutral'>('blue');
   const [badgeCustomText, setBadgeCustomText] = useState('O(log N)');
 
   // Card Atom
@@ -123,7 +123,7 @@ export const ReusableComponentDrawer: React.FC<{
 
   // ProgressBar Atom
   const [progressVal, setProgressVal] = useState(72);
-  const [progressVariant, setProgressVariant] = useState<'emerald' | 'amber' | 'rose' | 'cyan' | 'purple'>('emerald');
+  const [progressVariant, setProgressVariant] = useState<'blue' | 'blue' | 'blue' | 'blue' | 'blue'>('blue');
 
   // TabGroup Atom
   const [tabVariant, setTabVariant] = useState<'pill' | 'underline'>('pill');
@@ -147,7 +147,7 @@ export const ReusableComponentDrawer: React.FC<{
 
   // StatMetricCard Molecule
   const [statVal, setStatVal] = useState('382 / 520');
-  const [statVariant, setStatVariant] = useState<'emerald' | 'cyan' | 'amber' | 'purple' | 'neutral'>('emerald');
+  const [statVariant, setStatVariant] = useState<'blue' | 'blue' | 'blue' | 'blue' | 'neutral'>('blue');
 
   // SearchInput Molecule
   const [searchVal, setSearchVal] = useState('Dynamic Programming');
@@ -182,8 +182,8 @@ export const ReusableComponentDrawer: React.FC<{
       category: 'Tokens / Palette',
       icon: Palette,
       file: 'src/tokens/index.ts',
-      description: 'Master color tokens: Obsidian base canvas (#07090e, #0c101c), Difficulty emerald/amber/rose hues, Division cyan/purple tiers, and flame accents.',
-      propsSnippet: `export const tokens = {\n  colors: {\n    base: { canvas: '#07090e', surface: '#0c101c', elevated: '#111625' },\n    difficulty: {\n      easy: '#10b981',\n      medium: '#f59e0b',\n      hard: '#f43f5e'\n    },\n    divisions: { div1: '#22d3ee', div2: '#c084fc', div3: '#94a3b8' }\n  }\n};`,
+      description: 'Master color tokens: black and white base surfaces with blue difficulty, division, and activity accents.',
+      propsSnippet: `export const tokens = {\n  colors: {\n    base: { canvas: '#000000', surface: '#111111', elevated: '#171717' },\n    difficulty: {\n      easy: '#a1a1aa',\n      medium: '#d4d4d8',\n      hard: '#71717a'\n    },\n    divisions: { div1: '#d4d4d8', div2: '#a1a1aa', div3: '#a1a1aa' }\n  }\n};`,
       usageSnippet: `import { tokens } from '../tokens';\nconst easyColor = tokens.colors.difficulty.easy;`
     },
     {
@@ -195,7 +195,7 @@ export const ReusableComponentDrawer: React.FC<{
       file: 'src/tokens/index.ts',
       description: 'Standardized typography rules: Inter for UI prose, JetBrains/Consolas monospace for code, metrics, Big-O invariants, and tabular data.',
       propsSnippet: `export const tokens = {\n  typography: {\n    fontSans: 'ui-sans-serif, system-ui, -apple-system, sans-serif',\n    fontMono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',\n    sizes: { xs: '0.75rem', sm: '0.875rem', base: '1rem', lg: '1.125rem' }\n  }\n};`,
-      usageSnippet: `<span className="font-mono text-emerald-400 font-bold">O(N log N)</span>`
+      usageSnippet: `<span className="font-mono text-zinc-400 font-bold">O(N log N)</span>`
     },
     {
       id: 'token-radii',
@@ -205,8 +205,8 @@ export const ReusableComponentDrawer: React.FC<{
       icon: LayoutGrid,
       file: 'src/tokens/index.ts',
       description: 'Unified geometry: rounded-xl for interactive inputs and pills, rounded-2xl for surface cards, and subtle border-white/[0.08] for clean separation.',
-      propsSnippet: `export const tokens = {\n  radii: { sm: '6px', md: '8px', lg: '12px', xl: '16px', '2xl': '20px', full: '9999px' },\n  borders: { standard: 'border-white/[0.08]', active: 'border-emerald-500/50' }\n};`,
-      usageSnippet: `<div className="rounded-2xl border border-white/[0.08] bg-[#0c101c]" />`
+      propsSnippet: `export const tokens = {\n  radii: { sm: '6px', md: '8px', lg: '12px', xl: '16px', '2xl': '20px', full: '9999px' },\n  borders: { standard: 'border-white/[0.08]', active: 'border-zinc-500/50' }\n};`,
+      usageSnippet: `<div className="rounded-2xl border border-white/[0.08] bg-[#111111]" />`
     },
 
     // 2. ATOMS
@@ -218,7 +218,7 @@ export const ReusableComponentDrawer: React.FC<{
       icon: MousePointerClick,
       file: 'src/components/atoms/Button.tsx',
       description: 'Tactile action button supporting 6 color variants, 4 sizes, loading spinner state, and tactile scale feedback.',
-      propsSnippet: `interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'amber';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n  isLoading?: boolean;\n  icon?: React.ReactNode;\n}`,
+      propsSnippet: `interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'blue';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n  isLoading?: boolean;\n  icon?: React.ReactNode;\n}`,
       usageSnippet: `<Button variant="primary" size="sm" icon={<Play className="w-3.5 h-3.5" />}>\n  Run Code\n</Button>`
     },
     {
@@ -229,8 +229,8 @@ export const ReusableComponentDrawer: React.FC<{
       icon: Sparkles,
       file: 'src/components/atoms/Badge.tsx',
       description: 'Semantic pills for system states and problem difficulty (Easy/Medium/Hard). Enforces standardized LeetCode hues.',
-      propsSnippet: `interface BadgeProps {\n  variant?: 'emerald' | 'amber' | 'rose' | 'cyan' | 'purple' | 'neutral';\n  size?: 'xs' | 'sm' | 'md';\n  children: React.ReactNode;\n}\n\ninterface DifficultyBadgeProps {\n  difficulty: 'Easy' | 'Medium' | 'Hard';\n  size?: 'xs' | 'sm' | 'md';\n}`,
-      usageSnippet: `<DifficultyBadge difficulty="Medium" size="sm" />\n<Badge variant="cyan" size="xs">Div 1</Badge>`
+      propsSnippet: `interface BadgeProps {\n  variant?: 'blue' | 'blue' | 'blue' | 'blue' | 'blue' | 'neutral';\n  size?: 'xs' | 'sm' | 'md';\n  children: React.ReactNode;\n}\n\ninterface DifficultyBadgeProps {\n  difficulty: 'Easy' | 'Medium' | 'Hard';\n  size?: 'xs' | 'sm' | 'md';\n}`,
+      usageSnippet: `<DifficultyBadge difficulty="Medium" size="sm" />\n<Badge variant="blue" size="xs">Div 1</Badge>`
     },
     {
       id: 'atom-card',
@@ -239,7 +239,7 @@ export const ReusableComponentDrawer: React.FC<{
       category: 'Atoms / Containers',
       icon: Layers,
       file: 'src/components/atoms/Card.tsx',
-      description: 'Standardized card surfaces matching obsidian design tokens (#0c101c base, border-white/[0.08], subtle elevation).',
+      description: 'Standardized card surfaces matching obsidian design tokens (#111111 base, border-white/[0.08], subtle elevation).',
       propsSnippet: `interface CardProps extends React.HTMLAttributes<HTMLDivElement> {\n  variant?: 'default' | 'surface' | 'interactive' | 'sunken';\n  glow?: boolean;\n}`,
       usageSnippet: `<Card variant="surface" className="p-4">\n  <CardTitle>Two Pointers Track</CardTitle>\n  <CardDescription>Master inward and outward search intervals.</CardDescription>\n</Card>`
     },
@@ -250,7 +250,7 @@ export const ReusableComponentDrawer: React.FC<{
       category: 'Atoms / Form Elements',
       icon: Sliders,
       file: 'src/components/atoms/Input.tsx',
-      description: 'Standard form inputs with prefix and suffix slots, focused emerald outline, monospace typography, and subtle error states.',
+      description: 'Standard form inputs with prefix and suffix slots, focused blue outline, monospace typography, and subtle error states.',
       propsSnippet: `interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {\n  prefix?: React.ReactNode;\n  suffix?: React.ReactNode;\n  error?: boolean;\n}`,
       usageSnippet: `<Input \n  prefix={<Search className="w-4 h-4 text-zinc-500" />} \n  placeholder="Filter by keyword..." \n/>`
     },
@@ -273,8 +273,8 @@ export const ReusableComponentDrawer: React.FC<{
       icon: Sliders,
       file: 'src/components/atoms/ProgressBar.tsx',
       description: 'Multi-variant progress track with smooth CSS transitions, glowing accent heads, and size tiers.',
-      propsSnippet: `interface ProgressBarProps {\n  value: number;\n  max?: number;\n  variant?: 'emerald' | 'amber' | 'rose' | 'cyan' | 'purple';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n}`,
-      usageSnippet: `<ProgressBar value={82} variant="emerald" size="md" />`
+      propsSnippet: `interface ProgressBarProps {\n  value: number;\n  max?: number;\n  variant?: 'blue' | 'blue' | 'blue' | 'blue' | 'blue';\n  size?: 'xs' | 'sm' | 'md' | 'lg';\n}`,
+      usageSnippet: `<ProgressBar value={82} variant="blue" size="md" />`
     },
     {
       id: 'atom-tabs',
@@ -341,8 +341,8 @@ export const ReusableComponentDrawer: React.FC<{
       icon: Activity,
       file: 'src/components/molecules/StatMetricCard.tsx',
       description: 'Standardized scorecard displaying icon container, primary metric number, sublabel, and trend percentage badge.',
-      propsSnippet: `interface StatMetricCardProps {\n  label: string;\n  value: string | number;\n  subtext?: string;\n  icon: React.ReactNode;\n  trend?: { direction: 'up' | 'down' | 'neutral'; text: string };\n  variant?: 'emerald' | 'cyan' | 'amber' | 'purple' | 'neutral';\n}`,
-      usageSnippet: `<StatMetricCard label="Solved" value="382 / 520" icon={<BookOpen />} variant="emerald" />`
+      propsSnippet: `interface StatMetricCardProps {\n  label: string;\n  value: string | number;\n  subtext?: string;\n  icon: React.ReactNode;\n  trend?: { direction: 'up' | 'down' | 'neutral'; text: string };\n  variant?: 'blue' | 'blue' | 'blue' | 'blue' | 'neutral';\n}`,
+      usageSnippet: `<StatMetricCard label="Solved" value="382 / 520" icon={<BookOpen />} variant="blue" />`
     },
     {
       id: 'mol-search',
@@ -522,7 +522,7 @@ export const ReusableComponentDrawer: React.FC<{
       case 'token-colors':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5 pb-2 border-b border-white/[0.06]">
               <Palette className="w-3.5 h-3.5" />
               Interactive Design Tokens Palette
             </div>
@@ -531,42 +531,42 @@ export const ReusableComponentDrawer: React.FC<{
               <div className="text-[11px] font-mono text-zinc-400">Difficulty Hues (LeetCode & CodeHurdle Standard):</div>
               <div className="grid grid-cols-3 gap-2">
                 <div 
-                  onClick={() => showToast("Easy Token: #10b981 (Emerald)")} 
-                  className="p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                  onClick={() => showToast("Easy Token: #a1a1aa (Blue)")}
+                  className="p-3 rounded-xl border border-zinc-500/30 bg-zinc-500/10 cursor-pointer hover:scale-105 transition-all text-center"
                 >
-                  <div className="w-4 h-4 rounded-full bg-emerald-400 mx-auto mb-1 shadow-sm shadow-emerald-500/50" />
-                  <div className="text-xs font-bold text-emerald-400 font-mono">Easy</div>
-                  <div className="text-[10px] text-zinc-400 font-mono">#10b981</div>
+                  <div className="w-4 h-4 rounded-full bg-zinc-400 mx-auto mb-1 shadow-sm shadow-zinc-500/50" />
+                  <div className="text-xs font-bold text-zinc-400 font-mono">Easy</div>
+                  <div className="text-[10px] text-zinc-400 font-mono">#a1a1aa</div>
                 </div>
 
                 <div 
-                  onClick={() => showToast("Medium Token: #f59e0b (Amber)")} 
-                  className="p-3 rounded-xl border border-amber-500/30 bg-amber-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                  onClick={() => showToast("Medium Token: #d4d4d8 (Blue)")}
+                  className="p-3 rounded-xl border border-zinc-500/30 bg-zinc-500/10 cursor-pointer hover:scale-105 transition-all text-center"
                 >
-                  <div className="w-4 h-4 rounded-full bg-amber-400 mx-auto mb-1 shadow-sm shadow-amber-500/50" />
-                  <div className="text-xs font-bold text-amber-400 font-mono">Medium</div>
-                  <div className="text-[10px] text-zinc-400 font-mono">#f59e0b</div>
+                  <div className="w-4 h-4 rounded-full bg-zinc-400 mx-auto mb-1 shadow-sm shadow-zinc-500/50" />
+                  <div className="text-xs font-bold text-zinc-400 font-mono">Medium</div>
+                  <div className="text-[10px] text-zinc-400 font-mono">#d4d4d8</div>
                 </div>
 
                 <div 
-                  onClick={() => showToast("Hard Token: #f43f5e (Rose)")} 
-                  className="p-3 rounded-xl border border-rose-500/30 bg-rose-500/10 cursor-pointer hover:scale-105 transition-all text-center"
+                  onClick={() => showToast("Hard Token: #71717a (Blue)")}
+                  className="p-3 rounded-xl border border-zinc-500/30 bg-zinc-500/10 cursor-pointer hover:scale-105 transition-all text-center"
                 >
-                  <div className="w-4 h-4 rounded-full bg-rose-400 mx-auto mb-1 shadow-sm shadow-rose-500/50" />
-                  <div className="text-xs font-bold text-rose-400 font-mono">Hard</div>
-                  <div className="text-[10px] text-zinc-400 font-mono">#f43f5e</div>
+                  <div className="w-4 h-4 rounded-full bg-zinc-400 mx-auto mb-1 shadow-sm shadow-zinc-500/50" />
+                  <div className="text-xs font-bold text-zinc-400 font-mono">Hard</div>
+                  <div className="text-[10px] text-zinc-400 font-mono">#71717a</div>
                 </div>
               </div>
 
               <div className="text-[11px] font-mono text-zinc-400 pt-2">Contest Division Tiers:</div>
               <div className="grid grid-cols-3 gap-2 font-mono text-xs">
-                <div className="p-2.5 rounded-lg border border-cyan-500/25 bg-cyan-950/20 text-cyan-300 text-center">
+                <div className="p-2.5 rounded-lg border border-zinc-500/25 bg-zinc-950/20 text-zinc-300 text-center">
                   Div 1 (1900+)
                 </div>
-                <div className="p-2.5 rounded-lg border border-purple-500/25 bg-purple-950/20 text-purple-300 text-center">
+                <div className="p-2.5 rounded-lg border border-zinc-500/25 bg-zinc-950/20 text-zinc-300 text-center">
                   Div 2 (1400-1899)
                 </div>
-                <div className="p-2.5 rounded-lg border border-slate-500/25 bg-slate-900/40 text-slate-400 text-center">
+                <div className="p-2.5 rounded-lg border border-zinc-500/25 bg-zinc-900/40 text-zinc-400 text-center">
                   Div 3 (&lt;1400)
                 </div>
               </div>
@@ -579,11 +579,11 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <MousePointerClick className="w-3.5 h-3.5" />
                 Button Atom Workbench
               </span>
-              <span className="text-xs font-mono text-zinc-400">Clicks: <strong className="text-emerald-400">{btnClicks}</strong></span>
+              <span className="text-xs font-mono text-zinc-400">Clicks: <strong className="text-zinc-400">{btnClicks}</strong></span>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
@@ -592,14 +592,14 @@ export const ReusableComponentDrawer: React.FC<{
                 <select 
                   value={btnVariant} 
                   onChange={e => setBtnVariant(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
                 >
                   <option value="primary">primary</option>
                   <option value="secondary">secondary</option>
                   <option value="outline">outline</option>
                   <option value="ghost">ghost</option>
                   <option value="danger">danger</option>
-                  <option value="amber">amber</option>
+                  <option value="blue">blue</option>
                 </select>
               </div>
 
@@ -608,7 +608,7 @@ export const ReusableComponentDrawer: React.FC<{
                 <select 
                   value={btnSize} 
                   onChange={e => setBtnSize(e.target.value as any)}
-                  className="w-full bg-[#0c101c] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
+                  className="w-full bg-[#111111] border border-white/[0.08] rounded-lg px-2 py-1.5 text-xs text-zinc-200"
                 >
                   <option value="xs">xs</option>
                   <option value="sm">sm</option>
@@ -623,7 +623,7 @@ export const ReusableComponentDrawer: React.FC<{
                     type="checkbox" 
                     checked={btnLoading} 
                     onChange={e => setBtnLoading(e.target.checked)}
-                    className="rounded border-zinc-700 accent-emerald-500" 
+                    className="rounded border-zinc-700 accent-zinc-500" 
                   />
                   <span>Loading</span>
                 </label>
@@ -652,12 +652,12 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <BookOpen className="w-3.5 h-3.5" />
                 ProblemRow Molecule (Live Interactive Item)
               </span>
               <span className="text-xs font-mono">
-                Status: <strong className={rowSolved ? 'text-emerald-400' : 'text-zinc-500'}>{rowSolved ? 'SOLVED' : 'UNSOLVED'}</strong>
+                Status: <strong className={rowSolved ? 'text-zinc-400' : 'text-zinc-500'}>{rowSolved ? 'SOLVED' : 'UNSOLVED'}</strong>
               </span>
             </div>
 
@@ -685,13 +685,13 @@ export const ReusableComponentDrawer: React.FC<{
                   max="100" 
                   value={rowFreq} 
                   onChange={e => setRowFreq(Number(e.target.value))}
-                  className="w-20 accent-amber-500 cursor-pointer" 
+                  className="w-20 accent-zinc-500 cursor-pointer" 
                 />
                 <span className="font-mono text-zinc-300">{rowFreq}%</span>
               </div>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-white/[0.08] bg-[#0c101c]">
+            <div className="overflow-x-auto rounded-xl border border-white/[0.08] bg-[#111111]">
               <table className="w-full text-left border-collapse text-xs">
                 <tbody>
                   <ProblemRow
@@ -734,11 +734,11 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Building2 className="w-3.5 h-3.5" />
                 CompanyPill Molecule (Live Selection Filter)
               </span>
-              <span className="text-xs font-mono text-zinc-400">Selected: <strong className="text-emerald-400">{activeCompanyDemo}</strong></span>
+              <span className="text-xs font-mono text-zinc-400">Selected: <strong className="text-zinc-400">{activeCompanyDemo}</strong></span>
             </div>
 
             <div className="flex flex-wrap gap-2.5">
@@ -769,7 +769,7 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <HelpCircle className="w-3.5 h-3.5" />
                 FaqAccordionItem Molecule
               </span>
@@ -794,7 +794,7 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Swords className="w-3.5 h-3.5" />
                 ContestCard Molecule (Live Countdown & Registration)
               </span>
@@ -822,7 +822,7 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Sliders className="w-3.5 h-3.5" />
                 DifficultyBreakdownBar Molecule
               </span>
@@ -849,7 +849,7 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Play className="w-3.5 h-3.5" />
                 AlgorithmStepController Molecule
               </span>
@@ -878,7 +878,7 @@ export const ReusableComponentDrawer: React.FC<{
       case 'mol-elo':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold pb-2 border-b border-white/[0.06]">
               Gamification Badges (Streak & Elo)
             </div>
 
@@ -887,7 +887,7 @@ export const ReusableComponentDrawer: React.FC<{
                 <div className="text-xs font-bold text-white mb-1">Daily Habit Streak</div>
                 <StreakBadge days={streakDays} />
               </div>
-              <Button size="xs" variant="amber" onClick={() => {
+              <Button size="xs" variant="blue" onClick={() => {
                 setStreakDays(s => s + 1);
                 showToast(`Streak Increased to ${streakDays + 1} Days! 🔥`);
               }}>
@@ -907,7 +907,7 @@ export const ReusableComponentDrawer: React.FC<{
                 step="25"
                 value={eloRating} 
                 onChange={e => setEloRating(Number(e.target.value))}
-                className="w-full accent-cyan-500 cursor-pointer" 
+                className="w-full accent-zinc-500 cursor-pointer" 
               />
             </div>
           </div>
@@ -917,7 +917,7 @@ export const ReusableComponentDrawer: React.FC<{
       case 'mol-stat':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold pb-2 border-b border-white/[0.06]">
               StatMetricCard Telemetry Molecule
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -925,7 +925,7 @@ export const ReusableComponentDrawer: React.FC<{
                 label="Mastery Index"
                 value={statVal}
                 subtext="Top 4.8% worldwide"
-                icon={<BookOpen className="w-4 h-4 text-emerald-400" />}
+                icon={<BookOpen className="w-4 h-4 text-zinc-400" />}
                 trend={{ direction: 'up', text: '+12 this week' }}
                 variant={statVariant}
               />
@@ -933,9 +933,9 @@ export const ReusableComponentDrawer: React.FC<{
                 label="Contest Rating"
                 value="1,840 Elo"
                 subtext="Division 1 Candidate Master"
-                icon={<Award className="w-4 h-4 text-cyan-400" />}
+                icon={<Award className="w-4 h-4 text-zinc-400" />}
                 trend={{ direction: 'up', text: '+64 pts in round #89' }}
-                variant="cyan"
+                variant="blue"
               />
             </div>
           </div>
@@ -945,7 +945,7 @@ export const ReusableComponentDrawer: React.FC<{
       case 'mol-search':
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
-            <div className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold pb-2 border-b border-white/[0.06]">
+            <div className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold pb-2 border-b border-white/[0.06]">
               SearchInput Molecule with ⌘K Badge
             </div>
             <SearchInput
@@ -958,7 +958,7 @@ export const ReusableComponentDrawer: React.FC<{
               placeholder="Search problems by keyword, company tag, or pattern..."
             />
             <div className="text-xs font-mono text-zinc-500">
-              Query: <strong className="text-emerald-400">"{searchVal}"</strong>
+              Query: <strong className="text-zinc-400">"{searchVal}"</strong>
             </div>
           </div>
         );
@@ -974,7 +974,7 @@ export const ReusableComponentDrawer: React.FC<{
         return (
           <div className="space-y-4 p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08]">
             <div className="flex items-center justify-between pb-2 border-b border-white/[0.06]">
-              <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-bold flex items-center gap-1.5">
                 <Terminal className="w-3.5 h-3.5" />
                 {selectedComp.name} (Organism)
               </span>
@@ -999,23 +999,23 @@ export const ReusableComponentDrawer: React.FC<{
     <div className="fixed inset-0 z-50 flex justify-end bg-black/75 backdrop-blur-sm font-sans animate-fade-in">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed top-5 right-5 z-[60] bg-emerald-500 text-zinc-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 animate-bounce">
+        <div className="fixed top-5 right-5 z-[60] bg-zinc-500 text-zinc-950 font-bold text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2 animate-bounce">
           <CheckCircle2 className="w-4 h-4" />
           <span>{toastMessage}</span>
         </div>
       )}
 
-      <div className="w-full max-w-3xl bg-[#0b0e14] border-l border-white/[0.08] h-full flex flex-col shadow-2xl">
+      <div className="w-full max-w-3xl bg-[#111111] border-l border-white/[0.08] h-full flex flex-col shadow-2xl">
         {/* Header */}
         <div className="p-5 border-b border-white/[0.08] flex items-center justify-between bg-zinc-950/80">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+            <div className="p-2.5 rounded-xl bg-zinc-500/10 border border-zinc-500/20 text-zinc-400">
               <Layers className="w-5 h-5" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <h2 className="text-base font-bold text-white">CodeHurdle Atomic Architecture</h2>
-                <Badge variant="emerald" size="xs">4 Tiers Active</Badge>
+                <Badge variant="blue" size="xs">4 Tiers Active</Badge>
               </div>
               <p className="text-xs text-zinc-400 mt-0.5">Tokens · Atoms · Molecules · Organisms</p>
             </div>
@@ -1064,17 +1064,17 @@ export const ReusableComponentDrawer: React.FC<{
                   onClick={() => setSelectedComp(c)}
                   className={`p-3 rounded-xl border text-left transition-all flex flex-col gap-1.5 cursor-pointer ${
                     isSelected
-                      ? 'bg-zinc-800/90 border-emerald-500/60 text-white shadow-lg shadow-emerald-950/20'
+                      ? 'bg-zinc-800/90 border-zinc-500/60 text-white shadow-lg shadow-zinc-950/20'
                       : 'bg-zinc-900/40 border-white/[0.06] text-zinc-400 hover:text-zinc-200 hover:border-zinc-700'
                   }`}
                 >
                   <div className="flex items-center justify-between w-full">
-                    <Icon className={`w-4 h-4 ${isSelected ? 'text-emerald-400' : 'text-zinc-500'}`} />
+                    <Icon className={`w-4 h-4 ${isSelected ? 'text-zinc-400' : 'text-zinc-500'}`} />
                     <span className={`text-[9px] font-mono uppercase px-1.5 py-0.5 rounded ${
-                      c.tier === 'token' ? 'bg-emerald-500/10 text-emerald-400' :
-                      c.tier === 'atom' ? 'bg-cyan-500/10 text-cyan-400' :
-                      c.tier === 'molecule' ? 'bg-amber-500/10 text-amber-400' :
-                      'bg-purple-500/10 text-purple-400'
+                      c.tier === 'token' ? 'bg-zinc-500/10 text-zinc-400' :
+                      c.tier === 'atom' ? 'bg-zinc-500/10 text-zinc-400' :
+                      c.tier === 'molecule' ? 'bg-zinc-500/10 text-zinc-400' :
+                      'bg-zinc-500/10 text-zinc-400'
                     }`}>
                       {c.tier}
                     </span>
@@ -1093,9 +1093,9 @@ export const ReusableComponentDrawer: React.FC<{
                 <div className="flex items-center gap-2">
                   <Badge 
                     variant={
-                      selectedComp.tier === 'token' ? 'emerald' :
-                      selectedComp.tier === 'atom' ? 'cyan' :
-                      selectedComp.tier === 'molecule' ? 'amber' : 'purple'
+                      selectedComp.tier === 'token' ? 'blue' :
+                      selectedComp.tier === 'atom' ? 'blue' :
+                      selectedComp.tier === 'molecule' ? 'blue' : 'blue'
                     }
                     size="xs"
                   >
@@ -1145,11 +1145,11 @@ export const ReusableComponentDrawer: React.FC<{
                   onClick={() => handleCopy(selectedComp.usageSnippet)}
                   className="flex items-center gap-1 text-[11px] text-zinc-400 hover:text-white cursor-pointer"
                 >
-                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copied ? <Check className="w-3.5 h-3.5 text-zinc-400" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copied ? 'Copied' : 'Copy Code'}</span>
                 </button>
               </div>
-              <div className="p-3.5 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-emerald-300 overflow-x-auto">
+              <div className="p-3.5 rounded-xl bg-zinc-950 border border-white/[0.08] font-mono text-xs text-zinc-300 overflow-x-auto">
                 <pre>{selectedComp.usageSnippet}</pre>
               </div>
             </div>
@@ -1159,7 +1159,7 @@ export const ReusableComponentDrawer: React.FC<{
         {/* Footer */}
         <div className="p-4 border-t border-white/[0.08] bg-zinc-950/70 flex items-center justify-between text-xs text-zinc-400">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-zinc-400 animate-pulse"></span>
             <span>4-Tier Atomic Structure: Tokens → Atoms → Molecules → Organisms</span>
           </div>
           <Button 

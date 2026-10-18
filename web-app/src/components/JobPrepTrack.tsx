@@ -42,7 +42,7 @@ export const JobPrepTrack: React.FC = () => {
   ];
 
   return (
-    <section id="tracks" className="py-16 sm:py-20 bg-[#090a0f] border-b border-white/[0.08]">
+    <section id="tracks" className="py-16 sm:py-20 bg-[#000000] border-b border-white/[0.08]">
       <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -68,7 +68,7 @@ export const JobPrepTrack: React.FC = () => {
             return (
               <div 
                 key={idx}
-                className="rounded-lg border border-white/[0.08] bg-[#0c0e16] p-5 flex flex-col justify-between hover:border-white/[0.16] transition-colors"
+                className="rounded-lg border border-white/[0.08] bg-[#111111] p-5 flex flex-col justify-between hover:border-white/[0.16] transition-colors"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
@@ -95,7 +95,7 @@ export const JobPrepTrack: React.FC = () => {
                     <span className="text-zinc-200">{pct}%</span>
                   </div>
                   <div className="h-1 w-full bg-white/[0.06] rounded-full overflow-hidden mb-3">
-                    <div className="h-full bg-emerald-400 rounded-full" style={{ width: `${pct}%` }} />
+                    <div className="h-full bg-zinc-400 rounded-full" style={{ width: `${pct}%` }} />
                   </div>
                   
                   <a

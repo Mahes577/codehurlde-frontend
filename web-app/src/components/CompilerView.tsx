@@ -275,9 +275,9 @@ Complexity: Time O(log n), Space O(1).`);
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-zinc-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-[#000000] text-zinc-100 flex flex-col font-sans">
       {/* Top Navigation & Session Bar */}
-      <header className="h-14 border-b border-white/[0.08] bg-[#0c101c]/90 backdrop-blur px-4 flex items-center justify-between shrink-0">
+      <header className="h-14 border-b border-white/[0.08] bg-[#111111]/90 backdrop-blur px-4 flex items-center justify-between shrink-0">
         <div className="flex items-center gap-3">
           {onBackToDirectory && (
             <Button 
@@ -291,7 +291,7 @@ Complexity: Time O(log n), Space O(1).`);
           )}
 
           <div className="flex items-center gap-2">
-            <Badge variant="emerald" size="sm">
+            <Badge variant="blue" size="sm">
               {SAMPLE_PROBLEM.track}
             </Badge>
             <span className="text-zinc-600">/</span>
@@ -305,9 +305,9 @@ Complexity: Time O(log n), Space O(1).`);
         {/* Center: Live Session Timer */}
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900/90 border border-white/[0.08] text-xs font-mono text-zinc-300">
-            <Clock className="w-3.5 h-3.5 text-emerald-400" />
+            <Clock className="w-3.5 h-3.5 text-zinc-400" />
             <span>Session:</span>
-            <span className="font-semibold text-emerald-400">{formatTimer(timerSeconds)}</span>
+            <span className="font-semibold text-zinc-400">{formatTimer(timerSeconds)}</span>
             <button 
               onClick={() => setTimerRunning(!timerRunning)}
               className="text-[10px] text-zinc-500 hover:text-zinc-300 underline ml-1 cursor-pointer"
@@ -317,7 +317,7 @@ Complexity: Time O(log n), Space O(1).`);
           </div>
 
           <div className="hidden md:flex items-center gap-1.5 text-xs text-zinc-400">
-            <Flame className="w-3.5 h-3.5 text-amber-400" />
+            <Flame className="w-3.5 h-3.5 text-zinc-400" />
             <span>+100 XP upon completion</span>
           </div>
         </div>
@@ -329,7 +329,7 @@ Complexity: Time O(log n), Space O(1).`);
             size="sm"
             onClick={handleRunCode}
             disabled={isRunning}
-            icon={<Play className={`w-3.5 h-3.5 text-emerald-400 fill-emerald-400 ${isRunning ? 'animate-spin' : ''}`} />}
+            icon={<Play className={`w-3.5 h-3.5 text-zinc-400 fill-zinc-400 ${isRunning ? 'animate-spin' : ''}`} />}
           >
             {isRunning ? 'Running...' : 'Run Code'}
           </Button>
@@ -349,7 +349,7 @@ Complexity: Time O(log n), Space O(1).`);
       {/* Main Split Body: Left Statement & Right Code/Terminal */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 min-h-0 overflow-hidden">
         {/* Left Panel: Description / AI Mentor / Notes (Col 1-5) */}
-        <div className="lg:col-span-5 border-r border-white/[0.08] flex flex-col bg-[#0c101c]/60 min-h-0 overflow-hidden">
+        <div className="lg:col-span-5 border-r border-white/[0.08] flex flex-col bg-[#111111]/60 min-h-0 overflow-hidden">
           {/* Tabs */}
           <div className="flex items-center justify-between border-b border-white/[0.08] px-3 bg-zinc-950/40">
             <TabGroup
@@ -358,8 +358,8 @@ Complexity: Time O(log n), Space O(1).`);
                 { 
                   id: 'mentor', 
                   label: 'AI Mentor', 
-                  icon: <Sparkles className="w-3.5 h-3.5 text-purple-400" />,
-                  badge: <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
+                  icon: <Sparkles className="w-3.5 h-3.5 text-zinc-400" />,
+                  badge: <span className="w-1.5 h-1.5 rounded-full bg-zinc-500 animate-pulse" />
                 },
                 { id: 'notes', label: 'Notes', icon: <BookOpen className="w-3.5 h-3.5" /> }
               ]}
@@ -408,15 +408,15 @@ Complexity: Time O(log n), Space O(1).`);
                     Aarav is checking the official school notice board where roll numbers are listed in strictly increasing order. He needs to quickly verify if his friend Rohan's roll number is present on the board.
                   </p>
                   <p>
-                    You are given a 0-indexed integer array <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">nums</code> of length <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">n</code> consisting of unique elements sorted in ascending order, and an integer <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code>.
+                    You are given a 0-indexed integer array <code className="text-zinc-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">nums</code> of length <code className="text-zinc-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">n</code> consisting of unique elements sorted in ascending order, and an integer <code className="text-zinc-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code>.
                   </p>
                   <p>
-                    Find and return the index of <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code> if it exists in the array. If <code className="text-emerald-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code> does not exist, return <code className="text-rose-400 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">-1</code>.
+                    Find and return the index of <code className="text-zinc-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code> if it exists in the array. If <code className="text-zinc-300 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">target</code> does not exist, return <code className="text-zinc-400 bg-zinc-900/90 px-1.5 py-0.5 rounded border border-white/[0.08]">-1</code>.
                   </p>
                   
-                  <Card variant="surface" className="p-3 border-emerald-500/30 bg-emerald-500/[0.04]">
-                    <div className="text-emerald-300 text-xs leading-relaxed">
-                      <strong className="text-emerald-400">Algorithmic Requirement:</strong> Your solution must run in <strong>O(log n)</strong> time complexity and O(1) auxiliary space.
+                  <Card variant="surface" className="p-3 border-zinc-500/30 bg-zinc-500/[0.04]">
+                    <div className="text-zinc-300 text-xs leading-relaxed">
+                      <strong className="text-zinc-400">Algorithmic Requirement:</strong> Your solution must run in <strong>O(log n)</strong> time complexity and O(1) auxiliary space.
                     </div>
                   </Card>
                 </div>
@@ -434,7 +434,7 @@ Complexity: Time O(log n), Space O(1).`);
                         </div>
                         <div>
                           <span className="text-zinc-500">Output: </span>
-                          <span className="text-emerald-400">{ex.expectedOutput}</span>
+                          <span className="text-zinc-400">{ex.expectedOutput}</span>
                         </div>
                         {ex.explanation && (
                           <div className="text-zinc-400 text-[11px] pt-1 border-t border-white/[0.06]">
@@ -470,12 +470,12 @@ Complexity: Time O(log n), Space O(1).`);
                       <div 
                         className={`max-w-[85%] rounded-xl p-3 text-xs leading-relaxed ${
                           msg.sender === 'user'
-                            ? 'bg-emerald-600 text-white rounded-br-sm'
+                            ? 'bg-zinc-600 text-white rounded-br-sm'
                             : 'bg-zinc-900/90 border border-white/[0.08] text-zinc-300 rounded-bl-sm'
                         }`}
                       >
                         {msg.sender === 'ai' && (
-                          <div className="flex items-center gap-1.5 text-purple-400 font-medium mb-1 text-[11px]">
+                          <div className="flex items-center gap-1.5 text-zinc-400 font-medium mb-1 text-[11px]">
                             <Sparkles className="w-3 h-3" />
                             <span>CodeHurdle AI Mentor</span>
                           </div>
@@ -554,12 +554,12 @@ Complexity: Time O(log n), Space O(1).`);
         </div>
 
         {/* Right Panel: Code Editor (Top) & Testbed/Terminal (Bottom) (Col 6-12) */}
-        <div className="lg:col-span-7 flex flex-col min-h-0 overflow-hidden bg-[#07090e]">
+        <div className="lg:col-span-7 flex flex-col min-h-0 overflow-hidden bg-[#000000]">
           {/* Editor Header */}
           <div className="h-10 border-b border-white/[0.08] px-4 bg-zinc-950/60 flex items-center justify-between shrink-0">
             {/* Language Selector */}
             <div className="flex items-center gap-2">
-              <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+              <Code2 className="w-3.5 h-3.5 text-zinc-400" />
               <div className="flex items-center gap-1">
                 {(['python', 'cpp', 'javascript'] as const).map(lang => (
                   <button
@@ -597,7 +597,7 @@ Complexity: Time O(log n), Space O(1).`);
           </div>
 
           {/* Interactive Code Area */}
-          <div className="flex-1 relative min-h-[300px] bg-[#07090e] p-4 font-mono text-xs overflow-auto">
+          <div className="flex-1 relative min-h-[300px] bg-[#000000] p-4 font-mono text-xs overflow-auto">
             {/* Line numbers + Textarea */}
             <div className="flex gap-3 h-full">
               <div className="select-none text-zinc-600 text-right pr-2 border-r border-white/[0.08] font-mono space-y-1">
@@ -609,7 +609,7 @@ Complexity: Time O(log n), Space O(1).`);
                 value={code}
                 onChange={e => setCode(e.target.value)}
                 spellCheck={false}
-                className="flex-1 w-full bg-transparent text-emerald-300 font-mono text-xs leading-5 focus:outline-none resize-none selection:bg-emerald-500/30 selection:text-white"
+                className="flex-1 w-full bg-transparent text-zinc-300 font-mono text-xs leading-5 focus:outline-none resize-none selection:bg-zinc-500/30 selection:text-white"
               />
             </div>
           </div>
@@ -625,9 +625,9 @@ Complexity: Time O(log n), Space O(1).`);
                     id: 'output', 
                     label: 'Output / Console', 
                     icon: <Cpu className="w-3 h-3" />,
-                    badge: runResult ? <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> : undefined
+                    badge: runResult ? <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" /> : undefined
                   },
-                  { id: 'verdict', label: 'Submission Verdict', icon: <CheckCircle2 className="w-3 h-3 text-emerald-400" /> }
+                  { id: 'verdict', label: 'Submission Verdict', icon: <CheckCircle2 className="w-3 h-3 text-zinc-400" /> }
                 ]}
                 activeTab={activeBottomTab}
                 onChange={id => setActiveBottomTab(id as any)}
@@ -677,7 +677,7 @@ Complexity: Time O(log n), Space O(1).`);
                       </div>
                       <div>
                         <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1">Expected Output:</div>
-                        <div className="text-emerald-400 bg-zinc-950/80 p-2 rounded-lg border border-white/[0.06]">
+                        <div className="text-zinc-400 bg-zinc-950/80 p-2 rounded-lg border border-white/[0.06]">
                           {SAMPLE_PROBLEM.examples[selectedTestCase].expectedOutput}
                         </div>
                       </div>
@@ -701,7 +701,7 @@ Complexity: Time O(log n), Space O(1).`);
                   {runResult ? (
                     <div className="space-y-2">
                       <div className="flex items-center gap-3">
-                        <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                        <span className="flex items-center gap-1.5 text-zinc-400 font-semibold">
                           <CheckCircle2 className="w-4 h-4" />
                           <span>{runResult.status}</span>
                         </span>
@@ -719,7 +719,7 @@ Complexity: Time O(log n), Space O(1).`);
                         {runResult.outputs.map((out, idx) => (
                           <div key={idx} className="p-2 rounded-lg bg-zinc-900/60 border border-white/[0.08] flex items-center justify-between">
                             <span className="text-zinc-400">Case {out.caseId}</span>
-                            <span className="text-emerald-400 font-semibold flex items-center gap-1">
+                            <span className="text-zinc-400 font-semibold flex items-center gap-1">
                               <Check className="w-3 h-3" /> Passed
                             </span>
                           </div>
@@ -738,18 +738,18 @@ Complexity: Time O(log n), Space O(1).`);
               {activeBottomTab === 'verdict' && (
                 <div>
                   {verdictResult ? (
-                    <Card variant="surface" className="p-4 border-emerald-500/30 bg-emerald-500/[0.05] space-y-4">
+                    <Card variant="surface" className="p-4 border-zinc-500/30 bg-zinc-500/[0.05] space-y-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2.5">
-                          <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+                          <CheckCircle2 className="w-6 h-6 text-zinc-400" />
                           <div>
-                            <div className="text-base font-bold text-emerald-400">Accepted!</div>
+                            <div className="text-base font-bold text-zinc-400">Accepted!</div>
                             <div className="text-xs text-zinc-400 font-sans">All {verdictResult.testCasesPassed} testcases passed successfully.</div>
                           </div>
                         </div>
 
-                        <Badge variant="emerald" size="md">
-                          <Flame className="w-3.5 h-3.5 text-amber-400 inline mr-1" />
+                        <Badge variant="blue" size="md">
+                          <Flame className="w-3.5 h-3.5 text-zinc-400 inline mr-1" />
                           +{verdictResult.xpEarned} XP
                         </Badge>
                       </div>
@@ -759,9 +759,9 @@ Complexity: Time O(log n), Space O(1).`);
                         <Card variant="default" className="p-3">
                           <div className="text-xs text-zinc-400 mb-1.5 flex items-center justify-between">
                             <span>Runtime Speed</span>
-                            <span className="text-emerald-400 font-mono font-bold">{verdictResult.runtime}</span>
+                            <span className="text-zinc-400 font-mono font-bold">{verdictResult.runtime}</span>
                           </div>
-                          <ProgressBar value={parseFloat(verdictResult.runtimePercentile)} variant="emerald" size="sm" />
+                          <ProgressBar value={parseFloat(verdictResult.runtimePercentile)} variant="blue" size="sm" />
                           <div className="text-[11px] text-zinc-500 mt-1.5">
                             Beats <strong className="text-zinc-200">{verdictResult.runtimePercentile}</strong> of all submissions
                           </div>
@@ -770,9 +770,9 @@ Complexity: Time O(log n), Space O(1).`);
                         <Card variant="default" className="p-3">
                           <div className="text-xs text-zinc-400 mb-1.5 flex items-center justify-between">
                             <span>Memory Footprint</span>
-                            <span className="text-cyan-400 font-mono font-bold">{verdictResult.memory}</span>
+                            <span className="text-zinc-400 font-mono font-bold">{verdictResult.memory}</span>
                           </div>
-                          <ProgressBar value={parseFloat(verdictResult.memoryPercentile)} variant="cyan" size="sm" />
+                          <ProgressBar value={parseFloat(verdictResult.memoryPercentile)} variant="blue" size="sm" />
                           <div className="text-[11px] text-zinc-500 mt-1.5">
                             Beats <strong className="text-zinc-200">{verdictResult.memoryPercentile}</strong> of all submissions
                           </div>

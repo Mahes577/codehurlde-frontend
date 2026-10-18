@@ -45,14 +45,14 @@ export const FaqSection: React.FC = () => {
   };
 
   return (
-    <section className="py-16 sm:py-20 bg-[#07090e] border-b border-white/[0.08]">
+    <section className="py-16 sm:py-20 bg-[#000000] border-b border-white/[0.08]">
       <div className="mx-auto max-w-6xl xl:max-w-[1500px] px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Section Header */}
         <SectionHeader
           eyebrow="Documentation & FAQ"
           eyebrowIcon={<HelpCircle className="w-3.5 h-3.5" />}
-          eyebrowColor="cyan"
+          eyebrowColor="blue"
           title="Frequently Answered Inquiries"
           highlightText="For Engineers"
           subtitle="Everything you need to know about the CodeHurdle adaptive problem solver, competitive Elo system, and in-browser micro-containers."

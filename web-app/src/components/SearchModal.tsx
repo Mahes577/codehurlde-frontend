@@ -39,7 +39,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => 
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-xl rounded-lg border border-white/[0.12] bg-[#0c0e16] shadow-2xl overflow-hidden"
+        className="w-full max-w-xl rounded-lg border border-white/[0.12] bg-[#111111] shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Input Bar */}

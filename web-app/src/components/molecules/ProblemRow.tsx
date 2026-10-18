@@ -36,7 +36,7 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
     <tr
       onClick={onSelect}
       className={`group transition-colors cursor-pointer border-b border-white/[0.04] ${
-        isSelected ? 'bg-emerald-500/[0.08]' : 'hover:bg-white/[0.02]'
+        isSelected ? 'bg-zinc-500/[0.08]' : 'hover:bg-white/[0.02]'
       }`}
     >
       {/* Solved Status Checkbox */}
@@ -48,7 +48,7 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
         }}
       >
         {problem.solved ? (
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 fill-emerald-500/20 inline" />
+          <CheckCircle2 className="w-4 h-4 text-zinc-400 fill-zinc-500/20 inline" />
         ) : (
           <Circle className="w-4 h-4 text-zinc-600 hover:text-zinc-400 inline" />
         )}
@@ -62,7 +62,7 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
           onToggleStarred?.(e);
         }}
       >
-        <Star className={`w-3.5 h-3.5 inline ${problem.starred ? 'fill-amber-400 text-amber-400' : 'text-zinc-600 hover:text-amber-400/80'}`} />
+        <Star className={`w-3.5 h-3.5 inline ${problem.starred ? 'fill-zinc-400 text-zinc-400' : 'text-zinc-600 hover:text-zinc-400/80'}`} />
       </td>
 
       {/* ID & Title */}
@@ -72,7 +72,7 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
             #{problem.id}
           </span>
           <span className={`text-xs font-semibold font-sans tracking-tight ${
-            isSelected ? 'text-emerald-400' : 'text-zinc-200 group-hover:text-white'
+            isSelected ? 'text-zinc-400' : 'text-zinc-200 group-hover:text-white'
           }`}>
             {problem.title}
           </span>
@@ -97,7 +97,7 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
         <td className="py-3 px-3">
           <div className="w-16 bg-white/[0.06] rounded-full h-1.5 overflow-hidden">
             <div
-              className="bg-amber-400 h-full rounded-full"
+              className="bg-zinc-400 h-full rounded-full"
               style={{ width: `${problem.frequency}%` }}
               title={`${problem.frequency}% Frequency`}
             />
@@ -129,7 +129,7 @@ export const ProblemRow: React.FC<ProblemRowProps> = ({
               e.stopPropagation();
               onSolve();
             }}
-            className="p-1.5 rounded-lg bg-zinc-800 hover:bg-emerald-500 hover:text-black text-zinc-300 transition-colors"
+            className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-500 hover:text-black text-zinc-300 transition-colors"
             title="Solve in IDE"
           >
             <Play className="w-3 h-3 fill-current" />

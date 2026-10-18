@@ -26,13 +26,13 @@ export const AlgorithmStepController: React.FC<AlgorithmStepControllerProps> = (
     <div className={`p-4 rounded-xl bg-zinc-950/80 border border-white/[0.08] space-y-3 font-mono text-xs ${className}`}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Badge variant={isComplete ? 'emerald' : 'amber'} size="xs">
+          <Badge variant={isComplete ? 'blue' : 'blue'} size="xs">
             Step {currentStep} of {totalSteps}
           </Badge>
           <span className="text-zinc-400 font-sans font-semibold text-xs truncate">{stepTitle}</span>
         </div>
         {isComplete && (
-          <span className="flex items-center gap-1 text-emerald-400 font-bold text-[11px]">
+          <span className="flex items-center gap-1 text-zinc-400 font-bold text-[11px]">
             <CheckCircle2 className="w-3.5 h-3.5" /> Solved
           </span>
         )}
@@ -45,9 +45,9 @@ export const AlgorithmStepController: React.FC<AlgorithmStepControllerProps> = (
             key={i}
             className={`h-1.5 rounded-full transition-all ${
               i + 1 < currentStep || (i + 1 === currentStep && isComplete)
-                ? 'bg-emerald-400'
+                ? 'bg-zinc-400'
                 : i + 1 === currentStep
-                ? 'bg-amber-400 animate-pulse'
+                ? 'bg-zinc-400 animate-pulse'
                 : 'bg-zinc-800'
             }`}
           />

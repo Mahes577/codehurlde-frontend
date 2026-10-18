@@ -330,18 +330,18 @@ export const TreeAlgorithmVisualizer: React.FC<{
   };
 
   return (
-    <div className="rounded-2xl border border-white/[0.1] bg-[#090d18] text-zinc-100 p-5 sm:p-6 shadow-2xl space-y-6 font-sans">
+    <div className="rounded-2xl border border-white/[0.1] bg-[#111111] text-zinc-100 p-5 sm:p-6 shadow-2xl space-y-6 font-sans">
       {/* Top Header & Telemetry Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2">
-            <Badge variant="purple" size="xs">
+            <Badge variant="blue" size="xs">
               #236 Lowest Common Ancestor · Binary Tree DFS
             </Badge>
             <span className="text-[11px] font-mono text-zinc-500">O(N) Time · O(H) Space</span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <GitFork className="w-5 h-5 text-purple-400" />
+            <GitFork className="w-5 h-5 text-zinc-400" />
             <span>Interactive Binary Tree & Ancestor Traversal Visualizer</span>
           </h3>
           <p className="text-xs text-zinc-400 mt-0.5">
@@ -371,7 +371,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
           </Button>
 
           <Button
-            variant={isPlaying ? 'amber' : 'outline'}
+            variant={isPlaying ? 'blue' : 'outline'}
             size="xs"
             onClick={() => setIsPlaying(!isPlaying)}
             icon={isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -402,7 +402,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
               }}
               className={`px-3 py-1 rounded-lg border transition-all cursor-pointer ${
                 selectedScenarioIdx === 0
-                  ? 'border-purple-500/50 bg-purple-500/20 text-purple-300 font-bold shadow-sm'
+                  ? 'border-zinc-500/50 bg-zinc-500/20 text-zinc-300 font-bold shadow-sm'
                   : 'border-white/[0.08] text-zinc-400 hover:text-white'
               }`}
             >
@@ -416,7 +416,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
               }}
               className={`px-3 py-1 rounded-lg border transition-all cursor-pointer ${
                 selectedScenarioIdx === 1
-                  ? 'border-purple-500/50 bg-purple-500/20 text-purple-300 font-bold shadow-sm'
+                  ? 'border-zinc-500/50 bg-zinc-500/20 text-zinc-300 font-bold shadow-sm'
                   : 'border-white/[0.08] text-zinc-400 hover:text-white'
               }`}
             >
@@ -427,22 +427,22 @@ export const TreeAlgorithmVisualizer: React.FC<{
 
         <div className="flex items-center gap-2">
           <span className="text-zinc-500 uppercase">Target p:</span>
-          <span className="px-2 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-bold">
+          <span className="px-2 py-0.5 rounded-md bg-zinc-500/15 border border-zinc-500/40 text-zinc-300 font-bold">
             Node {scenario.p}
           </span>
           <span className="text-zinc-500 uppercase ml-2">Target q:</span>
-          <span className="px-2 py-0.5 rounded-md bg-cyan-500/15 border border-cyan-500/40 text-cyan-300 font-bold">
+          <span className="px-2 py-0.5 rounded-md bg-zinc-500/15 border border-zinc-500/40 text-zinc-300 font-bold">
             Node {scenario.q}
           </span>
         </div>
       </div>
 
       {/* Step Explanation Banner */}
-      <div className="p-4 rounded-xl border border-purple-500/25 bg-gradient-to-r from-purple-950/30 via-zinc-950/60 to-black/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="p-4 rounded-xl border border-zinc-500/25 bg-gradient-to-r from-zinc-950/30 via-zinc-950/60 to-black/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-purple-400 animate-pulse" />
-            <span className="text-xs font-mono font-bold text-purple-300">
+            <span className="flex h-2 w-2 rounded-full bg-zinc-400 animate-pulse" />
+            <span className="text-xs font-mono font-bold text-zinc-300">
               Stage {step.step + 1} of {scenario.steps.length}: {step.title}
             </span>
           </div>
@@ -453,30 +453,30 @@ export const TreeAlgorithmVisualizer: React.FC<{
 
         <div className="flex items-center gap-2 shrink-0">
           <span className="text-[11px] font-mono text-zinc-400">Current Node:</span>
-          <span className="px-2.5 py-1 rounded-lg bg-purple-500/20 border border-purple-500/40 text-purple-300 font-mono font-bold text-xs">
+          <span className="px-2.5 py-1 rounded-lg bg-zinc-500/20 border border-zinc-500/40 text-zinc-300 font-mono font-bold text-xs">
             Node {step.currentNode}
           </span>
         </div>
       </div>
 
       {/* Main SVG Binary Tree Interactive Canvas */}
-      <div className="relative rounded-2xl border border-white/[0.08] bg-[#060911] p-4 overflow-hidden">
+      <div className="relative rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-4 overflow-hidden">
         {/* Tree Legend */}
         <div className="absolute top-3 left-4 flex flex-wrap items-center gap-3 text-[10px] font-mono text-zinc-400 z-10 pointer-events-none">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-amber-500/90 border border-amber-400 shadow-sm shadow-amber-500/50" />
-            <span className="text-amber-300 font-bold">LCA Node</span>
+            <span className="w-3 h-3 rounded-full bg-zinc-500/90 border border-zinc-400 shadow-sm shadow-zinc-500/50" />
+            <span className="text-zinc-300 font-bold">LCA Node</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-emerald-500/90 border border-emerald-400" />
-            <span className="text-emerald-300">Target p</span>
+            <span className="w-3 h-3 rounded-full bg-zinc-500/90 border border-zinc-400" />
+            <span className="text-zinc-300">Target p</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-cyan-500/90 border border-cyan-400" />
-            <span className="text-cyan-300">Target q</span>
+            <span className="w-3 h-3 rounded-full bg-zinc-500/90 border border-zinc-400" />
+            <span className="text-zinc-300">Target q</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-purple-500/80 border border-purple-400" />
+            <span className="w-3 h-3 rounded-full bg-zinc-500/80 border border-zinc-400" />
             <span>Visiting / DFS</span>
           </div>
         </div>
@@ -491,10 +491,10 @@ export const TreeAlgorithmVisualizer: React.FC<{
               <path d="M0,0 L0,6 L6,3 z" fill="#52525b" />
             </marker>
             <marker id="tree-arrow-active" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
-              <path d="M0,0 L0,7 L7,3.5 z" fill="#a855f7" />
+              <path d="M0,0 L0,7 L7,3.5 z" fill="#a1a1aa" />
             </marker>
             <marker id="tree-arrow-lca" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-              <path d="M0,0 L0,8 L8,4 z" fill="#10b981" />
+              <path d="M0,0 L0,8 L8,4 z" fill="#a1a1aa" />
             </marker>
           </defs>
 
@@ -514,15 +514,15 @@ export const TreeAlgorithmVisualizer: React.FC<{
             let marker = 'url(#tree-arrow-default)';
 
             if (isLcaPath) {
-              strokeColor = '#10b981'; // emerald-500
+              strokeColor = '#a1a1aa'; // zinc-500
               strokeWidth = 3.5;
               marker = 'url(#tree-arrow-lca)';
             } else if (isActive) {
-              strokeColor = '#c084fc'; // purple-400
+              strokeColor = '#a1a1aa'; // zinc-400
               strokeWidth = 3;
               marker = 'url(#tree-arrow-active)';
             } else if (isVisiting) {
-              strokeColor = '#7e22ce'; // purple-700
+              strokeColor = '#52525b'; // zinc-700
               strokeWidth = 2;
             }
 
@@ -535,7 +535,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                     y1={y1}
                     x2={x2}
                     y2={y2}
-                    stroke="#10b981"
+                    stroke="#a1a1aa"
                     strokeWidth="8"
                     strokeOpacity="0.4"
                     strokeLinecap="round"
@@ -547,7 +547,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                     y1={y1}
                     x2={x2}
                     y2={y2}
-                    stroke="#a855f7"
+                    stroke="#a1a1aa"
                     strokeWidth="6"
                     strokeOpacity="0.3"
                     strokeLinecap="round"
@@ -571,7 +571,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                   y={midY - 2}
                   textAnchor="middle"
                   className="text-[9px] font-mono select-none"
-                  fill={isLcaPath ? '#6ee7b7' : isActive ? '#d8b4fe' : '#71717a'}
+                  fill={isLcaPath ? '#e4e4e7' : isActive ? '#e4e4e7' : '#71717a'}
                 >
                   {edge.direction === 'left' ? 'L' : 'R'}
                 </text>
@@ -590,33 +590,33 @@ export const TreeAlgorithmVisualizer: React.FC<{
             const isVisiting = step.visitingPath.includes(node.id);
             const isLcaPathNode = step.lcaPathNodes.includes(node.id);
 
-            let nodeFill = '#111625';
+            let nodeFill = '#171717';
             let strokeColor = '#3f3f46';
             let strokeWidth = 2;
 
             if (isLca) {
-              nodeFill = '#451a03'; // amber-950
-              strokeColor = '#f59e0b'; // amber-500
+              nodeFill = '#18181b'; // zinc-950
+              strokeColor = '#d4d4d8'; // zinc-500
               strokeWidth = 3.5;
             } else if (isFoundP) {
-              nodeFill = '#064e3b'; // emerald-950
-              strokeColor = '#10b981'; // emerald-500
+              nodeFill = '#18181b'; // zinc-950
+              strokeColor = '#a1a1aa'; // zinc-500
               strokeWidth = 3;
             } else if (isFoundQ) {
-              nodeFill = '#082f49'; // cyan-950
-              strokeColor = '#06b6d4'; // cyan-500
+              nodeFill = '#27272a'; // zinc-950
+              strokeColor = '#d4d4d8'; // zinc-500
               strokeWidth = 3;
             } else if (isLcaPathNode) {
-              nodeFill = '#064e3b';
-              strokeColor = '#34d399';
+              nodeFill = '#18181b';
+              strokeColor = '#e4e4e7';
               strokeWidth = 2.5;
             } else if (isCurrent) {
-              nodeFill = '#3b0764'; // purple-950
-              strokeColor = '#c084fc'; // purple-400
+              nodeFill = '#27272a'; // zinc-950
+              strokeColor = '#a1a1aa'; // zinc-400
               strokeWidth = 3;
             } else if (isVisiting) {
-              nodeFill = '#2e1065';
-              strokeColor = '#9333ea';
+              nodeFill = '#27272a';
+              strokeColor = '#71717a';
               strokeWidth = 2;
             }
 
@@ -633,7 +633,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                     cy={node.y}
                     r="27"
                     fill="none"
-                    stroke="#f59e0b"
+                    stroke="#d4d4d8"
                     strokeWidth="3"
                     strokeOpacity="0.5"
                     className="animate-pulse"
@@ -645,7 +645,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                     cy={node.y}
                     r="26"
                     fill="none"
-                    stroke={isFoundP ? '#10b981' : '#06b6d4'}
+                    stroke={isFoundP ? '#a1a1aa' : '#d4d4d8'}
                     strokeWidth="2.5"
                     strokeOpacity="0.45"
                   />
@@ -664,7 +664,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                 {/* Crown Icon for LCA Node */}
                 {isLca && (
                   <g transform={`translate(${node.x - 7}, ${node.y - 33})`}>
-                    <Crown className="w-3.5 h-3.5 text-amber-400 fill-amber-400 animate-bounce" />
+                    <Crown className="w-3.5 h-3.5 text-zinc-400 fill-zinc-400 animate-bounce" />
                   </g>
                 )}
 
@@ -675,7 +675,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                     y={node.y - 25}
                     textAnchor="middle"
                     className="text-[9px] font-mono font-bold"
-                    fill="#10b981"
+                    fill="#a1a1aa"
                   >
                     p
                   </text>
@@ -686,7 +686,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
                     y={node.y - 25}
                     textAnchor="middle"
                     className="text-[9px] font-mono font-bold"
-                    fill="#06b6d4"
+                    fill="#d4d4d8"
                   >
                     q
                   </text>
@@ -710,15 +710,15 @@ export const TreeAlgorithmVisualizer: React.FC<{
 
         {/* LCA Success Banner */}
         {step.lcaNode && (
-          <div className="mt-3 p-3.5 rounded-xl border border-amber-500/40 bg-amber-950/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono animate-fade-in">
+          <div className="mt-3 p-3.5 rounded-xl border border-zinc-500/40 bg-zinc-950/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono animate-fade-in">
             <div className="flex items-center gap-2">
-              <Crown className="w-4 h-4 text-amber-400 shrink-0" />
-              <span className="font-bold text-amber-300">Lowest Common Ancestor Found:</span>
+              <Crown className="w-4 h-4 text-zinc-400 shrink-0" />
+              <span className="font-bold text-zinc-300">Lowest Common Ancestor Found:</span>
               <span className="text-zinc-200">
-                LCA(Node {scenario.p}, Node {scenario.q}) = <strong className="text-amber-400 text-sm">Node {step.lcaNode}</strong>
+                LCA(Node {scenario.p}, Node {scenario.q}) = <strong className="text-zinc-400 text-sm">Node {step.lcaNode}</strong>
               </span>
             </div>
-            <div className="px-3 py-1 rounded-lg bg-amber-400 text-zinc-950 font-bold text-xs shrink-0">
+            <div className="px-3 py-1 rounded-lg bg-zinc-400 text-zinc-950 font-bold text-xs shrink-0">
               Verified Optimal ✓
             </div>
           </div>
@@ -733,9 +733,9 @@ export const TreeAlgorithmVisualizer: React.FC<{
       {/* Telemetry Dashboard: Call Stack + Status + Execution Code */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
         {/* Active Recursion Call Stack */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-2">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-2">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-purple-400">Call Stack:</span>
+            <span className="uppercase font-bold text-zinc-400">Call Stack:</span>
             <span>Depth: {step.visitingPath.length}</span>
           </div>
 
@@ -743,7 +743,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
             {step.callStack.map((frame, idx) => (
               <div 
                 key={idx}
-                className="px-2.5 py-1 rounded-lg border border-purple-500/30 bg-purple-500/10 text-purple-300 font-bold text-[11px]"
+                className="px-2.5 py-1 rounded-lg border border-zinc-500/30 bg-zinc-500/10 text-zinc-300 font-bold text-[11px]"
               >
                 {frame}
               </div>
@@ -752,16 +752,16 @@ export const TreeAlgorithmVisualizer: React.FC<{
         </div>
 
         {/* Target Status Table */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-2">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-2">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-emerald-400">Target Indicators:</span>
+            <span className="uppercase font-bold text-zinc-400">Target Indicators:</span>
             <span>Status</span>
           </div>
 
           <div className="space-y-2">
             <div className={`p-2 rounded-lg border flex items-center justify-between ${
               step.foundNodes.includes(scenario.p)
-                ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300 font-bold'
+                ? 'border-zinc-500/50 bg-zinc-500/15 text-zinc-300 font-bold'
                 : 'border-white/[0.06] bg-black/30 text-zinc-500'
             }`}>
               <span>Target p (Node {scenario.p})</span>
@@ -770,7 +770,7 @@ export const TreeAlgorithmVisualizer: React.FC<{
 
             <div className={`p-2 rounded-lg border flex items-center justify-between ${
               step.foundNodes.includes(scenario.q)
-                ? 'border-cyan-500/50 bg-cyan-500/15 text-cyan-300 font-bold'
+                ? 'border-zinc-500/50 bg-zinc-500/15 text-zinc-300 font-bold'
                 : 'border-white/[0.06] bg-black/30 text-zinc-500'
             }`}>
               <span>Target q (Node {scenario.q})</span>
@@ -780,9 +780,9 @@ export const TreeAlgorithmVisualizer: React.FC<{
         </div>
 
         {/* Python 3 Code Execution Line Tracker */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-2">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-2">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-cyan-400 flex items-center gap-1">
+            <span className="uppercase font-bold text-zinc-400 flex items-center gap-1">
               <Code2 className="w-3.5 h-3.5" />
               LCA Recursive Core:
             </span>
@@ -790,25 +790,25 @@ export const TreeAlgorithmVisualizer: React.FC<{
           </div>
 
           <div className="text-[11px] font-mono leading-relaxed space-y-0.5 text-zinc-400">
-            <div className={step.codeLine === 1 ? 'bg-purple-500/20 text-purple-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 1 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               1: def lowestCommonAncestor(root, p, q):
             </div>
-            <div className={step.codeLine === 2 ? 'bg-purple-500/20 text-purple-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 2 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               2:   if not root: return None
             </div>
-            <div className={step.codeLine === 3 ? 'bg-emerald-500/25 text-emerald-300 font-bold px-1 rounded' : ''}>
+            <div className={step.codeLine === 3 ? 'bg-zinc-500/25 text-zinc-300 font-bold px-1 rounded' : ''}>
               3:   if root == p or root == q: return root
             </div>
-            <div className={step.codeLine === 4 ? 'bg-cyan-500/20 text-cyan-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 4 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               4:   left = lowestCommonAncestor(root.left, p, q)
             </div>
-            <div className={step.codeLine === 5 ? 'bg-cyan-500/20 text-cyan-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 5 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               5:   right = lowestCommonAncestor(root.right, p, q)
             </div>
-            <div className={step.codeLine === 7 ? 'bg-amber-500/25 text-amber-300 font-bold px-1 rounded' : ''}>
+            <div className={step.codeLine === 7 ? 'bg-zinc-500/25 text-zinc-300 font-bold px-1 rounded' : ''}>
               6:   if left and right: return root # LCA
             </div>
-            <div className={step.codeLine === 8 ? 'bg-emerald-500/30 text-emerald-200 font-bold px-1 rounded' : ''}>
+            <div className={step.codeLine === 8 ? 'bg-zinc-500/30 text-zinc-200 font-bold px-1 rounded' : ''}>
               7:   return left if left else right
             </div>
           </div>

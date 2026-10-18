@@ -19,6 +19,7 @@ import { DifficultyBadge, DifficultyLevel, Badge } from './atoms/Badge';
 import { TabGroup } from './atoms/TabGroup';
 import { EloBadge } from './molecules/EloBadge';
 import { StreakBadge } from './molecules/StreakBadge';
+import { ActivityHeatmap } from './ActivityHeatmap';
 
 interface SubmissionRecord {
   id: string;
@@ -111,7 +112,7 @@ const BADGES = [
     description: 'Solved 40+ Binary Search problems with O(log n) efficiency',
     icon: '🎯',
     rarity: 'Legendary',
-    color: 'from-amber-500/20 to-amber-600/5 text-amber-300 border-amber-500/30'
+    color: 'from-lime-500/15 to-lime-600/5 text-lime-200 border-lime-500/30'
   },
   {
     id: 'b-2',
@@ -119,7 +120,7 @@ const BADGES = [
     description: 'Achieved 1,840+ Elo in CodeHurdle Weekly Rated Contests',
     icon: '🏆',
     rarity: 'Master',
-    color: 'from-purple-500/20 to-purple-600/5 text-purple-300 border-purple-500/30'
+    color: 'from-blue-500/15 to-blue-600/5 text-blue-200 border-blue-500/30'
   },
   {
     id: 'b-3',
@@ -127,7 +128,7 @@ const BADGES = [
     description: 'Submitted at least one accepted solution every day for 50 days',
     icon: '🔥',
     rarity: 'Epic',
-    color: 'from-orange-500/20 to-orange-600/5 text-orange-300 border-orange-500/30'
+    color: 'from-amber-500/15 to-amber-600/5 text-amber-200 border-amber-500/30'
   },
   {
     id: 'b-4',
@@ -135,7 +136,7 @@ const BADGES = [
     description: 'Ranked in the 99th runtime percentile on 25 problems',
     icon: '⚡',
     rarity: 'Rare',
-    color: 'from-cyan-500/20 to-cyan-600/5 text-cyan-300 border-cyan-500/30'
+    color: 'from-blue-500/15 to-blue-600/5 text-blue-200 border-blue-500/30'
   }
 ];
 
@@ -156,13 +157,13 @@ export const UserProfileView: React.FC = () => {
   const grandTotal = easyTotal + medTotal + hardTotal;
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-[#000000] text-zinc-100 py-8 px-4 sm:px-6 lg:px-8 font-sans">
       <div className="max-w-[1720px] mx-auto space-y-6">
         
         {/* Profile Card Header */}
         <Card variant="default" padding="lg">
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/3 -mb-20 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-80 h-80 rounded-full bg-zinc-500/10 blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-1/3 -mb-20 w-80 h-80 rounded-full bg-zinc-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="flex items-center gap-5">
@@ -182,7 +183,7 @@ export const UserProfileView: React.FC = () => {
                     <Calendar className="w-3.5 h-3.5 text-zinc-500" /> Jan 2025
                   </span>
                   <span className="flex items-center gap-1">
-                    <Target className="w-3.5 h-3.5 text-emerald-400" /> 500 Goal
+                    <Target className="w-3.5 h-3.5 text-zinc-400" /> 500 Goal
                   </span>
                   <div className="flex items-center gap-2 text-zinc-500 ml-2">
                     <a href="https://github.com" target="_blank" rel="noreferrer" title="GitHub" className="hover:text-zinc-300 transition-colors">
@@ -201,19 +202,19 @@ export const UserProfileView: React.FC = () => {
               <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/[0.08] text-center min-w-[100px]">
                 <div className="text-[11px] uppercase tracking-wider text-zinc-500 font-mono">Global Rank</div>
                 <div className="text-xl font-bold text-white font-mono mt-0.5">#242</div>
-                <div className="text-[10px] text-emerald-400 font-mono">Top 0.8%</div>
+                <div className="text-[10px] text-blue-300 font-mono">Top 0.8%</div>
               </div>
 
               <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/[0.08] text-center min-w-[100px]">
                 <div className="text-[11px] uppercase tracking-wider text-zinc-500 font-mono">Rating</div>
-                <div className="text-xl font-bold text-purple-400 font-mono mt-0.5">1,840</div>
-                <div className="text-[10px] text-purple-300/80 font-mono">Division 1</div>
+                <div className="text-xl font-bold text-blue-300 font-mono mt-0.5">1,840</div>
+                <div className="text-[10px] text-blue-200/80 font-mono">Division 1</div>
               </div>
 
               <div className="p-3.5 rounded-xl bg-zinc-950/80 border border-white/[0.08] text-center min-w-[100px]">
                 <div className="text-[11px] uppercase tracking-wider text-zinc-500 font-mono">Streak</div>
-                <div className="text-xl font-bold text-amber-400 font-mono mt-0.5 flex items-center justify-center gap-1">
-                  <Flame className="w-4 h-4 fill-amber-400" />
+                <div className="text-xl font-bold text-amber-300 font-mono mt-0.5 flex items-center justify-center gap-1">
+                  <Flame className="w-4 h-4 fill-amber-400 text-amber-500" />
                   <span>14</span>
                 </div>
                 <div className="text-[10px] text-zinc-500 font-mono">Days Active</div>
@@ -222,6 +223,8 @@ export const UserProfileView: React.FC = () => {
           </div>
         </Card>
 
+        <ActivityHeatmap />
+
         {/* Second Row: Solved Breakdown Circular Chart & Topic Breakdown */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Solved Problems Ring Card (Col 1-5) */}
@@ -229,7 +232,7 @@ export const UserProfileView: React.FC = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-white flex items-center gap-2">
-                  <BarChart3 className="w-4 h-4 text-emerald-400" />
+                  <BarChart3 className="w-4 h-4 text-zinc-400" />
                   <span>Solved Problems Breakdown</span>
                 </h2>
                 <span className="text-xs font-mono text-zinc-500">
@@ -241,24 +244,24 @@ export const UserProfileView: React.FC = () => {
               <div className="flex items-center gap-6 my-6">
                 <div className="relative w-36 h-36 shrink-0 flex items-center justify-center">
                   <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="40" stroke="#1f2937" strokeWidth="8" fill="transparent" />
+                    <circle cx="50" cy="50" r="40" stroke="#27272a" strokeWidth="8" fill="transparent" />
                     <circle 
                       cx="50" cy="50" r="40" 
-                      stroke="#10b981" strokeWidth="8" fill="transparent" 
+                      stroke="#22c55e" strokeWidth="8" fill="transparent"
                       strokeDasharray="251.2" 
                       strokeDashoffset={251.2 - (251.2 * (easySolved / grandTotal))} 
                       strokeLinecap="round" 
                     />
                     <circle 
                       cx="50" cy="50" r="32" 
-                      stroke="#f59e0b" strokeWidth="6" fill="transparent" 
+                      stroke="#a3e635" strokeWidth="6" fill="transparent"
                       strokeDasharray="201" 
                       strokeDashoffset={201 - (201 * (medSolved / grandTotal))} 
                       strokeLinecap="round" 
                     />
                     <circle 
                       cx="50" cy="50" r="24" 
-                      stroke="#ef4444" strokeWidth="5" fill="transparent" 
+                      stroke="#ef4444" strokeWidth="5" fill="transparent"
                       strokeDasharray="150.7" 
                       strokeDashoffset={150.7 - (150.7 * (hardSolved / grandTotal))} 
                       strokeLinecap="round" 
@@ -274,26 +277,26 @@ export const UserProfileView: React.FC = () => {
                 <div className="flex-1 space-y-3 font-sans">
                   <div className="p-2.5 rounded-xl bg-zinc-950/40 border border-white/[0.06]">
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="text-emerald-400 font-medium">Easy</span>
+                      <span className="text-green-400 font-medium">Easy</span>
                       <span className="font-mono text-zinc-300 font-semibold">{easySolved} <span className="text-zinc-600">/ {easyTotal}</span></span>
                     </div>
-                    <ProgressBar value={(easySolved / easyTotal) * 100} color="emerald" size="xs" />
+                    <ProgressBar value={(easySolved / easyTotal) * 100} color="easy" size="xs" />
                   </div>
 
                   <div className="p-2.5 rounded-xl bg-zinc-950/40 border border-white/[0.06]">
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="text-amber-400 font-medium">Medium</span>
+                      <span className="text-lime-300 font-medium">Medium</span>
                       <span className="font-mono text-zinc-300 font-semibold">{medSolved} <span className="text-zinc-600">/ {medTotal}</span></span>
                     </div>
-                    <ProgressBar value={(medSolved / medTotal) * 100} color="amber" size="xs" />
+                    <ProgressBar value={(medSolved / medTotal) * 100} color="medium" size="xs" />
                   </div>
 
                   <div className="p-2.5 rounded-xl bg-zinc-950/40 border border-white/[0.06]">
                     <div className="flex items-center justify-between text-xs mb-1">
-                      <span className="text-rose-400 font-medium">Hard</span>
+                      <span className="text-red-400 font-medium">Hard</span>
                       <span className="font-mono text-zinc-300 font-semibold">{hardSolved} <span className="text-zinc-600">/ {hardTotal}</span></span>
                     </div>
-                    <ProgressBar value={(hardSolved / hardTotal) * 100} color="rose" size="xs" />
+                    <ProgressBar value={(hardSolved / hardTotal) * 100} color="hard" size="xs" />
                   </div>
                 </div>
               </div>
@@ -301,7 +304,7 @@ export const UserProfileView: React.FC = () => {
 
             <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between text-xs text-zinc-400">
               <span>Overall Acceptance Rate:</span>
-              <span className="text-emerald-400 font-mono font-semibold">68.4%</span>
+              <span className="text-zinc-400 font-mono font-semibold">68.4%</span>
             </div>
           </Card>
 
@@ -310,7 +313,7 @@ export const UserProfileView: React.FC = () => {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-base font-semibold text-white flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-purple-400" />
+                  <Zap className="w-4 h-4 text-zinc-400" />
                   <span>Topic Mastery & Skill Index</span>
                 </h2>
                 <span className="text-xs text-zinc-500 font-mono">Calculated over 360 submissions</span>
@@ -321,9 +324,9 @@ export const UserProfileView: React.FC = () => {
                   <div key={topic.name} className="p-3 rounded-xl bg-zinc-950/40 border border-white/[0.06] space-y-1.5">
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-medium text-zinc-200">{topic.name}</span>
-                      <span className="font-mono text-emerald-400 font-semibold">{topic.percentage}%</span>
+                      <span className="font-mono text-zinc-400 font-semibold">{topic.percentage}%</span>
                     </div>
-                    <ProgressBar value={topic.percentage} color={topic.percentage >= 85 ? 'emerald' : topic.percentage >= 70 ? 'cyan' : 'amber'} size="xs" />
+                    <ProgressBar value={topic.percentage} color={topic.percentage >= 85 ? 'blue' : topic.percentage >= 70 ? 'blue' : 'blue'} size="xs" />
                     <div className="text-[10px] text-zinc-500 font-mono flex justify-between">
                       <span>{topic.solved} solved</span>
                       <span>Target: {topic.total}</span>
@@ -334,7 +337,7 @@ export const UserProfileView: React.FC = () => {
             </div>
 
             <div className="pt-4 mt-4 border-t border-white/[0.06] flex items-center justify-between text-xs text-zinc-400">
-              <span>Strongest Domain: <strong className="text-emerald-400">Binary Search & Invariants</strong></span>
+              <span>Strongest Domain: <strong className="text-zinc-400">Binary Search & Invariants</strong></span>
               <span className="text-zinc-500 font-mono">Updated today</span>
             </div>
           </Card>
@@ -344,7 +347,7 @@ export const UserProfileView: React.FC = () => {
         <Card variant="surface" padding="md">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-base font-semibold text-white flex items-center gap-2">
-              <Award className="w-4 h-4 text-amber-400" />
+              <Award className="w-4 h-4 text-zinc-400" />
               <span>Earned Badges & Distinctions (4)</span>
             </h2>
             <button className="text-xs text-zinc-400 hover:text-white transition-colors flex items-center gap-1 cursor-pointer">
@@ -379,7 +382,7 @@ export const UserProfileView: React.FC = () => {
         <Card variant="surface" padding="md" className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <h2 className="text-base font-semibold text-white flex items-center gap-2">
-              <Code2 className="w-4 h-4 text-emerald-400" />
+              <Code2 className="w-4 h-4 text-zinc-400" />
               <span>Recent Submissions Log</span>
             </h2>
 
@@ -397,7 +400,7 @@ export const UserProfileView: React.FC = () => {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-sans">
-              <thead className="bg-[#0c101c]/90 text-zinc-400 uppercase tracking-wider font-mono text-[11px] border-b border-white/[0.08]">
+              <thead className="bg-[#111111]/90 text-zinc-400 uppercase tracking-wider font-mono text-[11px] border-b border-white/[0.08]">
                 <tr>
                   <th className="py-3 px-4">Status</th>
                   <th className="py-3 px-4">Problem</th>
@@ -413,17 +416,17 @@ export const UserProfileView: React.FC = () => {
                   <tr key={sub.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="py-3.5 px-4">
                       {sub.status === 'Accepted' ? (
-                        <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-400">
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-zinc-400">
                           <CheckCircle2 className="w-3.5 h-3.5" />
                           <span>Accepted</span>
                         </span>
                       ) : sub.status === 'Time Limit Exceeded' ? (
-                        <span className="inline-flex items-center gap-1.5 font-semibold text-amber-400">
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-zinc-400">
                           <Clock className="w-3.5 h-3.5" />
                           <span>Time Limit</span>
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1.5 font-semibold text-rose-400">
+                        <span className="inline-flex items-center gap-1.5 font-semibold text-zinc-400">
                           <Target className="w-3.5 h-3.5" />
                           <span>Wrong Answer</span>
                         </span>

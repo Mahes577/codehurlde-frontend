@@ -27,11 +27,11 @@ export const ContestCard: React.FC<ContestCardProps> = ({
   onOpenDetails
 }) => {
   return (
-    <Card variant="surface" className="p-5 space-y-4 hover:border-emerald-500/40 transition-all">
+    <Card variant="surface" className="p-5 space-y-4 hover:border-zinc-500/40 transition-all">
       <div className="flex items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1.5">
-            <Badge variant={division.includes('1') ? 'cyan' : 'purple'} size="xs">
+            <Badge variant={division.includes('1') ? 'blue' : 'blue'} size="xs">
               {division}
             </Badge>
             <span className="text-[11px] font-mono text-zinc-500">Rated Round</span>
@@ -39,7 +39,7 @@ export const ContestCard: React.FC<ContestCardProps> = ({
           <h3 className="text-base font-bold text-white tracking-tight">{title}</h3>
         </div>
 
-        <div className="p-2 rounded-xl bg-white/[0.04] text-emerald-400">
+        <div className="p-2 rounded-xl bg-white/[0.04] text-zinc-400">
           <Swords className="w-5 h-5" />
         </div>
       </div>
@@ -50,14 +50,14 @@ export const ContestCard: React.FC<ContestCardProps> = ({
           <span>{startTime}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <Award className="w-3.5 h-3.5 text-amber-400" />
+          <Award className="w-3.5 h-3.5 text-zinc-400" />
           <span>{duration}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <Users className="w-3.5 h-3.5 text-zinc-500" />
           <span>{participants.toLocaleString()} joined</span>
         </div>
-        <div className="flex items-center gap-1.5 text-emerald-400">
+        <div className="flex items-center gap-1.5 text-zinc-400">
           <span>Elo Rated ✓</span>
         </div>
       </div>
@@ -68,7 +68,7 @@ export const ContestCard: React.FC<ContestCardProps> = ({
           size="sm"
           className="flex-1"
           onClick={onRegisterToggle}
-          icon={isRegistered ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : undefined}
+          icon={isRegistered ? <CheckCircle2 className="w-3.5 h-3.5 text-zinc-400" /> : undefined}
         >
           {isRegistered ? 'Registered ✓' : 'Register Now'}
         </Button>

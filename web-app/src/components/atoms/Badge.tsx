@@ -3,7 +3,7 @@ import React from 'react';
 export type DifficultyLevel = 'Easy' | 'Medium' | 'Hard';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'easy' | 'medium' | 'hard' | 'neutral' | 'emerald' | 'cyan' | 'purple' | 'amber' | 'rose';
+  variant?: 'easy' | 'medium' | 'hard' | 'neutral' | 'blue' | 'amber';
   size?: 'xs' | 'sm' | 'md';
   icon?: React.ReactNode;
 }
@@ -25,15 +25,12 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const variantStyles = {
-    easy: "text-emerald-400 bg-emerald-500/10 border-emerald-500/25",
-    medium: "text-amber-400 bg-amber-500/10 border-amber-500/25",
-    hard: "text-rose-400 bg-rose-500/10 border-rose-500/25",
+    easy: "text-green-300 bg-green-500/10 border-green-500/25",
+    medium: "text-lime-300 bg-lime-500/10 border-lime-500/25",
+    hard: "text-red-300 bg-red-500/10 border-red-500/25",
     neutral: "text-zinc-400 bg-zinc-900 border-white/[0.08]",
-    emerald: "text-emerald-300 bg-emerald-950/40 border-emerald-500/30",
-    cyan: "text-cyan-300 bg-cyan-950/40 border-cyan-500/30",
-    purple: "text-purple-300 bg-purple-950/40 border-purple-500/30",
-    amber: "text-amber-300 bg-amber-950/40 border-amber-500/30",
-    rose: "text-rose-300 bg-rose-950/40 border-rose-500/30"
+    blue: "text-blue-300 bg-blue-950/40 border-blue-500/30",
+    amber: "text-amber-300 bg-amber-500/10 border-amber-500/25"
   };
 
   return (

@@ -36,7 +36,7 @@ export const StatsBar: React.FC = () => {
   const strokeDashoffset = circumference - (solvedRatio * circumference);
 
   return (
-    <section id="stats" className="py-8 bg-[#07090e]">
+    <section id="stats" className="py-8 bg-[#000000]">
       <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 space-y-6">
         
         {/* Main Scorecard Card */}
@@ -61,7 +61,7 @@ export const StatsBar: React.FC = () => {
                     cx="68"
                     cy="68"
                     r={radius}
-                    stroke="#10b981"
+                    stroke="#a1a1aa"
                     strokeWidth="10"
                     strokeDasharray={circumference}
                     strokeDashoffset={strokeDashoffset}
@@ -83,7 +83,7 @@ export const StatsBar: React.FC = () => {
 
               {/* Progress Summary Info */}
               <div className="space-y-1.5 font-mono text-xs">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
                   <Target className="h-3.5 w-3.5" />
                   Mastery Progress
                 </div>
@@ -91,7 +91,7 @@ export const StatsBar: React.FC = () => {
                   Top 8.4% of Global Solvers
                 </div>
                 <div className="text-zinc-400 text-[11px]">
-                  Passing rate: <strong className="text-emerald-400">89.4%</strong> on first submission
+                  Passing rate: <strong className="text-zinc-400">89.4%</strong> on first submission
                 </div>
                 <div className="pt-1">
                   <a href="#problems" className="text-[11px] text-zinc-300 hover:text-white flex items-center gap-1">
@@ -121,31 +121,31 @@ export const StatsBar: React.FC = () => {
             value="38ms"
             subtext="GCC 11 & Python 3.11"
             icon={<Cpu className="w-4 h-4" />}
-            accentColor="text-emerald-400"
+            accentColor="text-zinc-400"
           />
           <StatMetricCard
             label="Active Solvers Today"
             value="1,420"
             subtext="+18% vs last week"
             icon={<Activity className="w-4 h-4" />}
-            iconBgColor="bg-cyan-500/10 text-cyan-400 border-cyan-500/20"
-            accentColor="text-cyan-400"
+            iconBgColor="bg-zinc-500/10 text-zinc-400 border-zinc-500/20"
+            accentColor="text-zinc-400"
           />
           <StatMetricCard
             label="Current Habit Streak"
             value="14 Days"
             subtext="Personal record: 21 days"
             icon={<Flame className="w-4 h-4" />}
-            iconBgColor="bg-amber-500/10 text-amber-400 border-amber-500/20"
-            accentColor="text-amber-400"
+            iconBgColor="bg-zinc-500/10 text-zinc-400 border-zinc-500/20"
+            accentColor="text-zinc-400"
           />
           <StatMetricCard
             label="Weekly Contest Rating"
             value="1,840 Elo"
             subtext="Division 1 Global #242"
             icon={<Award className="w-4 h-4" />}
-            iconBgColor="bg-purple-500/10 text-purple-400 border-purple-500/20"
-            accentColor="text-purple-400"
+            iconBgColor="bg-zinc-500/10 text-zinc-400 border-zinc-500/20"
+            accentColor="text-zinc-400"
           />
         </div>
 

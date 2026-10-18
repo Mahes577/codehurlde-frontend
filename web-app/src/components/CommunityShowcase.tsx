@@ -69,7 +69,7 @@ export const CommunityShowcase: React.FC = () => {
     : DISCUSSIONS.filter(d => d.tag === selectedTag);
 
   return (
-    <section id="discuss" className="py-16 sm:py-20 bg-[#090a0f] border-b border-white/[0.08]">
+    <section id="discuss" className="py-16 sm:py-20 bg-[#000000] border-b border-white/[0.08]">
       <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -106,7 +106,7 @@ export const CommunityShowcase: React.FC = () => {
           {filtered.map((item) => (
             <div 
               key={item.id}
-              className="rounded-lg border border-white/[0.08] bg-[#0c0e16] p-5 hover:border-white/[0.15] transition-colors"
+              className="rounded-lg border border-white/[0.08] bg-[#111111] p-5 hover:border-white/[0.15] transition-colors"
             >
               <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
                 
@@ -120,7 +120,7 @@ export const CommunityShowcase: React.FC = () => {
                     </span>
                   </div>
 
-                  <h3 className="text-base font-semibold text-white hover:text-emerald-400 transition-colors cursor-pointer">
+                  <h3 className="text-base font-semibold text-white hover:text-zinc-400 transition-colors cursor-pointer">
                     {item.title}
                   </h3>
 

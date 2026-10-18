@@ -185,18 +185,18 @@ export const DpAlgorithmVisualizer: React.FC<{
   };
 
   return (
-    <div className="rounded-2xl border border-white/[0.1] bg-[#090d18] text-zinc-100 p-5 sm:p-6 shadow-2xl space-y-6 font-sans">
+    <div className="rounded-2xl border border-white/[0.1] bg-[#111111] text-zinc-100 p-5 sm:p-6 shadow-2xl space-y-6 font-sans">
       {/* Top Header & Telemetry Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2">
-            <Badge variant="amber" size="xs">
+            <Badge variant="blue" size="xs">
               #322 Coin Change · Dynamic Programming
             </Badge>
             <span className="text-[11px] font-mono text-zinc-500">O(Amount × Coins)</span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <Coins className="w-5 h-5 text-amber-400" />
+            <Coins className="w-5 h-5 text-zinc-400" />
             <span>Interactive DP Table & Subproblem Transition Visualizer</span>
           </h3>
           <p className="text-xs text-zinc-400 mt-0.5">
@@ -226,7 +226,7 @@ export const DpAlgorithmVisualizer: React.FC<{
           </Button>
 
           <Button
-            variant={isPlaying ? 'amber' : 'outline'}
+            variant={isPlaying ? 'blue' : 'outline'}
             size="xs"
             onClick={() => setIsPlaying(!isPlaying)}
             icon={isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -253,7 +253,7 @@ export const DpAlgorithmVisualizer: React.FC<{
             {coins.map(c => (
               <span 
                 key={c}
-                className="px-2 py-0.5 rounded-md bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold"
+                className="px-2 py-0.5 rounded-md bg-zinc-500/10 border border-zinc-500/30 text-zinc-300 font-bold"
               >
                 ${c}
               </span>
@@ -263,18 +263,18 @@ export const DpAlgorithmVisualizer: React.FC<{
 
         <div className="flex items-center gap-2">
           <span className="text-zinc-500 uppercase">Target Amount:</span>
-          <span className="px-2.5 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 font-bold">
+          <span className="px-2.5 py-0.5 rounded-md bg-zinc-500/15 border border-zinc-500/40 text-zinc-300 font-bold">
             Amount = 7
           </span>
         </div>
       </div>
 
       {/* Step Explanation Banner */}
-      <div className="p-4 rounded-xl border border-amber-500/25 bg-gradient-to-r from-amber-950/30 via-zinc-950/60 to-black/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="p-4 rounded-xl border border-zinc-500/25 bg-gradient-to-r from-zinc-950/30 via-zinc-950/60 to-black/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-xs font-mono font-bold text-amber-300">
+            <span className="flex h-2 w-2 rounded-full bg-zinc-400 animate-pulse" />
+            <span className="text-xs font-mono font-bold text-zinc-300">
               Subproblem {currentStep.amount} / 7: {currentStepIdx === 0 ? 'Base Case' : `Solving for Amount $${currentStep.amount}`}
             </span>
           </div>
@@ -285,14 +285,14 @@ export const DpAlgorithmVisualizer: React.FC<{
 
         <div className="flex items-center gap-2 shrink-0 font-mono text-xs">
           <span className="text-zinc-400">dp[{currentStep.amount}] =</span>
-          <span className="px-3 py-1 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-bold text-sm">
+          <span className="px-3 py-1 rounded-lg bg-zinc-500/20 border border-zinc-500/40 text-zinc-300 font-bold text-sm">
             {currentStep.currentMin} {currentStep.currentMin === 1 ? 'coin' : 'coins'}
           </span>
         </div>
       </div>
 
       {/* DP Array 1D Visual Grid with Dynamic Subproblem Connection Curves */}
-      <div className="relative rounded-2xl border border-white/[0.08] bg-[#060911] p-6 overflow-hidden">
+      <div className="relative rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-6 overflow-hidden">
         <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider mb-4 flex items-center justify-between">
           <span>1D Memoization Table: <strong className="text-zinc-200">dp[0...7]</strong></span>
           <span className="text-zinc-500">Indexed by Subproblem Amount</span>
@@ -313,19 +313,19 @@ export const DpAlgorithmVisualizer: React.FC<{
                 key={idx}
                 className={`relative rounded-xl p-3 sm:p-4 text-center border transition-all duration-300 ${
                   isOptimalBacktrack
-                    ? 'border-emerald-400 bg-emerald-500/25 shadow-xl shadow-emerald-500/20 ring-2 ring-emerald-400 scale-105'
+                    ? 'border-zinc-400 bg-zinc-500/25 shadow-xl shadow-zinc-500/20 ring-2 ring-zinc-400 scale-105'
                     : isCurrent
-                    ? 'border-amber-400 bg-amber-500/20 shadow-lg shadow-amber-500/20 scale-105'
+                    ? 'border-zinc-400 bg-zinc-500/20 shadow-lg shadow-zinc-500/20 scale-105'
                     : candidateSource
-                    ? 'border-cyan-400/80 bg-cyan-950/30'
+                    ? 'border-zinc-400/80 bg-zinc-950/30'
                     : isSettled
-                    ? 'border-white/[0.12] bg-[#0c101c] text-zinc-200'
+                    ? 'border-white/[0.12] bg-[#111111] text-zinc-200'
                     : 'border-white/[0.05] bg-black/40 text-zinc-600'
                 }`}
               >
                 {/* Pointer Indicator */}
                 {isCurrent && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-amber-400 px-2 py-0.2 text-[9px] font-mono font-bold text-zinc-950 animate-bounce">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-zinc-400 px-2 py-0.2 text-[9px] font-mono font-bold text-zinc-950 animate-bounce">
                     i = {idx}
                   </div>
                 )}
@@ -333,7 +333,7 @@ export const DpAlgorithmVisualizer: React.FC<{
                 {/* Candidate Link Badge */}
                 {candidateSource && !isCurrent && (
                   <div className={`absolute -top-2.5 left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.2 text-[8px] font-mono font-bold border ${
-                    candidateSource.isMin ? 'bg-emerald-500 text-zinc-950 border-emerald-400' : 'bg-zinc-800 text-zinc-300 border-zinc-700'
+                    candidateSource.isMin ? 'bg-zinc-500 text-zinc-950 border-zinc-400' : 'bg-zinc-800 text-zinc-300 border-zinc-700'
                   }`}>
                     -${candidateSource.coin}
                   </div>
@@ -353,13 +353,13 @@ export const DpAlgorithmVisualizer: React.FC<{
 
         {/* Backtrack Optimal Solution Banner when Complete */}
         {isFinal && (
-          <div className="mt-6 p-4 rounded-xl border border-emerald-500/30 bg-emerald-950/20 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs animate-fade-in">
+          <div className="mt-6 p-4 rounded-xl border border-zinc-500/30 bg-zinc-950/20 flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs animate-fade-in">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-emerald-400" />
-              <span className="font-bold text-emerald-300">Optimal Coin Backtracking Path:</span>
+              <Sparkles className="w-4 h-4 text-zinc-400" />
+              <span className="font-bold text-zinc-300">Optimal Coin Backtracking Path:</span>
               <span className="text-zinc-300">Start at dp[7] → subtract coin $4 → reach dp[3] → subtract coin $3 → reach dp[0]</span>
             </div>
-            <div className="px-3 py-1 rounded-lg bg-emerald-500 text-zinc-950 font-bold text-xs shrink-0">
+            <div className="px-3 py-1 rounded-lg bg-zinc-500 text-zinc-950 font-bold text-xs shrink-0">
               Optimal: $4 + $3 = $7 (2 Coins)
             </div>
           </div>
@@ -369,9 +369,9 @@ export const DpAlgorithmVisualizer: React.FC<{
       {/* Candidate Decision Comparison Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
         {/* Subproblem Choices Evaluation */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-3">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-3">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-amber-400 flex items-center gap-1.5">
+            <span className="uppercase font-bold text-zinc-400 flex items-center gap-1.5">
               <Calculator className="w-3.5 h-3.5" />
               Recurrence Relation Evaluation:
             </span>
@@ -389,12 +389,12 @@ export const DpAlgorithmVisualizer: React.FC<{
                   key={idx}
                   className={`p-2.5 rounded-lg border flex items-center justify-between transition-all ${
                     cand.isMin
-                      ? 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300 font-bold'
+                      ? 'border-zinc-500/50 bg-zinc-500/10 text-zinc-300 font-bold'
                       : 'border-white/[0.06] bg-zinc-900/40 text-zinc-400'
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold">
+                    <span className="px-1.5 py-0.5 rounded bg-zinc-500/20 text-zinc-300 font-bold">
                       Coin ${cand.coin}
                     </span>
                     <span>
@@ -405,7 +405,7 @@ export const DpAlgorithmVisualizer: React.FC<{
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-sm">={cand.total}</span>
                     {cand.isMin && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 uppercase">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-zinc-500/20 text-zinc-400 border border-zinc-500/40 uppercase">
                         Optimal
                       </span>
                     )}
@@ -417,9 +417,9 @@ export const DpAlgorithmVisualizer: React.FC<{
         </div>
 
         {/* Live Code Highlighting */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-3">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-3">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-cyan-400 flex items-center gap-1">
+            <span className="uppercase font-bold text-zinc-400 flex items-center gap-1">
               <Code2 className="w-3.5 h-3.5" />
               Dynamic Programming Code:
             </span>
@@ -427,25 +427,25 @@ export const DpAlgorithmVisualizer: React.FC<{
           </div>
 
           <div className="text-[11px] font-mono leading-relaxed space-y-1 text-zinc-400">
-            <div className={currentStep.codeLine === 1 ? 'bg-amber-500/20 text-amber-200 px-1.5 py-0.5 rounded' : ''}>
+            <div className={currentStep.codeLine === 1 ? 'bg-zinc-500/20 text-zinc-200 px-1.5 py-0.5 rounded' : ''}>
               1: dp = [float('inf')] * (amount + 1)
             </div>
-            <div className={currentStep.codeLine === 1 ? 'bg-amber-500/20 text-amber-200 px-1.5 py-0.5 rounded' : ''}>
+            <div className={currentStep.codeLine === 1 ? 'bg-zinc-500/20 text-zinc-200 px-1.5 py-0.5 rounded' : ''}>
               2: dp[0] = 0  # base case
             </div>
-            <div className={currentStep.codeLine === 4 ? 'bg-cyan-500/20 text-cyan-200 px-1.5 py-0.5 rounded' : ''}>
+            <div className={currentStep.codeLine === 4 ? 'bg-zinc-500/20 text-zinc-200 px-1.5 py-0.5 rounded' : ''}>
               3: for i in range(1, amount + 1):
             </div>
-            <div className={currentStep.codeLine === 4 || currentStep.codeLine === 5 ? 'bg-emerald-500/25 text-emerald-300 font-bold px-1.5 py-0.5 rounded' : ''}>
+            <div className={currentStep.codeLine === 4 || currentStep.codeLine === 5 ? 'bg-zinc-500/25 text-zinc-300 font-bold px-1.5 py-0.5 rounded' : ''}>
               4:   for coin in coins:
             </div>
-            <div className={currentStep.codeLine === 5 ? 'bg-emerald-500/25 text-emerald-300 font-bold px-1.5 py-0.5 rounded' : ''}>
+            <div className={currentStep.codeLine === 5 ? 'bg-zinc-500/25 text-zinc-300 font-bold px-1.5 py-0.5 rounded' : ''}>
               5:     if i - coin &gt;= 0:
             </div>
-            <div className={currentStep.codeLine === 5 ? 'bg-emerald-500/25 text-emerald-300 font-bold px-1.5 py-0.5 rounded' : ''}>
+            <div className={currentStep.codeLine === 5 ? 'bg-zinc-500/25 text-zinc-300 font-bold px-1.5 py-0.5 rounded' : ''}>
               6:       dp[i] = min(dp[i], dp[i - coin] + 1)
             </div>
-            <div className={currentStep.codeLine === 7 ? 'bg-emerald-500/30 text-emerald-200 font-bold px-1.5 py-0.5 rounded' : ''}>
+            <div className={currentStep.codeLine === 7 ? 'bg-zinc-500/30 text-zinc-200 font-bold px-1.5 py-0.5 rounded' : ''}>
               7: return dp[amount] if dp[amount] != inf else -1
             </div>
           </div>

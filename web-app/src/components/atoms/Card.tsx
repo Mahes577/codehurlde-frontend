@@ -3,7 +3,7 @@ import React from 'react';
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'surface' | 'interactive' | 'sunken' | 'glass';
   padding?: 'none' | 'sm' | 'md' | 'lg';
-  glow?: 'none' | 'emerald' | 'amber' | 'purple' | 'cyan';
+  glow?: 'none' | 'blue' | 'blue' | 'blue' | 'blue';
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -17,9 +17,9 @@ export const Card: React.FC<CardProps> = ({
   const baseStyles = "relative rounded-2xl border transition-all duration-200 overflow-hidden";
 
   const variantStyles = {
-    default: "bg-[#0c101c]/90 border-white/[0.08] shadow-xl backdrop-blur-md",
+    default: "bg-[#111111]/90 border-white/[0.08] shadow-xl backdrop-blur-md",
     surface: "bg-zinc-900/60 border-zinc-800/80 shadow-lg backdrop-blur-xl",
-    interactive: "bg-[#0c101c]/90 border-white/[0.08] hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-950/20 cursor-pointer",
+    interactive: "bg-[#111111]/90 border-white/[0.08] hover:border-zinc-500/40 hover:shadow-2xl hover:shadow-zinc-950/20 cursor-pointer",
     sunken: "bg-zinc-950/70 border-zinc-800/60",
     glass: "bg-white/[0.02] border-white/[0.06] backdrop-blur-lg"
   };
@@ -33,10 +33,10 @@ export const Card: React.FC<CardProps> = ({
 
   const glowStyles = {
     none: "",
-    emerald: "shadow-2xl shadow-emerald-950/30 border-emerald-500/20",
-    amber: "shadow-2xl shadow-amber-950/30 border-amber-500/20",
-    purple: "shadow-2xl shadow-purple-950/30 border-purple-500/20",
-    cyan: "shadow-2xl shadow-cyan-950/30 border-cyan-500/20"
+    blue: "shadow-2xl shadow-zinc-950/30 border-zinc-500/20",
+    blue: "shadow-2xl shadow-zinc-950/30 border-zinc-500/20",
+    blue: "shadow-2xl shadow-zinc-950/30 border-zinc-500/20",
+    blue: "shadow-2xl shadow-zinc-950/30 border-zinc-500/20"
   };
 
   return (

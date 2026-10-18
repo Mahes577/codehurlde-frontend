@@ -3,7 +3,7 @@ import React from 'react';
 export interface SectionHeaderProps {
   eyebrow?: string;
   eyebrowIcon?: React.ReactNode;
-  eyebrowColor?: 'emerald' | 'amber' | 'purple' | 'cyan' | 'rose' | 'blue';
+  eyebrowColor?: 'blue' | 'blue' | 'blue' | 'blue' | 'blue' | 'blue';
   title: string;
   highlightText?: string;
   subtitle?: string;
@@ -15,7 +15,7 @@ export interface SectionHeaderProps {
 export const SectionHeader: React.FC<SectionHeaderProps> = ({
   eyebrow,
   eyebrowIcon,
-  eyebrowColor = 'emerald',
+  eyebrowColor = 'blue',
   title,
   highlightText,
   subtitle,
@@ -24,12 +24,12 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   className = ''
 }) => {
   const eyebrowColors = {
-    emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-    amber: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
-    purple: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-    cyan: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-    rose: 'bg-rose-500/10 text-rose-400 border-rose-500/20',
-    blue: 'bg-blue-500/10 text-blue-400 border-blue-500/20'
+    blue: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
+    blue: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
+    blue: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
+    blue: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
+    blue: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20',
+    blue: 'bg-zinc-500/10 text-zinc-400 border-zinc-500/20'
   };
 
   return (
@@ -46,7 +46,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white font-sans">
             {title}{' '}
             {highlightText && (
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 via-zinc-300 to-zinc-400">
                 {highlightText}
               </span>
             )}

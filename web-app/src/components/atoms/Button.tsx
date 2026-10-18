@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'amber';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'blue';
   size?: 'xs' | 'sm' | 'md' | 'lg';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
@@ -29,12 +29,12 @@ export const Button: React.FC<ButtonProps> = ({
   };
 
   const variantStyles = {
-    primary: "bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-zinc-950 shadow-md shadow-emerald-500/20 font-bold",
+    primary: "bg-gradient-to-r from-lime-400 to-green-400 hover:from-lime-300 hover:to-green-300 text-zinc-950 shadow-md shadow-lime-500/20 font-bold",
     secondary: "bg-zinc-900/90 hover:bg-zinc-800 text-zinc-200 hover:text-white border border-white/[0.08] hover:border-white/[0.16] shadow-sm",
     outline: "bg-transparent hover:bg-white/[0.05] text-zinc-300 hover:text-white border border-white/[0.12] hover:border-white/[0.24]",
     ghost: "bg-transparent hover:bg-white/[0.05] text-zinc-400 hover:text-zinc-200",
-    danger: "bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/30",
-    amber: "bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 border border-amber-500/30"
+    danger: "bg-red-500/15 hover:bg-red-500/25 text-red-300 border border-red-500/30",
+    blue: "bg-lime-500/15 hover:bg-lime-500/25 text-lime-300 border border-lime-500/30"
   };
 
   return (

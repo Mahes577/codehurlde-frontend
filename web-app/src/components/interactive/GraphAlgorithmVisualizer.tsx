@@ -254,18 +254,18 @@ export const GraphAlgorithmVisualizer: React.FC<{
     .join(' ');
 
   return (
-    <div className="rounded-2xl border border-white/[0.1] bg-[#090d18] text-zinc-100 p-5 sm:p-6 shadow-2xl space-y-6 font-sans">
+    <div className="rounded-2xl border border-white/[0.1] bg-[#111111] text-zinc-100 p-5 sm:p-6 shadow-2xl space-y-6 font-sans">
       {/* Top Header & Telemetry Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/[0.08]">
         <div>
           <div className="flex items-center gap-2">
-            <Badge variant="cyan" size="xs">
+            <Badge variant="blue" size="xs">
               #743 Network Delay Time · Dijkstra BFS
             </Badge>
             <span className="text-[11px] font-mono text-zinc-500">O((V + E) log V)</span>
           </div>
           <h3 className="text-lg sm:text-xl font-bold text-white mt-1 flex items-center gap-2">
-            <Network className="w-5 h-5 text-cyan-400" />
+            <Network className="w-5 h-5 text-zinc-400" />
             <span>Interactive Graph & Edge Traversal Visualizer</span>
           </h3>
           <p className="text-xs text-zinc-400 mt-0.5">
@@ -295,7 +295,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
           </Button>
 
           <Button
-            variant={isPlaying ? 'amber' : 'outline'}
+            variant={isPlaying ? 'blue' : 'outline'}
             size="xs"
             onClick={() => setIsPlaying(!isPlaying)}
             icon={isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -315,11 +315,11 @@ export const GraphAlgorithmVisualizer: React.FC<{
       </div>
 
       {/* Step Explanation Banner */}
-      <div className="p-4 rounded-xl border border-cyan-500/25 bg-gradient-to-r from-cyan-950/30 via-zinc-950/60 to-black/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="p-4 rounded-xl border border-zinc-500/25 bg-gradient-to-r from-zinc-950/30 via-zinc-950/60 to-black/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-mono font-bold text-cyan-300">
+            <span className="flex h-2 w-2 rounded-full bg-zinc-400 animate-pulse" />
+            <span className="text-xs font-mono font-bold text-zinc-300">
               Stage {step.step + 1} of {STEPS.length}: {step.title}
             </span>
           </div>
@@ -330,26 +330,26 @@ export const GraphAlgorithmVisualizer: React.FC<{
 
         <div className="flex items-center gap-2 shrink-0">
           <span className="text-[11px] font-mono text-zinc-400">Current Node:</span>
-          <span className="px-2.5 py-1 rounded-lg bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-mono font-bold text-xs">
+          <span className="px-2.5 py-1 rounded-lg bg-zinc-500/20 border border-zinc-500/40 text-zinc-300 font-mono font-bold text-xs">
             {step.currentNode} (dist: {step.distances[step.currentNode]})
           </span>
         </div>
       </div>
 
       {/* Main SVG Graph Interactive Canvas */}
-      <div className="relative rounded-2xl border border-white/[0.08] bg-[#060911] p-4 overflow-hidden">
+      <div className="relative rounded-2xl border border-white/[0.08] bg-[#0a0a0a] p-4 overflow-hidden">
         {/* Graph Legend */}
         <div className="absolute top-3 left-4 flex flex-wrap items-center gap-3 text-[10px] font-mono text-zinc-400 z-10 pointer-events-none">
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-emerald-500/90 border border-emerald-400 shadow-sm shadow-emerald-500/50" />
-            <span className="text-emerald-300 font-bold">Shortest Path</span>
+            <span className="w-3 h-3 rounded-full bg-zinc-500/90 border border-zinc-400 shadow-sm shadow-zinc-500/50" />
+            <span className="text-zinc-300 font-bold">Shortest Path</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-cyan-500/80 border border-cyan-400" />
+            <span className="w-3 h-3 rounded-full bg-zinc-500/80 border border-zinc-400" />
             <span>Settled / Visited</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-amber-500/80 border border-amber-400" />
+            <span className="w-3 h-3 rounded-full bg-zinc-500/80 border border-zinc-400" />
             <span>Frontier / PQ</span>
           </div>
           <div className="flex items-center gap-1.5">
@@ -368,13 +368,13 @@ export const GraphAlgorithmVisualizer: React.FC<{
               <path d="M0,0 L0,6 L6,3 z" fill="#52525b" />
             </marker>
             <marker id="arrow-active" markerWidth="7" markerHeight="7" refX="5.5" refY="3.5" orient="auto">
-              <path d="M0,0 L0,7 L7,3.5 z" fill="#38bdf8" />
+              <path d="M0,0 L0,7 L7,3.5 z" fill="#e4e4e7" />
             </marker>
             <marker id="arrow-tree" markerWidth="6.5" markerHeight="6.5" refX="5" refY="3.25" orient="auto">
-              <path d="M0,0 L0,6.5 L6.5,3.25 z" fill="#059669" />
+              <path d="M0,0 L0,6.5 L6.5,3.25 z" fill="#71717a" />
             </marker>
             <marker id="arrow-shortest" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
-              <path d="M0,0 L0,8 L8,4 z" fill="#10b981" />
+              <path d="M0,0 L0,8 L8,4 z" fill="#a1a1aa" />
             </marker>
           </defs>
 
@@ -385,7 +385,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
               <polyline
                 points={shortestPointsString}
                 fill="none"
-                stroke="#10b981"
+                stroke="#a1a1aa"
                 strokeWidth="10"
                 strokeOpacity="0.35"
                 strokeLinecap="round"
@@ -395,7 +395,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
               <polyline
                 points={shortestPointsString}
                 fill="none"
-                stroke="#34d399"
+                stroke="#e4e4e7"
                 strokeWidth="4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -420,16 +420,16 @@ export const GraphAlgorithmVisualizer: React.FC<{
             let dashArray = undefined;
 
             if (isShortest) {
-              strokeColor = '#10b981'; // emerald-500
+              strokeColor = '#a1a1aa'; // zinc-500
               strokeWidth = 3.5;
               marker = 'url(#arrow-shortest)';
             } else if (isActive) {
-              strokeColor = '#38bdf8'; // cyan-400
+              strokeColor = '#e4e4e7'; // zinc-400
               strokeWidth = 2.5;
               marker = 'url(#arrow-active)';
               dashArray = '5,3';
             } else if (isRelaxed) {
-              strokeColor = '#059669'; // emerald-600 tree edge
+              strokeColor = '#71717a'; // zinc-600 tree edge
               strokeWidth = 2;
               marker = 'url(#arrow-tree)';
             }
@@ -443,7 +443,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
                     y1={y1}
                     x2={x2}
                     y2={y2}
-                    stroke="#10b981"
+                    stroke="#a1a1aa"
                     strokeWidth="8"
                     strokeOpacity="0.4"
                     strokeLinecap="round"
@@ -455,7 +455,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
                     y1={y1}
                     x2={x2}
                     y2={y2}
-                    stroke="#38bdf8"
+                    stroke="#e4e4e7"
                     strokeWidth="6"
                     strokeOpacity="0.3"
                     strokeLinecap="round"
@@ -482,15 +482,15 @@ export const GraphAlgorithmVisualizer: React.FC<{
                     width="24"
                     height="18"
                     rx="6"
-                    fill={isShortest ? '#064e3b' : isActive ? '#082f49' : isRelaxed ? '#022c22' : '#18181b'}
-                    stroke={isShortest ? '#34d399' : isActive ? '#38bdf8' : isRelaxed ? '#059669' : '#27272a'}
+                    fill={isShortest ? '#18181b' : isActive ? '#27272a' : isRelaxed ? '#3f3f46' : '#18181b'}
+                    stroke={isShortest ? '#e4e4e7' : isActive ? '#e4e4e7' : isRelaxed ? '#71717a' : '#27272a'}
                     strokeWidth="1.2"
                   />
                   <text
                     textAnchor="middle"
                     dy="3.5"
                     className="text-[10px] font-mono font-bold"
-                    fill={isShortest ? '#6ee7b7' : isActive ? '#7dd3fc' : isRelaxed ? '#34d399' : '#a1a1aa'}
+                    fill={isShortest ? '#e4e4e7' : isActive ? '#f4f4f5' : isRelaxed ? '#e4e4e7' : '#a1a1aa'}
                   >
                     {edge.weight}
                   </text>
@@ -507,25 +507,25 @@ export const GraphAlgorithmVisualizer: React.FC<{
             const isFrontier = step.frontierNodes.includes(node.id);
             const dist = step.distances[node.id];
 
-            let nodeFill = '#111625';
+            let nodeFill = '#171717';
             let strokeColor = '#3f3f46';
             let strokeWidth = 2;
 
             if (isShortest) {
-              nodeFill = '#064e3b';
-              strokeColor = '#10b981';
+              nodeFill = '#18181b';
+              strokeColor = '#a1a1aa';
               strokeWidth = 3;
             } else if (isCurrent) {
-              nodeFill = '#082f49';
-              strokeColor = '#38bdf8';
+              nodeFill = '#27272a';
+              strokeColor = '#e4e4e7';
               strokeWidth = 3;
             } else if (isVisited) {
-              nodeFill = '#164e63';
-              strokeColor = '#06b6d4';
+              nodeFill = '#3f3f46';
+              strokeColor = '#d4d4d8';
               strokeWidth = 2;
             } else if (isFrontier) {
-              nodeFill = '#451a03';
-              strokeColor = '#f59e0b';
+              nodeFill = '#18181b';
+              strokeColor = '#d4d4d8';
               strokeWidth = 2;
             }
 
@@ -542,7 +542,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
                     cy={node.y}
                     r="28"
                     fill="none"
-                    stroke="#10b981"
+                    stroke="#a1a1aa"
                     strokeWidth="3"
                     strokeOpacity="0.45"
                     className="animate-pulse"
@@ -554,7 +554,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
                     cy={node.y}
                     r="28"
                     fill="none"
-                    stroke="#38bdf8"
+                    stroke="#e4e4e7"
                     strokeWidth="3"
                     strokeOpacity="0.45"
                   />
@@ -589,7 +589,7 @@ export const GraphAlgorithmVisualizer: React.FC<{
                   textAnchor="middle"
                   dy="11"
                   className="text-[9px] font-mono font-bold"
-                  fill={isShortest ? '#6ee7b7' : isCurrent ? '#7dd3fc' : isFrontier ? '#fcd34d' : '#94a3b8'}
+                  fill={isShortest ? '#e4e4e7' : isCurrent ? '#f4f4f5' : isFrontier ? '#fcd34d' : '#a1a1aa'}
                 >
                   d={dist}
                 </text>
@@ -600,15 +600,15 @@ export const GraphAlgorithmVisualizer: React.FC<{
 
         {/* Shortest Path Success Banner */}
         {step.shortestPathNodes.length > 0 && (
-          <div className="mt-3 p-3.5 rounded-xl border border-emerald-500/40 bg-emerald-950/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono animate-fade-in">
+          <div className="mt-3 p-3.5 rounded-xl border border-zinc-500/40 bg-zinc-950/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs font-mono animate-fade-in">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-              <span className="font-bold text-emerald-300">Continuous Shortest Path Verified:</span>
+              <CheckCircle2 className="w-4 h-4 text-zinc-400 shrink-0" />
+              <span className="font-bold text-zinc-300">Continuous Shortest Path Verified:</span>
               <span className="text-zinc-200">
-                A <span className="text-emerald-400 font-bold">(wt 2)</span> → C <span className="text-emerald-400 font-bold">(wt 3)</span> → E <span className="text-emerald-400 font-bold">(wt 2)</span> → F
+                A <span className="text-zinc-400 font-bold">(wt 2)</span> → C <span className="text-zinc-400 font-bold">(wt 3)</span> → E <span className="text-zinc-400 font-bold">(wt 2)</span> → F
               </span>
             </div>
-            <div className="px-3 py-1 rounded-lg bg-emerald-500 text-zinc-950 font-bold text-xs shrink-0">
+            <div className="px-3 py-1 rounded-lg bg-zinc-500 text-zinc-950 font-bold text-xs shrink-0">
               Total Distance = 7
             </div>
           </div>
@@ -623,9 +623,9 @@ export const GraphAlgorithmVisualizer: React.FC<{
       {/* Telemetry Dashboard: Priority Queue + Distance Map + Execution Code */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
         {/* Min-Heap Priority Queue */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-2">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-2">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-amber-400">Min-Heap (PQ):</span>
+            <span className="uppercase font-bold text-zinc-400">Min-Heap (PQ):</span>
             <span>{step.minHeap.length} Elements</span>
           </div>
 
@@ -636,10 +636,10 @@ export const GraphAlgorithmVisualizer: React.FC<{
               step.minHeap.map((item, idx) => (
                 <div 
                   key={idx}
-                  className="px-2.5 py-1 rounded-lg border border-amber-500/30 bg-amber-500/10 text-amber-300 font-bold flex items-center gap-1"
+                  className="px-2.5 py-1 rounded-lg border border-zinc-500/30 bg-zinc-500/10 text-zinc-300 font-bold flex items-center gap-1"
                 >
                   <span>{item.node}</span>
-                  <span className="text-[10px] text-amber-500 font-normal">({item.dist})</span>
+                  <span className="text-[10px] text-zinc-500 font-normal">({item.dist})</span>
                 </div>
               ))
             )}
@@ -647,9 +647,9 @@ export const GraphAlgorithmVisualizer: React.FC<{
         </div>
 
         {/* Settled Distances Table */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-2">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-2">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-cyan-400">Distances Array:</span>
+            <span className="uppercase font-bold text-zinc-400">Distances Array:</span>
             <span>dist[u]</span>
           </div>
 
@@ -659,9 +659,9 @@ export const GraphAlgorithmVisualizer: React.FC<{
                 key={k} 
                 className={`p-1.5 rounded-lg border ${
                   step.shortestPathNodes.includes(k) 
-                    ? 'border-emerald-500/50 bg-emerald-500/15 text-emerald-300 font-bold'
+                    ? 'border-zinc-500/50 bg-zinc-500/15 text-zinc-300 font-bold'
                     : k === step.currentNode
-                    ? 'border-cyan-500/50 bg-cyan-500/15 text-cyan-300 font-bold'
+                    ? 'border-zinc-500/50 bg-zinc-500/15 text-zinc-300 font-bold'
                     : 'border-white/[0.06] bg-black/30 text-zinc-400'
                 }`}
               >
@@ -673,9 +673,9 @@ export const GraphAlgorithmVisualizer: React.FC<{
         </div>
 
         {/* Algorithm Code Execution Tracker */}
-        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#0c101c] space-y-2">
+        <div className="p-4 rounded-xl border border-white/[0.08] bg-[#111111] space-y-2">
           <div className="flex items-center justify-between text-zinc-400 pb-1 border-b border-white/[0.06]">
-            <span className="uppercase font-bold text-emerald-400 flex items-center gap-1">
+            <span className="uppercase font-bold text-zinc-400 flex items-center gap-1">
               <Code2 className="w-3.5 h-3.5" />
               Dijkstra Core:
             </span>
@@ -683,25 +683,25 @@ export const GraphAlgorithmVisualizer: React.FC<{
           </div>
 
           <div className="text-[11px] font-mono leading-relaxed space-y-0.5 text-zinc-400">
-            <div className={step.codeLine === 1 ? 'bg-cyan-500/20 text-cyan-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 1 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               1: dist = &#123;u: inf&#125;; dist[src] = 0
             </div>
-            <div className={step.codeLine === 2 ? 'bg-cyan-500/20 text-cyan-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 2 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               2: pq = [(0, src)]
             </div>
-            <div className={step.codeLine === 3 ? 'bg-cyan-500/20 text-cyan-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 3 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               3: while pq: d, u = heappop(pq)
             </div>
-            <div className={step.codeLine === 4 || step.codeLine === 5 ? 'bg-emerald-500/25 text-emerald-300 font-bold px-1 rounded' : ''}>
+            <div className={step.codeLine === 4 || step.codeLine === 5 ? 'bg-zinc-500/25 text-zinc-300 font-bold px-1 rounded' : ''}>
               4:   for v, w in adj[u]:
             </div>
-            <div className={step.codeLine === 5 ? 'bg-emerald-500/25 text-emerald-300 font-bold px-1 rounded' : ''}>
+            <div className={step.codeLine === 5 ? 'bg-zinc-500/25 text-zinc-300 font-bold px-1 rounded' : ''}>
               5:     if d + w &lt; dist[v]:
             </div>
-            <div className={step.codeLine === 7 ? 'bg-amber-500/20 text-amber-200 px-1 rounded' : ''}>
+            <div className={step.codeLine === 7 ? 'bg-zinc-500/20 text-zinc-200 px-1 rounded' : ''}>
               6:       dist[v] = d + w; heappush(pq)
             </div>
-            <div className={step.codeLine === 8 ? 'bg-emerald-500/30 text-emerald-200 font-bold px-1 rounded' : ''}>
+            <div className={step.codeLine === 8 ? 'bg-zinc-500/30 text-zinc-200 font-bold px-1 rounded' : ''}>
               7: return dist[target]  # = 7
             </div>
           </div>

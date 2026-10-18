@@ -4,7 +4,7 @@ import { GithubIcon, TwitterIcon, DiscordIcon } from './Icons';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#07080c] text-zinc-400 text-xs">
+    <footer className="bg-[#000000] text-zinc-400 text-xs">
       <div className="mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           
@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
           <div className="col-span-2 space-y-3">
             <a href="#" className="flex items-center gap-2 group">
               <div className="flex h-6 w-6 items-center justify-center rounded bg-white/[0.06] border border-white/[0.1]">
-                <Code2 className="h-3.5 w-3.5 text-emerald-400" />
+                <Code2 className="h-3.5 w-3.5 text-zinc-400" />
               </div>
               <span className="font-semibold text-sm text-white">CodeHurdle</span>
             </a>

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar, ActiveView } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { ActivityHeatmap } from './components/ActivityHeatmap';
 import { CompanyTrustBar } from './components/CompanyTrustBar';
-import { StatsBar } from './components/StatsBar';
 import { DynamicModeShowcase } from './components/DynamicModeShowcase';
 import { ProblemExplorer } from './components/ProblemExplorer';
 import { ContestArena } from './components/ContestArena';
@@ -20,10 +18,10 @@ import { CpArenaView } from './components/CpArenaView';
 import { CommunityView } from './components/CommunityView';
 import { JobPrepView } from './components/JobPrepView';
 import { ReusableComponentDrawer } from './components/ReusableComponentDrawer';
-import { DesignSystemView } from './components/DesignSystemView';
+import { ContestPage } from './components/ContestPage';
 
 export const App: React.FC = () => {
-  const [currentView, setCurrentView] = useState<ActiveView>('design-system');
+  const [currentView, setCurrentView] = useState<ActiveView>('home');
   const [searchOpen, setSearchOpen] = useState(false);
   const [componentDocsOpen, setComponentDocsOpen] = useState(false);
 
@@ -38,7 +36,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#07090e] text-zinc-100 flex flex-col font-sans selection:bg-emerald-500/25 selection:text-emerald-300">
+    <div className="min-h-screen bg-[#000000] text-zinc-100 flex flex-col font-sans selection:bg-lime-500/30 selection:text-lime-200">
       {/* Global Spotlight Search Palette */}
       <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
 
@@ -67,50 +65,43 @@ export const App: React.FC = () => {
               onExploreRoadmap={() => handleSelectView('roadmap')}
             />
 
-            {/* 2. LeetCode-style 365-Day Continuous Activity Heatmap & Streaks */}
-            <ActivityHeatmap />
-
-            {/* 3. High-Frequency Company Question Vaults */}
+            {/* High-Frequency Company Question Vaults */}
             <CompanyTrustBar />
 
-            {/* 4. Telemetry Metrics */}
-            <StatsBar />
-
-            {/* 5. Algorithmic Skill Calibration with Visual SVG Radar Spider Chart */}
+            {/* Algorithmic Skill Calibration with Visual SVG Radar Spider Chart */}
             <DynamicModeShowcase />
 
-            {/* 6. 520 Curated Problem Catalog with Difficulty Meters */}
+            {/* 520 Curated Problem Catalog with Difficulty Meters */}
             <div id="problems">
               <ProblemExplorer onSolveProblem={(id) => handleLaunchCompiler(id)} />
             </div>
 
-            {/* 7. Weekly Rated Contests with Live SVG Rating Progression Graph */}
+            {/* Weekly Rated Contests with Live SVG Rating Progression Graph */}
             <div id="contests">
               <ContestArena />
             </div>
 
-            {/* 8. Solution Walkthroughs & Algorithmic Editorials */}
+            {/* Solution Walkthroughs & Algorithmic Editorials */}
             <CommunityShowcase />
 
-            {/* 9. Structured Pattern Roadmaps */}
+            {/* Structured Pattern Roadmaps */}
             <JobPrepTrack />
 
-            {/* 10. FAQ Accordion */}
+            {/* FAQ Accordion */}
             <FaqSection />
 
-            {/* 11. High-Converting CTA Banner */}
+            {/* Final CTA Banner */}
             <CtaSection />
           </>
         )}
 
         {/* Dedicated Page Views for every route of CodeHurdle */}
-        {currentView === 'design-system' && (
-          <DesignSystemView onNavigateToView={(view) => handleSelectView(view)} />
+        {currentView === 'contest' && (
+          <ContestPage onOpenContest={() => handleSelectView('cp')} />
         )}
 
         {currentView === 'problems' && (
           <div className="py-6 space-y-6">
-            <StatsBar />
             <ProblemExplorer onSolveProblem={(id) => handleLaunchCompiler(id)} />
           </div>
         )}
